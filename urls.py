@@ -4,6 +4,7 @@
 from handlers import index
 
 url_patterns = [
-    (r'/', index.PingHandler),
+    (r'/', index.IndexHandler),
+    (r'/ping', index.PingHandler),
 ]
 
