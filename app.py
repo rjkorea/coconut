@@ -19,7 +19,7 @@ class APIApplication(web.Application):
 def main():
     import settings
     config = settings.settings()
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s:%(name)s:%(module)s %(message)s')
+    logging.basicConfig(level=config['application']['log']['level'], format=config['application']['log']['format'])
     logger = logging.getLogger(config['application']['name'])
     try:
         app = APIApplication(config=config)
