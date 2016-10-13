@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+
+
+import json
+
+from tornado.web import RequestHandler
+
+
+class BaseHandler(RequestHandler):
+    def __init__(self, application, request, **kwargs):
+        super().__init__(application, request, **kwargs)
+        self.response = dict()
+
+    def write_json(self):
+        output = self.response
+        self.write(outpu)
+
+
+class JsonHandler(BaseHandler):
+    pass
