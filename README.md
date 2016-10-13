@@ -1,3 +1,8 @@
-# coconut
-This is a asynchronous application server for Social Network Service
-- users, contents, comments, likes, follow and push
+# What is coconut?
+This is a asynchronous application server
+
+# Prerequisites
+$ pip install -r requirements.txt
+
+# Usage
+$ python app.py
