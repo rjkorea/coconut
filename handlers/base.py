@@ -6,6 +6,8 @@ import json
 from tornado.web import RequestHandler, HTTPError
 from tornado.escape import json_decode, utf8
 
+from common.utils import ApiJSONEncoder
+
 
 class BaseHandler(RequestHandler):
     def __init__(self, application, request, **kwargs):
@@ -13,7 +15,8 @@ class BaseHandler(RequestHandler):
         self.response = dict()
 
     def write_json(self):
-        self.write(self.response)
+        output = json.dumps(self.response, cls=ApiJSONEncoder)
+        self.write(output)
 
 
 class JsonHandler(BaseHandler):
