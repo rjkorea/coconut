@@ -34,3 +34,7 @@ class JsonHandler(BaseHandler):
                 raise HTTPError(400, 'Unable parse to JSON.')
         else:
             self.json_decoded_body = dict()
+
+    def set_default_headers(self):
+        super().set_default_headers()
+        self.set_header('Content-Type', 'application/json')
