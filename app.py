@@ -8,6 +8,8 @@ from tornado.options import parse_command_line
 
 from urls import url_patterns
 
+from services.mongodb import MongodbService
+
 
 class APIApplication(web.Application):
     def __init__(self, *args, **kwargs):
@@ -27,6 +29,7 @@ def main():
         server.bind(config['application']['port'])
         server.start(1)
         logger.info('api start up on Tornado listen %d' % config['application']['port'])
+        MongodbService(config=config['mongodb'])
         ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
         logger.info('KeyboardInterrupt occured. Stopping instance')

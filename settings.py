@@ -14,6 +14,11 @@ _settings = dict(
             level=logging.DEBUG,
             format='%(asctime)s %(levelname)s:%(name)s:%(module)s %(message)s'
         )
+    ),
+    mongodb=dict(
+        host='localhost',
+        port=27017,
+        db='coconut'
     )
 )
 

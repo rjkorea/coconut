@@ -14,3 +14,12 @@ class ApiJSONEncoder(JSONEncoder):
             return int(datetime.timestamp(o))
         else:
             return super(ApiJSONEncoder, self).default(o)
+
+
+class Singleton(object):
+    _instance = {}
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Singleton, cls).__new__(cls, *args)
+        return cls._instance
