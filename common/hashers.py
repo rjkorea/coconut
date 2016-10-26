@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import re
 import string
 import random
 import pbkdf2
 
 HASHING_ITERATIONS = 400
 ALLOWED_IN_SALT = string.ascii_letters + string.digits + './'
+ALLOWD_PASSWORD_PATTERN = r'[A-Za-z0-9@#$%^&+=]{8,}'
 
 
 def generate_random_string(len=12, allowed_chars=string.ascii_letters+string.digits):
@@ -21,3 +23,14 @@ def make_password(password=None):
 
 def check_password(password, hashed_password):
     return hashed_password == pbkdf2.crypt(password, hashed_password)
+
+
+def validate_password(password=None):
+    """
+    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9@#$%^&+=]{8,}'
+    """
+    if password is None:
+        raise ValueError('password is required')
+    if re.match(ALLOWD_PASSWORD_PATTERN, password):
+        return True
+    return False
