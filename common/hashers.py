@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+
+import string
+import random
+import pbkdf2
+
+HASHING_ITERATIONS = 400
+ALLOWED_IN_SALT = string.ascii_letters + string.digits + './'
+
+
+def generate_random_string(len=12, allowed_chars=string.ascii_letters+string.digits):
+    return ''.join(random.choice(allowed_chars) for i in range(len))
+
+
+def make_password(password=None):
+    if password is None:
+        raise ValueError('password is required')
+    salt = generate_random_string(len=32, allowed_chars=ALLOWED_IN_SALT)
+    return pbkdf2.crypt(password, salt=salt, iterations=HASHING_ITERATIONS)
+
+
+def check_password(password, hashed_password):
+    return hashed_password == pbkdf2.crypt(password, hashed_password)
