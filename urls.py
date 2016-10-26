@@ -8,5 +8,8 @@ url_patterns = [
     (r'/ping/?', index.PingHandler),
     (r'/test?', index.TestHandler),
     (r'/test/(?P<oid>[^\/]+)/?', index.TestHandler),
+    
+    # admin
+    (r'/a/auth/?', index.AuthHandler),
 ]
 
