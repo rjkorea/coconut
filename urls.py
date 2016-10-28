@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
-from handlers import index
+from handlers import index, a
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -10,6 +9,7 @@ url_patterns = [
     (r'/test/(?P<oid>[^\/]+)/?', index.TestHandler),
     
     # admin
-    (r'/a/auth/?', index.AuthHandler),
+    (r'/a/auth/register/?', a.auth.RegisterHandler),
+    (r'/a/auth/login/?', a.auth.LoginHandler),
 ]
 
