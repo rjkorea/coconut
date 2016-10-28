@@ -10,6 +10,9 @@ from common.utils import ApiJSONEncoder
 
 
 class BaseHandler(RequestHandler):
+    COOKIE_KEYS = dict(
+        SESSION_KEY='csk',  # coconut session key
+    )
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
         self.response = dict()
@@ -18,6 +21,11 @@ class BaseHandler(RequestHandler):
         output = json.dumps(self.response, cls=ApiJSONEncoder)
         self.write(output)
 
+    def write_error(self, status_code, **kwargs):
+        self.set_status(status_code)
+        self.response['message'] = '%d: %s' % (status_code, getattr(kwargs['exc_info'][1], 'log_message'))
+        self.write_json()
+    
 
 class JsonHandler(BaseHandler):
     def __init__(self, application, request, **kwargs):
