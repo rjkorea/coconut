@@ -16,3 +16,29 @@ def admin_auth_async(method):
             if result:
                 await result
     return wrapper
+
+def parse_argument(key_type_defaults):
+    def decorator(method):
+        @functools.wraps(method)
+        async def wrapper(self, *args, **kwargs):
+            parsed_args = dict()
+            try:
+                for k, t, d in key_type_defaults:
+                    if t == list:
+                        parsed_args[k] = self.get_arguments(k)
+                    else:
+                        val = self.get_argument(k, None)
+                        try:
+                            parsed_args[k] = t(val) if val is not None else d
+                        except Exception as e:
+                            parsed_args[k] = d
+                kwargs['parsed_args'] = parsed_args
+                result = method(self, *args, **kwargs)
+                if result:
+                    await result
+            except ValueError as e:
+                raise HTTPError(400, str(e))
+         
+        return wrapper
+        
+    return decorator
