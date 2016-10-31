@@ -36,7 +36,6 @@ class PingHandler(JsonHandler):
 
 
 class TestHandler(JsonHandler):
-    @admin_auth_async
     async def get(self, *args, **kwargs):
         result = await TestModel.find()
         self.response['data'] = result 
