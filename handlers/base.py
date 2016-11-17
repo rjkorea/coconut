@@ -21,6 +21,13 @@ class BaseHandler(RequestHandler):
         super().__init__(application, request, **kwargs)
         self.response = dict()
 
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+        self.set_header('Access-Control-Allow-Headers',
+                        'Content-Type, X-Requested-With, _xsrf, X-XSRFToken, user-os, user-os-ver, user-app-ver, Accept-Encoding, Authorization')
+        self.set_header('Access-Control-Allow-Credentials', 'true')
+
     def write_json(self):
         output = json.dumps(self.response, cls=ApiJSONEncoder)
         self.write(output)
