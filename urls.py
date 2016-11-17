@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, a
+from handlers import index, a, v1
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -14,5 +14,8 @@ url_patterns = [
     (r'/a/admins/?', a.admin.AdminListHandler),
     (r'/a/invitation/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
+
+	# v1
+	(r'/v1/invitation/submit/?', v1.invitation.SubmitHandler)
 ]
 
