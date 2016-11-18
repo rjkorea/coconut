@@ -16,6 +16,7 @@ from models.session import AdminSessionModel
 class BaseHandler(RequestHandler):
     COOKIE_KEYS = dict(
         SESSION_KEY='csk',  # coconut session key
+        MOBILE_APP_KEY='mak' # for mobile app
     )
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
@@ -46,6 +47,12 @@ class BaseHandler(RequestHandler):
         if not session:
             return None
         return  await AdminModel.find_one({'_id': session['admin_oid']})
+
+    async def get_current_app_async(self):
+        mobile_app_key = self.get_cookie(self.COOKIE_KEYS['MOBILE_APP_KEY'], None)
+        if not mobile_app_key:
+            return None
+        return  mobile_app_key
 
 
 class JsonHandler(BaseHandler):

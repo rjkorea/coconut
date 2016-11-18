@@ -2,7 +2,7 @@
 
 from tornado.web import HTTPError
 
-from common.decorators import parse_argument
+from common.decorators import parse_argument, app_auth_async
 
 from handlers.base import JsonHandler
 from models.invitation import InvitationModel
@@ -10,6 +10,7 @@ from models.admin import AdminModel
 
 
 class SubmitHandler(JsonHandler):
+    @app_auth_async
     async def put(self, *args, **kwargs):
         admin_oid = self.json_decoded_body.get('admin_oid', None)
         if not admin_oid or len(admin_oid) == 0:
@@ -26,6 +27,7 @@ class SubmitHandler(JsonHandler):
 
 
 class AdminListHandler(JsonHandler):
+    @app_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')

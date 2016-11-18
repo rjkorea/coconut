@@ -13,6 +13,9 @@ _settings = dict(
         log=dict(
             level=logging.DEBUG,
             format='%(asctime)s %(levelname)s:%(name)s:%(module)s %(message)s'
+        ),
+        mobile = dict(
+            ipad_id='582d37225f54714def85effb'
         )
     ),
     mongodb=dict(
