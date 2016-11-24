@@ -12,17 +12,23 @@ from models.admin import AdminModel
 class SubmitHandler(JsonHandler):
     @app_auth_async
     async def put(self, *args, **kwargs):
-        admin_oid = self.json_decoded_body.get('admin_oid', None)
-        if not admin_oid or len(admin_oid) == 0:
-            raise HTTPError(400, 'invalid admin_oid')
+        desk_number = self.json_decoded_body.get('desk_number', None)
+        if not isinstance(desk_number, int):
+            raise HTTPError(400, 'invalid desk_number')
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number(+821022223333)')
+        target_admin = await AdminModel.find_one({'desk_number': desk_number})
+        if not target_admin:
+            raise HTTPError(400, 'not exist desk number')
         query = {
         	'mobile_number': mobile_number
         }
-        result = await InvitationModel.find_one(query)
-        self.response['data'] = result
+        invitation = await InvitationModel.find_one(query)
+        if not invitation:
+            raise HTTPError(400, 'not exist mobile number')
+        # TODO: save notification
+        self.response['data'] = invitation
         self.write_json()
 
 
