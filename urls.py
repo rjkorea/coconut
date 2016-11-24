@@ -14,6 +14,7 @@ url_patterns = [
     (r'/a/admins/?', a.admin.AdminListHandler),
     (r'/a/invitation/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
+    (r'/a/notifications/?', a.notification.NotificationListHandler),
 
 	# v1
 	(r'/v1/invitation/submit/?', v1.invitation.SubmitHandler),
