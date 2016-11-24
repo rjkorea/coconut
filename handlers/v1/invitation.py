@@ -7,6 +7,7 @@ from common.decorators import parse_argument, app_auth_async
 from handlers.base import JsonHandler
 from models.invitation import InvitationModel
 from models.admin import AdminModel
+from models.notification import NotificationModel
 
 
 class SubmitHandler(JsonHandler):
@@ -27,7 +28,16 @@ class SubmitHandler(JsonHandler):
         invitation = await InvitationModel.find_one(query)
         if not invitation:
             raise HTTPError(400, 'not exist mobile number')
-        # TODO: save notification
+        # save notification
+        notification = NotificationModel(raw_data=dict(
+            admin_oid=target_admin['_id'],
+            type='request_auth',
+            message='requested %s' % invitation['mobile_number'],
+            data=dict(
+                invitation_oid=invitation['_id']
+            )
+        ))
+        await notification.insert()
         self.response['data'] = invitation
         self.write_json()
 
