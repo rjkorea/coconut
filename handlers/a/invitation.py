@@ -46,7 +46,7 @@ class InvitationHandler(JsonHandler):
 
 
 class InvitationListHandler(JsonHandler):
-    @admin_auth_async
+    # @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
