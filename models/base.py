@@ -54,7 +54,7 @@ class BaseModel(object):
         if query is None or not isinstance(query, dict):
             raise ValueError('Invalid query')
         if document is None or not isinstance(document, dict):
-            raise ValueError('Invalid doocument')
+            raise ValueError('Invalid document')
         result = await MongodbService().client[cls.MONGO_COLLECTION].update(query, document, upsert=upsert, multi=multi)
         return result
 

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from bson import ObjectId
+
 from tornado.web import HTTPError
 
 from common.decorators import admin_auth_async, parse_argument
@@ -9,7 +11,7 @@ from models.invitation import InvitationModel
 
 
 class InvitationHandler(JsonHandler):
-    @admin_auth_async
+    # @admin_auth_async
     async def post(self, *args, **kwargs):
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) == 0:
@@ -42,6 +44,23 @@ class InvitationHandler(JsonHandler):
         ))
         await invitation.insert()
         self.response['data'] = invitation.data
+        self.write_json()
+
+    # @admin_auth_async
+    async def put(self, *args, **kwargs):
+        oid = self.json_decoded_body.pop('oid', None)
+        if not oid or len(oid) == 0:
+            raise HTTPError(400, 'invalid oid')
+        invitation = await InvitationModel.find_one({'_id': ObjectId(oid)})
+        if not invitation:
+            raise HTTPError(400, 'not exist oid')
+        query = {
+            '_id': ObjectId(oid)
+        }
+        document = {
+            '$set': self.json_decoded_body
+        }
+        self.response['data'] = await InvitationModel.update(query, document)
         self.write_json()
 
 
