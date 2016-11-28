@@ -48,19 +48,23 @@ class InvitationHandler(JsonHandler):
 
     # @admin_auth_async
     async def put(self, *args, **kwargs):
-        oid = self.json_decoded_body.pop('oid', None)
-        if not oid or len(oid) == 0:
-            raise HTTPError(400, 'invalid oid')
-        invitation = await InvitationModel.find_one({'_id': ObjectId(oid)})
+        _id = self.json_decoded_body.pop('_id', None)
+        if not _id or len(_id) == 0:
+            raise HTTPError(400, 'invalid _id')
+        invitation = await InvitationModel.find_one({'_id': ObjectId(_id)})
         if not invitation:
             raise HTTPError(400, 'not exist oid')
         query = {
-            '_id': ObjectId(oid)
+            '_id': ObjectId(_id)
         }
         document = {
             '$set': self.json_decoded_body
         }
         self.response['data'] = await InvitationModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
         self.write_json()
 
 
