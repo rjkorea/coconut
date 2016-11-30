@@ -76,3 +76,8 @@ class InvitationListHandler(JsonHandler):
         result = await InvitationModel.find(skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result 
         self.write_json()
+        
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
