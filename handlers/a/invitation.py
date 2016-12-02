@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
+from datetime import datetime
 
 from tornado.web import HTTPError
 
@@ -11,6 +12,41 @@ from models.invitation import InvitationModel
 
 
 class InvitationHandler(JsonHandler):
+    # @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        invitation = await InvitationModel.find_one({'_id': ObjectId(_id)})
+        if not invitation:
+            raise HTTPError(400, 'not exist _id')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        self.json_decoded_body['updated_at'] = datetime.utcnow()
+        document = {
+            '$set': self.json_decoded_body
+        }
+        self.response['data'] = await InvitationModel.update(query, document)
+        self.write_json()
+
+    # @admin_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        invitation = await InvitationModel.find_one({'_id': ObjectId(_id)})
+        if not invitation:
+            raise HTTPError(400, 'not exist _id')
+        self.response['data'] = invitation
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class InvitationPostHandler(JsonHandler):
     # @admin_auth_async
     async def post(self, *args, **kwargs):
         mobile_number = self.json_decoded_body.get('mobile_number', None)
@@ -44,23 +80,6 @@ class InvitationHandler(JsonHandler):
         ))
         await invitation.insert()
         self.response['data'] = invitation.data
-        self.write_json()
-
-    # @admin_auth_async
-    async def put(self, *args, **kwargs):
-        _id = self.json_decoded_body.pop('_id', None)
-        if not _id or len(_id) == 0:
-            raise HTTPError(400, 'invalid _id')
-        invitation = await InvitationModel.find_one({'_id': ObjectId(_id)})
-        if not invitation:
-            raise HTTPError(400, 'not exist oid')
-        query = {
-            '_id': ObjectId(_id)
-        }
-        document = {
-            '$set': self.json_decoded_body
-        }
-        self.response['data'] = await InvitationModel.update(query, document)
         self.write_json()
 
     async def options(self, *args, **kwargs):

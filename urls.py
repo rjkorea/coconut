@@ -12,8 +12,10 @@ url_patterns = [
     (r'/a/auth/register/?', a.auth.RegisterHandler),
     (r'/a/auth/login/?', a.auth.LoginHandler),
     (r'/a/admins/?', a.admin.AdminListHandler),
-    (r'/a/invitation/?', a.invitation.InvitationHandler),
+    (r'/a/invitation/?', a.invitation.InvitationPostHandler),
+    (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
+    (r'/a/notification/(?P<_id>[^\/]+)/?', a.notification.NotificationHandler),
     (r'/a/notifications/?', a.notification.NotificationListHandler),
 
 	# v1
