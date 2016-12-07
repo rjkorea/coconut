@@ -4,7 +4,7 @@ from tornado.web import HTTPError
 
 from common.decorators import parse_argument, app_auth_async
 
-from handlers.base import JsonHandler
+from handlers.base import JsonHandler, WSHandler
 from models.invitation import InvitationModel
 from models.admin import AdminModel
 from models.notification import NotificationModel
@@ -38,6 +38,10 @@ class SubmitHandler(JsonHandler):
             )
         ))
         await notification.insert()
+        ws_data = dict(
+            type='request_auth',
+            _id=str(target_admin['_id']))
+        WSHandler.write_to_clients(ws_data)
         self.response['data'] = invitation
         self.write_json()
 
