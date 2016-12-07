@@ -5,6 +5,7 @@ import json
 from bson import ObjectId
 
 from tornado.web import RequestHandler, HTTPError
+from tornado.websocket import WebSocketHandler
 from tornado.escape import json_decode, utf8
 
 from common.utils import ApiJSONEncoder
@@ -77,3 +78,18 @@ class JsonHandler(BaseHandler):
     def set_default_headers(self):
         super().set_default_headers()
         self.set_header('Content-Type', 'application/json')
+
+
+class WSHandler(WebSocketHandler):
+    clients = list()
+    def open(self):
+        WSHandler.clients.append(self)
+
+    def on_close(self):
+        WSHandler.clients.remove(self)
+
+    @classmethod
+    def write_to_clients(cls, data):
+        if cls.clients:
+            for client in cls.clients:
+                client.write_message(data)

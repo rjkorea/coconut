@@ -7,7 +7,7 @@ from common.decorators import admin_auth_async
 
 from tornado.web import HTTPError
 
-from handlers.base import JsonHandler
+from handlers.base import JsonHandler, WSHandler
 from models.test import TestModel
 
 
@@ -62,4 +62,13 @@ class TestHandler(JsonHandler):
         model = TestModel(raw_data=data)
         result = await model.insert()
         self.response['data'] = result
+        self.write_json()
+
+
+class WSTestHandler(JsonHandler):
+    async def get(self, *args, **kwargs):
+        data=dict(hello='world',
+            coconut=True)
+        WSHandler.write_to_clients(data)
+        self.response['message'] = 'OK'
         self.write_json()

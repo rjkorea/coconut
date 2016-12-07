@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, a, v1
+from handlers import index, a, v1, base
 
 url_patterns = [
     (r'/', index.IndexHandler),
     (r'/ping/?', index.PingHandler),
-    (r'/test?', index.TestHandler),
+    (r'/test/?', index.TestHandler),
     (r'/test/(?P<oid>[^\/]+)/?', index.TestHandler),
+    (r'/testws/?', index.WSTestHandler),
     
     # admin
     (r'/a/auth/register/?', a.auth.RegisterHandler),
@@ -20,6 +21,9 @@ url_patterns = [
 
 	# v1
 	(r'/v1/invitation/submit/?', v1.invitation.SubmitHandler),
-    (r'/v1/admins/?', v1.invitation.AdminListHandler)
+    (r'/v1/admins/?', v1.invitation.AdminListHandler),
+
+    # web socket handler
+    (r'/ws/?', base.WSHandler),
 ]
 
