@@ -88,6 +88,9 @@ class WSHandler(WebSocketHandler):
     def on_close(self):
         WSHandler.clients.remove(self)
 
+    def check_origin(self, origin):
+        return True
+
     @classmethod
     def write_to_clients(cls, data):
         if cls.clients:
