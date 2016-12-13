@@ -58,26 +58,10 @@ class InvitationPostHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
-        birthday = self.json_decoded_body.get('birthday', None)
-        if not birthday or len(birthday) == 0:
-            raise HTTPError(400, 'invalid birthday')
-        email = self.json_decoded_body.get('email', None)
-        if not email or len(email) == 0:
-            raise HTTPError(400, 'invalid email')
-        gender = self.json_decoded_body.get('gender', None)
-        if not gender or len(gender) == 0:
-            raise HTTPError(400, 'invalid gender(male or female)')
         type = self.json_decoded_body.get('type', None)
         if not type or len(type) == 0:
             raise HTTPError(400, 'invalid type')
-        invitation = InvitationModel(raw_data=dict(
-            mobile_number=mobile_number,
-            name=name,
-            birthday=birthday,
-            email=email,
-            gender=gender,
-            type=type
-        ))
+        invitation = InvitationModel(raw_data=self.json_decoded_body)
         await invitation.insert()
         self.response['data'] = invitation.data
         self.write_json()

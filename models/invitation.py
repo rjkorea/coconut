@@ -53,5 +53,20 @@ class InvitationModel(BaseModel):
                 'type': bool,
                 'default': (lambda: True)
             },
+            {
+                'key': 'group',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'assignee',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'fee',
+                'type': dict,
+                'default': None
+            }
         ])
         return specification
