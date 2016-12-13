@@ -33,14 +33,14 @@ class SubmitHandler(JsonHandler):
             admin_oid=target_admin['_id'],
             type='request_auth',
             message='requested %s' % invitation['mobile_number'],
-            data=dict(
-                invitation_oid=invitation['_id']
-            )
+            data=invitation
         ))
         await notification.insert()
         ws_data = dict(
             type='request_auth',
-            _id=str(target_admin['_id']))
+            _id=str(target_admin['_id']),
+            name=invitation['name'],
+            mobile_number=invitation['mobile_number'])
         WSHandler.write_to_clients(ws_data)
         self.response['data'] = invitation
         self.write_json()
