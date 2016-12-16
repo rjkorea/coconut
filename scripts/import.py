@@ -15,8 +15,9 @@ def invitation():
 @invitation.command()
 @click.option('-c', '--csvfile', help='csv filename')
 @click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('--dryrun', is_flag=True, help='dry run test')
 @click.confirmation_option(help='Are you sure you want to mongodb?')
-def invitations(csvfile, mongo):
+def invitations(csvfile, mongo, dryrun):
     click.secho('= params info =', fg='cyan')
     click.secho('csvfile: %s' % (csvfile), fg='green')
     click.secho('mongodb: %s' % (mongo), fg='green')
@@ -24,7 +25,7 @@ def invitations(csvfile, mongo):
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         res = csv.DictReader(open(csvfile, 'r'))
         for line in res:
-            line['mobile_number'] = line['mobile_number'].replace('-', '')
+            line['mobile_number'] = line['mobile_number'].replace('-', '').replace('\u200b', '')
             line['created_at'] = datetime.utcnow()
             line['updated_at'] = datetime.utcnow()
             line['enabled'] = True
@@ -33,8 +34,10 @@ def invitations(csvfile, mongo):
                 line['fee'] = dict(enabled=False)
             elif line['fee'] == 'O':
                 line['fee'] = dict(enabled=True)
-            mongo_client['coconut']['invitation'].insert(line)
-            print(line)
+            if dryrun:
+                print(line)
+            else:
+                mongo_client['coconut']['invitation'].insert(line)
     else:
         click.secho('check parameters <python import.py invitations --help>', fg='red')
 
