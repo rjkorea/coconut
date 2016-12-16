@@ -48,7 +48,9 @@ class SubmitHandler(JsonHandler):
             email=invitation['email'],
             group=invitation['group'],
             entered=invitation['entered'],
-            birthday=invitation['birthday'])
+            birthday=invitation['birthday'],
+            updated_at=int(invitation['updated_at'].strftime('%s')),
+            created_at=int(invitation['created_at'].strftime('%s')))
         WSHandler.write_to_clients(ws_data)
         self.response['data'] = invitation
         self.write_json()
