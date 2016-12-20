@@ -12,6 +12,7 @@ url_patterns = [
     # admin
     (r'/a/auth/register/?', a.auth.RegisterHandler),
     (r'/a/auth/login/?', a.auth.LoginHandler),
+    (r'/a/dashboard/?', a.dashboard.DashboardHandler),
     (r'/a/admins/?', a.admin.AdminListHandler),
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
