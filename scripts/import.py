@@ -30,10 +30,12 @@ def invitations(csvfile, mongo, dryrun):
             line['updated_at'] = datetime.utcnow()
             line['enabled'] = True
             line['entered'] = False
+            if line['gender'] == '':
+                line['gender'] = 'female'
             if line['fee'] == 'X':
                 line['fee'] = dict(enabled=False)
             elif line['fee'] == 'O':
-                line['fee'] = dict(enabled=True)
+                line['fee'] = dict(enabled=True, method='cash', price=10000)
             if dryrun:
                 print(line)
             else:
