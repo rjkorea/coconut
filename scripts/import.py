@@ -32,6 +32,10 @@ def invitations(csvfile, mongo, dryrun):
             line['entered'] = False
             if line['gender'] == '':
                 line['gender'] = 'female'
+            if line['gender'] == '여':
+                line['gender'] = 'female'
+            if line['gender'] == '남':
+                line['gender'] = 'male'
             if line['fee'] == 'X':
                 line['fee'] = dict(enabled=False)
             elif line['fee'] == 'O':
