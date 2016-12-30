@@ -25,7 +25,7 @@ def invitations(csvfile, mongo, dryrun):
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         res = csv.DictReader(open(csvfile, 'r'))
         for line in res:
-            line['mobile_number'] = line['mobile_number'].replace('-', '').replace('\u200b', '')
+            line['mobile_number'] = line['mobile_number'].replace('-', '').replace('\u200b', '').replace(' ', '')
             line['created_at'] = datetime.utcnow()
             line['updated_at'] = datetime.utcnow()
             line['enabled'] = True
