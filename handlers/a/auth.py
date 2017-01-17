@@ -62,7 +62,6 @@ class LoginHandler(JsonHandler):
         self.set_cookie(self.COOKIE_KEYS['SESSION_KEY'], str(session_oid))
         # self.response['message'] = 'OK'
         self.response['data'] = dict(
-            csk=str(session_oid),
             admin=admin
             )
         self.write_json()
