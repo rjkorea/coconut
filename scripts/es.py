@@ -96,11 +96,8 @@ def gen_invitation(cursor):
             enabled=cursor['enabled'],
             mobile_number=cursor['mobile_number'],
             name=cursor['name'],
-            birthday=cursor['birthday'],
-            gender=cursor['gender'],
             type=cursor['type'],
             email=cursor['email'],
-            group=cursor['group'],
             entered=cursor['entered'],
             assignee=cursor['assignee'],
             fee=dict(
@@ -113,11 +110,30 @@ def gen_invitation(cursor):
     )
     if 'quantity' in cursor:
         invitation['quantity'] = cursor['quantity']
-    if 'method' in cursor['fee']:
-        invitation['fee']['method'] = cursor['fee']['method']
-    if 'price' in cursor['fee']:
-        if cursor['fee']['price']:
-            invitation['fee']['price'] = int(cursor['fee']['price'])
+    if cursor['fee']['enabled']:
+        if 'method' in cursor['fee']:
+            invitation['fee']['method'] = cursor['fee']['method']
+        if 'price' in cursor['fee']:
+            if cursor['fee']['price']:
+                invitation['fee']['price'] = int(cursor['fee']['price'])
+
+    if cursor['gender'].strip() == '여' or cursor['gender'].strip() == 'female':
+        invitation['gender'] = 'female'
+    elif cursor['gender'].strip() == '남' or cursor['gender'].strip() == 'male':
+        invitation['gender'] = 'male'
+
+    if cursor['group'].strip() == '일반 게스트':
+        invitation['group'] = '일반게스트'
+    elif cursor['group'].strip() == 'RJ Ent. 일반 게스트':
+        invitation['group'] = 'RJ Ent. 일반게스트'
+    elif cursor['group'].strip() == 'RJ Ent.':
+        invitation['group'] = 'RJ Ent. 일반게스트'
+    else:
+        invitation['group'] = cursor['group'].strip()
+
+    if cursor['birthday'] and len(cursor['birthday'].strip().replace(' ', '').replace('.', '')) == 6:
+        invitation['birthday'] = int('19%s' % cursor['birthday'][:2])
+        invitation['age'] = 2017-invitation['birthday']
     return invitation
 
 
