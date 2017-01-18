@@ -29,7 +29,7 @@ class BaseHandler(RequestHandler):
             self.set_header('Access-Control-Allow-Origin', origin)
             self.set_header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
             self.set_header('Access-Control-Allow-Headers',
-                            'Content-Type, X-Requested-With, _xsrf, X-XSRFToken, Accept-Encoding, Authorization')
+                            'Content-Type, X-Requested-With, _xsrf, X-XSRFToken, Accept-Encoding, Authorization, Set-Cookie')
             self.set_header('Access-Control-Allow-Credentials', 'true')
             self.set_header('Access-Control-Max-Age', 1800)
 
