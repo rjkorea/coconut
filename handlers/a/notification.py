@@ -12,7 +12,7 @@ from models.notification import NotificationModel
 
 
 class NotificationHandler(JsonHandler):
-    # @admin_auth_async
+    @admin_auth_async
     async def put(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
@@ -36,7 +36,7 @@ class NotificationHandler(JsonHandler):
 
 
 class NotificationListHandler(JsonHandler):
-    # @admin_auth_async
+    @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('_id', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')

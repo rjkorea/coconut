@@ -12,7 +12,7 @@ from models.invitation import InvitationModel
 
 
 class InvitationHandler(JsonHandler):
-    # @admin_auth_async
+    @admin_auth_async
     async def put(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
@@ -30,7 +30,7 @@ class InvitationHandler(JsonHandler):
         self.response['data'] = await InvitationModel.update(query, document)
         self.write_json()
 
-    # @admin_auth_async
+    @admin_auth_async
     async def get(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
@@ -47,7 +47,7 @@ class InvitationHandler(JsonHandler):
 
 
 class InvitationPostHandler(JsonHandler):
-    # @admin_auth_async
+    @admin_auth_async
     async def post(self, *args, **kwargs):
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) == 0:
@@ -72,7 +72,7 @@ class InvitationPostHandler(JsonHandler):
 
 
 class InvitationListHandler(JsonHandler):
-    # @admin_auth_async
+    @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
