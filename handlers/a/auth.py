@@ -60,10 +60,7 @@ class LoginHandler(JsonHandler):
         session.data['admin_oid'] = admin['_id']
         session_oid = await session.insert()
         self.set_cookie(self.COOKIE_KEYS['SESSION_KEY'], str(session_oid))
-        # self.response['message'] = 'OK'
-        self.response['data'] = dict(
-            admin=admin
-            )
+        self.response['data'] = admin
         self.write_json()
 
     async def options(self, *args, **kwargs):
