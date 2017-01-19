@@ -9,7 +9,7 @@ from models.invitation import InvitationModel
 
 
 class DashboardHandler(JsonHandler):
-    # @admin_auth_async
+    @admin_auth_async
     async def get(self, *args, **kwargs):
         total_users_count = await InvitationModel.count({'enabled': True})
         total_visitors_count = await InvitationModel.count({'enabled': True, 'entered': True})
