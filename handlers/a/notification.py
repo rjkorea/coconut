@@ -40,10 +40,8 @@ class NotificationListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ('_id', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if not parsed_args['_id']:
-            raise HTTPError(400, 'invalid _id')
         query = {
-            'admin_oid': ObjectId(parsed_args['_id']),
+            'admin_oid': self.current_user['_id'],
             'enabled': True
         }
         result = await NotificationModel.find(query=query, skip=parsed_args['start'], limit=parsed_args['size'])
