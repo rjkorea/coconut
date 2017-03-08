@@ -7,6 +7,7 @@ from models.base import BaseModel
 
 class AdminModel(BaseModel):
     MONGO_COLLECTION = 'admin'
+    ROLE = ('admin', 'host', 'super')
 
     def __init__(self, *args, **kwargs):
         super(AdminModel, self).__init__(*args, **kwargs)
@@ -31,9 +32,29 @@ class AdminModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'mobile_number',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'role',
+                'type': list,
+                'default': None
+            },
+            {
+                'key': 'company',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'website',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
-                'default': (lambda: True)
+                'default': (lambda: False)
             },
         ])
         return specification

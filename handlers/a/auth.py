@@ -14,6 +14,9 @@ from common import hashers
 
 class RegisterHandler(JsonHandler):
     async def post(self, *args, **kwargs):
+        role = self.json_decoded_body.get('role', None)
+        if not role or len(role) == 0 or not isinstance(role, list):
+            raise HTTPError(400, 'invalid role')
         email = self.json_decoded_body.get('email', None)
         if not email or len(email) == 0:
             raise HTTPError(400, 'invalid email')
@@ -28,12 +31,16 @@ class RegisterHandler(JsonHandler):
             raise HTTPError(400, 'invalid password2')
         if password != password2:
             raise HTTPError(400, 'password and password2 not matched')
+        for r in role:
+            if r not in AdminModel.ROLE:
+                raise HTTPError(400, 'invalid role (admin or host)')
         duplicated_admin = await AdminModel.find_one({'email': email})
         if duplicated_admin:
             raise HTTPError(400, 'duplicated email')
         admin = AdminModel(raw_data=dict(
             email=email,
-            name=name
+            name=name,
+            role=role
         ))
         admin.set_password(password)
         await admin.insert()
