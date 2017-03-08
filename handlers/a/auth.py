@@ -47,6 +47,10 @@ class RegisterHandler(JsonHandler):
         self.response['data'] = admin.data
         self.write_json()
 
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
 
 class LoginHandler(JsonHandler):
     async def post(self, *args, **kwargs):
