@@ -61,7 +61,7 @@ class LoginHandler(JsonHandler):
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_password(password):
             raise HTTPError(400, 'invalid password')
-        admin = await AdminModel.find_one({'email': email})
+        admin = await AdminModel.find_one({'email': email, 'enabled': True})
         if not admin:
             raise HTTPError(400, 'no exist admin user')
         if not hashers.check_password(password, admin['password']):
