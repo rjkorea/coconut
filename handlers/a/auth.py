@@ -23,6 +23,9 @@ class RegisterHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if not mobile_number or len(mobile_number) == 0:
+            raise HTTPError(400, 'invalid mobile_number')
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_password(password):
             raise HTTPError(400, 'invalid password')
@@ -42,6 +45,11 @@ class RegisterHandler(JsonHandler):
             name=name,
             role=role
         ))
+        if 'host' in role:
+            mobile_number = self.json_decoded_body.get('mobile_number', None)
+            if not mobile_number or len(mobile_number) == 0:
+                raise HTTPError(400, 'invalid mobile_number')
+            admin.data['mobile_number'] = mobile_number
         admin.set_password(password)
         await admin.insert()
         self.response['data'] = admin.data
