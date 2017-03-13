@@ -8,12 +8,13 @@ url_patterns = [
     (r'/test/?', index.TestHandler),
     (r'/test/(?P<oid>[^\/]+)/?', index.TestHandler),
     (r'/testws/?', index.WSTestHandler),
-    
+
     # admin
     (r'/a/auth/register/?', a.auth.RegisterHandler),
     (r'/a/auth/login/?', a.auth.LoginHandler),
     (r'/a/dashboard/?', a.dashboard.DashboardHandler),
     (r'/a/admins/?', a.admin.AdminListHandler),
+    (r'/a/admin/(?P<_id>[^\/]+)/?', a.admin.AdminHandler),
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
@@ -27,4 +28,3 @@ url_patterns = [
     # web socket handler
     (r'/ws/?', base.WSHandler),
 ]
-
