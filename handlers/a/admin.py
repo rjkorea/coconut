@@ -14,8 +14,10 @@ class AdminListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
+        count = await AdminModel.count()
         result = await AdminModel.find(skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
+        self.response['count'] = count
         self.write_json()
 
     async def options(self, *args, **kwargs):
