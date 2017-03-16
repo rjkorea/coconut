@@ -15,6 +15,8 @@ url_patterns = [
     (r'/a/dashboard/?', a.dashboard.DashboardHandler),
     (r'/a/admins/?', a.admin.AdminListHandler),
     (r'/a/admin/(?P<_id>[^\/]+)/?', a.admin.AdminHandler),
+    (r'/a/users/?', a.user.UserListHandler),
+    (r'/a/user/(?P<_id>[^\/]+)/?', a.user.UserHandler),
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
