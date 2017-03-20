@@ -22,6 +22,10 @@ url_patterns = [
     (r'/a/user/(?P<_id>[^\/]+)/?', a.user.UserHandler),
     (r'/a/user/?', a.user.UserHandler),
 
+    (r'/a/contents/?', a.content.ContentListHandler),
+    (r'/a/content/(?P<_id>[^\/]+)/?', a.content.ContentHandler),
+    (r'/a/content/?', a.content.ContentHandler),
+
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
