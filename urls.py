@@ -26,6 +26,11 @@ url_patterns = [
     (r'/a/content/(?P<_id>[^\/]+)/?', a.content.ContentHandler),
     (r'/a/content/?', a.content.ContentHandler),
 
+    (r'/a/ticket/types/?', a.ticket.TicketTypeListHandler),
+    (r'/a/ticket/type/(?P<_id>[^\/]+)/?', a.ticket.TicketTypeHandler),
+    (r'/a/ticket/type/?', a.ticket.TicketTypeHandler),
+
+    # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
 	(r'/a/invitations/?', a.invitation.InvitationListHandler),
