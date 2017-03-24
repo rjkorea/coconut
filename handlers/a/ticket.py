@@ -22,7 +22,7 @@ class TicketTypeListHandler(JsonHandler):
                     {'_id': self.current_user['_id']},
                     {'name': {'$regex': parsed_args['q']}},
                     {'desc': {'$regex': parsed_args['q']}},
-                    {'price': {'$regex': parsed_args['q']}}
+                    {'price': int(parsed_args['q'])}
                 ]
             }
         else:
