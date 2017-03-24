@@ -42,5 +42,10 @@ class TicketTypeModel(BaseModel):
                 'type': int,
                 'default': None
             },
+            {
+                'key': 'enabled',
+                'type': bool,
+                'default': (lambda: True)
+            },
         ])
         return specification
