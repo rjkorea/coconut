@@ -10,6 +10,8 @@ from common.decorators import admin_auth_async, parse_argument
 from handlers.base import JsonHandler
 from models.ticket import TicketTypeModel
 
+from models import get_content, get_admin
+
 
 class TicketTypeListHandler(JsonHandler):
     @admin_auth_async
@@ -21,14 +23,18 @@ class TicketTypeListHandler(JsonHandler):
                 '$or': [
                     {'_id': self.current_user['_id']},
                     {'name': {'$regex': parsed_args['q']}},
-                    {'desc': {'$regex': parsed_args['q']}},
-                    {'price': int(parsed_args['q'])}
+                    {'desc': {'$regex': parsed_args['q']}}
                 ]
             }
         else:
             q = {}
         count = await TicketTypeModel.count(query=q)
         result = await TicketTypeModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for res in result:
+            res['content'] = await get_content(res['content_oid'])
+            res['user'] = await get_admin(res['user_oid'])
+            res.pop('content_oid')
+            res.pop('user_oid')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
