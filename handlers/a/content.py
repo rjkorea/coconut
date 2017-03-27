@@ -21,7 +21,7 @@ class ContentListHandler(JsonHandler):
         if parsed_args['q']:
             q = {
                 '$or': [
-                    {'_id': self.current_user['_id']},
+                    {'user_oid': self.current_user['_id']},
                     {'name': {'$regex': parsed_args['q']}},
                     {'desc': {'$regex': parsed_args['q']}},
                     {'place': {'$regex': parsed_args['q']}},
