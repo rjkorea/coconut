@@ -38,6 +38,11 @@ class TicketTypeModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'day',
+                'type': int,
+                'default': (lambda: 1)
+            },
+            {
                 'key': 'price',
                 'type': int,
                 'default': None
