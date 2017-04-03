@@ -103,6 +103,10 @@ class TicketTypeHandler(JsonHandler):
         if not ticket_type:
             raise HTTPError(400, 'not exist ticket type')
         self.response['data'] = ticket_type
+        self.response['data']['content'] = await get_content(self.response['data']['content_oid'])
+        self.response['data']['user'] = await get_admin(self.response['data']['user_oid'])
+        self.response['data'].pop('content_oid')
+        self.response['data'].pop('user_oid')
         self.write_json()
 
     async def options(self, *args, **kwargs):
