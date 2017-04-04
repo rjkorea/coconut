@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
 from bson import ObjectId
 
 from common import hashers
@@ -45,6 +46,60 @@ class TicketTypeModel(BaseModel):
             {
                 'key': 'price',
                 'type': int,
+                'default': None
+            },
+            {
+                'key': 'enabled',
+                'type': bool,
+                'default': (lambda: True)
+            },
+        ])
+        return specification
+
+
+class TicketOrderModel(BaseModel):
+    MONGO_COLLECTION = 'ticket_order'
+
+    def __init__(self, *args, **kwargs):
+        super(TicketOrderModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(TicketOrderModel, self).specification
+        specification.extend([
+            {
+                'key': 'user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'ticket_type_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'parent_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'qty',
+                'type': int,
+                'default': None
+            },
+            {
+                'key': 'receiver',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'fee',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'expiry_date',
+                'type': datetime,
                 'default': None
             },
             {
