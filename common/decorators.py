@@ -24,7 +24,6 @@ def app_auth_async(method):
     @functools.wraps(method)
     async def wrapper(self, *args, **kwargs):
         config = settings.settings()
-        ''
         mobile_app_key = await self.get_current_app_async()
         if mobile_app_key != config['application']['mobile']['ipad_id']:
             raise HTTPError(401, 'Permission denied')
@@ -56,7 +55,7 @@ def parse_argument(key_type_defaults):
                     await result
             except ValueError as e:
                 raise HTTPError(400, str(e))
-         
+
         return wrapper
-        
+
     return decorator
