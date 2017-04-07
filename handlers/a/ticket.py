@@ -161,11 +161,6 @@ class TicketOrderHandler(JsonHandler):
             raise HTTPError(400, 'invalid receiver')
         if 'mobile_number' not in receiver or 'name' not in receiver or 'access_code' not in receiver:
             raise HTTPError(400, 'invalid mobile_number | name | access_code')
-        fee = self.json_decoded_body.get('fee', None)
-        if not fee or not isinstance(fee, dict):
-            raise HTTPError(400, 'invalid fee')
-        if 'price' not in fee or 'method' not in fee:
-            raise HTTPError(400, 'invalid price | method')
         expiry_date = self.json_decoded_body.get('expiry_date', None)
         if not expiry_date or len(expiry_date) == 0:
             raise HTTPError(400, 'invalid expiry_date')
@@ -180,12 +175,16 @@ class TicketOrderHandler(JsonHandler):
             ticket_type_oid=ObjectId(ticket_type_oid),
             qty=qty,
             receiver=receiver,
-            fee=fee,
             expiry_date=expiry_date
         ))
         parent_oid = self.json_decoded_body.get('parent_oid', None)
         if parent_oid:
             ticket_order.data['parent_oid'] = parent_oid
+        fee = self.json_decoded_body.get('fee', None)
+        if fee:
+            if 'price' not in fee or 'method' not in fee:
+                raise HTTPError(400, 'invalid price | method')
+            ticket_order.data['fee'] = fee
 
         await ticket_order.insert()
         self.response['data'] = ticket_order.data
