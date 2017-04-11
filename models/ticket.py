@@ -109,3 +109,48 @@ class TicketOrderModel(BaseModel):
             },
         ])
         return specification
+
+
+class TicketModel(BaseModel):
+    MONGO_COLLECTION = 'ticket'
+    STATUS = ('pend', 'send', 'register', 'use')
+
+    def __init__(self, *args, **kwargs):
+        super(TicketModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(TicketModel, self).specification
+        specification.extend([
+            {
+                'key': 'user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'ticket_order_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'day',
+                'type': int,
+                'default': (lambda: 1)
+            },
+            {
+                'key': 'status',
+                'type': str,
+                'default': (lambda: 'pend')
+            },
+            {
+                'key': 'entered_at',
+                'type': datetime,
+                'default': None
+            },
+            {
+                'key': 'enabled',
+                'type': bool,
+                'default': (lambda: True)
+            },
+        ])
+        return specification
