@@ -37,6 +37,11 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'access_code',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'gender',
                 'type': str,
                 'default': None
