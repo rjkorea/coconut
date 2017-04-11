@@ -6,11 +6,14 @@ from bson import ObjectId
 from tornado.web import HTTPError
 
 from common.decorators import admin_auth_async, parse_argument
+from common import constants
 
 from handlers.base import JsonHandler
 from models.ticket import TicketTypeModel, TicketOrderModel
+from models.content import ContentModel
 
-from models import get_content, get_admin, get_ticket_type
+from models import get_content, get_admin, get_ticket_type, create_ticket, create_broker
+from models import send_sms
 
 
 class TicketTypeListHandler(JsonHandler):
@@ -99,7 +102,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        ticket_type = await TicketTypeModel.find_one({'_id': ObjectId(_id), 'user_oid': self.current_user['_id']})
+        ticket_type = await TicketTypeModel.find_one({'_id': ObjectId(_id)})
         if not ticket_type:
             raise HTTPError(400, 'not exist ticket type')
         self.response['data'] = ticket_type
@@ -187,7 +190,10 @@ class TicketOrderHandler(JsonHandler):
             ticket_order.data['fee'] = fee
 
         await ticket_order.insert()
+        await create_ticket(ticket_order.data)
+        is_created_broker = await create_broker(ticket_order.data['receiver'])
         self.response['data'] = ticket_order.data
+        self.response['is_created_broker'] = is_created_broker
         self.write_json()
 
     @admin_auth_async
@@ -214,7 +220,7 @@ class TicketOrderHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        ticket_order = await TicketOrderModel.find_one({'_id': ObjectId(_id), 'user_oid': self.current_user['_id']})
+        ticket_order = await TicketOrderModel.find_one({'_id': ObjectId(_id)})
         if not ticket_order:
             raise HTTPError(400, 'not exist ticket order')
         self.response['data'] = ticket_order
@@ -222,6 +228,36 @@ class TicketOrderHandler(JsonHandler):
         self.response['data']['user'] = await get_admin(self.response['data']['user_oid'])
         self.response['data'].pop('ticket_type_oid')
         self.response['data'].pop('user_oid')
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketOrderSendHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket_order = await TicketOrderModel.find_one({'_id': ObjectId(_id)})
+        if not ticket_order:
+            raise HTTPError(400, 'not exist _id')
+        ticket_type = await TicketTypeModel.find_one({'_id': ticket_order['ticket_type_oid']})
+        content = await ContentModel.find_one({'_id': ticket_type['content_oid']})
+        # send SMS
+        is_sent_receiver = await send_sms(
+            {
+                'type': 'unicode',
+                'from': 'tkit',
+                'to': ticket_order['receiver']['mobile_number'],
+                'text': constants.TICKET_ORDER_INFO_MSG.format(content['name'], 'http://tkit.me', ticket_order['receiver']['access_code'])
+                        + '\n' + constants.TICKET_ORDER_WARN_MSG
+            }
+        )
+        self.response['data'] = ticket_order
+        self.response['is_sent_receiver'] = is_sent_receiver
         self.write_json()
 
     async def options(self, *args, **kwargs):
