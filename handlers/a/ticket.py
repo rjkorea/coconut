@@ -12,7 +12,8 @@ from handlers.base import JsonHandler
 from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
 
-from models import get_content, get_admin, get_ticket_type, get_ticket_order
+from models import get_content, get_admin, get_user
+from models import get_ticket_type, get_ticket_order
 from models import create_ticket, create_broker
 from models import send_sms
 
