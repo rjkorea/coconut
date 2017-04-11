@@ -9,10 +9,11 @@ from common.decorators import admin_auth_async, parse_argument
 from common import constants
 
 from handlers.base import JsonHandler
-from models.ticket import TicketTypeModel, TicketOrderModel
+from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
 
-from models import get_content, get_admin, get_ticket_type, create_ticket, create_broker
+from models import get_content, get_admin, get_ticket_type, get_ticket_order
+from models import create_ticket, create_broker
 from models import send_sms
 
 
@@ -258,6 +259,81 @@ class TicketOrderSendHandler(JsonHandler):
         )
         self.response['data'] = ticket_order
         self.response['is_sent_receiver'] = is_sent_receiver
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        if parsed_args['q']:
+            q = {
+                '$or': [
+                    {'status': {'$regex': parsed_args['q']}}
+                ]
+            }
+        else:
+            q = {}
+        count = await TicketModel.count(query=q)
+        result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for res in result:
+            res['ticket_order'] = await get_ticket_order(res['ticket_order_oid'])
+            res.pop('ticket_order_oid')
+            if 'user_oid' in res:
+                res['user'] = await get_user(res['user_oid'])
+                res.pop('user_oid')
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketHandler(JsonHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        self.response['message'] = 'Not implement'
+        self.write_json()
+
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist _id')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        self.json_decoded_body['updated_at'] = datetime.utcnow()
+        document = {
+            '$set': self.json_decoded_body
+        }
+        self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    @admin_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
+        self.response['data'] = ticket
+        self.response['data']['ticket_order'] = await get_ticket_order(self.response['data']['ticket_order_oid'])
+        self.response['data'].pop('ticket_order_oid')
+        if 'user_oid' in self.response['data']:
+            self.response['data']['user'] = await get_user(self.response['data']['user_oid'])
+            self.response['data'].pop('user_oid')
         self.write_json()
 
     async def options(self, *args, **kwargs):

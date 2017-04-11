@@ -6,8 +6,7 @@ from bson import ObjectId
 from models.content import ContentModel
 from models.admin import AdminModel
 from models.user import UserModel
-from models.ticket import TicketTypeModel
-from models.ticket import TicketModel
+from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 
 from services.sms import NexmoService
 
@@ -20,6 +19,9 @@ async def get_admin(id):
 
 async def get_ticket_type(id):
     return await TicketTypeModel.find_one(query={'_id': id})
+
+async def get_ticket_order(id):
+    return await TicketOrderModel.find_one(query={'_id': id})
 
 async def get_user(id):
     return await UserModel.find_one(query={'_id': id})
