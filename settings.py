@@ -22,6 +22,10 @@ _settings = dict(
         host='localhost',
         port=27017,
         db='coconut'
+    ),
+    nexmo=dict(
+        api_key='7968a1e2',
+        api_secret='a45366ce5d7a295c'
     )
 )
 
