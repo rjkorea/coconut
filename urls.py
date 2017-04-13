@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, a, v1, base
+from handlers import index, base, a, v1, t
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -48,9 +48,15 @@ url_patterns = [
     (r'/a/notifications/?', a.notification.NotificationListHandler),
 
 	# v1
-	(r'/v1/invitation/submit/?', v1.invitation.SubmitHandler),
+	# (r'/v1/invitation/submit/?', v1.invitation.SubmitHandler),
+    # (r'/v1/admins/?', v1.invitation.AdminListHandler),
 
-    (r'/v1/admins/?', v1.invitation.AdminListHandler),
+    # t (tablet)
+    (r'/t/host/?', t.admin.AdminHandler),
+    (r'/t/contents/?', t.content.ContentListHandler),
+    (r'/t/content/(?P<_id>[^\/]+)/?', t.content.ContentHandler),
+    (r'/t/dashboard/(?P<_id>[^\/]+)/?', t.dashboard.DashboardHandler),
+    (r'/t/auth/?', t.auth.AuthHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),

@@ -34,6 +34,19 @@ def app_auth_async(method):
     return wrapper
 
 
+def tablet_auth_async(method):
+    @functools.wraps(method)
+    async def wrapper(self, *args, **kwargs):
+        self.current_user = await self.get_current_tablet_async()
+        if not self.current_user:
+            raise HTTPError(401, 'Permission denied')
+        else:
+            result = method(self, *args, **kwargs)
+            if result:
+                await result
+    return wrapper
+
+
 def parse_argument(key_type_defaults):
     def decorator(method):
         @functools.wraps(method)

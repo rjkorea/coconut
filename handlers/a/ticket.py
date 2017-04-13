@@ -269,7 +269,7 @@ class TicketOrderSendHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None), ('user_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         if parsed_args['q']:
@@ -277,6 +277,10 @@ class TicketListHandler(JsonHandler):
                 '$or': [
                     {'status': {'$regex': parsed_args['q']}}
                 ]
+            }
+        elif parsed_args['user_oid']:
+            q = {
+                'user_oid': ObjectId(parsed_args['user_oid'])
             }
         else:
             q = {}

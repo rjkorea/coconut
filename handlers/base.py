@@ -17,7 +17,8 @@ from models.session import AdminSessionModel
 class BaseHandler(RequestHandler):
     COOKIE_KEYS = dict(
         SESSION_KEY='csk',  # coconut session key
-        MOBILE_APP_KEY='mak' # for mobile app
+        MOBILE_APP_KEY='mak', # for mobile app
+        TABLET_APP_KEY='tak' # for tablet app
     )
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
@@ -41,7 +42,7 @@ class BaseHandler(RequestHandler):
         self.set_status(status_code)
         self.response['message'] = '%d: %s' % (status_code, getattr(kwargs['exc_info'][1], 'log_message'))
         self.write_json()
-    
+
     async def get_current_admin_async(self):
         current_user = None
         session_key = self.get_cookie(self.COOKIE_KEYS['SESSION_KEY'], None)
@@ -57,6 +58,12 @@ class BaseHandler(RequestHandler):
         if not mobile_app_key:
             return None
         return  mobile_app_key
+
+    async def get_current_tablet_async(self):
+        tablet_code = self.get_cookie(self.COOKIE_KEYS['TABLET_APP_KEY'], None)
+        if not tablet_code:
+            return None
+        return  await AdminModel.find_one({'tablet_code': tablet_code})
 
 
 class JsonHandler(BaseHandler):
