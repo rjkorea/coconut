@@ -57,6 +57,7 @@ url_patterns = [
     (r'/t/content/(?P<_id>[^\/]+)/?', t.content.ContentHandler),
     (r'/t/dashboard/(?P<_id>[^\/]+)/?', t.dashboard.DashboardHandler),
     (r'/t/auth/?', t.auth.AuthHandler),
+    (r'/t/countries/?', t.util.CountryListHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
