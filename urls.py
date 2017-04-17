@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, base, a, v1, t
+from handlers import index, base, a, v1, t, w
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -50,6 +50,10 @@ url_patterns = [
 	# v1
 	# (r'/v1/invitation/submit/?', v1.invitation.SubmitHandler),
     # (r'/v1/admins/?', v1.invitation.AdminListHandler),
+
+    # w
+    (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
+    (r'/w/countries/?', w.util.CountryListHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),
