@@ -22,3 +22,22 @@ class AdminSessionModel(BaseModel):
             },
         ])
         return specification
+
+
+class UserSessionModel(BaseModel):
+    MONGO_COLLECTION = 'user_session'
+
+    def __init__(self, *args, **kwargs):
+        super(UserSessionModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(UserSessionModel, self).specification
+        specification.extend([
+            {
+                'key': 'user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+        ])
+        return specification

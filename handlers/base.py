@@ -11,12 +11,14 @@ from tornado.escape import json_decode, utf8
 from common.utils import ApiJSONEncoder
 
 from models.admin import AdminModel
-from models.session import AdminSessionModel
+from models.session import AdminSessionModel, UserSessionModel
+from models.user import UserModel
 
 
 class BaseHandler(RequestHandler):
     COOKIE_KEYS = dict(
-        SESSION_KEY='csk',  # coconut session key
+        SESSION_KEY='csk',  # coconut session key for admin
+        USER_SESSION_KEY='usk',  # coconut session key for user
         MOBILE_APP_KEY='mak', # for mobile app
         TABLET_APP_KEY='tak' # for tablet app
     )
@@ -52,6 +54,16 @@ class BaseHandler(RequestHandler):
         if not session:
             return None
         return  await AdminModel.find_one({'_id': session['admin_oid']})
+
+    async def get_current_user_async(self):
+        current_user = None
+        session_key = self.get_cookie(self.COOKIE_KEYS['USER_SESSION_KEY'], None)
+        if not session_key:
+            return None
+        session = await UserSessionModel.find_one({'_id': ObjectId(session_key)})
+        if not session:
+            return None
+        return  await UserModel.find_one({'_id': session['user_oid']})
 
     async def get_current_app_async(self):
         mobile_app_key = self.get_cookie(self.COOKIE_KEYS['MOBILE_APP_KEY'], None)

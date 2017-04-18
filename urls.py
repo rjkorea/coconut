@@ -52,6 +52,8 @@ url_patterns = [
     # (r'/v1/admins/?', v1.invitation.AdminListHandler),
 
     # w
+    (r'/w/auth/login/?', w.auth.LoginHandler),
+
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
 
