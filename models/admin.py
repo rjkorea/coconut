@@ -37,6 +37,11 @@ class AdminModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'tablet_code',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'role',
                 'type': list,
                 'default': None
