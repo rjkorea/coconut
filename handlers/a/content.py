@@ -21,7 +21,6 @@ class ContentListHandler(JsonHandler):
         if parsed_args['q']:
             q = {
                 '$or': [
-                    {'user_oid': self.current_user['_id']},
                     {'name': {'$regex': parsed_args['q']}},
                     {'desc': {'$regex': parsed_args['q']}},
                     {'place': {'$regex': parsed_args['q']}},
@@ -90,7 +89,7 @@ class ContentHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        content = await ContentModel.find_one({'_id': ObjectId(_id), 'user_oid': self.current_user['_id']})
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
         if not content:
             raise HTTPError(400, 'not exist content')
         self.response['data'] = content
