@@ -21,7 +21,11 @@ class LoginHandler(JsonHandler):
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number')
-        user = await UserModel.find_one({'name': name, 'mobile_number': mobile_number, 'enabled': True})
+        query = {'name': name, 'mobile_number': mobile_number, 'enabled': True, 'access_code': {'$exists': False}}
+        access_code = self.json_decoded_body.get('access_code', None)
+        if access_code and len(access_code) > 0:
+            query['access_code'] = access_code
+        user = await UserModel.find_one(query)
         if not user:
             raise HTTPError(400, 'no exist user')
         self.current_user = user
