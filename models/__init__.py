@@ -29,12 +29,22 @@ async def get_user(id):
 async def create_ticket(ticket_order):
     ticket_type = await TicketTypeModel.find_one({'_id': ticket_order['ticket_type_oid']})
     for c in range(ticket_order['qty']):
+        days = dict()
         for i in range(ticket_type['day']):
-            ticket = TicketModel(raw_data=dict(
-                ticket_order_oid=ticket_order['_id'],
-                day=i+1
-            ))
-            await ticket.insert()
+            if 'fee' in ticket_order:
+                days[str(i+1)] = dict(
+                    entered=False,
+                    fee=ticket_order['fee']
+                )
+            else:
+                days[str(i+1)] = dict(
+                    entered=False
+                )
+        ticket = TicketModel(raw_data=dict(
+            ticket_order_oid=ticket_order['_id'],
+            days=days
+        ))
+        await ticket.insert()
 
 async def create_broker(receiver):
     broker = await UserModel.find_one({'mobile_number': receiver['mobile_number']})

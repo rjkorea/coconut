@@ -66,6 +66,9 @@ class TicketTypeHandler(JsonHandler):
         desc = self.json_decoded_body.get('desc', None)
         if not desc or len(desc) == 0:
             raise HTTPError(400, 'invalid desc')
+        day = self.json_decoded_body.get('day', None)
+        if not day or not isinstance(day, int):
+            raise HTTPError(400, 'invalid day')
 
         # create ticket type model
         ticket_type = TicketTypeModel(raw_data=dict(
@@ -73,7 +76,8 @@ class TicketTypeHandler(JsonHandler):
             content_oid=ObjectId(content_oid),
             name=name,
             price=price,
-            desc=desc
+            desc=desc,
+            day=day
         ))
 
         await ticket_type.insert()

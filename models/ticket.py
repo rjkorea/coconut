@@ -133,19 +133,14 @@ class TicketModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'day',
-                'type': int,
-                'default': (lambda: 1)
+                'key': 'days',
+                'type': dict,
+                'default': None
             },
             {
                 'key': 'status',
                 'type': str,
                 'default': (lambda: 'pend')
-            },
-            {
-                'key': 'entered_at',
-                'type': datetime,
-                'default': None
             },
             {
                 'key': 'enabled',
