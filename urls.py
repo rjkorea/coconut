@@ -57,6 +57,8 @@ url_patterns = [
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
 
+    (r'/w/ticket/orders/?', w.ticket.TicketOrderListHandler),
+
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),
     (r'/t/contents/?', t.content.ContentListHandler),

@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from handlers.w import auth, content, util
+from handlers.w import auth, content, ticket, util
