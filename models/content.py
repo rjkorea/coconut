@@ -18,7 +18,7 @@ class ContentModel(BaseModel):
         specification = super(ContentModel, self).specification
         specification.extend([
             {
-                'key': 'user_oid',
+                'key': 'admin_oid',
                 'type': ObjectId,
                 'default': None
             },

@@ -24,7 +24,7 @@ class TicketTypeModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'user_oid',
+                'key': 'admin_oid',
                 'type': ObjectId,
                 'default': None
             },
@@ -68,7 +68,17 @@ class TicketOrderModel(BaseModel):
         specification = super(TicketOrderModel, self).specification
         specification.extend([
             {
+                'key': 'admin_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
                 'key': 'user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'content_oid',
                 'type': ObjectId,
                 'default': None
             },

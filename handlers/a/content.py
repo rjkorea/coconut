@@ -10,29 +10,33 @@ from common.decorators import admin_auth_async, parse_argument
 from handlers.base import JsonHandler
 from models.content import ContentModel
 
+from models import get_admin
+
 from common import hashers
 
 
 class ContentListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None),
+        ('admin_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if parsed_args['q']:
-            q = {
-                '$or': [
-                    {'name': {'$regex': parsed_args['q']}},
-                    {'desc': {'$regex': parsed_args['q']}},
-                    {'place': {'$regex': parsed_args['q']}},
-                    {'genre': {'$regex': parsed_args['q']}},
-                    {'lineup': {'$regex': parsed_args['q']}},
-                    {'role': {'$regex': parsed_args['q']}}
-                ]
-            }
-        else:
-            q = {}
+        q = dict()
+        if 'admin_oid' in parsed_args and parsed_args['admin_oid']:
+            q['admin_oid'] = ObjectId(parsed_args['admin_oid'])
+        if 'q' in parsed_args and parsed_args['q']:
+            q['$or'] = [
+                {'name': {'$regex': parsed_args['q']}},
+                {'desc': {'$regex': parsed_args['q']}},
+                {'place': {'$regex': parsed_args['q']}},
+                {'genre': {'$regex': parsed_args['q']}},
+                {'lineup': {'$regex': parsed_args['q']}}
+            ]
         count = await ContentModel.count(query=q)
         result = await ContentModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for res in result:
+            res['admin'] = await get_admin(res['admin_oid'])
+            res.pop('admin_oid')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
