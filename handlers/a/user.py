@@ -18,19 +18,16 @@ class UserListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if parsed_args['q']:
-            q = {
-                '$or': [
-                    {'name': {'$regex': parsed_args['q']}},
-                    {'email': {'$regex': parsed_args['q']}},
-                    {'mobile_number': {'$regex': parsed_args['q']}},
-                    {'gender': {'$regex': parsed_args['q']}},
-                    {'birthday': {'$regex': parsed_args['q']}},
-                    {'role': {'$regex': parsed_args['q']}}
-                ]
-            }
-        else:
-            q = {}
+        q = dict()
+        if 'q' in parsed_args and parsed_args['q']:
+            q['$or'] = [
+                {'name': {'$regex': parsed_args['q']}},
+                {'email': {'$regex': parsed_args['q']}},
+                {'mobile_number': {'$regex': parsed_args['q']}},
+                {'gender': {'$regex': parsed_args['q']}},
+                {'birthday': {'$regex': parsed_args['q']}},
+                {'role': {'$regex': parsed_args['q']}}
+            ]
         count = await UserModel.count(query=q)
         result = await UserModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
