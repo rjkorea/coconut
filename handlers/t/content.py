@@ -15,7 +15,7 @@ class ContentListHandler(JsonHandler):
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
-            'user_oid': self.current_user['_id']
+            'admin_oid': self.current_user['_id']
         }
         count = await ContentModel.count(query=q)
         result = await ContentModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
@@ -31,7 +31,7 @@ class ContentHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        content = await ContentModel.find_one({'_id': ObjectId(_id), 'user_oid': self.current_user['_id']})
+        content = await ContentModel.find_one({'_id': ObjectId(_id), 'admin_oid': self.current_user['_id']})
         if not content:
             raise HTTPError(400, 'not exist content')
         self.response['data'] = content
