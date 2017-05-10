@@ -58,6 +58,7 @@ url_patterns = [
     (r'/w/countries/?', w.util.CountryListHandler),
 
     (r'/w/ticket/orders/?', w.ticket.TicketOrderListHandler),
+    (r'/w/tickets/?', w.ticket.TicketListHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),

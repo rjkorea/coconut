@@ -10,6 +10,7 @@ from common.decorators import user_auth_async, parse_argument
 from handlers.base import JsonHandler
 from models.content import ContentModel
 from models.ticket import TicketOrderModel
+from models.ticket import TicketModel
 
 from models import get_ticket_type
 
@@ -31,6 +32,20 @@ class TicketOrderListHandler(JsonHandler):
             res.pop('ticket_type_oid')
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketListHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        self.response['data'] = list()
+        self.response['count'] = 0
         self.write_json()
 
     async def options(self, *args, **kwargs):
