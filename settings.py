@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -8-
 
 
+import os
+import collections
 from tornado.log import logging
 
 
 _settings = dict(
     application=dict(
         name='coconut',
-        port=5100,
-        debug=True,
-        autoreload=True,
+        port=9100,
+        debug=False,
+        autoreload=False,
         log=dict(
             level=logging.DEBUG,
             format='%(asctime)s %(levelname)s:%(name)s:%(module)s %(message)s'
@@ -19,7 +21,7 @@ _settings = dict(
         )
     ),
     mongodb=dict(
-        host='localhost',
+        host='test.tkit.me',
         port=27017,
         db='coconut'
     ),
@@ -30,5 +32,20 @@ _settings = dict(
 )
 
 
+
+
 def settings():
+    def update(original, local):
+        for k, v in iter(local.items()):
+            if isinstance(v, collections.Mapping):
+                original[k].update(v)
+            else:
+                original[k] = v
+        return original
+
+    if os.path.isfile('settings_local.py'):
+        import settings_local
+        update(_settings, settings_local._settings)
+        print(_settings)
+
     return _settings
