@@ -15,6 +15,10 @@ url_patterns = [
 
     (r'/a/dashboard/?', a.dashboard.DashboardHandler),
 
+    (r'/a/companies/?', a.company.CompanyListHandler),
+    (r'/a/company/(?P<_id>[^\/]+)/?', a.company.CompanyHandler),
+    (r'/a/company/?', a.company.CompanyHandler),
+
     (r'/a/admins/?', a.admin.AdminListHandler),
     (r'/a/admin/(?P<_id>[^\/]+)/?', a.admin.AdminHandler),
 
