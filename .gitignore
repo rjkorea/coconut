@@ -93,3 +93,6 @@ ENV/
 
 # csv
 *.csv
+
+# settings
+settings_local.py
