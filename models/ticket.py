@@ -159,3 +159,48 @@ class TicketModel(BaseModel):
             },
         ])
         return specification
+
+
+class TicketPlaceModel(BaseModel):
+    MONGO_COLLECTION = 'ticket_place'
+    TYPE = ('area', 'seat', 'site')
+
+    def __init__(self, *args, **kwargs):
+        super(TicketPlaceModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(TicketPlaceModel, self).specification
+        specification.extend([
+            {
+                'key': 'type',
+                'type': str,
+                'default': (lambda: 'area')
+            },
+            {
+                'key': 'serial',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'enabled',
+                'type': bool,
+                'default': (lambda: True)
+            },
+            {
+                'key': 'ticket_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'content_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'admin_oid',
+                'type': ObjectId,
+                'default': None
+            },
+        ])
+        return specification
