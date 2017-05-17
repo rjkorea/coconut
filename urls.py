@@ -21,6 +21,7 @@ url_patterns = [
 
     (r'/a/admins/?', a.admin.AdminListHandler),
     (r'/a/admin/(?P<_id>[^\/]+)/?', a.admin.AdminHandler),
+    (r'/a/admin/?', a.admin.AdminHandler),
 
     (r'/a/users/?', a.user.UserListHandler),
     (r'/a/user/(?P<_id>[^\/]+)/?', a.user.UserHandler),
