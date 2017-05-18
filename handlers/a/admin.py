@@ -64,6 +64,7 @@ class AdminHandler(JsonHandler):
         duplicated_admin = await AdminModel.find_one({'email': email})
         if duplicated_admin:
             raise HTTPError(400, 'duplicated email')
+
         admin = AdminModel(raw_data=dict(
             email=email,
             mobile_number=mobile_number,
@@ -71,6 +72,12 @@ class AdminHandler(JsonHandler):
             role=role,
         ))
         admin.set_password(password)
+        company_oid = self.json_decoded_body.get('company_oid', None)
+        if company_oid and (role=='host' or role=='staff'):
+            admin.data['company_oid'] = company_oid
+        else:
+            raise HTTPError(400, 'host and staff role needs company_oid')
+
         await admin.insert()
         self.response['data'] = admin.data
         self.write_json()

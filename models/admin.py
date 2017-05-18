@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from bson import ObjectId
 from common import hashers
 
 from models.base import BaseModel
@@ -44,6 +45,11 @@ class AdminModel(BaseModel):
             {
                 'key': 'role',
                 'type': str,
+                'default': None
+            },
+            {
+                'key': 'company_oid',
+                'type': ObjectId,
                 'default': None
             },
             {
