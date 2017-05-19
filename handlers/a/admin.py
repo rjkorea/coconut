@@ -12,20 +12,65 @@ from handlers.base import JsonHandler
 from models.admin import AdminModel
 
 
+def get_query_by_user(user=None):
+    q = {'$and': []}
+    if user['role'] == 'super':
+        q['$and'].append(
+            {
+                '$or': [
+                    {'role': 'super'},
+                    {'role': 'admin'},
+                    {'role': 'host'},
+                    {'role': 'staff'}
+                ]
+            }
+        )
+    elif user['role'] == 'admin':
+        q['$and'].append(
+            {
+                '$or': [
+                    {'role': 'host'},
+                    {'role': 'staff'}
+                ]
+            }
+        )
+    elif user['role'] == 'host':
+        q['$and'].append(
+            {
+                '$or': [
+                    {'role': 'staff'}
+                ]
+            }
+        )
+        q['$and'].append(
+            {
+                'company_oid': user['company_oid']
+            }
+        )
+    elif role == 'staff':
+        pass
+    else:
+        pass
+    return q
+
+
 class AdminListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        q = dict()
+        q = get_query_by_user(self.current_user)
+        if not q['$and']:
+            raise HTTPError(400, 'invalid role')
         if 'q' in parsed_args and parsed_args['q']:
-            q['$or'] = [
+            search_q = {'$or': [
                 {'name': {'$regex': parsed_args['q']}},
                 {'email': {'$regex': parsed_args['q']}},
                 {'company': {'$regex': parsed_args['q']}},
                 {'mobile_number': {'$regex': parsed_args['q']}},
                 {'role': {'$regex': parsed_args['q']}}
-            ]
+            ]}
+            q['$and'].append(search_q)
         count = await AdminModel.count(query=q)
         result = await AdminModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
