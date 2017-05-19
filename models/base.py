@@ -12,7 +12,7 @@ class BaseModel(object):
     def __init__(self, *args, **kwargs):
         raw_data = kwargs.pop('raw_data', dict())
         self.data = self.refine(raw_data)
-    
+
     @property
     def specification(self):
         return [
@@ -24,7 +24,7 @@ class BaseModel(object):
             {
                 'key': 'created_at',
                 'type': datetime,
-                'default':datetime.utcnow 
+                'default':datetime.utcnow
             },
             {
                 'key': 'updated_at',
@@ -32,7 +32,7 @@ class BaseModel(object):
                 'default': datetime.utcnow
             }
         ]
-    
+
     @classmethod
     async def find_one(cls, query={}, fields=None):
         result = await MongodbService().client[cls.MONGO_COLLECTION].find_one(query, fields)
@@ -56,6 +56,11 @@ class BaseModel(object):
         if document is None or not isinstance(document, dict):
             raise ValueError('Invalid document')
         result = await MongodbService().client[cls.MONGO_COLLECTION].update(query, document, upsert=upsert, multi=multi)
+        return result
+
+    @classmethod
+    async def get_id(cls, _id, fields=None):
+        result = await MongodbService().client[cls.MONGO_COLLECTION].find_one({'_id': _id}, fields)
         return result
 
     async def insert(self):

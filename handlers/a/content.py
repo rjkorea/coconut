@@ -9,8 +9,7 @@ from common.decorators import admin_auth_async, parse_argument
 
 from handlers.base import JsonHandler
 from models.content import ContentModel
-
-from models import get_admin
+from models.admin import AdminModel
 
 from common import hashers
 
@@ -35,7 +34,7 @@ class ContentListHandler(JsonHandler):
         count = await ContentModel.count(query=q)
         result = await ContentModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['admin'] = await get_admin(res['admin_oid'])
+            res['admin'] = await AdminModel.get_id(res['admin_oid'])
             res.pop('admin_oid')
         self.response['data'] = result
         self.response['count'] = count

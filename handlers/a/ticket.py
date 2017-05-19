@@ -11,9 +11,9 @@ from common import constants
 from handlers.base import JsonHandler
 from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
+from models.admin import AdminModel
+from models.user import UserModel
 
-from models import get_content, get_admin, get_user
-from models import get_ticket_type, get_ticket_order
 from models import create_ticket, create_broker
 from models import send_sms
 
@@ -37,8 +37,8 @@ class TicketTypeListHandler(JsonHandler):
         count = await TicketTypeModel.count(query=q)
         result = await TicketTypeModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['content'] = await get_content(res['content_oid'])
-            res['admin'] = await get_admin(res['admin_oid'])
+            res['content'] = await ContentModel.get_id(res['content_oid'])
+            res['admin'] = await AdminModel.get_id(res['admin_oid'])
             res.pop('content_oid')
             res.pop('admin_oid')
         self.response['data'] = result
@@ -113,8 +113,8 @@ class TicketTypeHandler(JsonHandler):
         if not ticket_type:
             raise HTTPError(400, 'not exist ticket type')
         self.response['data'] = ticket_type
-        self.response['data']['content'] = await get_content(self.response['data']['content_oid'])
-        self.response['data']['admin'] = await get_admin(self.response['data']['admin_oid'])
+        self.response['data']['content'] = await ContentModel.get_id(self.response['data']['content_oid'])
+        self.response['data']['admin'] = await AdminModel.get_id(self.response['data']['admin_oid'])
         self.response['data'].pop('content_oid')
         self.response['data'].pop('admin_oid')
         self.write_json()
@@ -143,8 +143,8 @@ class TicketOrderListHandler(JsonHandler):
         count = await TicketOrderModel.count(query=q)
         result = await TicketOrderModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['ticket_type'] = await get_ticket_type(res['ticket_type_oid'])
-            res['admin'] = await get_admin(res['admin_oid'])
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            res['admin'] = await AdminModel.get_id(res['admin_oid'])
             res.pop('ticket_type_oid')
             res.pop('admin_oid')
         self.response['data'] = result
@@ -236,8 +236,8 @@ class TicketOrderHandler(JsonHandler):
         if not ticket_order:
             raise HTTPError(400, 'not exist ticket order')
         self.response['data'] = ticket_order
-        self.response['data']['ticket_type'] = await get_ticket_type(self.response['data']['ticket_type_oid'])
-        self.response['data']['admin'] = await get_admin(self.response['data']['admin_oid'])
+        self.response['data']['ticket_type'] = await TicketTypeModel.get_id(self.response['data']['ticket_type_oid'])
+        self.response['data']['admin'] = await AdminModel.get_id(self.response['data']['admin_oid'])
         self.response['data'].pop('ticket_type_oid')
         self.response['data'].pop('admin_oid')
         self.write_json()
@@ -297,10 +297,10 @@ class TicketListHandler(JsonHandler):
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['ticket_order'] = await get_ticket_order(res['ticket_order_oid'])
+            res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
             res.pop('ticket_order_oid')
             if 'user_oid' in res:
-                res['user'] = await get_user(res['user_oid'])
+                res['user'] = await UserModel.get_id(res['user_oid'])
                 res.pop('user_oid')
         self.response['data'] = result
         self.response['count'] = count
@@ -344,10 +344,10 @@ class TicketHandler(JsonHandler):
         if not ticket:
             raise HTTPError(400, 'not exist ticket')
         self.response['data'] = ticket
-        self.response['data']['ticket_order'] = await get_ticket_order(self.response['data']['ticket_order_oid'])
+        self.response['data']['ticket_order'] = await TicketOrderModel.get_id(self.response['data']['ticket_order_oid'])
         self.response['data'].pop('ticket_order_oid')
         if 'user_oid' in self.response['data']:
-            self.response['data']['user'] = await get_user(self.response['data']['user_oid'])
+            self.response['data']['user'] = await UserModel.get_id(self.response['data']['user_oid'])
             self.response['data'].pop('user_oid')
         self.write_json()
 

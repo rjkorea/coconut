@@ -9,10 +9,7 @@ from common.decorators import user_auth_async, parse_argument
 
 from handlers.base import JsonHandler
 from models.content import ContentModel
-from models.ticket import TicketOrderModel
-from models.ticket import TicketModel
-
-from models import get_ticket_type
+from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel
 
 
 class TicketOrderListHandler(JsonHandler):
@@ -28,7 +25,7 @@ class TicketOrderListHandler(JsonHandler):
         count = await TicketOrderModel.count(query=q)
         result = await TicketOrderModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['ticket_type'] = await get_ticket_type(res['ticket_type_oid'])
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
             res.pop('ticket_type_oid')
         self.response['data'] = result
         self.response['count'] = count
