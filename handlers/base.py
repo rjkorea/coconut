@@ -45,6 +45,9 @@ class BaseHandler(RequestHandler):
         self.response['message'] = '%d: %s' % (status_code, getattr(kwargs['exc_info'][1], 'log_message'))
         self.write_json()
 
+    def get_authorization(self):
+        return self.request.headers.get('Authorization')
+
     async def get_current_admin_async(self):
         current_user = None
         session_key = self.get_cookie(self.COOKIE_KEYS['SESSION_KEY'], None)
