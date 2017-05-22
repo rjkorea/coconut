@@ -47,7 +47,7 @@ def get_query_by_user(user=None):
                 'company_oid': user['company_oid']
             }
         )
-    elif role == 'staff':
+    elif user['role'] == 'staff':
         pass
     else:
         pass
