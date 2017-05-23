@@ -37,7 +37,7 @@ class PlaceModel(BaseModel):
             },
             {
                 'key': 'number',
-                'type': int,
+                'type': str,
                 'default': None
             },
             {

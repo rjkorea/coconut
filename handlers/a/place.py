@@ -51,8 +51,15 @@ class PlaceHandler(JsonHandler):
         if not area or len(area) == 0:
             raise HTTPError(400, 'invalid area')
         number = self.json_decoded_body.get('number', None)
-        if not number or not isinstance(number, int):
+        if not number or len(number) == 0:
             raise HTTPError(400, 'invalid number')
+        query = {
+            'area': area,
+            'number': number
+        }
+        duplicated_place = await PlaceModel.find_one(query)
+        if duplicated_place:
+            raise HTTPError(400, 'duplicated_place')
 
         place = PlaceModel(raw_data=dict(
             admin_oid=admin_oid,
