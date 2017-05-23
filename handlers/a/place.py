@@ -81,6 +81,14 @@ class PlaceHandler(JsonHandler):
         if not place:
             raise HTTPError(400, 'not exist _id')
         query = {
+            'area': self.json_decoded_body['area'],
+            'number': self.json_decoded_body['number'],
+            '_id': {'$ne': ObjectId(_id)}
+        }
+        duplicated_place = await PlaceModel.find_one(query)
+        if duplicated_place:
+            raise HTTPError(400, 'duplicated place')
+        query = {
             '_id': ObjectId(_id),
         }
         self.json_decoded_body['updated_at'] = datetime.utcnow()
