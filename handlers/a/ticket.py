@@ -14,7 +14,7 @@ from models.content import ContentModel
 from models.admin import AdminModel
 from models.user import UserModel
 
-from models import create_ticket, create_broker
+from models import create_ticket, create_broker, create_user
 from models import send_sms
 
 
@@ -299,6 +299,10 @@ class TicketListHandler(JsonHandler):
         for res in result:
             res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
             res.pop('ticket_order_oid')
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            res.pop('ticket_type_oid')
+            res['content'] = await ContentModel.get_id(res['content_oid'])
+            res.pop('content_oid')
             if 'user_oid' in res:
                 res['user'] = await UserModel.get_id(res['user_oid'])
                 res.pop('user_oid')
@@ -346,9 +350,39 @@ class TicketHandler(JsonHandler):
         self.response['data'] = ticket
         self.response['data']['ticket_order'] = await TicketOrderModel.get_id(self.response['data']['ticket_order_oid'])
         self.response['data'].pop('ticket_order_oid')
+        self.response['data']['ticket_type'] = await TicketTypeModel.get_id(self.response['data']['ticket_type_oid'])
+        self.response['data'].pop('ticket_type_oid')
+        self.response['data']['content'] = await ContentModel.get_id(self.response['data']['content_oid'])
+        self.response['data'].pop('content_oid')
         if 'user_oid' in self.response['data']:
             self.response['data']['user'] = await UserModel.get_id(self.response['data']['user_oid'])
             self.response['data'].pop('user_oid')
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketRegisterUserHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist _id')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        user = await create_user(self.json_decoded_body)
+        document = {
+            '$set': {
+                'user_oid': user['_id']
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
         self.write_json()
 
     async def options(self, *args, **kwargs):

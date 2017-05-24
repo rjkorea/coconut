@@ -42,6 +42,7 @@ url_patterns = [
 
     (r'/a/tickets/?', a.ticket.TicketListHandler),
     (r'/a/ticket/(?P<_id>[^\/]+)/?', a.ticket.TicketHandler),
+    (r'/a/ticket/(?P<_id>[^\/]+)/register/user/?', a.ticket.TicketRegisterUserHandler),
     (r'/a/ticket/?', a.ticket.TicketHandler),
 
     (r'/a/places/?', a.place.PlaceListHandler),

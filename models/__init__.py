@@ -27,6 +27,8 @@ async def create_ticket(ticket_order):
                 ))
         ticket = TicketModel(raw_data=dict(
             ticket_order_oid=ticket_order['_id'],
+            ticket_type_oid=ticket_type['_id'],
+            content_oid=ticket_type['content_oid'],
             days=days
         ))
         await ticket.insert()
@@ -44,6 +46,15 @@ async def create_broker(receiver):
         ))
         await broker.insert()
         return True
+
+async def create_user(user):
+    user = await UserModel.find_one({'mobile_number': user['mobile_number']})
+    if user:
+        return user
+    else:
+        user = UserModel(raw_data=user)
+    await user.insert()
+    return user.data
 
 async def send_sms(data=dict()):
     response = NexmoService().client.send_message(data)

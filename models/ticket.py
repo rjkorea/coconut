@@ -138,7 +138,17 @@ class TicketModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'ticket_type_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
                 'key': 'ticket_order_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'content_oid',
                 'type': ObjectId,
                 'default': None
             },
