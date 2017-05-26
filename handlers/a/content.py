@@ -14,23 +14,46 @@ from models.admin import AdminModel
 from common import hashers
 
 
+def get_query_by_user(user=None):
+    q = {'$and': []}
+    if user['role'] == 'super':
+        q['$and'].append({})
+    elif user['role'] == 'admin':
+        q['$and'].append({})
+    elif user['role'] == 'host':
+        q['$and'].append(
+            {
+                'company_oid': user['company_oid']
+            }
+        )
+    elif user['role'] == 'staff':
+        q['$and'].append(
+            {
+                'company_oid': user['company_oid']
+            }
+        )
+    else:
+        pass
+    return q
+
+
 class ContentListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None),
-        ('admin_oid', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        q = dict()
-        if 'admin_oid' in parsed_args and parsed_args['admin_oid']:
-            q['admin_oid'] = ObjectId(parsed_args['admin_oid'])
+        q = get_query_by_user(self.current_user)
+        if not q['$and']:
+            raise HTTPError(400, 'invalid role')
         if 'q' in parsed_args and parsed_args['q']:
-            q['$or'] = [
+            search_q = {'$or': [
                 {'name': {'$regex': parsed_args['q']}},
                 {'desc': {'$regex': parsed_args['q']}},
                 {'place': {'$regex': parsed_args['q']}},
                 {'genre': {'$regex': parsed_args['q']}},
                 {'lineup': {'$regex': parsed_args['q']}}
-            ]
+            ]}
+            q['$and'].append(search_q)
         count = await ContentModel.count(query=q)
         result = await ContentModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
@@ -50,9 +73,6 @@ class ContentHandler(JsonHandler):
     async def post(self, *args, **kwargs):
         # basic field
         admin_oid = self.current_user['_id']
-        company_oid = self.json_decoded_body.get('company_oid', None)
-        if not company_oid or len(company_oid) != 24:
-            raise HTTPError(400, 'invalid company_oid')
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
@@ -62,7 +82,8 @@ class ContentHandler(JsonHandler):
 
         # create content model
         content = ContentModel(raw_data=dict(
-            user_oid=user_oid,
+            company_oid=self.current_user['company_oid'],
+            admin_oid=admin_oid,
             name=name,
             place=place
         ))
