@@ -23,6 +23,11 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'company_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
                 'key': 'name',
                 'type': str,
                 'default': None

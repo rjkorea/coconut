@@ -49,7 +49,10 @@ class ContentHandler(JsonHandler):
     @admin_auth_async
     async def post(self, *args, **kwargs):
         # basic field
-        user_oid = self.current_user['_id']
+        admin_oid = self.current_user['_id']
+        company_oid = self.json_decoded_body.get('company_oid', None)
+        if not company_oid or len(company_oid) != 24:
+            raise HTTPError(400, 'invalid company_oid')
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
@@ -77,8 +80,7 @@ class ContentHandler(JsonHandler):
         if not content:
             raise HTTPError(400, 'not exist _id')
         query = {
-            '_id': ObjectId(_id),
-            'user_oid': self.current_user['_id']
+            '_id': ObjectId(_id)
         }
         self.json_decoded_body['updated_at'] = datetime.utcnow()
         document = {

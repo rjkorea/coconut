@@ -112,3 +112,22 @@ class PlaceHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class PlaceStatsHandler(JsonHandler):
+    @admin_auth_async
+    async def get(self, *args, **kwargs):
+        result = dict()
+        result['A'] = await PlaceModel.count(query={'area': 'A'})
+        result['B'] = await PlaceModel.count(query={'area': 'B'})
+        result['C'] = await PlaceModel.count(query={'area': 'C'})
+        result['D'] = await PlaceModel.count(query={'area': 'D'})
+        result['E'] = await PlaceModel.count(query={'area': 'E'})
+        result['F'] = await PlaceModel.count(query={'area': 'F'})
+        result['G'] = await PlaceModel.count(query={'area': 'G'})
+        self.response['data'] = result
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()

@@ -48,6 +48,7 @@ url_patterns = [
     (r'/a/places/?', a.place.PlaceListHandler),
     (r'/a/place/(?P<_id>[^\/]+)/?', a.place.PlaceHandler),
     (r'/a/place/?', a.place.PlaceHandler),
+    (r'/a/places/stats/?', a.place.PlaceStatsHandler),
 
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
