@@ -48,13 +48,13 @@ async def create_broker(receiver):
         return True
 
 async def create_user(user):
-    user = await UserModel.find_one({'mobile_number': user['mobile_number']})
-    if user:
-        return user
+    res = await UserModel.find_one({'mobile_number': user['mobile_number']})
+    if res:
+        return res 
     else:
-        user = UserModel(raw_data=user)
-    await user.insert()
-    return user.data
+        res = UserModel(raw_data=user)
+        await res.insert()
+        return res.data
 
 async def send_sms(data=dict()):
     response = NexmoService().client.send_message(data)

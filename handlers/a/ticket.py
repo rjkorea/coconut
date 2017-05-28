@@ -376,7 +376,8 @@ class TicketRegisterUserHandler(JsonHandler):
         query = {
             '_id': ObjectId(_id)
         }
-        user = await create_user(self.json_decoded_body)
+        parsed_args = self.json_decoded_body
+        user = await create_user(parsed_args)
         document = {
             '$set': {
                 'user_oid': user['_id']
