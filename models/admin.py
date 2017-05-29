@@ -65,7 +65,7 @@ class AdminModel(BaseModel):
             {
                 'key': 'enabled',
                 'type': bool,
-                'default': (lambda: False)
+                'default': (lambda: True)
             },
         ])
         return specification
