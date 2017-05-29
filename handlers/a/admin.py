@@ -120,9 +120,6 @@ class AdminHandler(JsonHandler):
         company_oid = self.json_decoded_body.get('company_oid', None)
         if company_oid and (role=='host' or role=='staff'):
             admin.data['company_oid'] = ObjectId(company_oid)
-        else:
-            raise HTTPError(400, 'host and staff role needs company_oid')
-
         await admin.insert()
         self.response['data'] = admin.data
         self.write_json()
