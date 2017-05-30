@@ -82,15 +82,24 @@ class ContentHandler(JsonHandler):
         place = self.json_decoded_body.get('place', None)
         if not place or len(place) == 0:
             raise HTTPError(400, 'invalid place')
+        desc = self.json_decoded_body.get('desc', None)
 
         # create content model
         content = ContentModel(raw_data=dict(
-            company_oid=self.current_user['company_oid'],
             admin_oid=admin_oid,
             name=name,
-            place=place
+            place=place,
+            desc=desc
         ))
-
+        if self.current_user['role'] == 'host':
+            content.data['company_oid'] = self.current_user['company_oid']
+        elif self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
+            company_oid = self.json_decoded_body.get('company_oid', None)
+            if not company_oid:
+                raise HTTPError(400, 'need company_oid when your role is super or admin')
+            content.data['company_oid'] = ObjectId(company_oid)
+        else:
+            pass
         await content.insert()
         self.response['data'] = content.data
         self.write_json()
