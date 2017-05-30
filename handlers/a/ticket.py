@@ -380,7 +380,8 @@ class TicketRegisterUserHandler(JsonHandler):
         user = await create_user(parsed_args)
         document = {
             '$set': {
-                'user_oid': user['_id']
+                'user_oid': user['_id'],
+                'status': TicketModel.STATUS[2]
             }
         }
         self.response['data'] = await TicketModel.update(query, document)

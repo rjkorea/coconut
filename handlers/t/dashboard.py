@@ -5,7 +5,7 @@ from common.decorators import app_auth_async, tablet_auth_async, parse_argument
 from tornado.web import HTTPError
 
 from handlers.base import JsonHandler
-from models.content import ContentModel
+from models.ticket import TicketModel
 
 
 class DashboardHandler(JsonHandler):
@@ -15,12 +15,17 @@ class DashboardHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        # content = await ContentModel.find_one({'_id': ObjectId(_id), 'user_oid': self.current_user['_id']})
-        # if not content:
-        #     raise HTTPError(400, 'not exist content')
+        total = await TicketModel.count({'content_oid': ObjectId(_id)})
+        use = await TicketModel.count({'content_oid': ObjectId(_id), 'status': 'use'})
+        pend = await TicketModel.count({'content_oid': ObjectId(_id), 'status': 'pend'})
+        send = await TicketModel.count({'content_oid': ObjectId(_id), 'status': 'send'})
+        register = await TicketModel.count({'content_oid': ObjectId(_id), 'status': 'register'})
         dashboard = dict(
-            use=787,
-            total=1242
+            pend=pend,
+            register=register,
+            send=send,
+            use=use,
+            total=total
         )
         self.response['data'] = dashboard
         self.write_json()
