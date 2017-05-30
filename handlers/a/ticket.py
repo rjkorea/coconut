@@ -333,6 +333,9 @@ class TicketHandler(JsonHandler):
             '_id': ObjectId(_id)
         }
         self.json_decoded_body['updated_at'] = datetime.utcnow()
+        for d in self.json_decoded_body['days']:
+            if d['entered']:
+                d['entered_at'] = self.json_decoded_body['updated_at']
         document = {
             '$set': self.json_decoded_body
         }
@@ -382,6 +385,36 @@ class TicketRegisterUserHandler(JsonHandler):
             '$set': {
                 'user_oid': user['_id'],
                 'status': TicketModel.STATUS[2]
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketEnterUserHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist _id')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        days = self.json_decoded_body['days']
+        for d in days:
+            if entered:
+                d.entered_at = datetime.utcnow()
+        document = {
+            '$set': {                
+                'status': TicketModel.STATUS[3],
+                'days': days
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
