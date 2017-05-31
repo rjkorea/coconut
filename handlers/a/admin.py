@@ -83,6 +83,7 @@ class AdminListHandler(JsonHandler):
 
 
 class AdminHandler(JsonHandler):
+    @admin_auth_async
     async def post(self, *args, **kwargs):
         role = self.json_decoded_body.get('role', None)
         if not role or len(role) == 0:
@@ -151,6 +152,45 @@ class AdminHandler(JsonHandler):
         if not admin:
             raise HTTPError(400, 'not exist _id')
         self.response['data'] = admin
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class AdminPasswordHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        old_password = self.json_decoded_body.get('old_password', None)
+        if not old_password or len(old_password) == 0 or not hashers.validate_password(old_password):
+            raise HTTPError(400, 'invalid old_password')
+        new_password_1 = self.json_decoded_body.get('new_password_1', None)
+        if not new_password_1 or len(new_password_1) == 0 or not hashers.validate_password(new_password_1):
+            raise HTTPError(400, 'invalid new_password_1')
+        new_password_2 = self.json_decoded_body.get('new_password_2', None)
+        if not new_password_2 or len(new_password_2) == 0 or not hashers.validate_password(new_password_2):
+            raise HTTPError(400, 'invalid new_password_2')
+        if new_password_1 != new_password_2:
+            raise HTTPError(400, 'new password 1 and 2 not matched')
+        admin = await AdminModel.find_one({'_id': ObjectId(_id)})
+        if not admin:
+            raise HTTPError(400, 'not exist _id')
+        if not hashers.check_password(old_password, admin['password']):
+            raise HTTPError(400, 'not correct old password')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'password': hashers.make_password(new_password_1),
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await AdminModel.update(query, document)
         self.write_json()
 
     async def options(self, *args, **kwargs):
