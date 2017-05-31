@@ -18,11 +18,13 @@ class DashboardHandler(JsonHandler):
         total_user_count = await UserModel.count({'enabled': True})
         total_content_count = await ContentModel.count({'enabled': True})
         total_ticket_count = await TicketModel.count({'enabled': True})
+        recent_contents = await ContentModel.find(query={'enabled': True}, fields=[('name')], limit=5)
         self.response['data'] = {
             'total_ticket_count': total_ticket_count,
             'total_company_count': total_company_count,
             'total_user_count': total_user_count,
-            'total_content_count': total_content_count
+            'total_content_count': total_content_count,
+            'recent_contents': recent_contents
         }
         self.write_json()
 
