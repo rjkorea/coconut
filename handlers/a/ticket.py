@@ -279,21 +279,21 @@ class TicketOrderSendHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None), ('user_oid', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None), ('user_oid', str, None), ('company_oid', str, None), ('content_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
+        q = {'$and': [{}]}
+        if parsed_args['company_oid']:
+            q['$and'].append({'company_oid': ObjectId(parsed_args['company_oid'])})
+        if parsed_args['content_oid']:
+            q['$and'].append({'content_oid': ObjectId(parsed_args['content_oid'])})
+        if parsed_args['user_oid']:
+            q['$and'].append({'user_oid': ObjectId(parsed_args['user_oid'])})
         if parsed_args['q']:
-            q = {
-                '$or': [
-                    {'status': {'$regex': parsed_args['q']}}
-                ]
-            }
-        elif parsed_args['user_oid']:
-            q = {
-                'user_oid': ObjectId(parsed_args['user_oid'])
-            }
-        else:
-            q = {}
+            search_q = {'$or': [
+                {'status': {'$regex': parsed_args['q']}},
+            ]}
+            q['$and'].append(search_q)
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
