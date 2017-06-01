@@ -14,6 +14,7 @@ url_patterns = [
     (r'/a/auth/login/?', a.auth.LoginHandler),
 
     (r'/a/dashboard/?', a.dashboard.DashboardHandler),
+    (r'/a/dashboard/(?P<_id>[^\/]+)/?', a.dashboard.DashboardContentHandler),
 
     (r'/a/companies/?', a.company.CompanyListHandler),
     (r'/a/company/(?P<_id>[^\/]+)/?', a.company.CompanyHandler),
