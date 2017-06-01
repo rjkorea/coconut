@@ -10,6 +10,7 @@ from common import hashers
 
 from handlers.base import JsonHandler
 from models.admin import AdminModel
+from models.company import CompanyModel
 
 
 def get_query_by_user(user=None):
@@ -66,13 +67,15 @@ class AdminListHandler(JsonHandler):
             search_q = {'$or': [
                 {'name': {'$regex': parsed_args['q']}},
                 {'email': {'$regex': parsed_args['q']}},
-                {'company': {'$regex': parsed_args['q']}},
                 {'mobile_number': {'$regex': parsed_args['q']}},
                 {'role': {'$regex': parsed_args['q']}}
             ]}
             q['$and'].append(search_q)
         count = await AdminModel.count(query=q)
         result = await AdminModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for r in result:
+            r['company'] = await AdminModel.get_id(r['company_oid'])
+            r.pop('company_oid')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -140,6 +143,7 @@ class AdminHandler(JsonHandler):
         document = {
             '$set': self.json_decoded_body
         }
+        document['$set']['company_oid'] = ObjectId(document['$set']['company_oid'])
         self.response['data'] = await AdminModel.update(query, document)
         self.write_json()
 
@@ -151,6 +155,8 @@ class AdminHandler(JsonHandler):
         admin = await AdminModel.find_one({'_id': ObjectId(_id)})
         if not admin:
             raise HTTPError(400, 'not exist _id')
+        admin['company'] = await CompanyModel.get_id(admin['company_oid'])
+        admin.pop('company_oid')
         self.response['data'] = admin
         self.write_json()
 
