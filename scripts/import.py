@@ -107,6 +107,9 @@ def tickets(csvfile, mongo, contentid, dryrun):
             line.pop('gender')
             line.pop('birthday')
 
+            # TODO add empty ticket_order_oid
+            line['ticket_order_oid'] = None
+            
             # TODO add ticket_type_oid
             line['ticket_type_oid'] = mongo_client['coconut']['ticket_type'].find_one({'name': line['ticket_type']})['_id']
             line.pop('ticket_type')
