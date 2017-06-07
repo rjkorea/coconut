@@ -60,10 +60,25 @@ class DashboardContentHandler(JsonHandler):
             'content_oid': ObjectId(content_oid),
             'enabled': True
         }
-        self.response['data']['recent_ticket_types'] = await TicketTypeModel.find(query=query, fields=[('name')], limit=5)
-        self.response['data']['ticket_count']['total'] = await TicketModel.count(query)
-        query['status'] = 'use'
-        self.response['data']['ticket_count']['use'] = await TicketModel.count(query)
+        self.response['data']['recent_ticket_types'] = await TicketTypeModel.find(
+            query = {
+                    'content_oid': ObjectId(content_oid),
+                    'enabled': True
+            },
+            fields=[('name')], limit=5)
+        self.response['data']['ticket_count']['total'] = await TicketModel.count(
+            {
+                'content_oid': ObjectId(content_oid),
+                'enabled': True
+            }
+        )
+        self.response['data']['ticket_count']['use'] = await TicketModel.count(
+            {
+                'content_oid': ObjectId(content_oid),
+                'enabled': True,
+                'status': 'use'
+            }
+        )
         self.write_json()
 
     async def options(self, *args, **kwargs):
