@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from bson import ObjectId
+from enum import Enum
 
 from common import hashers
 
@@ -123,7 +124,7 @@ class TicketOrderModel(BaseModel):
 
 class TicketModel(BaseModel):
     MONGO_COLLECTION = 'ticket'
-    STATUS = ('pend', 'send', 'register', 'use')
+    Status = Enum('Status', 'pend send register use cancel')
 
     def __init__(self, *args, **kwargs):
         super(TicketModel, self).__init__(*args, **kwargs)

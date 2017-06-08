@@ -186,7 +186,7 @@ class TicketOrderHandler(JsonHandler):
         # create ticket order model
         ticket_order = TicketOrderModel(raw_data=dict(
             admin_oid=admin_oid,
-            content_oid=content_oid,
+            content_oid=ObjectId(content_oid),
             ticket_type_oid=ObjectId(ticket_type_oid),
             qty=qty,
             receiver=receiver,
@@ -201,11 +201,11 @@ class TicketOrderHandler(JsonHandler):
                 raise HTTPError(400, 'invalid price | method')
             ticket_order.data['fee'] = fee
 
+        broker_oid = await create_broker(ticket_order.data['receiver'])
+        ticket_order.data['user_oid'] = broker_oid
         await ticket_order.insert()
         await create_ticket(ticket_order.data)
-        is_created_broker = await create_broker(ticket_order.data['receiver'])
         self.response['data'] = ticket_order.data
-        self.response['is_created_broker'] = is_created_broker
         self.write_json()
 
     @admin_auth_async
@@ -384,7 +384,7 @@ class TicketRegisterUserHandler(JsonHandler):
         document = {
             '$set': {
                 'user_oid': user['_id'],
-                'status': TicketModel.STATUS[2]
+                'status': TicketModel.Status.register.name
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
@@ -413,7 +413,7 @@ class TicketEnterUserHandler(JsonHandler):
                 d.entered_at = datetime.utcnow()
         document = {
             '$set': {                
-                'status': TicketModel.STATUS[3],
+                'status': TicketModel.Status.use,
                 'days': days
             }
         }

@@ -40,7 +40,7 @@ url_patterns = [
     (r'/a/ticket/orders/?', a.ticket.TicketOrderListHandler),
     (r'/a/ticket/order/(?P<_id>[^\/]+)/?', a.ticket.TicketOrderHandler),
     (r'/a/ticket/order/?', a.ticket.TicketOrderHandler),
-    (r'/a/ticket/order/(?P<_id>[^\/]+)/send?', a.ticket.TicketOrderSendHandler),
+    (r'/a/ticket/order/(?P<_id>[^\/]+)/send/?', a.ticket.TicketOrderSendHandler),
 
     (r'/a/tickets/?', a.ticket.TicketListHandler),
     (r'/a/ticket/(?P<_id>[^\/]+)/?', a.ticket.TicketHandler),
@@ -71,7 +71,12 @@ url_patterns = [
     (r'/w/countries/?', w.util.CountryListHandler),
 
     (r'/w/ticket/orders/?', w.ticket.TicketOrderListHandler),
-    (r'/w/tickets/?', w.ticket.TicketListHandler),
+    (r'/w/ticket/order/(?P<_id>[^\/]+)/tickets/unused?', w.ticket.TicketUnusedListHandler),
+    (r'/w/ticket/order/(?P<_id>[^\/]+)/tickets/used?', w.ticket.TicketUsedListHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/register/?', w.ticket.TicketRegisterHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/cancel/?', w.ticket.TicketCancelHandler),
+    (r'/w/ticket/send/?', w.ticket.TicketSendHandler),
+    (r'/w/ticket/send/batch/?', w.ticket.TicketSendBatchHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),

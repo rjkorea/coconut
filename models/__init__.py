@@ -36,7 +36,7 @@ async def create_ticket(ticket_order):
 async def create_broker(receiver):
     broker = await UserModel.find_one({'mobile_number': receiver['mobile_number']})
     if broker:
-        return False
+        return broker['_id']
     else:
         broker = UserModel(raw_data=dict(
             name=receiver['name'],
@@ -44,8 +44,8 @@ async def create_broker(receiver):
             access_code=receiver['access_code'],
             role=['broker']
         ))
-        await broker.insert()
-        return True
+        res = await broker.insert()
+        return res['_id']
 
 async def create_user(user):
     res = await UserModel.find_one({'mobile_number': user['mobile_number']})
