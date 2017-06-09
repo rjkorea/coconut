@@ -32,7 +32,7 @@ class LoginHandler(JsonHandler):
         session = UserSessionModel()
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
-        self.set_cookie(self.COOKIE_KEYS['USER_SESSION_KEY'], str(session_oid))
+        user[self.COOKIE_KEYS['USER_SESSION_KEY']] = str(session_oid)
         self.response['data'] = user
         self.write_json()
 

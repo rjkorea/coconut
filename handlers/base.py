@@ -48,6 +48,12 @@ class BaseHandler(RequestHandler):
     def get_authorization(self):
         return self.request.headers.get('Authorization')
 
+    def get_authorization_usk(self):
+        auth = self.request.headers.get('Authorization', None)
+        if auth:
+            return auth.strip().split('=')[1]
+        return auth
+
     async def get_current_admin_async(self):
         current_user = None
         session_key = self.get_cookie(self.COOKIE_KEYS['SESSION_KEY'], None)
@@ -60,7 +66,7 @@ class BaseHandler(RequestHandler):
 
     async def get_current_user_async(self):
         current_user = None
-        session_key = self.get_cookie(self.COOKIE_KEYS['USER_SESSION_KEY'], None)
+        session_key = self.get_authorization_usk()
         if not session_key:
             return None
         session = await UserSessionModel.find_one({'_id': ObjectId(session_key)})

@@ -686,10 +686,10 @@
 		},
 		{
 			"id": "76ac834e-24d7-d6fe-10d8-829d80ffd7db",
-			"headers": "Cookie: usk=58f5a97c5f547121f0471066\n",
+			"headers": "Authorization: usk=58f5a97c5f547121f0471066\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=58f5a97c5f547121f0471066",
 					"description": "",
 					"enabled": true
@@ -729,8 +729,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496900692679,
-			"name": "/w/qnas",
+			"time": 1497013825652,
+			"name": "/w/qnas (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": []
@@ -911,10 +911,10 @@
 		},
 		{
 			"id": "95042088-6745-9044-2477-ac442f47ca8a",
-			"headers": "Cookie: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
+			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5937ae31fd183a02d6ddca07",
 					"description": "",
 					"enabled": true
@@ -938,8 +938,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496899883597,
-			"name": "/w/ticket/<oid>/cancel",
+			"time": 1497013492687,
+			"name": "/w/ticket/<oid>/cancel (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
@@ -966,10 +966,10 @@
 		},
 		{
 			"id": "9ab38025-00da-cafa-3c8e-738ae7c4a457",
-			"headers": "Cookie: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
+			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5937ae31fd183a02d6ddca07",
 					"description": "",
 					"enabled": true
@@ -993,8 +993,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496821358785,
-			"name": "/w/ticket/<oid>/register",
+			"time": 1497011438909,
+			"name": "/w/ticket/<oid>/register (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
@@ -1022,10 +1022,10 @@
 		},
 		{
 			"id": "9df42ac1-cb79-7485-63db-eb8d5fae1821",
-			"headers": "Cookie: usk=5937ae31fd183a02d6ddca07\n",
+			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5937ae31fd183a02d6ddca07",
 					"description": "",
 					"enabled": true
@@ -1065,7 +1065,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496906614406,
+			"time": 1497011420704,
 			"name": "/w/ticket/order/<oid>/tickets/used",
 			"description": "사용된티켓 텝메뉴",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
@@ -1245,10 +1245,10 @@
 		},
 		{
 			"id": "b77b533c-9d21-ba89-27c7-ec32718d2085",
-			"headers": "Cookie: usk=5937ae31fd183a02d6ddca07\n",
+			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5937ae31fd183a02d6ddca07",
 					"description": "",
 					"enabled": true
@@ -1288,7 +1288,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496907912767,
+			"time": 1497011397121,
 			"name": "/w/ticket/order/<oid>/tickets/unused",
 			"description": "사용가능한 티켓탭메뉴",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
@@ -1410,10 +1410,10 @@
 		},
 		{
 			"id": "be716ab2-8e48-9da1-6d93-0370f7309a28",
-			"headers": "Cookie: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
+			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5937ae31fd183a02d6ddca07",
 					"description": "",
 					"enabled": true
@@ -1437,8 +1437,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496902877739,
-			"name": "/w/ticket/send",
+			"time": 1497013505884,
+			"name": "/w/ticket/send (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
@@ -1581,10 +1581,10 @@
 		},
 		{
 			"id": "cf6c1258-ae28-7633-13ab-876f9ba9ee0d",
-			"headers": "Cookie: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
+			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5937ae31fd183a02d6ddca07",
 					"description": "",
 					"enabled": true
@@ -1608,8 +1608,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496895328670,
-			"name": "/w/ticket/send/batch",
+			"time": 1497013930760,
+			"name": "/w/ticket/send/batch (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
@@ -1637,10 +1637,10 @@
 		},
 		{
 			"id": "d43a5f3d-34a3-d5a0-6a16-d6fda743a999",
-			"headers": "Cookie: usk=58f5a97c5f547121f0471066\n",
+			"headers": "Authorization: usk=58f5a97c5f547121f0471066\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=58f5a97c5f547121f0471066",
 					"description": "",
 					"enabled": true
@@ -1680,8 +1680,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496901023916,
-			"name": "/w/tickets/me",
+			"time": 1497013815121,
+			"name": "/w/tickets/me (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": []
@@ -1810,10 +1810,10 @@
 		},
 		{
 			"id": "e47c83a1-9433-f1a2-1c4d-7082d1dbe4b9",
-			"headers": "Cookie: usk=5938f49a5f5471259d521341\n",
+			"headers": "Authorization: usk=5938f49a5f5471259d521341\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=5938f49a5f5471259d521341",
 					"description": "",
 					"enabled": true
@@ -1853,7 +1853,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496906479365,
+			"time": 1497011375085,
 			"name": "/w/ticket/orders",
 			"description": "초대권 탭 메뉴",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
@@ -2212,10 +2212,10 @@
 		},
 		{
 			"id": "fdda41e7-c5f3-d1e8-d024-499c0f746a05",
-			"headers": "Cookie: usk=58f5a97c5f547121f0471066\n",
+			"headers": "Authorization: usk=58f5a97c5f547121f0471066\n",
 			"headerData": [
 				{
-					"key": "Cookie",
+					"key": "Authorization",
 					"value": "usk=58f5a97c5f547121f0471066",
 					"description": "",
 					"enabled": true
@@ -2241,8 +2241,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496900780854,
-			"name": "/w/info",
+			"time": 1497013739900,
+			"name": "/w/info (Doing)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": []
