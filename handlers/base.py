@@ -54,9 +54,15 @@ class BaseHandler(RequestHandler):
             return auth.strip().split('=')[1]
         return auth
 
+    def get_authorization_csk(self):
+        auth = self.request.headers.get('Authorization', None)
+        if auth:
+            return auth.strip().split('=')[1]
+        return auth
+
     async def get_current_admin_async(self):
         current_user = None
-        session_key = self.get_cookie(self.COOKIE_KEYS['SESSION_KEY'], None)
+        session_key = self.get_authorization_csk()
         if not session_key:
             return None
         session = await AdminSessionModel.find_one({'_id': ObjectId(session_key)})

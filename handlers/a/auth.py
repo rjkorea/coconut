@@ -78,7 +78,7 @@ class LoginHandler(JsonHandler):
         session = AdminSessionModel()
         session.data['admin_oid'] = admin['_id']
         session_oid = await session.insert()
-        self.set_cookie(self.COOKIE_KEYS['SESSION_KEY'], str(session_oid))
+        admin['csk'] = str(session_oid)
         self.response['data'] = admin
         self.write_json()
 
