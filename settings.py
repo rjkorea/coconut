@@ -21,7 +21,7 @@ _settings = dict(
         )
     ),
     mongodb=dict(
-        host='test.tkit.me',
+        host='localhost',
         port=27017,
         db='coconut'
     ),
