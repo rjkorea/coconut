@@ -192,9 +192,6 @@ class TicketOrderHandler(JsonHandler):
             receiver=receiver,
             expiry_date=expiry_date
         ))
-        parent_oid = self.json_decoded_body.get('parent_oid', None)
-        if parent_oid:
-            ticket_order.data['parent_oid'] = parent_oid
         fee = self.json_decoded_body.get('fee', None)
         if fee:
             if 'price' not in fee or 'method' not in fee:
@@ -256,6 +253,7 @@ class TicketOrderSendHandler(JsonHandler):
         ticket_order = await TicketOrderModel.find_one({'_id': ObjectId(_id)})
         if not ticket_order:
             raise HTTPError(400, 'not exist _id')
+        await TicketModel.update({'ticket_order_oid': ticket_order['_id'], 'status': TicketModel.Status.pend.name}, {'$set': {'status': TicketModel.Status.send.name}}, False, True)
         ticket_type = await TicketTypeModel.find_one({'_id': ticket_order['ticket_type_oid']})
         content = await ContentModel.find_one({'_id': ticket_type['content_oid']})
         # send SMS
@@ -279,7 +277,7 @@ class TicketOrderSendHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None), ('user_oid', str, None), ('company_oid', str, None), ('content_oid', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None), ('receive_user_oid', str, None), ('company_oid', str, None), ('content_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {'$and': [{}]}
@@ -287,8 +285,8 @@ class TicketListHandler(JsonHandler):
             q['$and'].append({'company_oid': ObjectId(parsed_args['company_oid'])})
         if parsed_args['content_oid']:
             q['$and'].append({'content_oid': ObjectId(parsed_args['content_oid'])})
-        if parsed_args['user_oid']:
-            q['$and'].append({'user_oid': ObjectId(parsed_args['user_oid'])})
+        if parsed_args['receive_user_oid']:
+            q['$and'].append({'receive_user_oid': ObjectId(parsed_args['receive_user_oid'])})
         if parsed_args['q']:
             search_q = {'$or': [
                 {'status': {'$regex': parsed_args['q']}},
@@ -303,9 +301,9 @@ class TicketListHandler(JsonHandler):
             res.pop('ticket_type_oid')
             res['content'] = await ContentModel.get_id(res['content_oid'])
             res.pop('content_oid')
-            if 'user_oid' in res:
-                res['user'] = await UserModel.get_id(res['user_oid'])
-                res.pop('user_oid')
+            if 'receive_user_oid' in res:
+                res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
+                res.pop('receive_user_oid')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -357,9 +355,9 @@ class TicketHandler(JsonHandler):
         self.response['data'].pop('ticket_type_oid')
         self.response['data']['content'] = await ContentModel.get_id(self.response['data']['content_oid'])
         self.response['data'].pop('content_oid')
-        if 'user_oid' in self.response['data']:
-            self.response['data']['user'] = await UserModel.get_id(self.response['data']['user_oid'])
-            self.response['data'].pop('user_oid')
+        if 'receive_user_oid' in self.response['data']:
+            self.response['data']['receive_user'] = await UserModel.get_id(self.response['data']['receive_user_oid'])
+            self.response['data'].pop('receive_user_oid')
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -383,7 +381,7 @@ class TicketRegisterUserHandler(JsonHandler):
         user = await create_user(parsed_args)
         document = {
             '$set': {
-                'user_oid': user['_id'],
+                'receive_user_oid': user['_id'],
                 'status': TicketModel.Status.register.name
             }
         }

@@ -26,6 +26,7 @@ async def create_ticket(ticket_order):
                     entered=False
                 ))
         ticket = TicketModel(raw_data=dict(
+            receive_user_oid=ticket_order['user_oid'],
             ticket_order_oid=ticket_order['_id'],
             ticket_type_oid=ticket_type['_id'],
             content_oid=ticket_type['content_oid'],

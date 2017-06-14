@@ -134,7 +134,12 @@ class TicketModel(BaseModel):
         specification = super(TicketModel, self).specification
         specification.extend([
             {
-                'key': 'user_oid',
+                'key': 'send_user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'receive_user_oid',
                 'type': ObjectId,
                 'default': None
             },

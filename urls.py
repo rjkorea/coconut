@@ -67,6 +67,10 @@ url_patterns = [
     # w
     (r'/w/auth/login/?', w.auth.LoginHandler),
 
+    (r'/w/user/?', w.user.UserHandler),
+    (r'/w/user/(?P<_id>[^\/]+)/new/password?', w.user.UserNewPasswordHandler),
+    (r'/w/user/(?P<_id>[^\/]+)/auth/password?', w.user.UserAuthPasswordHandler),
+
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
 
@@ -77,6 +81,8 @@ url_patterns = [
     (r'/w/ticket/(?P<_id>[^\/]+)/cancel/?', w.ticket.TicketCancelHandler),
     (r'/w/ticket/send/?', w.ticket.TicketSendHandler),
     (r'/w/ticket/send/batch/?', w.ticket.TicketSendBatchHandler),
+    (r'/w/tickets/me/?', w.ticket.TicketListMeHandler),
+    (r'/w/tickets/?', w.ticket.TicketListHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),
