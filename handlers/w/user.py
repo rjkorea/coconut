@@ -129,8 +129,6 @@ class UserMePasswordHandler(JsonHandler):
             raise HTTPError(400, 'invalid new_password_2')
         if new_password_1 != new_password_2:
             raise HTTPError(400, 'new password 1 and 2 not matched')
-        import logging
-        logging.info(self.current_user)
         if not hashers.check_password(old_password, self.current_user['password']):
             raise HTTPError(400, 'not correct old password')
         query = {
