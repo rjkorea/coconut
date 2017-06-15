@@ -1101,10 +1101,26 @@
 		},
 		{
 			"id": "6d117c1c-77f9-60f2-36cd-f320d0a32d96",
-			"headers": "Content-Type: application/json\nCookie: csk=58c6411b5f5471055238f6f9;\n",
+			"headers": "Content-Type: application/json\nAuthorization: csk=58c6411b5f5471055238f6f9\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "csk=58c6411b5f5471055238f6f9",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{protocol}}://{{hostname}}:{{port}}/a/admin/58bfafa55f5471325c68c4f3/password",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "PUT",
 			"data": [],
 			"dataMode": "raw",
@@ -1112,7 +1128,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496212381298,
+			"time": 1497511733651,
 			"name": "/a/admin/<oid>/password",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
@@ -1179,16 +1195,16 @@
 		},
 		{
 			"id": "76ac834e-24d7-d6fe-10d8-829d80ffd7db",
-			"headers": "Authorization: usk=58f5a97c5f547121f0471066\n",
+			"headers": "Authorization: usk=593e4c625f5471600c4c90c1\n",
 			"headerData": [
 				{
 					"key": "Authorization",
-					"value": "usk=58f5a97c5f547121f0471066",
+					"value": "usk=593e4c625f5471600c4c90c1",
 					"description": "",
 					"enabled": true
 				}
 			],
-			"url": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=58d0c6ad5f54711d1fab3ac7",
+			"url": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
 			"queryParams": [
 				{
 					"key": "start",
@@ -1206,7 +1222,7 @@
 				},
 				{
 					"key": "content_oid",
-					"value": "58d0c6ad5f54711d1fab3ac7",
+					"value": "58cf91e55f5471137a8ffd9e",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1222,11 +1238,115 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1497013825652,
-			"name": "/w/qnas (Doing)",
+			"time": 1497512908610,
+			"name": "/w/qnas",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
-			"responses": []
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 27,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "5333",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 07:47:48 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Etag",
+							"value": "\"f1fe8f91e83038a9998c8b9288d1726706065b51\"",
+							"name": "Etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"count\": 12, \"data\": [{\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423ad8fd183a8f160312b4\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b65fd183a8f160312b5\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b93fd183a8f160312b6\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b96fd183a8f160312b7\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b97fd183a8f160312b8\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b99fd183a8f160312b9\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9afd183a8f160312ba\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9bfd183a8f160312bb\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9cfd183a8f160312bc\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9dfd183a8f160312bd\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}]}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 200,
+					"responseSize": {
+						"body": 5333,
+						"header": 189,
+						"total": 5522
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJjb3VudCI6IDEyLCAiZGF0YSI6IFt7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNhZDhmZDE4M2E4ZjE2MDMxMmI0IiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiNjVmZDE4M2E4ZjE2MDMxMmI1IiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOTNmZDE4M2E4ZjE2MDMxMmI2IiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOTZmZDE4M2E4ZjE2MDMxMmI3IiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOTdmZDE4M2E4ZjE2MDMxMmI4IiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOTlmZDE4M2E4ZjE2MDMxMmI5IiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOWFmZDE4M2E4ZjE2MDMxMmJhIiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOWJmZDE4M2E4ZjE2MDMxMmJiIiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOWNmZDE4M2E4ZjE2MDMxMmJjIiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9LCB7ImVuYWJsZWQiOiB0cnVlLCAiYW5zd2VyIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJfaWQiOiAiNTk0MjNiOWRmZDE4M2E4ZjE2MDMxMmJkIiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyIsICJjb250ZW50X29pZCI6ICI1OGNmOTFlNTVmNTQ3MTEzN2E4ZmZkOWUiLCAicXVlc3Rpb24iOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJ1cGRhdGVkX2F0IjogMTQ5NzQ5OTAzMywgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiY3JlYXRlZF9hdCI6IDE0OTc0ODI3MDl9XX0=",
+					"name": "Q/A 리스트",
+					"id": "1cfaf205-c22d-5e1e-af1b-3f89d12caebd",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "start",
+								"value": "0",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							},
+							{
+								"key": "size",
+								"value": "10",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							},
+							{
+								"key": "content_oid",
+								"value": "58cf91e55f5471137a8ffd9e",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "usk=593e4c625f5471600c4c90c1",
+								"description": "",
+								"enabled": true,
+								"disabled": false
+							}
+						],
+						"headers": "Authorization: usk=593e4c625f5471600c4c90c1\n",
+						"data": null,
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
 		},
 		{
 			"id": "773a5793-c5b9-af09-bb29-6fac34eba439",
@@ -1654,7 +1774,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/58d0c6ad5f54711d1fab3ac7/register",
+			"url": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -1666,12 +1786,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1497255070040,
-			"name": "/w/ticket/<oid>/register (Doing)",
+			"time": 1497507795333,
+			"name": "/w/ticket/<oid>/register",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
-			"rawModeData": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821088880000\",\n\t\"email\": \"cl@cl.com\",\n\t\"gender\": \"male\",\n\t\"birthday\": \"19990101\"\n}"
+			"rawModeData": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
 		},
 		{
 			"id": "9ab48fc5-74a1-16b6-4f30-b3409ee804e4",
@@ -1695,11 +1815,11 @@
 		},
 		{
 			"id": "9ac657c6-2fd4-b57a-0fed-f3b0a5fd7ea9",
-			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
+			"headers": "Authorization: usk=5940efb15f5471a2b6750108\nContent-Type: application/json\n",
 			"headerData": [
 				{
 					"key": "Authorization",
-					"value": "usk=5937ae31fd183a02d6ddca07",
+					"value": "usk=5940efb15f5471a2b6750108",
 					"description": "",
 					"enabled": true
 				},
@@ -1722,12 +1842,95 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1497345344725,
-			"name": "/w/user/me/password (Doing)",
+			"time": 1497511863732,
+			"name": "/w/user/me/password",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
-			"responses": [],
-			"rawModeData": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821088880000\",\n\t\"email\": \"cl@cl.com\",\n\t\"gender\": \"male\",\n\t\"birthday\": \"19990101\"\n}"
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 30,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "68",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 07:30:38 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"data\": {\"nModified\": 1, \"updatedExisting\": true, \"n\": 1, \"ok\": 1}}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 200,
+					"responseSize": {
+						"body": 68,
+						"header": 137,
+						"total": 205
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJuTW9kaWZpZWQiOiAxLCAidXBkYXRlZEV4aXN0aW5nIjogdHJ1ZSwgIm4iOiAxLCAib2siOiAxfX0=",
+					"name": "비밀번호 변경성공",
+					"id": "ff35ee88-68a8-dbc3-51bd-d2abede73ea5",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/user/me/password",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "usk=5940efb15f5471a2b6750108",
+								"description": "",
+								"enabled": true,
+								"disabled": false
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"enabled": true,
+								"disabled": false
+							}
+						],
+						"headers": "Authorization: usk=5940efb15f5471a2b6750108\nContent-Type: application/json\n",
+						"data": "{\n\t\"old_password\": \"1234\",\n\t\"new_password_1\": \"4321\",\n\t\"new_password_2\": \"4321\"\n}",
+						"method": "PUT",
+						"dataMode": "raw"
+					}
+				}
+			],
+			"rawModeData": "{\n\t\"old_password\": \"1234\",\n\t\"new_password_1\": \"4321\",\n\t\"new_password_2\": \"4321\"\n}"
 		},
 		{
 			"id": "9df42ac1-cb79-7485-63db-eb8d5fae1821",
@@ -2119,11 +2322,11 @@
 		},
 		{
 			"id": "be716ab2-8e48-9da1-6d93-0370f7309a28",
-			"headers": "Authorization: usk=5937ae31fd183a02d6ddca07\nContent-Type: application/json\n",
+			"headers": "Authorization: usk=5941e8105f5471a2b6be0f80\nContent-Type: application/json\n",
 			"headerData": [
 				{
 					"key": "Authorization",
-					"value": "usk=5937ae31fd183a02d6ddca07",
+					"value": "usk=5941e8105f5471a2b6be0f80",
 					"description": "",
 					"enabled": true
 				},
@@ -2146,12 +2349,175 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1497013505884,
-			"name": "/w/ticket/send (Doing)",
+			"time": 1497510432781,
+			"name": "/w/ticket/send",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
-			"responses": [],
-			"rawModeData": "{\n\t\"ticket_oids\": [\n\t\t\"58d0c6ad5f54711d1fab3ac0\",\n\t\t\"58d0c6ad5f54711d1fab3ac1\",\n\t\t\"58d0c6ad5f54711d1fab3ac2\"\n\t],\n\t\"user\": {\n\t\t\"name\": \"조건희\",\n\t\t\"mobile_number\": \"821088880000\",\n\t\t\"email\": \"cl@cl.com\",\n\t\t\"gender\": \"male\",\n\t\t\"birthday\": \"19990101\"\n\t}\n}"
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 27,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "68",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 07:08:59 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 200,
+					"responseSize": {
+						"body": 68,
+						"header": 137,
+						"total": 205
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJvayI6IDEsICJ1cGRhdGVkRXhpc3RpbmciOiB0cnVlLCAibk1vZGlmaWVkIjogMCwgIm4iOiAzfX0=",
+					"name": "3개 티켓 다른 사람에게 전송",
+					"id": "0cf88853-8be0-8ba3-78f0-c905858fd696",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "usk=5941e8105f5471a2b6be0f80",
+								"description": "",
+								"enabled": true,
+								"disabled": false
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"enabled": true,
+								"disabled": false
+							}
+						],
+						"headers": "Authorization: usk=5941e8105f5471a2b6be0f80\nContent-Type: application/json\n",
+						"data": "{\n\t\"ticket_oids\": [\n\t\t\"5942318a5f5471bfcf43b8ad\",\n\t\t\"5942318a5f5471bfcf43b8ab\",\n\t\t\"5942318a5f5471bfcf43b8ac\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"SELULKI\",\n\t\t\"mobile_number\": \"821030919199\"\n\t}\n}",
+						"method": "PUT",
+						"dataMode": "raw"
+					}
+				},
+				{
+					"status": "",
+					"responseCode": {
+						"code": 400,
+						"name": "Bad Request",
+						"detail": "The request cannot be fulfilled due to bad syntax."
+					},
+					"time": 26,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "41",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 07:10:55 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"message\": \"400: cannot send to myself\"}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 400,
+					"responseSize": {
+						"body": 41,
+						"header": 146,
+						"total": 187
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJtZXNzYWdlIjogIjQwMDogY2Fubm90IHNlbmQgdG8gbXlzZWxmIn0=",
+					"name": "3개 티켓을 자신에게 전송 (400 에러)",
+					"id": "b29b4d14-19f6-fa66-c1ad-ad3d37ec2281",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "usk=5941e8105f5471a2b6be0f80",
+								"description": "",
+								"enabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headers": "Authorization: usk=5941e8105f5471a2b6be0f80\nContent-Type: application/json\n",
+						"data": "{\n\t\"ticket_oids\": [\n\t\t\"5942318a5f5471bfcf43b8ad\",\n\t\t\"5942318a5f5471bfcf43b8ab\",\n\t\t\"5942318a5f5471bfcf43b8ac\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"조건희\",\n\t\t\"mobile_number\": \"821032697178\"\n\t}\n}",
+						"method": "PUT",
+						"dataMode": "raw"
+					}
+				}
+			],
+			"rawModeData": "{\n\t\"ticket_oids\": [\n\t\t\"5942318a5f5471bfcf43b8ad\",\n\t\t\"5942318a5f5471bfcf43b8ab\",\n\t\t\"5942318a5f5471bfcf43b8ac\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"SELULKI\",\n\t\t\"mobile_number\": \"821030919199\"\n\t}\n}"
 		},
 		{
 			"id": "bf6b4078-b06a-85f1-9624-9a836f75a4ae",
@@ -2915,11 +3281,17 @@
 		},
 		{
 			"id": "ec2a42ed-2b52-8653-5fb6-f5df7a55f67d",
-			"headers": "Content-Type: application/json\n",
+			"headers": "Content-Type: application/json\nAuthorization: usk=5941e8105f5471a2b6be0f80\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
 					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "usk=5941e8105f5471a2b6be0f80",
 					"description": "",
 					"enabled": true
 				}
@@ -2936,8 +3308,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1497345292472,
-			"name": "/w/user/me (Doing)",
+			"time": 1497510955330,
+			"name": "/w/user/me",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [
@@ -2948,11 +3320,11 @@
 						"name": "OK",
 						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
 					},
-					"time": 21,
+					"time": 16,
 					"headers": [
 						{
 							"key": "Content-Length",
-							"value": "220",
+							"value": "385",
 							"name": "Content-Length",
 							"description": "The length of the response body in octets (8-bit bytes)"
 						},
@@ -2964,37 +3336,26 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 08 Jun 2017 08:25:53 GMT",
+							"value": "Thu, 15 Jun 2017 07:17:51 GMT",
 							"name": "Date",
 							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Etag",
+							"value": "\"292a41006c5be7ce16c683e48f2e196e3d8855e7\"",
+							"name": "Etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "TornadoServer/4.4.2",
 							"name": "Server",
 							"description": "A name for the server"
-						},
-						{
-							"key": "Set-Cookie",
-							"value": "usk=59390a11bc2c444bb5a2b054; Path=/",
-							"name": "Set-Cookie",
-							"description": "an HTTP cookie"
 						}
 					],
-					"cookies": [
-						{
-							"domain": "host.tkit.me",
-							"expirationDate": 2147451247,
-							"httpOnly": false,
-							"name": "usk",
-							"path": "/",
-							"secure": false,
-							"url": "http://host.tkit.me:9100",
-							"value": "59390a11bc2c444bb5a2b054"
-						}
-					],
+					"cookies": [],
 					"mime": "",
-					"text": "{\"data\": {\"updated_at\": 1496425450, \"mobile_number\": \"821032697178\", \"name\": \"\\uc870\\uac74\\ud76c\", \"access_code\": \"asdf\", \"_id\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"role\": [\"broker\"], \"created_at\": 1496425450}}",
+					"text": "{\"data\": {\"role\": [\"broker\"], \"birthday\": \"20170615\", \"email\": \"takearest118@gmail.com\", \"access_code\": \"asdf\", \"updated_at\": 1497388008, \"password\": \"$p5k2$$Y2IhkSbqCi1NOcyLCQfvi.BBmkhkyUu5$kF27wh0vjhr5cOISfwiEBpBWm2oY5bUj\", \"_id\": \"5931a3eabc2c44140e0dea91\", \"gender\": \"male\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"name\": \"\\uc870\\uac74\\ud76c\", \"created_at\": 1497388008}}",
 					"language": "json",
 					"previewType": "text",
 					"searchResultScrolledTo": -1,
@@ -3004,17 +3365,17 @@
 					"failed": false,
 					"code": 200,
 					"responseSize": {
-						"body": 220,
+						"body": 385,
 						"header": 188,
-						"total": 408
+						"total": 573
 					},
 					"mimeType": "text",
 					"fileName": "response.json",
-					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJ1cGRhdGVkX2F0IjogMTQ5NjQyNTQ1MCwgIm1vYmlsZV9udW1iZXIiOiAiODIxMDMyNjk3MTc4IiwgIm5hbWUiOiAiXHVjODcwXHVhYzc0XHVkNzZjIiwgImFjY2Vzc19jb2RlIjogImFzZGYiLCAiX2lkIjogIjU5MzFhM2VhYmMyYzQ0MTQwZTBkZWE5MSIsICJlbmFibGVkIjogdHJ1ZSwgInJvbGUiOiBbImJyb2tlciJdLCAiY3JlYXRlZF9hdCI6IDE0OTY0MjU0NTB9fQ==",
-					"name": "조건희 브로커로 로그인",
-					"id": "c34b3327-4265-58db-462f-948cf1ead10d",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJyb2xlIjogWyJicm9rZXIiXSwgImJpcnRoZGF5IjogIjIwMTcwNjE1IiwgImVtYWlsIjogInRha2VhcmVzdDExOEBnbWFpbC5jb20iLCAiYWNjZXNzX2NvZGUiOiAiYXNkZiIsICJ1cGRhdGVkX2F0IjogMTQ5NzM4ODAwOCwgInBhc3N3b3JkIjogIiRwNWsyJCRZMkloa1NicUNpMU5PY3lMQ1FmdmkuQkJta2hreVV1NSRrRjI3d2gwdmpocjVjT0lTZndpRUJwQldtMm9ZNWJVaiIsICJfaWQiOiAiNTkzMWEzZWFiYzJjNDQxNDBlMGRlYTkxIiwgImdlbmRlciI6ICJtYWxlIiwgImVuYWJsZWQiOiB0cnVlLCAibW9iaWxlX251bWJlciI6ICI4MjEwMzI2OTcxNzgiLCAibmFtZSI6ICJcdWM4NzBcdWFjNzRcdWQ3NmMiLCAiY3JlYXRlZF9hdCI6IDE0OTczODgwMDh9fQ==",
+					"name": "조건희 유저정보 가져오기",
+					"id": "1b568b58-1c31-d45b-1ff3-6680b510540a",
 					"request": {
-						"url": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
 						"pathVariables": {},
 						"pathVariableData": [],
 						"queryParams": [],
@@ -3023,12 +3384,20 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": "",
-								"enabled": true
+								"enabled": true,
+								"disabled": false
+							},
+							{
+								"key": "Authorization",
+								"value": "usk=5941e8105f5471a2b6be0f80",
+								"description": "",
+								"enabled": true,
+								"disabled": false
 							}
 						],
-						"headers": "Content-Type: application/json\n",
+						"headers": "Content-Type: application/json\nAuthorization: usk=5941e8105f5471a2b6be0f80\n",
 						"data": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}",
-						"method": "POST",
+						"method": "GET",
 						"dataMode": "raw"
 					}
 				}
