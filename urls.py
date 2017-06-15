@@ -87,6 +87,8 @@ url_patterns = [
     (r'/w/tickets/me/?', w.ticket.TicketListMeHandler),
     (r'/w/tickets/?', w.ticket.TicketListHandler),
 
+    (r'/w/qnas/?', w.qna.QnaListHandler),
+
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),
     (r'/t/contents/?', t.content.ContentListHandler),
