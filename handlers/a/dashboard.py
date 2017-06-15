@@ -12,6 +12,8 @@ from models.user import UserModel
 from models.content import ContentModel
 from models.ticket import TicketModel, TicketTypeModel
 
+from services.mongodb import MongodbService
+
 
 class DashboardHandler(JsonHandler):
     @admin_auth_async
@@ -20,14 +22,35 @@ class DashboardHandler(JsonHandler):
         total_user_count = await UserModel.count({'enabled': True})
         total_content_count = await ContentModel.count({'enabled': True})
         total_ticket_count = await TicketModel.count({'enabled': True})
-        recent_contents = await ContentModel.find(query={'enabled': True}, fields=[('name')], limit=5)
         self.response['data'] = {
             'total_ticket_count': total_ticket_count,
             'total_company_count': total_company_count,
             'total_user_count': total_user_count,
-            'total_content_count': total_content_count,
-            'recent_contents': recent_contents
+            'total_content_count': total_content_count
         }
+        # use aggregate
+        pipeline = [
+            {
+                '$group': {
+                    '_id': '$content_oid',
+                    'ticket_cnt': {
+                        '$sum': 1
+                    }
+                }
+            },
+            {
+                '$sort': {
+                    "ticket_cnt": -1
+                }
+            },
+            {
+                '$limit': 5
+            }
+        ]
+        top_contents = await MongodbService().client[TicketModel.MONGO_COLLECTION].aggregate(pipeline).to_list(length=5)
+        for rc in top_contents:
+            rc['content'] = await ContentModel.get_id(rc['_id'], fields=[('name')])
+        self.response['data']['top_contents'] = top_contents
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -54,18 +77,12 @@ class DashboardContentHandler(JsonHandler):
                 'cash': 0,
                 'creditcard': 0
             },
-            'recent_ticket_types': []
+            'top_ticket_types': []
         }
         query = {
             'content_oid': ObjectId(content_oid),
             'enabled': True
         }
-        self.response['data']['recent_ticket_types'] = await TicketTypeModel.find(
-            query = {
-                    'content_oid': ObjectId(content_oid),
-                    'enabled': True
-            },
-            fields=[('name')], limit=5)
         self.response['data']['ticket_count']['total'] = await TicketModel.count(
             {
                 'content_oid': ObjectId(content_oid),
@@ -79,6 +96,33 @@ class DashboardContentHandler(JsonHandler):
                 'status': 'use'
             }
         )
+
+        # use aggregate
+        pipeline = [
+            {
+                '$match': {'content_oid': ObjectId(content_oid)}
+            },
+            {
+                '$group': {
+                    '_id': '$ticket_type_oid',
+                    'ticket_cnt': {
+                        '$sum': 1
+                    }
+                }
+            },
+            {
+                '$sort': {
+                    "ticket_cnt": -1
+                }
+            },
+            {
+                '$limit': 5
+            }
+        ]
+        top_ticket_types = await MongodbService().client[TicketModel.MONGO_COLLECTION].aggregate(pipeline).to_list(length=5)
+        for ttt in top_ticket_types:
+            ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name')])
+        self.response['data']['top_ticket_types'] = top_ticket_types
         self.write_json()
 
     async def options(self, *args, **kwargs):
