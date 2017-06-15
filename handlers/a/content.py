@@ -84,8 +84,16 @@ class ContentHandler(JsonHandler):
             raise HTTPError(400, 'invalid place')
         desc = self.json_decoded_body.get('desc', None)
 
+        # generate short id
+        while True:
+            short_id = hashers.generate_random_string(ContentModel.SHORT_ID_LENGTH)
+            duplicated_content = await ContentModel.find({'short_id': short_id})
+            if not duplicated_content:
+                break
+
         # create content model
         content = ContentModel(raw_data=dict(
+            short_id=short_id,
             admin_oid=admin_oid,
             name=name,
             place=place,

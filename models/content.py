@@ -9,6 +9,7 @@ from models.base import BaseModel
 
 class ContentModel(BaseModel):
     MONGO_COLLECTION = 'content'
+    SHORT_ID_LENGTH = 7
 
     def __init__(self, *args, **kwargs):
         super(ContentModel, self).__init__(*args, **kwargs)
@@ -17,6 +18,11 @@ class ContentModel(BaseModel):
     def specification(self):
         specification = super(ContentModel, self).specification
         specification.extend([
+            {
+                'key': 'short_id',
+                'type': str,
+                'default': None
+            },
             {
                 'key': 'admin_oid',
                 'type': ObjectId,

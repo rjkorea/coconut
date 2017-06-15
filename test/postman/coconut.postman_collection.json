@@ -751,7 +751,7 @@
 			"id": "43291f29-6201-3577-c018-e137a3a8bd14",
 			"headers": "",
 			"headerData": [],
-			"url": "{{protocol}}://{{hostname}}:{{port}}/w/content/58cf91e55f5471137a8ffd9e",
+			"url": "{{protocol}}://{{hostname}}:{{port}}/w/content/iB8n2mb",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -763,9 +763,9 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496900329991,
-			"name": "/w/content/<oid>",
-			"description": "로그인 필요없음",
+			"time": 1497496385028,
+			"name": "/w/content/<short_id or oid>",
+			"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [
 				{
@@ -775,11 +775,11 @@
 						"name": "OK",
 						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
 					},
-					"time": 11,
+					"time": 6,
 					"headers": [
 						{
 							"key": "Content-Length",
-							"value": "729",
+							"value": "742",
 							"name": "Content-Length",
 							"description": "The length of the response body in octets (8-bit bytes)"
 						},
@@ -791,13 +791,13 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 08 Jun 2017 08:25:23 GMT",
+							"value": "Thu, 15 Jun 2017 03:10:51 GMT",
 							"name": "Date",
 							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "Etag",
-							"value": "\"92a2cad7ed86fd990edac08b803536ce8498b6d5\"",
+							"value": "\"3f203dca3b9e9d30653ae1c0522f45fd5e86dc08\"",
 							"name": "Etag",
 							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
@@ -808,20 +808,9 @@
 							"description": "A name for the server"
 						}
 					],
-					"cookies": [
-						{
-							"domain": "host.tkit.me",
-							"expirationDate": 2147451247,
-							"httpOnly": false,
-							"name": "usk",
-							"path": "/",
-							"secure": false,
-							"url": "http://host.tkit.me:9100",
-							"value": "593905ddbc2c444bb5a2b053"
-						}
-					],
+					"cookies": [],
 					"mime": "",
-					"text": "{\"data\": {\"place\": \"Jarasum, Gyeonggido\", \"enabled\": true, \"updated_at\": 1489998309, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"name\": \"Rainbow island 2017\", \"_id\": \"58cf91e55f5471137a8ffd9e\", \"created_at\": 1489998309, \"company_oid\": \"59267101c8bd954d005597c7\", \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"image\": {\"poster\": {\"m\": \"http://host.tkit.me:9200/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me:9200/assets/images/rain_logo.png\"}}, \"when\": {\"start\": 1497052800, \"end\": 1497193200}}}",
+					"text": "{\"data\": {\"name\": \"Rainbow island 2017\", \"place\": \"Jarasum, Gyeonggido\", \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"image\": {\"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}, \"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}}, \"created_at\": 1489965909, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"updated_at\": 1497463033, \"enabled\": true, \"short_id\": \"iB8n2mb\", \"company_oid\": \"59267101c8bd954d005597c7\"}}",
 					"language": "json",
 					"previewType": "text",
 					"searchResultScrolledTo": -1,
@@ -831,17 +820,17 @@
 					"failed": false,
 					"code": 200,
 					"responseSize": {
-						"body": 729,
+						"body": 742,
 						"header": 188,
-						"total": 917
+						"total": 930
 					},
 					"mimeType": "text",
 					"fileName": "response.json",
-					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJwbGFjZSI6ICJKYXJhc3VtLCBHeWVvbmdnaWRvIiwgImVuYWJsZWQiOiB0cnVlLCAidXBkYXRlZF9hdCI6IDE0ODk5OTgzMDksICJhZG1pbl9vaWQiOiAiNThiZmFmYTU1ZjU0NzEzMjVjNjhjNGYzIiwgIm5hbWUiOiAiUmFpbmJvdyBpc2xhbmQgMjAxNyIsICJfaWQiOiAiNThjZjkxZTU1ZjU0NzExMzdhOGZmZDllIiwgImNyZWF0ZWRfYXQiOiAxNDg5OTk4MzA5LCAiY29tcGFueV9vaWQiOiAiNTkyNjcxMDFjOGJkOTU0ZDAwNTU5N2M3IiwgImRlc2MiOiAiUmFpbmJvdyBGZXN0aXZhbCBmZWF0dXJpbmcgY2FtcGluZyBhbmQgcm9jayBmZXN0aXZhbHMhIEl0IGlzIGEgc3BlY2lhbCBtdXNpYyBmZXN0aXZhbCB3aGVyZSB5b3UgY2FuIGV4cGVyaWVuY2UgbmF0dXJlIGluIEphcmFzdW0sIGNhbXBpbmcgYW5kIGV4cGVyaWVuY2luZyB0aGUgcGVyZm9ybWFuY2VzIG9mIGhvdCBhcnRpc3RzISBSaWdodCBub3cgSSdtIGdvaW5nIHRvIGJvb2sgdGlja2V0cyBhbmQgY2FtcGluZyB0aWNrZXRzIH5+ICEhIiwgImltYWdlIjogeyJwb3N0ZXIiOiB7Im0iOiAiaHR0cDovL2hvc3QudGtpdC5tZTo5MjAwL2Fzc2V0cy9pbWFnZXMvcmFpbl9wb3N0ZXIucG5nIn0sICJsb2dvIjogeyJtIjogImh0dHA6Ly9ob3N0LnRraXQubWU6OTIwMC9hc3NldHMvaW1hZ2VzL3JhaW5fbG9nby5wbmcifX0sICJ3aGVuIjogeyJzdGFydCI6IDE0OTcwNTI4MDAsICJlbmQiOiAxNDk3MTkzMjAwfX19",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJuYW1lIjogIlJhaW5ib3cgaXNsYW5kIDIwMTciLCAicGxhY2UiOiAiSmFyYXN1bSwgR3llb25nZ2lkbyIsICJkZXNjIjogIlJhaW5ib3cgRmVzdGl2YWwgZmVhdHVyaW5nIGNhbXBpbmcgYW5kIHJvY2sgZmVzdGl2YWxzISBJdCBpcyBhIHNwZWNpYWwgbXVzaWMgZmVzdGl2YWwgd2hlcmUgeW91IGNhbiBleHBlcmllbmNlIG5hdHVyZSBpbiBKYXJhc3VtLCBjYW1waW5nIGFuZCBleHBlcmllbmNpbmcgdGhlIHBlcmZvcm1hbmNlcyBvZiBob3QgYXJ0aXN0cyEgUmlnaHQgbm93IEknbSBnb2luZyB0byBib29rIHRpY2tldHMgYW5kIGNhbXBpbmcgdGlja2V0cyB+fiAhISIsICJpbWFnZSI6IHsibG9nbyI6IHsibSI6ICJodHRwOi8vaG9zdC50a2l0Lm1lL2Fzc2V0cy9pbWFnZXMvcmFpbl9sb2dvLnBuZyJ9LCAicG9zdGVyIjogeyJtIjogImh0dHA6Ly9ob3N0LnRraXQubWUvYXNzZXRzL2ltYWdlcy9yYWluX3Bvc3Rlci5wbmcifX0sICJjcmVhdGVkX2F0IjogMTQ4OTk2NTkwOSwgImFkbWluX29pZCI6ICI1OGJmYWZhNTVmNTQ3MTMyNWM2OGM0ZjMiLCAiX2lkIjogIjU4Y2Y5MWU1NWY1NDcxMTM3YThmZmQ5ZSIsICJ3aGVuIjogeyJlbmQiOiAxNDk3MTYwODAwLCAic3RhcnQiOiAxNDk3MDIwNDAwfSwgInVwZGF0ZWRfYXQiOiAxNDk3NDYzMDMzLCAiZW5hYmxlZCI6IHRydWUsICJzaG9ydF9pZCI6ICJpQjhuMm1iIiwgImNvbXBhbnlfb2lkIjogIjU5MjY3MTAxYzhiZDk1NGQwMDU1OTdjNyJ9fQ==",
 					"name": "로그인 화면에서 보이는 컨텐츠 정보",
-					"id": "7e348a0b-9c1c-8322-33bc-dcd648198c3c",
+					"id": "67c422de-6520-fa6b-0d9a-66a56ba61ee9",
 					"request": {
-						"url": "{{protocol}}://{{hostname}}:{{port}}/w/content/58cf91e55f5471137a8ffd9e",
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/content/iB8n2mb",
 						"pathVariables": {},
 						"pathVariableData": [],
 						"queryParams": [],
@@ -2641,6 +2630,94 @@
 					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJoYXNfcGFzc3dvcmQiOiBmYWxzZSwgIl9pZCI6ICI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifX0=",
 					"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 					"id": "38715001-acdf-61b6-17d7-a4354b58e0b7",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "name",
+								"value": "조건희",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							},
+							{
+								"key": "mobile_number",
+								"value": "821032697178",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headerData": [],
+						"headers": "",
+						"data": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}",
+						"method": "GET",
+						"dataMode": "raw"
+					}
+				},
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 24,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "67",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 02:08:19 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Etag",
+							"value": "\"e82b45ab372a989bea319d2ceb98f58931455f6c\"",
+							"name": "Etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"data\": {\"has_password\": true, \"_id\": \"5931a3eabc2c44140e0dea91\"}}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 200,
+					"responseSize": {
+						"body": 67,
+						"header": 187,
+						"total": 254
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJoYXNfcGFzc3dvcmQiOiB0cnVlLCAiX2lkIjogIjU5MzFhM2VhYmMyYzQ0MTQwZTBkZWE5MSJ9fQ==",
+					"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
+					"id": "c3eb5f56-39da-5a1b-37d8-313ff00d4e56",
 					"request": {
 						"url": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
 						"pathVariables": {},

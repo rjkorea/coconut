@@ -9,6 +9,7 @@ from tornado.log import logging
 _settings = dict(
     application=dict(
         name='coconut',
+        host='api.tkit.me',
         port=9100,
         debug=False,
         autoreload=False,
@@ -28,6 +29,11 @@ _settings = dict(
     nexmo=dict(
         api_key='7968a1e2',
         api_secret='a45366ce5d7a295c'
+    ),
+    web=dict(
+        name='cherry',
+        host='i.tkit.me',
+        port=80,
     )
 )
 
