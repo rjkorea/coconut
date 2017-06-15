@@ -118,13 +118,32 @@ class TicketUsedListHandler(JsonHandler):
 
 
 class TicketRegisterHandler(JsonHandler):
-    @user_auth_async
+    @user_auth_async        
     async def put(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        self.response['_id'] = _id
-        self.response['data'] = self.json_decoded_body
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
+        if ticket['status'] == TicketModel.Status.register.name and 'receive_user_oid' in ticket:
+            raise HTTPError(400, 'registerd ticket')
+
+        email = self.json_decoded_body.get('email', None)
+        birthday = self.json_decoded_body.get('birthday', None)
+        gender = self.json_decoded_body.get('gender', None)
+        if email and birthday and gender:
+            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'receive_user_oid': self.current_user['_id'],
+                'status': TicketModel.Status.register.name
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
         self.write_json()
 
     async def options(self, *args, **kwargs):
