@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
+from datetime import datetime
 
 from tornado.web import HTTPError
 
@@ -107,6 +108,41 @@ class UserMeHandler(JsonHandler):
         if not user:
             raise HTTPError(400, 'not exist user')
         self.response['data'] = user
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class UserMePasswordHandler(JsonHandler):
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        old_password = self.json_decoded_body.get('old_password', None)
+        if not old_password or len(old_password) == 0 or not hashers.validate_user_password(old_password):
+            raise HTTPError(400, 'invalid old_password')
+        new_password_1 = self.json_decoded_body.get('new_password_1', None)
+        if not new_password_1 or len(new_password_1) == 0 or not hashers.validate_user_password(new_password_1):
+            raise HTTPError(400, 'invalid new_password_1')
+        new_password_2 = self.json_decoded_body.get('new_password_2', None)
+        if not new_password_2 or len(new_password_2) == 0 or not hashers.validate_user_password(new_password_2):
+            raise HTTPError(400, 'invalid new_password_2')
+        if new_password_1 != new_password_2:
+            raise HTTPError(400, 'new password 1 and 2 not matched')
+        import logging
+        logging.info(self.current_user)
+        if not hashers.check_password(old_password, self.current_user['password']):
+            raise HTTPError(400, 'not correct old password')
+        query = {
+            '_id': self.current_user['_id']
+        }
+        document = {
+            '$set': {
+                'password': hashers.make_password(new_password_1),
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await UserModel.update(query, document)
         self.write_json()
 
     async def options(self, *args, **kwargs):
