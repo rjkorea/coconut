@@ -12,6 +12,8 @@ from models.user import UserModel
 from models.content import ContentModel
 from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel
 
+from models import create_user
+
 
 class TicketOrderListHandler(JsonHandler):
     @user_auth_async
@@ -169,7 +171,26 @@ class TicketCancelHandler(JsonHandler):
 class TicketSendHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):
-        self.response['data'] = self.json_decoded_body
+        ticket_oids = self.json_decoded_body.get('ticket_oids', None)
+        if not ticket_oids or not isinstance(ticket_oids, list):
+            raise HTTPError(400, 'invalid ticket_oids')
+        receive_user = self.json_decoded_body.get('receive_user', None)
+        if not receive_user or not isinstance(receive_user, dict):
+            raise HTTPError(400, 'invalid receive_user')
+        receive_user = await create_user(receive_user)
+        if self.current_user['_id'] == receive_user['_id']:
+            raise HTTPError(400, 'cannot send to myself')
+        query = {'$or': []}
+        for t_oid in ticket_oids:
+            query['$or'].append({'_id': ObjectId(t_oid)})
+        document = {
+            '$set': {
+                'status': TicketModel.Status.send.name,
+                'send_user_oid': self.current_user['_id'],
+                'receive_user_oid': receive_user['_id']
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document, False, True)
         self.write_json()
 
     async def options(self, *args, **kwargs):
