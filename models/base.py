@@ -63,6 +63,13 @@ class BaseModel(object):
         result = await MongodbService().client[cls.MONGO_COLLECTION].find_one({'_id': _id}, fields)
         return result
 
+    @classmethod
+    async def aggregate(cls, pipeline=[]):
+        if not pipeline:
+            return None
+        result = await MongodbService().client[cls.MONGO_COLLECTION].aggregate(pipeline)
+        return result
+
     async def insert(self):
         if not hasattr(self, 'data'):
             raise ValueError('instance does not have atturibute "data"')
