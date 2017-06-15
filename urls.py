@@ -68,6 +68,8 @@ url_patterns = [
     (r'/w/auth/login/?', w.auth.LoginHandler),
 
     (r'/w/user/?', w.user.UserHandler),
+    (r'/w/user/me/?', w.user.UserMeHandler),
+
     (r'/w/user/(?P<_id>[^\/]+)/new/password?', w.user.UserNewPasswordHandler),
     (r'/w/user/(?P<_id>[^\/]+)/auth/password?', w.user.UserAuthPasswordHandler),
 
