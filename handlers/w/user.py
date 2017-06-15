@@ -29,9 +29,14 @@ class UserHandler(JsonHandler):
         user = await UserModel.find_one(query=q)
         if not user:
             raise HTTPError(400, 'not exist user')
-        self.response['data'] = {
+        res = {
             '_id': user['_id']
         }
+        if 'password' in user:
+            res['has_password'] = True
+        else:
+            res['has_password'] = False
+        self.response['data'] = res
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -78,6 +83,8 @@ class UserAuthPasswordHandler(JsonHandler):
         user = await UserModel.find_one({'_id': ObjectId(user_oid)})
         if not user:
             raise HTTPError(400, 'not exist user')
+        if 'password' not in user:
+            raise HTTPError(400, 'does not set password')
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_user_password(password):
             raise HTTPError(400, 'invalid password')

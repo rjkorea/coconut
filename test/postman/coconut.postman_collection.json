@@ -572,6 +572,80 @@
 						"method": "PUT",
 						"dataMode": "raw"
 					}
+				},
+				{
+					"status": "",
+					"responseCode": {
+						"code": 400,
+						"name": "Bad Request",
+						"detail": "The request cannot be fulfilled due to bad syntax."
+					},
+					"time": 5,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "41",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 01:50:07 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"message\": \"400: does not set password\"}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 400,
+					"responseSize": {
+						"body": 41,
+						"header": 146,
+						"total": 187
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJtZXNzYWdlIjogIjQwMDogZG9lcyBub3Qgc2V0IHBhc3N3b3JkIn0=",
+					"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
+					"id": "6b76ae8b-d586-098f-d4d8-7bb1add01810",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/auth/password",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headers": "Content-Type: application/json\n",
+						"data": "{\n\t\"password\": \"1234\"\n}",
+						"method": "PUT",
+						"dataMode": "raw"
+					}
 				}
 			],
 			"rawModeData": "{\n\t\"password\": \"1234\"\n}"
@@ -2513,11 +2587,11 @@
 						"name": "OK",
 						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
 					},
-					"time": 12,
+					"time": 7,
 					"headers": [
 						{
 							"key": "Content-Length",
-							"value": "45",
+							"value": "68",
 							"name": "Content-Length",
 							"description": "The length of the response body in octets (8-bit bytes)"
 						},
@@ -2529,13 +2603,13 @@
 						},
 						{
 							"key": "Date",
-							"value": "Wed, 14 Jun 2017 08:25:40 GMT",
+							"value": "Thu, 15 Jun 2017 01:47:53 GMT",
 							"name": "Date",
 							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "Etag",
-							"value": "\"86594c8fa2d186c47baa73f825dda5e79241dd90\"",
+							"value": "\"47afa71c5382ac506a88b73655df22c240010de5\"",
 							"name": "Etag",
 							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
@@ -2548,7 +2622,7 @@
 					],
 					"cookies": [],
 					"mime": "",
-					"text": "{\"data\": {\"_id\": \"5931a3eabc2c44140e0dea91\"}}",
+					"text": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}",
 					"language": "json",
 					"previewType": "text",
 					"searchResultScrolledTo": -1,
@@ -2558,15 +2632,15 @@
 					"failed": false,
 					"code": 200,
 					"responseSize": {
-						"body": 45,
+						"body": 68,
 						"header": 187,
-						"total": 232
+						"total": 255
 					},
 					"mimeType": "text",
 					"fileName": "response.json",
-					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJfaWQiOiAiNTkzMWEzZWFiYzJjNDQxNDBlMGRlYTkxIn19",
-					"name": "유저정보 가져오기",
-					"id": "9c6a74f6-2953-3da3-a25a-c4b254d6f237",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogeyJoYXNfcGFzc3dvcmQiOiBmYWxzZSwgIl9pZCI6ICI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifX0=",
+					"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
+					"id": "38715001-acdf-61b6-17d7-a4354b58e0b7",
 					"request": {
 						"url": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
 						"pathVariables": {},
