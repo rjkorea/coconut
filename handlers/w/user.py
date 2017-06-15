@@ -16,8 +16,6 @@ class UserHandler(JsonHandler):
     @parse_argument([('name', str, None), ('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        import logging
-        logging.info(parsed_args)
         if not parsed_args['name']:
             raise HTTPError(400, 'invalid name')
         if not parsed_args['mobile_number']:
