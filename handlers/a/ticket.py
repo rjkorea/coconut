@@ -301,6 +301,9 @@ class TicketListHandler(JsonHandler):
             res.pop('ticket_type_oid')
             res['content'] = await ContentModel.get_id(res['content_oid'])
             res.pop('content_oid')
+            if 'send_user_oid' in res:
+                res['send_user'] = await UserModel.get_id(res['send_user_oid'])
+                res.pop('send_user_oid')
             if 'receive_user_oid' in res:
                 res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
                 res.pop('receive_user_oid')
@@ -355,6 +358,9 @@ class TicketHandler(JsonHandler):
         self.response['data'].pop('ticket_type_oid')
         self.response['data']['content'] = await ContentModel.get_id(self.response['data']['content_oid'])
         self.response['data'].pop('content_oid')
+        if 'send_user_oid' in self.response['data']:
+            self.response['data']['send_user'] = await UserModel.get_id(self.response['data']['send_user_oid'])
+            self.response['data'].pop('send_user_oid')
         if 'receive_user_oid' in self.response['data']:
             self.response['data']['receive_user'] = await UserModel.get_id(self.response['data']['receive_user_oid'])
             self.response['data'].pop('receive_user_oid')
