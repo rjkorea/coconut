@@ -173,8 +173,8 @@ class TicketOrderHandler(JsonHandler):
         receiver = self.json_decoded_body.get('receiver', None)
         if not receiver or not isinstance(receiver, dict):
             raise HTTPError(400, 'invalid receiver')
-        if 'mobile_number' not in receiver or 'name' not in receiver or 'access_code' not in receiver:
-            raise HTTPError(400, 'invalid mobile_number | name | access_code')
+        if 'mobile_number' not in receiver or 'name' not in receiver:
+            raise HTTPError(400, 'invalid mobile_number | name')
         expiry_date = self.json_decoded_body.get('expiry_date', None)
         if not expiry_date or len(expiry_date) == 0:
             raise HTTPError(400, 'invalid expiry_date')

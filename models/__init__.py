@@ -41,9 +41,7 @@ async def create_broker(receiver):
     else:
         broker = UserModel(raw_data=dict(
             name=receiver['name'],
-            mobile_number=receiver['mobile_number'],
-            access_code=receiver['access_code'],
-            role=['broker']
+            mobile_number=receiver['mobile_number']
         ))
         id = await broker.insert()
         return id
