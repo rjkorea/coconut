@@ -45,8 +45,8 @@ async def create_broker(receiver):
             access_code=receiver['access_code'],
             role=['broker']
         ))
-        res = await broker.insert()
-        return res['_id']
+        id = await broker.insert()
+        return id
 
 async def create_user(user):
     res = await UserModel.find_one({'mobile_number': user['mobile_number']})
