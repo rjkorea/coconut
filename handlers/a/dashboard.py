@@ -42,6 +42,7 @@ class DashboardHandler(JsonHandler):
         for r in res:
             ticket[r['_id']] = r['cnt']
         self.response['data']['ticket_count'] = ticket
+
         # aggregate top contents
         pipeline = [
             {
@@ -65,6 +66,23 @@ class DashboardHandler(JsonHandler):
         for rc in top_contents:
             rc['content'] = await ContentModel.get_id(rc['_id'], fields=[('name')])
         self.response['data']['top_contents'] = top_contents
+
+        # aggregate genders
+        pipeline = [
+            {
+                '$group': {
+                    '_id': '$gender',
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        res = await UserModel.aggregate(pipeline, 10)
+        genders = dict()
+        for r in res:
+            genders[r['_id']] = r['count']
+        self.response['data']['gender_count'] = genders
         self.write_json()
 
     async def options(self, *args, **kwargs):
