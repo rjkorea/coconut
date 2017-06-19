@@ -21,14 +21,28 @@ class DashboardHandler(JsonHandler):
         total_company_count = await CompanyModel.count({'enabled': True})
         total_user_count = await UserModel.count({'enabled': True})
         total_content_count = await ContentModel.count({'enabled': True})
-        total_ticket_count = await TicketModel.count({'enabled': True})
         self.response['data'] = {
-            'total_ticket_count': total_ticket_count,
             'total_company_count': total_company_count,
             'total_user_count': total_user_count,
-            'total_content_count': total_content_count
+            'total_content_count': total_content_count,
         }
-        # use aggregate
+        # aggregate tickets
+        pipeline = [
+            {
+                '$group': {
+                    '_id': '$status',
+                    'cnt': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        res = await TicketModel.aggregate(pipeline, 10)
+        ticket = dict()
+        for r in res:
+            ticket[r['_id']] = r['cnt']
+        self.response['data']['ticket_count'] = ticket
+        # aggregate top contents
         pipeline = [
             {
                 '$group': {
@@ -47,7 +61,7 @@ class DashboardHandler(JsonHandler):
                 '$limit': 5
             }
         ]
-        top_contents = await MongodbService().client[TicketModel.MONGO_COLLECTION].aggregate(pipeline).to_list(length=5)
+        top_contents = await TicketModel.aggregate(pipeline, 5)
         for rc in top_contents:
             rc['content'] = await ContentModel.get_id(rc['_id'], fields=[('name')])
         self.response['data']['top_contents'] = top_contents
@@ -119,7 +133,7 @@ class DashboardContentHandler(JsonHandler):
                 '$limit': 5
             }
         ]
-        top_ticket_types = await MongodbService().client[TicketModel.MONGO_COLLECTION].aggregate(pipeline).to_list(length=5)
+        top_ticket_types = await TicketModel.aggregate(pipeline, 5)
         for ttt in top_ticket_types:
             ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name')])
         self.response['data']['top_ticket_types'] = top_ticket_types
