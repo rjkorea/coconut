@@ -130,6 +130,8 @@ class TicketRegisterHandler(JsonHandler):
             raise HTTPError(400, 'not exist ticket')
         if ticket['status'] == TicketModel.Status.register.name and 'receive_user_oid' in ticket:
             raise HTTPError(400, 'registerd ticket')
+        if ticket['status'] == TicketModel.Status.cancel.name:
+            raise HTTPError(400, 'cancel ticket can not to register')
 
         email = self.json_decoded_body.get('email', None)
         birthday = self.json_decoded_body.get('birthday', None)
