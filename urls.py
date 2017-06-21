@@ -52,6 +52,10 @@ url_patterns = [
     (r'/a/place/?', a.place.PlaceHandler),
     (r'/a/places/stats/?', a.place.PlaceStatsHandler),
 
+    (r'/a/qnas/?', a.qna.QnaListHandler),
+    (r'/a/qna/(?P<_id>[^\/]+)/?', a.qna.QnaHandler),
+    (r'/a/qna/?', a.qna.QnaHandler),
+
     (r'/a/countries/?', a.util.CountryListHandler),
 
     # legacy api for admin
