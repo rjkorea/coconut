@@ -63,7 +63,8 @@
 				"cf747317-a8c2-0b1b-31dc-2b1473b771fb",
 				"90a380bc-b7d3-7340-6f01-4303cfcc8ace",
 				"6d117c1c-77f9-60f2-36cd-f320d0a32d96",
-				"21e03ace-05d1-2331-39a6-1c2e9760cd4b"
+				"21e03ace-05d1-2331-39a6-1c2e9760cd4b",
+				"aab27a8e-e7df-b5d8-069b-3dc1f9932ded"
 			],
 			"owner": "1127670",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd"
@@ -405,10 +406,20 @@
 		},
 		{
 			"id": "21e03ace-05d1-2331-39a6-1c2e9760cd4b",
-			"headers": "Cookie: csk=58ca31195f547161e34018bc\n",
+			"headers": "Authorization: csk=58ca31195f547161e34018bc\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "csk=58ca31195f547161e34018bc",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard/592cc5ebbc2c4460de83beb1",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
@@ -416,7 +427,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496312889519,
+			"time": 1497605216418,
 			"name": "/a/dashboard/<oid>",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
@@ -1790,7 +1801,88 @@
 			"name": "/w/ticket/<oid>/register",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
-			"responses": [],
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 400,
+						"name": "Bad Request",
+						"detail": "The request cannot be fulfilled due to bad syntax."
+					},
+					"time": 31,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "61",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 21 Jun 2017 05:32:30 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"message\": \"400: Already registered ticket on this content\"}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 400,
+					"responseSize": {
+						"body": 61,
+						"header": 146,
+						"total": 207
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJtZXNzYWdlIjogIjQwMDogQWxyZWFkeSByZWdpc3RlcmVkIHRpY2tldCBvbiB0aGlzIGNvbnRlbnQifQ==",
+					"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
+					"id": "4e47da45-72f5-f021-0724-2cd434b63af9",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/594388d15f5471034ffcda28/register",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Authorization",
+								"value": "usk=593e4c625f5471600c4c90c1",
+								"description": "",
+								"enabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headers": "Authorization: usk=593e4c625f5471600c4c90c1\nContent-Type: application/json\n",
+						"data": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}",
+						"method": "PUT",
+						"dataMode": "raw"
+					}
+				}
+			],
 			"rawModeData": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
 		},
 		{
@@ -2115,6 +2207,150 @@
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": []
+		},
+		{
+			"id": "aab27a8e-e7df-b5d8-069b-3dc1f9932ded",
+			"headers": "Authorization: csk=58ca31195f547161e34018bc\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "csk=58ca31195f547161e34018bc",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{protocol}}://{{hostname}}:{{port}}/a/countries?start=0&size=10",
+			"queryParams": [
+				{
+					"key": "start",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "size",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"Response time is less than 200ms\"] = responseTime < 200;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497605232333,
+			"name": "/a/countries",
+			"description": "로그인 필요없음",
+			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 20,
+					"headers": [
+						{
+							"key": "Content-Length",
+							"value": "1418",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 08 Jun 2017 08:24:30 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Etag",
+							"value": "\"ac3dfd7c15b0b499456fe77f3d14d1f71227e9aa\"",
+							"name": "Etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookies": [
+						{
+							"domain": "host.tkit.me",
+							"expirationDate": 2147451247,
+							"httpOnly": false,
+							"name": "usk",
+							"path": "/",
+							"secure": false,
+							"url": "http://host.tkit.me:9100",
+							"value": "593905ddbc2c444bb5a2b053"
+						}
+					],
+					"mime": "",
+					"text": "{\"data\": [{\"updated_at\": 1492070119, \"name\": \"Australia\", \"code\": \"61\", \"_id\": \"58ef24098705470b00874bd6\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Brazil\", \"code\": \"55\", \"_id\": \"58ef242c8705470b00874bd7\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Canada\", \"code\": \"1\", \"_id\": \"58ef248a8705470b00874bd8\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"China\", \"code\": \"86\", \"_id\": \"58ef24a58705470b00874bd9\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Germany\", \"code\": \"49\", \"_id\": \"58ef24cb8705470b00874bda\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Hong Kong\", \"code\": \"852\", \"_id\": \"58ef24f28705470b00874bdb\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Japan\", \"code\": \"81\", \"_id\": \"58ef253e8705470b00874bdc\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Singapore\", \"code\": \"65\", \"_id\": \"58ef256c8705470b00874bdd\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"South Korea\", \"code\": \"82\", \"_id\": \"58ef23d08705470b00874bd5\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Thailand\", \"code\": \"66\", \"_id\": \"58ef25828705470b00874bde\", \"enabled\": true, \"created_at\": 1492070061}], \"count\": 12}",
+					"language": "json",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"code": 200,
+					"responseSize": {
+						"body": 1418,
+						"header": 189,
+						"total": 1607
+					},
+					"mimeType": "text",
+					"fileName": "response.json",
+					"dataURI": "data:application/json;base64, eyJkYXRhIjogW3sidXBkYXRlZF9hdCI6IDE0OTIwNzAxMTksICJuYW1lIjogIkF1c3RyYWxpYSIsICJjb2RlIjogIjYxIiwgIl9pZCI6ICI1OGVmMjQwOTg3MDU0NzBiMDA4NzRiZDYiLCAiZW5hYmxlZCI6IHRydWUsICJjcmVhdGVkX2F0IjogMTQ5MjA3MDA2MX0sIHsidXBkYXRlZF9hdCI6IDE0OTIwNzAxMTksICJuYW1lIjogIkJyYXppbCIsICJjb2RlIjogIjU1IiwgIl9pZCI6ICI1OGVmMjQyYzg3MDU0NzBiMDA4NzRiZDciLCAiZW5hYmxlZCI6IHRydWUsICJjcmVhdGVkX2F0IjogMTQ5MjA3MDA2MX0sIHsidXBkYXRlZF9hdCI6IDE0OTIwNzAxMTksICJuYW1lIjogIkNhbmFkYSIsICJjb2RlIjogIjEiLCAiX2lkIjogIjU4ZWYyNDhhODcwNTQ3MGIwMDg3NGJkOCIsICJlbmFibGVkIjogdHJ1ZSwgImNyZWF0ZWRfYXQiOiAxNDkyMDcwMDYxfSwgeyJ1cGRhdGVkX2F0IjogMTQ5MjA3MDExOSwgIm5hbWUiOiAiQ2hpbmEiLCAiY29kZSI6ICI4NiIsICJfaWQiOiAiNThlZjI0YTU4NzA1NDcwYjAwODc0YmQ5IiwgImVuYWJsZWQiOiB0cnVlLCAiY3JlYXRlZF9hdCI6IDE0OTIwNzAwNjF9LCB7InVwZGF0ZWRfYXQiOiAxNDkyMDcwMTE5LCAibmFtZSI6ICJHZXJtYW55IiwgImNvZGUiOiAiNDkiLCAiX2lkIjogIjU4ZWYyNGNiODcwNTQ3MGIwMDg3NGJkYSIsICJlbmFibGVkIjogdHJ1ZSwgImNyZWF0ZWRfYXQiOiAxNDkyMDcwMDYxfSwgeyJ1cGRhdGVkX2F0IjogMTQ5MjA3MDExOSwgIm5hbWUiOiAiSG9uZyBLb25nIiwgImNvZGUiOiAiODUyIiwgIl9pZCI6ICI1OGVmMjRmMjg3MDU0NzBiMDA4NzRiZGIiLCAiZW5hYmxlZCI6IHRydWUsICJjcmVhdGVkX2F0IjogMTQ5MjA3MDA2MX0sIHsidXBkYXRlZF9hdCI6IDE0OTIwNzAxMTksICJuYW1lIjogIkphcGFuIiwgImNvZGUiOiAiODEiLCAiX2lkIjogIjU4ZWYyNTNlODcwNTQ3MGIwMDg3NGJkYyIsICJlbmFibGVkIjogdHJ1ZSwgImNyZWF0ZWRfYXQiOiAxNDkyMDcwMDYxfSwgeyJ1cGRhdGVkX2F0IjogMTQ5MjA3MDExOSwgIm5hbWUiOiAiU2luZ2Fwb3JlIiwgImNvZGUiOiAiNjUiLCAiX2lkIjogIjU4ZWYyNTZjODcwNTQ3MGIwMDg3NGJkZCIsICJlbmFibGVkIjogdHJ1ZSwgImNyZWF0ZWRfYXQiOiAxNDkyMDcwMDYxfSwgeyJ1cGRhdGVkX2F0IjogMTQ5MjA3MDExOSwgIm5hbWUiOiAiU291dGggS29yZWEiLCAiY29kZSI6ICI4MiIsICJfaWQiOiAiNThlZjIzZDA4NzA1NDcwYjAwODc0YmQ1IiwgImVuYWJsZWQiOiB0cnVlLCAiY3JlYXRlZF9hdCI6IDE0OTIwNzAwNjF9LCB7InVwZGF0ZWRfYXQiOiAxNDkyMDcwMTE5LCAibmFtZSI6ICJUaGFpbGFuZCIsICJjb2RlIjogIjY2IiwgIl9pZCI6ICI1OGVmMjU4Mjg3MDU0NzBiMDA4NzRiZGUiLCAiZW5hYmxlZCI6IHRydWUsICJjcmVhdGVkX2F0IjogMTQ5MjA3MDA2MX1dLCAiY291bnQiOiAxMn0=",
+					"name": "국가코드 알파벳순서 정렬 리스트",
+					"id": "adc3f3aa-6992-e7f5-79ce-d8ee7e48d6b3",
+					"request": {
+						"url": "{{protocol}}://{{hostname}}:{{port}}/w/countries?start=0&size=10",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "start",
+								"value": "0",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							},
+							{
+								"key": "size",
+								"value": "10",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headerData": [],
+						"headers": "",
+						"data": null,
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
 		},
 		{
 			"id": "af66db60-6598-f218-de78-ec48bc004355",
@@ -2559,10 +2795,20 @@
 		},
 		{
 			"id": "c4c10daf-0c49-4069-2b78-c50cffd64123",
-			"headers": "Cookie: csk=59296c9f5f54713712336d1d\n",
+			"headers": "Authorization: csk=593bd1b55f54713ec27e9f19\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "csk=593bd1b55f54713ec27e9f19",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
@@ -2570,7 +2816,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1495969019739,
+			"time": 1497861546358,
 			"name": "/a/dashboard",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
