@@ -21,10 +21,12 @@ class DashboardHandler(JsonHandler):
         total_company_count = await CompanyModel.count({'enabled': True})
         total_user_count = await UserModel.count({'enabled': True})
         total_content_count = await ContentModel.count({'enabled': True})
+        total_ticket_count = await TicketModel.count({'enabled': True})
         self.response['data'] = {
             'total_company_count': total_company_count,
             'total_user_count': total_user_count,
             'total_content_count': total_content_count,
+            'total_ticket_count': total_ticket_count
         }
         # aggregate tickets
         pipeline = [
