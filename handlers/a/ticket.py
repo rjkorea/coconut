@@ -262,8 +262,9 @@ class TicketOrderSendHandler(JsonHandler):
                 'type': 'unicode',
                 'from': 'tkit',
                 'to': ticket_order['receiver']['mobile_number'],
-                'text': constants.TICKET_ORDER_INFO_MSG.format(content['name'], 'http://i.tkit.me/l/', content['short_id'])
-                        + '\n' + constants.TICKET_ORDER_WARN_MSG
+                'text': 'http://itkit.emojeomo.com/l/%s 스프라이트Sprite ‘워터밤 2017’ EVENT 당첨에 축하드립니다 지금 바로 티켓을 등록해주세요^^' % content['short_id']
+                # 'text': constants.TICKET_ORDER_INFO_MSG.format(content['name'], 'http://i.tkit.me/l/', content['short_id'])
+                #         + '\n' + constants.TICKET_ORDER_WARN_MSG
             }
         )
         self.response['data'] = ticket_order
