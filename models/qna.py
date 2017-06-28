@@ -36,6 +36,11 @@ class QnaModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'is_mytkit',
+                'type': bool,
+                'default': (lambda: False)
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)
