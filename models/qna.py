@@ -21,11 +21,6 @@ class QnaModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'company_oid',
-                'type': ObjectId,
-                'default': None
-            },
-            {
                 'key': 'content_oid',
                 'type': ObjectId,
                 'default': None
