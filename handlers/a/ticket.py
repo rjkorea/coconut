@@ -41,6 +41,7 @@ class TicketTypeListHandler(JsonHandler):
             res['admin'] = await AdminModel.get_id(res['admin_oid'])
             res.pop('content_oid')
             res.pop('admin_oid')
+            res['ticket_order_cnt'] = await TicketOrderModel.count({'ticket_type_oid': ObjectId(res['_id'])})
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -127,7 +128,7 @@ class TicketTypeHandler(JsonHandler):
 class TicketOrderListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None),
-        ('content_oid', str, None), ('admin_oid', str, None)])
+        ('content_oid', str, None), ('admin_oid', str, None), ('ticket_type_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = dict()
@@ -135,6 +136,8 @@ class TicketOrderListHandler(JsonHandler):
             q['content_oid'] = ObjectId(parsed_args['content_oid'])
         if 'admin_oid' in parsed_args and parsed_args['admin_oid']:
             q['admin_oid'] = ObjectId(parsed_args['admin_oid'])
+        if 'ticket_type_oid' in parsed_args and parsed_args['ticket_type_oid']:
+            q['ticket_type_oid'] = ObjectId(parsed_args['ticket_type_oid'])
         if 'q' in parsed_args and parsed_args['q']:
             q['$or'] = [
                 {'name': {'$regex': parsed_args['q']}},
@@ -145,8 +148,10 @@ class TicketOrderListHandler(JsonHandler):
         for res in result:
             res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
             res['admin'] = await AdminModel.get_id(res['admin_oid'])
+            res['content'] = await ContentModel.get_id(res['content_oid'])
             res.pop('ticket_type_oid')
             res.pop('admin_oid')
+            res.pop('content_oid')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -278,7 +283,8 @@ class TicketOrderSendHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None), ('receive_user_oid', str, None), ('company_oid', str, None), ('content_oid', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None),
+        ('receive_user_oid', str, None),('company_oid', str, None), ('content_oid', str, None), ('ticket_order_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {'$and': [{}]}
@@ -288,6 +294,8 @@ class TicketListHandler(JsonHandler):
             q['$and'].append({'content_oid': ObjectId(parsed_args['content_oid'])})
         if parsed_args['receive_user_oid']:
             q['$and'].append({'receive_user_oid': ObjectId(parsed_args['receive_user_oid'])})
+        if parsed_args['ticket_order_oid']:
+            q['$and'].append({'ticket_order_oid': ObjectId(parsed_args['ticket_order_oid'])})
         if parsed_args['q']:
             search_q = {'$or': [
                 {'status': {'$regex': parsed_args['q']}},
