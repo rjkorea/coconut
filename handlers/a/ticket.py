@@ -255,21 +255,20 @@ class TicketOrderSendHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
+        sms_message = self.json_decoded_body.get('sms_message', None)
+        if not sms_message or len(sms_message) == 0:
+            raise HTTPError(400, 'invalid sms_message')
         ticket_order = await TicketOrderModel.find_one({'_id': ObjectId(_id)})
         if not ticket_order:
             raise HTTPError(400, 'not exist _id')
         await TicketModel.update({'ticket_order_oid': ticket_order['_id'], 'status': TicketModel.Status.pend.name}, {'$set': {'status': TicketModel.Status.send.name}}, False, True)
-        ticket_type = await TicketTypeModel.find_one({'_id': ticket_order['ticket_type_oid']})
-        content = await ContentModel.find_one({'_id': ticket_type['content_oid']})
         # send SMS
         is_sent_receiver = await send_sms(
             {
                 'type': 'unicode',
                 'from': 'tkit',
                 'to': ticket_order['receiver']['mobile_number'],
-                'text': 'http://itkit.emojeomo.com/l/%s 스프라이트Sprite ‘워터밤 2017’ EVENT 당첨에 축하드립니다 지금 바로 티켓을 등록해주세요^^' % content['short_id']
-                # 'text': constants.TICKET_ORDER_INFO_MSG.format(content['name'], 'http://i.tkit.me/l/', content['short_id'])
-                #         + '\n' + constants.TICKET_ORDER_WARN_MSG
+                'text': sms_message
             }
         )
         self.response['data'] = ticket_order
