@@ -110,6 +110,7 @@
 				"ec2a42ed-2b52-8653-5fb6-f5df7a55f67d",
 				"9ac657c6-2fd4-b57a-0fed-f3b0a5fd7ea9",
 				"cb8956d7-fe92-193a-5747-ef3ccdb299a3",
+				"ac5966b7-bb59-6695-0485-2b08e85a3e92",
 				"65189eda-5996-cacf-e72a-e22b869ab740",
 				"95042088-6745-9044-2477-ac442f47ca8a",
 				"e47c83a1-9433-f1a2-1c4d-7082d1dbe4b9",
@@ -2750,6 +2751,36 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "ac5966b7-bb59-6695-0485-2b08e85a3e92",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/sn/q190uAv/register",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1499657193865,
+			"name": "/w/ticket/sn/<serial_number>/register",
+			"description": "",
+			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\"\n}"
 		},
 		{
 			"id": "af66db60-6598-f218-de78-ec48bc004355",

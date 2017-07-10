@@ -99,6 +99,7 @@ url_patterns = [
     (r'/w/qnas/?', w.qna.QnaListHandler),
 
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
+    (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register?', w.ticket.TicketSerialNumberRegisterHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
+from datetime import datetime
 
 from tornado.web import HTTPError
 
@@ -322,6 +323,46 @@ class TicketOrderSlugHandler(JsonHandler):
         res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
         res.pop('ticket_type_oid')
         self.response['data'] = res
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketSerialNumberRegisterHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        serial_number = kwargs.get('serial_number', None)
+        if not serial_number or len(serial_number) != 7:
+            raise HTTPError(400, 'invalid serial number')
+        ticket = await TicketModel.find_one({'serial_number': serial_number})
+        if not ticket:
+            raise HTTPError(400, 'not exist serial number')
+        if ticket['status'] == TicketModel.Status.register.name:
+            raise HTTPError(400, 'registered ticket can\'t register')
+        if ticket['status'] == TicketModel.Status.use.name:
+            raise HTTPError(400, 'used ticket can\'t register')
+        if ticket['status'] == TicketModel.Status.cancel.name:
+            raise HTTPError(400, 'canceled ticket can\'t register')
+        name = self.json_decoded_body.get('name', None)
+        if not name:
+            raise HTTPError(400, 'invalid name')
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if not mobile_number:
+            raise HTTPError(400, 'invalid mobile number')
+        user = await create_user(self.json_decoded_body)
+        query = {
+            '_id': ticket['_id'],
+            'status': TicketModel.Status.pend.name
+        }
+        document = {
+            '$set': {
+                'receive_user_oid': user['_id'],
+                'status': TicketModel.Status.register.name,
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
         self.write_json()
 
     async def options(self, *args, **kwargs):
