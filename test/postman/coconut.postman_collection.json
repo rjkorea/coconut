@@ -798,12 +798,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1499647354219,
+			"time": 1499648281012,
 			"name": "/a/ticket/<oid>/cancel",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
-			"rawModeData": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"email\": \"kevin.cho@rjkorea.com\"\n}"
+			"rawModeData": ""
 		},
 		{
 			"id": "36d1e171-5436-c90b-93d6-418b86d38291",
