@@ -44,6 +44,7 @@
 				"3cdbabd4-670a-e7af-787c-bab9220c2eeb",
 				"867058a4-76fa-8db8-8d4f-87f9510b80d4",
 				"efbbab78-b7fe-4995-201a-f5e9e5cd5737",
+				"5915efe6-c83b-d2c0-491e-feecf5eb5f5a",
 				"60352bde-8847-d0db-b61e-441586f189d2",
 				"20e91f99-d384-adf3-edf5-b884d1b62ac0",
 				"95424c9c-1168-86fb-45fd-121824f54b2f",
@@ -1033,6 +1034,42 @@
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": []
+		},
+		{
+			"id": "5915efe6-c83b-d2c0-491e-feecf5eb5f5a",
+			"headers": "Authorization: csk=5962d8315f5471398093ee0a\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "csk=5962d8315f5471398093ee0a",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1499652228158,
+			"name": "/a/ticket/order (hardticket, slug)",
+			"description": "",
+			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
+			"responses": [],
+			"rawModeData": "{\n\t\"content_oid\": \"594246755f5471c519ecfc8c\",\n\t\"ticket_type_oid\": \"595c7b3eba590e56f091b5d4\",\n\t\"qty\": 2,\n\t\"receiver\": {\n\t\t\"mobile_number\": \"821032697178\",\n\t\t\"name\": \"조건희\"\n\t},\n\t\"fee\": {\n\t\t\"price\": 10000,\n\t\t\"method\": \"cash\"\n\t},\n\t\"expiry_date\": \"2017-7-29T18:08:00\",\n\t\"slug\": \"waterbomb-2017-kbs\"\n}"
 		},
 		{
 			"id": "5aadc867-d182-e4c6-ab87-6d15ac250d10",
@@ -4166,10 +4203,26 @@
 		},
 		{
 			"id": "efbbab78-b7fe-4995-201a-f5e9e5cd5737",
-			"headers": "Cookie: csk=58cb4cd05f547175e5ecac83;\nContent-Type: application/json\n",
+			"headers": "Authorization: csk=5962d8315f5471398093ee0a\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "csk=5962d8315f5471398093ee0a",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
 			"url": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
@@ -4177,12 +4230,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1495767267101,
-			"name": "/a/ticket/order (root)",
+			"time": 1499652574024,
+			"name": "/a/ticket/order (default)",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
-			"rawModeData": "{\n\t\"ticket_type_oid\": \"58d3959b5f547155bbcf8eff\",\n\t\"qty\": 10,\n\t\"receiver\": {\n\t\t\"mobile_number\": \"821099998888\",\n\t\t\"name\": \"그레그레\",\n\t\t\"access_code\": \"1234\"\n\t},\n\t\"fee\": {\n\t\t\"price\": 10000,\n\t\t\"method\": \"cash\"\n\t},\n\t\"expiry_date\": \"2017-6-8T15:8:00\"\n}"
+			"rawModeData": "{\n\t\"content_oid\": \"594246755f5471c519ecfc8c\",\n\t\"ticket_type_oid\": \"595c7b3eba590e56f091b5d4\",\n\t\"qty\": 2,\n\t\"receiver\": {\n\t\t\"mobile_number\": \"821032697178\",\n\t\t\"name\": \"조건희\"\n\t},\n\t\"fee\": {\n\t\t\"price\": 10000,\n\t\t\"method\": \"cash\"\n\t},\n\t\"expiry_date\": \"2017-7-28T20:8:00\"\n}"
 		},
 		{
 			"id": "f0e7b9e5-8d94-ed11-848a-ceff1cb8e668",

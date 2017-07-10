@@ -202,6 +202,12 @@ class TicketOrderHandler(JsonHandler):
             if 'price' not in fee or 'method' not in fee:
                 raise HTTPError(400, 'invalid price | method')
             ticket_order.data['fee'] = fee
+        slug = self.json_decoded_body.get('slug', None)
+        if slug:
+            duplicated_order = await TicketOrderModel.find_one({'slug': slug})
+            if duplicated_order:
+                raise HTTPError(400, 'duplicated slug')
+            ticket_order.data['slug'] = slug
 
         broker_oid = await create_broker(ticket_order.data['receiver'])
         ticket_order.data['user_oid'] = broker_oid

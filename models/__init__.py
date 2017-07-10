@@ -3,6 +3,8 @@
 import logging
 from bson import ObjectId
 
+from common import hashers
+
 from models.user import UserModel
 from models.ticket import TicketTypeModel, TicketModel
 
@@ -32,6 +34,14 @@ async def create_ticket(ticket_order):
             content_oid=ticket_type['content_oid'],
             days=days
         ))
+        if 'slug' in ticket_order:
+            # generate serial_number
+            while True:
+                serial_number = hashers.generate_random_string(TicketModel.SERIAL_NUMBER_LENGTH)
+                duplicated_ticket = await TicketModel.find_one({'serial_number': serial_number})
+                if not duplicated_ticket:
+                    ticket.data['serial_number'] = serial_number
+                    break
         await ticket.insert()
 
 async def create_broker(receiver):

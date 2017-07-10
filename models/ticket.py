@@ -89,11 +89,6 @@ class TicketOrderModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'parent_oid',
-                'type': ObjectId,
-                'default': None
-            },
-            {
                 'key': 'qty',
                 'type': int,
                 'default': None
@@ -114,6 +109,11 @@ class TicketOrderModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'slug',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)
@@ -124,6 +124,7 @@ class TicketOrderModel(BaseModel):
 
 class TicketModel(BaseModel):
     MONGO_COLLECTION = 'ticket'
+    SERIAL_NUMBER_LENGTH = 7
     Status = Enum('Status', 'pend send register use cancel')
 
     def __init__(self, *args, **kwargs):
@@ -167,6 +168,11 @@ class TicketModel(BaseModel):
                 'key': 'status',
                 'type': str,
                 'default': (lambda: 'pend')
+            },
+            {
+                'key': 'serial_number',
+                'type': str,
+                'default': None
             },
             {
                 'key': 'enabled',
