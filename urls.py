@@ -41,6 +41,7 @@ url_patterns = [
     (r'/a/ticket/order/(?P<_id>[^\/]+)/?', a.ticket.TicketOrderHandler),
     (r'/a/ticket/order/?', a.ticket.TicketOrderHandler),
     (r'/a/ticket/order/(?P<_id>[^\/]+)/send/?', a.ticket.TicketOrderSendHandler),
+    (r'/a/ticket/order/(?P<_id>[^\/]+)/serial_number_list/?', a.ticket.TicketOrderSerialNumberList),
 
     (r'/a/tickets/?', a.ticket.TicketListHandler),
     (r'/a/ticket/(?P<_id>[^\/]+)/?', a.ticket.TicketHandler),

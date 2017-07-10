@@ -464,3 +464,20 @@ class TicketCancelHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+class TicketOrderSerialNumberList(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10)])
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        res = await TicketModel.find({'ticket_order_oid': ObjectId(_id)}, fields=[('serial_number')])
+        count = await TicketModel.count({'ticket_order_oid': ObjectId(_id)})
+        self.response['data'] = res
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
