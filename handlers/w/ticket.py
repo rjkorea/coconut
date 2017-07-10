@@ -307,3 +307,23 @@ class TicketListHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketOrderSlugHandler(JsonHandler):
+    async def get(self, *args, **kwargs):
+        slug = kwargs.get('slug', None)
+        if not slug:
+            raise HTTPError(400, 'invalid slug')
+        res = await TicketOrderModel.find_one({'slug': slug})
+        if not res:
+            raise HTTPError(400, 'no exist ticket order')
+        res['content'] = await ContentModel.get_id(res['content_oid'])
+        res.pop('content_oid')
+        res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+        res.pop('ticket_type_oid')
+        self.response['data'] = res
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
