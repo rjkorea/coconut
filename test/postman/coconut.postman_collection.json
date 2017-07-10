@@ -52,6 +52,7 @@
 				"812b75b3-c374-dda7-6d0c-cb40adfbfdd3",
 				"b6013a43-3bd7-ece9-2ab0-533930e28f25",
 				"603947f0-8116-4ff8-d4e9-f092eb59d9e2",
+				"34964b60-91a2-42c9-6c51-1e16c134252e",
 				"55ebd6cb-5cce-6b62-39fa-9a183091a93b",
 				"9ab48fc5-74a1-16b6-4f30-b3409ee804e4",
 				"30c62771-c635-42d6-2893-323d0a9186d2",
@@ -278,10 +279,26 @@
 		},
 		{
 			"id": "09acd23e-34df-45f4-eeec-5265afcecf08",
-			"headers": "Content-Type: application/json\nCookie: csk=58ca31195f547161e34018bc;\n",
-			"url": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order/58eb54815f547118a54aff74/send",
+			"headers": "Content-Type: application/json\nAuthorization: csk=595b0a745f5471064a96d71a\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "csk=595b0a745f5471064a96d71a",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order/5940d2785f5471904fd44561/send",
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "PUT",
 			"data": [],
 			"dataMode": "raw",
@@ -289,12 +306,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1495767346560,
+			"time": 1499241673234,
 			"name": "/a/ticket/order/<oid>/send",
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": [],
-			"rawModeData": ""
+			"rawModeData": "{\n\t\"sms_message\": \"TKIT을 이용해주셔서 감사합니다. http://tkit.me\"\n}"
 		},
 		{
 			"id": "10bbac43-fe8a-cabb-9e52-7fb4694a129a",
@@ -751,6 +768,42 @@
 			"description": "",
 			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 			"responses": []
+		},
+		{
+			"id": "34964b60-91a2-42c9-6c51-1e16c134252e",
+			"headers": "Content-Type: application/json\nAuthorization: csk=5962cd185f54713980e171ab\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "csk=5962cd185f54713980e171ab",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/595b3df85f5471064a96d722/cancel",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1499647354219,
+			"name": "/a/ticket/<oid>/cancel",
+			"description": "",
+			"collectionId": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"email\": \"kevin.cho@rjkorea.com\"\n}"
 		},
 		{
 			"id": "36d1e171-5436-c90b-93d6-418b86d38291",

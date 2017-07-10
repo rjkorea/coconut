@@ -435,3 +435,26 @@ class TicketEnterUserHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketCancelHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'status': TicketModel.Status.cancel.name,
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
