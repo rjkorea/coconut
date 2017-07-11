@@ -26,7 +26,18 @@ class DashboardHandler(JsonHandler):
             'total_company_count': total_company_count,
             'total_user_count': total_user_count,
             'total_content_count': total_content_count,
-            'total_ticket_count': total_ticket_count
+            'total_ticket_count': total_ticket_count,
+            'ticket_count': {
+                'pend': 0,
+                'send': 0,
+                'register': 0,
+                'use': 0,
+                'cancel': 0
+            },
+            'gender_count': {
+                'male': 0,
+                'female': 0
+            }
         }
         # aggregate tickets
         pipeline = [
@@ -40,10 +51,8 @@ class DashboardHandler(JsonHandler):
             }
         ]
         res = await TicketModel.aggregate(pipeline, 10)
-        ticket = dict()
         for r in res:
-            ticket[r['_id']] = r['cnt']
-        self.response['data']['ticket_count'] = ticket
+            self.response['data']['ticket_count'][r['_id']] = r['cnt']
 
         # aggregate top contents
         pipeline = [
@@ -81,10 +90,8 @@ class DashboardHandler(JsonHandler):
             }
         ]
         res = await UserModel.aggregate(pipeline, 10)
-        genders = dict()
         for r in res:
-            genders[r['_id']] = r['count']
-        self.response['data']['gender_count'] = genders
+            self.response['data']['gender_count'][r['_id']] = r['count']
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -100,10 +107,17 @@ class DashboardContentHandler(JsonHandler):
             raise HTTPError(400, 'invalid content_oid')
         self.response['data'] = {
             'ticket_count': {
+                'pend': 0,
+                'send': 0,
+                'register': 0,
                 'use': 0,
-                'total': 0
+                'cancel': 0
             },
             'avg_age': {
+                'male': 0,
+                'female': 0
+            },
+            'gender_count': {
                 'male': 0,
                 'female': 0
             },
@@ -117,21 +131,61 @@ class DashboardContentHandler(JsonHandler):
             'content_oid': ObjectId(content_oid),
             'enabled': True
         }
-        self.response['data']['ticket_count']['total'] = await TicketModel.count(
+        # use aggregate for ticket count
+        pipeline = [
             {
-                'content_oid': ObjectId(content_oid),
-                'enabled': True
-            }
-        )
-        self.response['data']['ticket_count']['use'] = await TicketModel.count(
+                '$match': {
+                    'content_oid': ObjectId(content_oid)
+                }
+            },
             {
-                'content_oid': ObjectId(content_oid),
-                'enabled': True,
-                'status': 'use'
+                '$group': {
+                    '_id': '$status',
+                    'cnt': {
+                        '$sum': 1
+                    }
+                }
             }
-        )
+        ]
+        res = await TicketModel.aggregate(pipeline, 10)
+        for r in res:
+            self.response['data']['ticket_count'][r['_id']] = r['cnt']
 
-        # use aggregate
+        # use aggregate for genders
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(content_oid),
+                    'status': TicketModel.Status.use.name
+                }
+            },
+            {
+                '$lookup': {
+                    'from': 'user',
+                    'localField': 'receive_user_oid',
+                    'foreignField': '_id',
+                    'as': 'receive_user'
+                }
+            },
+            {
+                '$unwind': {
+                    'path': '$receive_user'
+                }
+            },
+            {
+                '$group': {
+                    '_id': '$receive_user.gender',
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        res = await TicketModel.aggregate(pipeline, 5)
+        for r in res:
+            self.response['data']['gender_count'][r['_id']] = r['count']
+
+        # use aggregate for top ticket type
         pipeline = [
             {
                 '$match': {'content_oid': ObjectId(content_oid)}
@@ -157,6 +211,30 @@ class DashboardContentHandler(JsonHandler):
         for ttt in top_ticket_types:
             ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name')])
         self.response['data']['top_ticket_types'] = top_ticket_types
+
+        #user aggregate for revenue
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(content_oid),
+                    'status': TicketModel.Status.use.name
+                }
+            },
+            {
+                '$unwind': {'path': '$days'}
+            },
+            {
+                '$group': {
+                    '_id': '$days.fee.method',
+                    'revenue': {
+                        '$sum': '$days.fee.price'
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 5)
+        for a in aggs:
+            self.response['data']['revenue'][a['_id']] = a['revenue']
         self.write_json()
 
     async def options(self, *args, **kwargs):
