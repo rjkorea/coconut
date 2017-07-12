@@ -351,6 +351,9 @@ class TicketSerialNumberRegisterHandler(JsonHandler):
         if not mobile_number:
             raise HTTPError(400, 'invalid mobile number')
         user = await create_user(self.json_decoded_body)
+        registered_user = await TicketModel.find_one({'content_oid': ticket['content_oid'], 'receive_user_oid': user['_id'], 'status': TicketModel.Status.register.name})
+        if registered_user:
+            raise HTTPError(400, 'already registered user')
         query = {
             '_id': ticket['_id'],
             'status': TicketModel.Status.pend.name
