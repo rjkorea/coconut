@@ -187,7 +187,9 @@ class TicketOrderHandler(JsonHandler):
             expiry_date = datetime.strptime(expiry_date, '%Y-%m-%dT%H:%M:%S')
         except ValueError as e:
             raise HTTPError(400, e)
-
+        receiver['sms'] = {
+            'count': 0
+        }
         # create ticket order model
         ticket_order = TicketOrderModel(raw_data=dict(
             admin_oid=admin_oid,
@@ -277,6 +279,8 @@ class TicketOrderSendHandler(JsonHandler):
                 'text': sms_message
             }
         )
+        if is_sent_receiver:
+            await TicketOrderModel.update({'_id': ticket_order['_id']}, {'$set': {'receiver.sms.count': ticket_order['receiver']['sms']['count']+1, 'receiver.sms.sent_at': datetime.utcnow()}}, False, False)
         self.response['data'] = ticket_order
         self.response['is_sent_receiver'] = is_sent_receiver
         self.write_json()
