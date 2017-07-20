@@ -95,8 +95,7 @@ class TicketTypeHandler(JsonHandler):
         if not ticket_type:
             raise HTTPError(400, 'not exist _id')
         query = {
-            '_id': ObjectId(_id),
-            'admin_oid': self.current_user['_id']
+            '_id': ObjectId(_id)
         }
         self.json_decoded_body['updated_at'] = datetime.utcnow()
         document = {
