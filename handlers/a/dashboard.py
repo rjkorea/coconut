@@ -204,12 +204,12 @@ class DashboardContentHandler(JsonHandler):
                 }
             },
             {
-                '$limit': 5
+                '$limit': 10
             }
         ]
-        top_ticket_types = await TicketModel.aggregate(pipeline, 5)
+        top_ticket_types = await TicketModel.aggregate(pipeline, 10)
         for ttt in top_ticket_types:
-            ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name')])
+            ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name'), ('desc')])
         self.response['data']['top_ticket_types'] = top_ticket_types
 
         #user aggregate for revenue
