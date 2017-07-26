@@ -484,3 +484,34 @@ class TicketOrderSerialNumberList(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketSmsSendHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        sms_message = self.json_decoded_body.get('sms_message', None)
+        if not sms_message or len(sms_message) == 0:
+            raise HTTPError(400, 'invalid sms_message')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist _id')
+        user = await UserModel.find_one({'_id': ticket['receive_user_oid']})
+        # send SMS
+        is_sent_receiver = await send_sms(
+            {
+                'type': 'unicode',
+                'from': 'tkit',
+                'to': user['mobile_number'],
+                'text': sms_message
+            }
+        )
+        self.response['data'] = ticket
+        self.response['is_sent_receiver'] = is_sent_receiver
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
