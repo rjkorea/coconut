@@ -196,8 +196,15 @@ class DashboardContentHandler(JsonHandler):
         pipeline = [
             {
                 '$match': {
-                    'content_oid': ObjectId(content_oid),
-                    'status': TicketModel.Status.register.name
+                    '$and': [
+                        {'content_oid': ObjectId(content_oid)},
+                        {
+                            '$or': [
+                                {'status': TicketModel.Status.register.name},
+                                {'status': TicketModel.Status.use.name}
+                            ]
+                        }
+                    ]
                 }
             },
             {
@@ -252,6 +259,7 @@ class DashboardContentHandler(JsonHandler):
         for ttt in top_ticket_types:
             ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name'), ('desc')])
             ttt['ticket_register_cnt'] = await TicketModel.count({'ticket_type_oid': ttt['_id'], 'status': TicketModel.Status.register.name})
+            ttt['ticket_use_cnt'] = await TicketModel.count({'ticket_type_oid': ttt['_id'], 'status': TicketModel.Status.use.name})
         self.response['data']['top_ticket_types'] = top_ticket_types
 
         # use aggregate for top ticket order
@@ -281,6 +289,7 @@ class DashboardContentHandler(JsonHandler):
             tto['ticket_order'] = await TicketOrderModel.get_id(tto['_id'])
             tto['ticket_type'] = await TicketTypeModel.get_id(tto['ticket_order']['ticket_type_oid'])
             tto['ticket_register_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.register.name})
+            tto['ticket_use_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.use.name})
         self.response['data']['top_ticket_orders'] = top_ticket_orders
 
         #user aggregate for revenue
