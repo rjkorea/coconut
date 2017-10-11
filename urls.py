@@ -96,6 +96,7 @@ url_patterns = [
     (r'/w/ticket/send/batch/?', w.ticket.TicketSendBatchHandler),
     (r'/w/tickets/me/?', w.ticket.TicketListMeHandler),
     (r'/w/tickets/?', w.ticket.TicketListHandler),
+    (r'/w/ticket/logs/?', w.ticket.TicketLogsHandler),
 
     (r'/w/qnas/?', w.qna.QnaListHandler),
 
