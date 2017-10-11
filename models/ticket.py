@@ -183,6 +183,46 @@ class TicketModel(BaseModel):
         return specification
 
 
+class TicketLogModel(BaseModel):
+    MONGO_COLLECTION = 'ticket_log'
+    Status = Enum('Status', 'pend send register use cancel')
+
+    def __init__(self, *args, **kwargs):
+        super(TicketLogModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(TicketLogModel, self).specification
+        specification.extend([
+            {
+                'key': 'action',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'content_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'send_user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'receive_user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'ticket_oids',
+                'type': list,
+                'default': None
+            },
+        ])
+        return specification
+
+
 class TicketPlaceModel(BaseModel):
     MONGO_COLLECTION = 'ticket_place'
     TYPE = ('area', 'seat', 'site')
