@@ -145,6 +145,11 @@ class TicketModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'history_send_user_oids',
+                'type': list,
+                'default': None
+            },
+            {
                 'key': 'ticket_type_oid',
                 'type': ObjectId,
                 'default': None
