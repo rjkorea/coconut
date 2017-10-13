@@ -196,6 +196,9 @@ class TicketSendHandler(JsonHandler):
                 'status': TicketModel.Status.send.name,
                 'send_user_oid': self.current_user['_id'],
                 'receive_user_oid': receive_user['_id']
+            },
+            '$addToSet': {
+                'history_send_user_oids': self.current_user['_id']
             }
         }
         self.response['data'] = await TicketModel.update(query, document, False, True)
