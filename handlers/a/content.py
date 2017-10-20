@@ -201,15 +201,15 @@ class ContentPostHandler(MultipartFormdataHandler):
             image = dict()
             if 'poster' in self.request.files:
                 image['poster'] = {
-                    'm': '/content/%s/poster.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split(',')[-1])
+                    'm': '/content/%s/poster.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split('.')[-1])
                 }
             if 'logo' in self.request.files:
                 image['logo'] = {
-                    'm': '/content/%s/logo.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split(',')[-1])
+                    'm': '/content/%s/logo.m.%s' % (content_oid, self.request.files['logo'][0]['filename'].split('.')[-1])
                 }
             if 'og' in self.request.files:
                 image['og'] = {
-                    'm': '/content/%s/og.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split(',')[-1])
+                    'm': '/content/%s/og.m.%s' % (content_oid, self.request.files['og'][0]['filename'].split('.')[-1])
                 }
             query = {
                 '_id': ObjectId(content_oid)
