@@ -536,12 +536,55 @@
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "multipart/form-data"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Ultra Music Festival Korea 2017\",\n\t\"desc\": \"All of EDM\",\n\t\"place\": \"Olympic Stadium, Seoul, South Korea\"\n}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "poster",
+									"description": "",
+									"type": "file",
+									"src": "poster.m.jpg"
+								},
+								{
+									"key": "og",
+									"description": "",
+									"type": "file",
+									"src": "opengraph.jpg"
+								},
+								{
+									"key": "logo",
+									"description": "",
+									"type": "file",
+									"src": "waterbomb_logo-2.png"
+								},
+								{
+									"key": "name",
+									"value": "테스트 페스티벌",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "desc",
+									"value": "let's get it",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "place",
+									"value": "Olympic Statdium",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "company_oid",
+									"value": "5922bc83c8bd9535771cf837",
+									"description": "",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content",
@@ -1756,7 +1799,7 @@
 					},
 					"response": [
 						{
-							"id": "a0bc4fc3-8732-4faa-af10-62b6a267eba3",
+							"id": "f4aa1a64-c81d-44ab-9753-1a71aac895e4",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -1883,7 +1926,7 @@
 					},
 					"response": [
 						{
-							"id": "5bb71994-de27-4970-a0d8-2079e1d0302d",
+							"id": "cec463be-6672-43a8-8237-8d0ee60e8935",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -2308,7 +2351,7 @@
 					},
 					"response": [
 						{
-							"id": "fe056156-974d-4936-bb41-1cbaa37725dd",
+							"id": "c558de81-11fc-4a9c-bcd1-6a669546ce91",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2383,7 +2426,7 @@
 							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "5bc5f83f-4fc1-45eb-b839-e20b102114e9",
+							"id": "7101a27a-4978-4b40-8d40-458d3ec07b7f",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2492,7 +2535,7 @@
 					},
 					"response": [
 						{
-							"id": "a086c626-52ca-4911-b81e-4aab8805b384",
+							"id": "4d9ada96-9660-4768-8f19-056a5b37a601",
 							"name": "패스워드 설정이 되어 있는 유저",
 							"originalRequest": {
 								"method": "PUT",
@@ -2558,7 +2601,7 @@
 							"body": "{\"message\": \"400: exist password\"}"
 						},
 						{
-							"id": "5174f525-cac4-417e-82a3-7adeb7b50999",
+							"id": "8bc9db12-7dba-4d3a-a2c8-22230a31e143",
 							"name": "신규 패스워드 설정",
 							"originalRequest": {
 								"method": "PUT",
@@ -2657,7 +2700,7 @@
 					},
 					"response": [
 						{
-							"id": "e2bce286-ac44-4655-813e-0f5de0182ce9",
+							"id": "2484466b-579b-4ab9-bd78-8fe55e215c47",
 							"name": "비밀번호 인증 성공",
 							"originalRequest": {
 								"method": "PUT",
@@ -2722,7 +2765,7 @@
 							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "c1f25d39-16d4-4e2e-bb22-20d8f3c0d331",
+							"id": "0c74eff8-df71-4da0-a028-605483c48ad2",
 							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
 							"originalRequest": {
 								"method": "PUT",
@@ -2811,7 +2854,7 @@
 					},
 					"response": [
 						{
-							"id": "62173926-68d0-4041-8a4e-9c7533375d79",
+							"id": "b08d0e5c-0141-4542-93e2-b467807576bb",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -2920,7 +2963,7 @@
 					},
 					"response": [
 						{
-							"id": "a3d67d38-f733-4adc-a36e-bac7d27a0443",
+							"id": "c3437338-3506-488a-8817-dcf5846cd189",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3047,7 +3090,7 @@
 					},
 					"response": [
 						{
-							"id": "360317b3-3c86-4cc3-af1e-0b61b59d22fe",
+							"id": "9bba1061-4a3a-4825-8658-145030cc9803",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3175,7 +3218,7 @@
 					},
 					"response": [
 						{
-							"id": "92297ac4-46d0-46b4-8622-3339e5f8cae3",
+							"id": "fa1e0c80-f953-45a9-8b11-9773027acf67",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3294,7 +3337,7 @@
 					},
 					"response": [
 						{
-							"id": "b43f7936-8f60-49bb-8c31-f24985bf5f9d",
+							"id": "de2e59f4-65a9-40dc-8db5-032215ec7ba7",
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
 								"method": "PUT",
@@ -3398,7 +3441,7 @@
 					},
 					"response": [
 						{
-							"id": "b441281f-6662-4649-a033-df2b6de6e63c",
+							"id": "f9a860a4-c7a6-4b15-a432-ba02c6f687d0",
 							"name": "3개 티켓 다른 사람에게 전송",
 							"originalRequest": {
 								"method": "PUT",
@@ -3467,7 +3510,7 @@
 							"body": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}"
 						},
 						{
-							"id": "41e8136e-9ca4-4797-bd31-311dd5f96521",
+							"id": "07ea8172-7ed0-4777-9a4a-d7ad71938570",
 							"name": "3개 티켓을 자신에게 전송 (400 에러)",
 							"originalRequest": {
 								"method": "PUT",
@@ -3580,7 +3623,7 @@
 					},
 					"response": [
 						{
-							"id": "793bbecd-82cb-4f36-87c5-ed8a07711f4a",
+							"id": "94e57a11-bee9-457e-b870-edc7fd3262d7",
 							"name": "마이티킷 리스트(status: register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3708,7 +3751,7 @@
 					},
 					"response": [
 						{
-							"id": "1e7ae7b3-fd5d-4887-9973-45d7ba802808",
+							"id": "f0a44f39-117b-4e1a-b98c-f4543ac3a70a",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3841,7 +3884,7 @@
 					},
 					"response": [
 						{
-							"id": "4e42ca8a-c0d5-4beb-9e31-c24419ce9dfa",
+							"id": "4293f918-09fe-435b-9de6-bfc906842c24",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3960,7 +4003,7 @@
 					},
 					"response": [
 						{
-							"id": "ee7b1a02-f0b3-457a-92a1-b144afaf2a9e",
+							"id": "1b79a869-adde-44f9-92e0-d0003a3a0212",
 							"name": "조건희 유저정보 가져오기",
 							"originalRequest": {
 								"method": "GET",
@@ -4072,7 +4115,7 @@
 					},
 					"response": [
 						{
-							"id": "900087e9-8972-4afe-9335-cdb788533146",
+							"id": "171a70b4-a257-4379-a745-823c6cbf2698",
 							"name": "비밀번호 변경성공",
 							"originalRequest": {
 								"method": "PUT",
