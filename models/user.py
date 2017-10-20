@@ -56,6 +56,11 @@ class UserModel(BaseModel):
                 'type': bool,
                 'default': (lambda: True)
             },
+            {
+                'key': 'image',
+                'type': dict,
+                'default': None
+            },
         ])
         return specification
 
