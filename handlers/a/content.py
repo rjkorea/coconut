@@ -7,7 +7,7 @@ from tornado.web import HTTPError
 
 from common.decorators import admin_auth_async, parse_argument
 
-from handlers.base import JsonHandler
+from handlers.base import JsonHandler, BaseHandler, MultipartFormdataHandler
 from models.content import ContentModel
 from models.admin import AdminModel
 from models.company import CompanyModel
@@ -139,6 +139,89 @@ class ContentHandler(JsonHandler):
         if not content:
             raise HTTPError(400, 'not exist content')
         self.response['data'] = content
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentPostHandler(MultipartFormdataHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        # basic field
+        admin_oid = self.current_user['_id']
+        # files = self.request.files
+        # body_args = self.request.body_arguments
+        # body = self.request.body
+        # import logging
+        # # logging.info(files)
+        # logging.info(body_args)
+        # logging.info(body_args['name'])
+        # logging.info(body_args['desc'])
+        # logging.info(body_args['place'])
+        # logging.info(files['poster'][0]['filename'])
+        # logging.info(files['logo'][0]['filename'])
+        # logging.info(files['og'][0]['filename'])
+        name = self.json_decoded_body.get('name', None)
+        if not name or len(name) == 0:
+            raise HTTPError(400, 'invalid name')
+        place = self.json_decoded_body.get('place', None)
+        if not place or len(place) == 0:
+            raise HTTPError(400, 'invalid place')
+        desc = self.json_decoded_body.get('desc', None)
+
+        # generate short id
+        while True:
+            short_id = hashers.generate_random_string(ContentModel.SHORT_ID_LENGTH)
+            duplicated_content = await ContentModel.find({'short_id': short_id})
+            if not duplicated_content:
+                break
+
+        # create content model
+        content = ContentModel(raw_data=dict(
+            short_id=short_id,
+            admin_oid=admin_oid,
+            name=name,
+            place=place,
+            desc=desc
+        ))
+        if self.current_user['role'] == 'host':
+            content.data['company_oid'] = self.current_user['company_oid']
+        elif self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
+            company_oid = self.json_decoded_body.get('company_oid', None)
+            if not company_oid:
+                raise HTTPError(400, 'need company_oid when your role is super or admin')
+            content.data['company_oid'] = ObjectId(company_oid)
+        else:
+            pass
+        content_oid = await content.insert()
+        # TODO file upload process
+        if self.request.files:
+            image = dict()
+            if 'poster' in self.request.files:
+                image['poster'] = {
+                    'm': '/content/%s/poster.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split(',')[-1])
+                }
+            if 'logo' in self.request.files:
+                image['logo'] = {
+                    'm': '/content/%s/logo.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split(',')[-1])
+                }
+            if 'og' in self.request.files:
+                image['og'] = {
+                    'm': '/content/%s/og.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split(',')[-1])
+                }
+            query = {
+                '_id': ObjectId(content_oid)
+            }
+            document = {
+                '$set': {
+                    'image': image
+                }
+            }
+            await ContentModel.update(query, document)
+            content.data['image'] = image
+        self.response['data'] = content.data
         self.write_json()
 
     async def options(self, *args, **kwargs):
