@@ -149,20 +149,7 @@ class ContentHandler(JsonHandler):
 class ContentPostHandler(MultipartFormdataHandler):
     @admin_auth_async
     async def post(self, *args, **kwargs):
-        # basic field
         admin_oid = self.current_user['_id']
-        # files = self.request.files
-        # body_args = self.request.body_arguments
-        # body = self.request.body
-        # import logging
-        # # logging.info(files)
-        # logging.info(body_args)
-        # logging.info(body_args['name'])
-        # logging.info(body_args['desc'])
-        # logging.info(body_args['place'])
-        # logging.info(files['poster'][0]['filename'])
-        # logging.info(files['logo'][0]['filename'])
-        # logging.info(files['og'][0]['filename'])
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
