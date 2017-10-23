@@ -8,7 +8,7 @@ from tornado.web import HTTPError
 from common import hashers
 from common.decorators import user_auth_async, parse_argument
 
-from handlers.base import JsonHandler
+from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.user import UserModel
 from models.session import UserSessionModel
 
@@ -141,6 +141,36 @@ class UserMePasswordHandler(JsonHandler):
             }
         }
         self.response['data'] = await UserModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class UserMeImageUploadHandler(MultipartFormdataHandler):
+    @user_auth_async
+    async def post(self, *args, **kwargs):
+        user_oid = self.current_user['_id']
+        if 'profile' not in self.request.files:
+            raise HTTPError(400, 'invalid param, only profile')
+        # TODO upload s3
+        img_dict = {
+            'profile': {
+                'm': '/user/%s/profile.m.%s' % (str(self.current_user['_id']), self.request.files['profile'][0]['filename'].split('.')[-1])
+            }
+        }
+        query = {
+            '_id': self.current_user['_id']
+        }
+        document = {
+            '$set': {
+                'image': img_dict
+            }
+        }
+        res = await UserModel.update(query, document, False, False)
+        self.current_user['image'] = img_dict
+        self.response['data'] = self.current_user
         self.write_json()
 
     async def options(self, *args, **kwargs):

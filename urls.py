@@ -80,6 +80,7 @@ url_patterns = [
     (r'/w/user/?', w.user.UserHandler),
     (r'/w/user/me/?', w.user.UserMeHandler),
     (r'/w/user/me/password?', w.user.UserMePasswordHandler),
+    (r'/w/user/me/image?', w.user.UserMeImageUploadHandler),
 
     (r'/w/user/(?P<_id>[^\/]+)/new/password?', w.user.UserNewPasswordHandler),
     (r'/w/user/(?P<_id>[^\/]+)/auth/password?', w.user.UserAuthPasswordHandler),
