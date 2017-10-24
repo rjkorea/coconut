@@ -11,6 +11,9 @@ from common.decorators import user_auth_async, parse_argument
 from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.user import UserModel
 from models.session import UserSessionModel
+from models import send_sms
+
+import settings
 
 
 class UserHandler(JsonHandler):
@@ -173,6 +176,43 @@ class UserMeImageUploadHandler(MultipartFormdataHandler):
         self.response['data'] = self.current_user
         self.write_json()
 
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class SmsLoginHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        name = self.json_decoded_body.get('name', None)
+        if not name:
+            raise HTTPError(400, 'invalid name')
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if not mobile_number:
+            raise HTTPError(400, 'invalid mobile_number')
+        content_oid = self.json_decoded_body.get('content_oid', None)
+        if not content_oid:
+            raise HTTPError(400, 'invalid content_oid')
+        user = await UserModel.find_one({'name': name, 'mobile_number': mobile_number})
+        if not user:
+            raise HTTPError(400, 'not exist user')
+        session = UserSessionModel()
+        session.data['user_oid'] = user['_id']
+        session_oid = await session.insert()
+        usk = str(session_oid)
+        config = settings.settings()
+        is_sent_receiver = await send_sms(
+            {
+                'type': 'unicode',
+                'from': 'tkit',
+                'to': mobile_number,
+                'text': 'http://%s:%s/smslogin?usk=%s&content_oid=%s' % (config['web']['host'], config['web']['port'], str(session_oid), content_oid)
+            }
+        )
+        self.response['message'] = 'check your sms'
+        self.response['is_sent_receiver'] = is_sent_receiver
+        self.write_json()
+        
+    
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
