@@ -121,9 +121,6 @@ class UserMeHandler(JsonHandler):
 class UserMePasswordHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):
-        old_password = self.json_decoded_body.get('old_password', None)
-        if not old_password or len(old_password) == 0 or not hashers.validate_user_password(old_password):
-            raise HTTPError(400, 'invalid old_password')
         new_password_1 = self.json_decoded_body.get('new_password_1', None)
         if not new_password_1 or len(new_password_1) == 0 or not hashers.validate_user_password(new_password_1):
             raise HTTPError(400, 'invalid new_password_1')
@@ -132,8 +129,6 @@ class UserMePasswordHandler(JsonHandler):
             raise HTTPError(400, 'invalid new_password_2')
         if new_password_1 != new_password_2:
             raise HTTPError(400, 'new password 1 and 2 not matched')
-        if not hashers.check_password(old_password, self.current_user['password']):
-            raise HTTPError(400, 'not correct old password')
         query = {
             '_id': self.current_user['_id']
         }
