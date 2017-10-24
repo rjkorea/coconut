@@ -87,6 +87,7 @@ url_patterns = [
     (r'/w/smslogin?', w.user.SmsLoginHandler),
 
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
+    (r'/w/contents/?', w.content.ContentListHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
 
     (r'/w/ticket/orders/?', w.ticket.TicketOrderListHandler),

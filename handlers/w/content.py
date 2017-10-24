@@ -8,6 +8,7 @@ from handlers.base import JsonHandler
 from models.content import ContentModel
 
 from common import hashers
+from common.decorators import parse_argument
 
 
 class ContentHandler(JsonHandler):
@@ -22,6 +23,21 @@ class ContentHandler(JsonHandler):
         if not content:
             raise HTTPError(400, 'not exist content')
         self.response['data'] = content
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentListHandler(JsonHandler):
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        count = await ContentModel.count(query={})
+        result = await ContentModel.find(query={}, fields=[('name'), ('when'), ('place'), ('image')], skip=parsed_args['start'], limit=parsed_args['size'])
+        self.response['data'] = result
+        self.response['count'] = count
         self.write_json()
 
     async def options(self, *args, **kwargs):
