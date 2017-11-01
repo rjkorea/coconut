@@ -15,6 +15,8 @@ from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel, Ticket
 
 from models import create_user
 
+from services.iamport import IamportService
+
 
 class TicketOrderListHandler(JsonHandler):
     @user_auth_async
@@ -417,6 +419,29 @@ class TicketLogsHandler(JsonHandler):
             res.pop('ticket_oids')
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketPaymentHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('imp_uid', str, None), ('merchant_uid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        if 'imp_uid' not in parsed_args:
+            raise HTTPError(400, 'invalid imp_uid')
+        payment_result = IamportService().client.find(imp_uid=parsed_args['imp_uid'])
+        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid'])})
+        if 'fee' in ticket['days'][0]:
+            res = IamportService().client.is_paid(ticket['days'][0]['price'], merchant_uid=payment_result['merchant_uid'])
+            if not res:
+                raise HTTPError(400, 'different price')
+        else:
+            raise HTTPError(400, 'not exist fee')
+        self.response['data'] = payment_result
         self.write_json()
 
     async def options(self, *args, **kwargs):

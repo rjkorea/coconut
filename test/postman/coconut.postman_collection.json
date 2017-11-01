@@ -1799,7 +1799,7 @@
 					},
 					"response": [
 						{
-							"id": "e4bb5188-882a-4f6e-a02a-b381fa6ff9e2",
+							"id": "fa0bdf30-2c28-40a6-b470-50b175171c48",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -1926,7 +1926,7 @@
 					},
 					"response": [
 						{
-							"id": "6d471de7-220e-4042-94c9-4cca25e20659",
+							"id": "324c5c8a-ad73-403b-90ec-9c2073fee2a8",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -2351,7 +2351,7 @@
 					},
 					"response": [
 						{
-							"id": "649f7649-c0f7-49b0-96e8-a6bcfc5e4461",
+							"id": "a4f74d56-a45c-4f4b-9e30-438b2ec1eb06",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2426,7 +2426,7 @@
 							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "26ed35de-4362-45d8-92d0-cb90ce45fc71",
+							"id": "c9c6c7af-4fa9-45a6-8418-6142dbeb2d8b",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2535,7 +2535,7 @@
 					},
 					"response": [
 						{
-							"id": "22030929-4826-4155-94f3-65ef4d13b5e3",
+							"id": "ce49695e-2c7e-41a2-b3f9-87bf00960b75",
 							"name": "패스워드 설정이 되어 있는 유저",
 							"originalRequest": {
 								"method": "PUT",
@@ -2601,7 +2601,7 @@
 							"body": "{\"message\": \"400: exist password\"}"
 						},
 						{
-							"id": "a5978115-b904-4477-b2c9-26f140a8bbd0",
+							"id": "1887b720-1eaa-4b14-bb09-c96171cc2177",
 							"name": "신규 패스워드 설정",
 							"originalRequest": {
 								"method": "PUT",
@@ -2700,7 +2700,7 @@
 					},
 					"response": [
 						{
-							"id": "520681b8-50cb-4829-92b0-ba3a59db431d",
+							"id": "b6b8819c-ce18-4f0b-bb0a-1c1aceb36e27",
 							"name": "비밀번호 인증 성공",
 							"originalRequest": {
 								"method": "PUT",
@@ -2765,7 +2765,7 @@
 							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "5e7706f9-4423-4f45-822d-b74ed64242a4",
+							"id": "b0e7b427-c949-48e5-bd84-a08ef1bd694b",
 							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
 							"originalRequest": {
 								"method": "PUT",
@@ -2888,7 +2888,7 @@
 					},
 					"response": [
 						{
-							"id": "5ccbe722-6a5e-4cb9-ac9d-0dfa10313e3e",
+							"id": "54f42181-a315-445b-82cd-31541970abf4",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -2984,7 +2984,7 @@
 					},
 					"response": [
 						{
-							"id": "ea0df376-aa2b-4958-87c1-8f37fe5c863e",
+							"id": "53a6d59d-827a-48bc-b50e-d7e35f6f1b19",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -3093,7 +3093,7 @@
 					},
 					"response": [
 						{
-							"id": "e96b543e-2a34-4b3e-aa07-c5a3ec91d619",
+							"id": "0a4ecb08-0c56-41bf-9e32-3c3625ad69c8",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3220,7 +3220,7 @@
 					},
 					"response": [
 						{
-							"id": "f44afa0a-1430-41bd-9c69-d33af990e925",
+							"id": "b8beeac0-4dbf-4228-9b78-032589f1f041",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3348,7 +3348,7 @@
 					},
 					"response": [
 						{
-							"id": "b226b5ea-a9f2-4365-9fee-bb3284ee2a9a",
+							"id": "a73a2307-0315-496f-afd8-07e208429a40",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3432,6 +3432,41 @@
 					]
 				},
 				{
+					"name": "/w/ticket/payment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_869530953640",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"payment"
+							],
+							"query": [
+								{
+									"key": "imp_uid",
+									"value": "imp_869530953640",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "/w/ticket/<oid>/register",
 					"request": {
 						"method": "PUT",
@@ -3467,7 +3502,7 @@
 					},
 					"response": [
 						{
-							"id": "2e714e66-0db8-4880-926a-9bef006e698d",
+							"id": "761e0088-9cc1-46de-b48a-1b1cadad3dd8",
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
 								"method": "PUT",
@@ -3571,7 +3606,7 @@
 					},
 					"response": [
 						{
-							"id": "d2b4ea91-5994-42aa-b604-ca3a4d032ae4",
+							"id": "90042feb-90f1-4507-a01d-19d27b3884ce",
 							"name": "3개 티켓 다른 사람에게 전송",
 							"originalRequest": {
 								"method": "PUT",
@@ -3640,7 +3675,7 @@
 							"body": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}"
 						},
 						{
-							"id": "a2118a27-f5f8-42e2-af9b-3d485a7b7edf",
+							"id": "ddde4c37-9089-4229-ad5b-dfb9963f3236",
 							"name": "3개 티켓을 자신에게 전송 (400 에러)",
 							"originalRequest": {
 								"method": "PUT",
@@ -3753,7 +3788,7 @@
 					},
 					"response": [
 						{
-							"id": "036ea127-563b-4ad6-9f2d-250a3cb90a23",
+							"id": "bed2491f-fa28-4104-b8a4-5a6a0520cc8e",
 							"name": "마이티킷 리스트(status: register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3881,7 +3916,7 @@
 					},
 					"response": [
 						{
-							"id": "515ccdcb-35ea-44a6-8da7-ae0c7eee1870",
+							"id": "9865ec72-898d-41df-84bd-a5401911f43b",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -4014,7 +4049,7 @@
 					},
 					"response": [
 						{
-							"id": "eaf79bb8-0ec3-4f9d-aa64-d0e97672322b",
+							"id": "f9c23752-8adf-4e35-a12e-f1d99a25731b",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -4133,7 +4168,7 @@
 					},
 					"response": [
 						{
-							"id": "74e123a9-ad57-4dc3-b12a-95bbc7fdc7c1",
+							"id": "82f61ac5-4daa-4370-a7f6-10a060c90a41",
 							"name": "조건희 유저정보 가져오기",
 							"originalRequest": {
 								"method": "GET",
@@ -4252,7 +4287,7 @@
 					},
 					"response": [
 						{
-							"id": "2ce60f9c-7179-47b6-9f89-fd66a391edf6",
+							"id": "0584c486-be60-49b0-96ef-a942ff58d720",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -4327,7 +4362,7 @@
 							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "98670e98-a589-47ce-bf35-553585b1cd63",
+							"id": "d1b1e03a-c31d-403c-84dd-29ca92ba4df1",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
