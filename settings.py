@@ -34,6 +34,10 @@ _settings = dict(
         name='cherry',
         host='i.tkit.me',
         port=80,
+    ),
+    iamport=dict(
+        api_key='4335180923213950',
+        api_secret='8PJ0Bmp6JLDTBITQ281p2BuM5jJ0FpWOeGOQ2eWMZAGBizrkHtKK4ewaygadG72VORLR5IE5ikHBT8WA'
     )
 )
 
