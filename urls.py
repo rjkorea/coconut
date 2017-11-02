@@ -101,6 +101,7 @@ url_patterns = [
     (r'/w/tickets/?', w.ticket.TicketListHandler),
     (r'/w/ticket/logs/?', w.ticket.TicketLogsHandler),
     (r'/w/ticket/payment/?', w.ticket.TicketPaymentHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/payment/status?', w.ticket.TicketPaymentStatusHandler),
 
     (r'/w/qnas/?', w.qna.QnaListHandler),
 

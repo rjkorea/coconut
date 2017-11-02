@@ -428,7 +428,7 @@ class TicketLogsHandler(JsonHandler):
 
 class TicketPaymentHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('imp_uid', str, None), ('merchant_uid', str, None)])
+    @parse_argument([('imp_uid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         if 'imp_uid' not in parsed_args:
@@ -468,6 +468,30 @@ class TicketPaymentHandler(JsonHandler):
             cancelled_at=payment_result['cancelled_at'],
             cancel_receipt_urls=payment_result['cancel_receipt_urls'],
             cancel_history=payment_result['cancel_history'],
+        )
+        self.response['data'] = data
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketPaymentStatusHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        payment = IamportService().client.find(merchant_uid=_id)
+        if payment == {}:
+            raise HTTPError(400, 'not exist payment info')
+        data = dict(
+            name=payment['name'],
+            buyer_name=payment['buyer_name'],
+            buyer_tel=payment['buyer_tel'],
+            status=payment['status'],
+            imp_uid=payment['imp_uid']
         )
         self.response['data'] = data
         self.write_json()
