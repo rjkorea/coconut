@@ -434,14 +434,42 @@ class TicketPaymentHandler(JsonHandler):
         if 'imp_uid' not in parsed_args:
             raise HTTPError(400, 'invalid imp_uid')
         payment_result = IamportService().client.find(imp_uid=parsed_args['imp_uid'])
-        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid'])})
+        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid']), 'status': TicketModel.Status.register.name})
+        if not ticket:
+            raise HTTPError(400, 'invalid payment')
         if 'fee' in ticket['days'][0]:
-            res = IamportService().client.is_paid(ticket['days'][0]['price'], merchant_uid=payment_result['merchant_uid'])
+            res = IamportService().client.is_paid(ticket['days'][0]['fee']['price'], merchant_uid=payment_result['merchant_uid'])
             if not res:
-                raise HTTPError(400, 'different price')
+                raise HTTPError(400, 'invalid price')
         else:
             raise HTTPError(400, 'not exist fee')
-        self.response['data'] = payment_result
+        data = dict(
+            imp_uid=payment_result['imp_uid'],
+            merchant_uid=payment_result['merchant_uid'],
+            name=payment_result['name'],
+            currency=payment_result['currency'],
+            amount=payment_result['amount'],
+            status=payment_result['status'],
+            paid_at=payment_result['paid_at'],
+            receipt_url=payment_result['receipt_url'],
+            pg_provier=payment_result['pg_provider'],
+            pay_method=payment_result['pay_method'],
+            apply_num=payment_result['apply_num'],
+            buyer_name=payment_result['buyer_name'],
+            buyer_tel=payment_result['buyer_tel'],
+            buyer_email=payment_result['buyer_email'],
+            card_name=payment_result['card_name'],
+            card_code=payment_result['card_code'],
+            card_quota=payment_result['card_quota'],
+            pg_tid=payment_result['pg_tid'],
+            user_agent=payment_result['user_agent'],
+            cancel_amount=payment_result['cancel_amount'],
+            cancel_reason=payment_result['cancel_reason'],
+            cancelled_at=payment_result['cancelled_at'],
+            cancel_receipt_urls=payment_result['cancel_receipt_urls'],
+            cancel_history=payment_result['cancel_history'],
+        )
+        self.response['data'] = data
         self.write_json()
 
     async def options(self, *args, **kwargs):
