@@ -499,3 +499,23 @@ class TicketPaymentStatusHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketPaymentCancelHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        reason = self.json_decoded_body.get('reason', None)
+        if not reason:
+            raise HTTPError(400, 'invalid reason')
+        try:
+            response = IamportService().client.cancel(reason, merchant_uid=_id)
+        except IamportService().client.ResponseError as e:
+            raise HTTPError(e.code, e.message)
+        self.response['data'] = response
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
