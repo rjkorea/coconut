@@ -513,7 +513,19 @@ class TicketPaymentCancelHandler(JsonHandler):
             response = IamportService().client.cancel(reason, merchant_uid=_id)
         except IamportService().client.ResponseError as e:
             raise HTTPError(e.code, e.message)
-        self.response['data'] = response
+        data = dict(
+            name=response['name'],
+            buyer_name=response['buyer_name'],
+            buyer_tel=response['buyer_tel'],
+            status=response['status'],
+            imp_uid=response['imp_uid'],
+            cancel_amount=response['cancel_amount'],
+            cancel_reason=response['cancel_reason'],
+            cancelled_at=response['cancelled_at'],
+            cancel_receipt_urls=response['cancel_receipt_urls'],
+            cancel_history=response['cancel_history']
+        )
+        self.response['data'] = data
         self.write_json()
 
     async def options(self, *args, **kwargs):
