@@ -513,6 +513,17 @@ class TicketPaymentCancelHandler(JsonHandler):
             response = IamportService().client.cancel(reason, merchant_uid=_id)
         except IamportService().client.ResponseError as e:
             raise HTTPError(e.code, e.message)
+        if response['status'] == 'cancelled':
+            query = {
+                '_id': ObjectId(_id)
+            }
+            document = {
+                '$set': {
+                    'status': TicketModel.Status.cancel.name,
+                    'updated_at': datetime.utcnow()
+                }
+            }
+            await TicketModel.update(query, document, False, False)
         data = dict(
             name=response['name'],
             buyer_name=response['buyer_name'],
