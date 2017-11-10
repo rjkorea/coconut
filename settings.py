@@ -31,7 +31,7 @@ _settings = dict(
         api_secret='a45366ce5d7a295c'
     ),
     web=dict(
-        name='cherry',
+        name='citron',
         host='i.tkit.me',
         port=80,
     ),
