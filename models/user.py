@@ -47,6 +47,11 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'terms',
+                'type': dict,
+                'default': None
+            },
+            {
                 'key': 'role',
                 'type': list,
                 'default': None
