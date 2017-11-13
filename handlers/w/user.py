@@ -38,6 +38,8 @@ class UserHandler(JsonHandler):
             res['has_password'] = True
         else:
             res['has_password'] = False
+        if 'terms' in user:
+            res['terms'] = user['terms']
         self.response['data'] = res
         self.write_json()
 
@@ -65,6 +67,15 @@ class UserNewPasswordHandler(JsonHandler):
         if password != password2:
             raise HTTPError(400, 'password and password2 not matched')
         await UserModel.update({'_id': user['_id']}, {'$set': {'password': hashers.make_password(password)}})
+        terms = self.json_decoded_body.get('terms', None)
+        if terms == True or terms == False:
+            document = {
+                '$set': {
+                    'terms': {'privacy': terms, 'policy': terms}
+                }
+            }
+            await UserModel.update({'_id': ObjectId(user_oid)}, document, False, False)
+            user['terms'] = document['$set']['terms']
         session = UserSessionModel()
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
@@ -92,6 +103,15 @@ class UserAuthPasswordHandler(JsonHandler):
             raise HTTPError(400, 'invalid password')
         if not hashers.check_password(password, user['password']):
             raise HTTPError(400, 'invalid password')
+        terms = self.json_decoded_body.get('terms', None)
+        if terms == True or terms == False:
+            document = {
+                '$set': {
+                    'terms': {'privacy': terms, 'policy': terms}
+                }
+            }
+            await UserModel.update({'_id': ObjectId(user_oid)}, document, False, False)
+            user['terms'] = document['$set']['terms']
         session = UserSessionModel()
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
