@@ -198,7 +198,8 @@ class TicketSendHandler(JsonHandler):
             '$set': {
                 'status': TicketModel.Status.send.name,
                 'send_user_oid': self.current_user['_id'],
-                'receive_user_oid': receive_user['_id']
+                'receive_user_oid': receive_user['_id'],
+                'updated_at': datetime.utcnow()
             },
             '$addToSet': {
                 'history_send_user_oids': self.current_user['_id']
