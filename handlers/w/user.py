@@ -13,6 +13,8 @@ from models.user import UserModel
 from models.session import UserSessionModel
 from models import send_sms
 
+from services.s3 import S3Service
+
 import settings
 
 
@@ -173,9 +175,38 @@ class UserMeImageUploadHandler(MultipartFormdataHandler):
         if 'profile' not in self.request.files:
             raise HTTPError(400, 'invalid param, only profile')
         # TODO upload s3
+        config = settings.settings()
+        img_extension = self.request.files['profile'][0]['filename'].split('.')[-1]
+        key = 'user/%s/profile.m.%s' % (str(self.current_user['_id']), img_extension)
+        cres = S3Service().client.create_multipart_upload(
+            ACL='public-read',
+            ContentType='image/%s' % img_extension,
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        upres = S3Service().client.upload_part(
+            UploadId=cres['UploadId'],
+            PartNumber=1,
+            Body=self.request.files['profile'][0]['body'],
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        response = S3Service().client.complete_multipart_upload(
+            Bucket=config['aws']['res_bucket'],
+            Key=key,
+            UploadId=cres['UploadId'],
+            MultipartUpload={
+                'Parts': [
+                    {
+                        'ETag': upres['ETag'],
+                        'PartNumber': 1
+                    }
+                ]
+            }
+        )
         img_dict = {
             'profile': {
-                'm': '/user/%s/profile.m.%s' % (str(self.current_user['_id']), self.request.files['profile'][0]['filename'].split('.')[-1])
+                'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/%s' % (config['aws']['res_bucket'], key)
             }
         }
         query = {
@@ -186,7 +217,7 @@ class UserMeImageUploadHandler(MultipartFormdataHandler):
                 'image': img_dict
             }
         }
-        res = await UserModel.update(query, document, False, False)
+        await UserModel.update(query, document, False, False)
         self.current_user['image'] = img_dict
         self.response['data'] = self.current_user
         self.write_json()
