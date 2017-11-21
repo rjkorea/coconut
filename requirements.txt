@@ -11,3 +11,4 @@ tornado==4.4.2
 urllib3==1.19.1
 nexmo==1.4.0
 iamport-rest-client==0.6.0
+boto3==1.4.7
