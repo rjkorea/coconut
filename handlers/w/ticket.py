@@ -153,7 +153,7 @@ class TicketRegisterHandler(JsonHandler):
             '$set': {
                 'receive_user_oid': self.current_user['_id'],
                 'status': TicketModel.Status.register.name,
-                'update_at': datetime.utcnow()
+                'updated_at': datetime.utcnow()
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
