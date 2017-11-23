@@ -603,6 +603,298 @@
 					"response": []
 				},
 				{
+					"name": "/a/content/<oid>/image/poster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"description": "",
+									"type": "file",
+									"src": "waterbomb_poster.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/image/poster",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"594246755f5471c519ecfc8c",
+								"image",
+								"poster"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "3c622491-744a-4ec2-b87f-671b0844ba8f",
+							"name": "/a/content/<oid>/image/poster (200 OK)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}",
+										"disabled": false
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"description": "",
+											"type": "file",
+											"src": {
+												"0": {}
+											}
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/image/poster",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"content",
+										"594246755f5471c519ecfc8c",
+										"image",
+										"poster"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "158",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Nov 2017 03:06:57 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"responseTime": 1258,
+							"body": "{\"data\": {\"image.poster.m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/594246755f5471c519ecfc8c/poster.m.jpg\", \"updated_at\": 1511374018}}"
+						}
+					]
+				},
+				{
+					"name": "/a/content/<oid>/image/logo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/image/logo",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"594246755f5471c519ecfc8c",
+								"image",
+								"logo"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "543a955b-531f-4969-a157-ec568dfca8d2",
+							"name": "/a/content/<oid>/image/logo (200 OK)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"description": "",
+											"type": "file",
+											"src": {
+												"0": {}
+											}
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/image/logo",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"content",
+										"594246755f5471c519ecfc8c",
+										"image",
+										"logo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "154",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Nov 2017 03:08:06 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"responseTime": 231,
+							"body": "{\"data\": {\"image.logo.m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/594246755f5471c519ecfc8c/logo.m.png\", \"updated_at\": 1511374086}}"
+						}
+					]
+				},
+				{
+					"name": "/a/content/<oid>/image/og",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/image/og",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"594246755f5471c519ecfc8c",
+								"image",
+								"og"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "/a/content/<oid>",
 					"request": {
 						"method": "GET",
@@ -1799,7 +2091,7 @@
 					},
 					"response": [
 						{
-							"id": "ca4b00e8-3a81-485c-b601-29bb099ae288",
+							"id": "b76626b5-a165-4a42-b773-d8aa8d4643cb",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -1926,7 +2218,7 @@
 					},
 					"response": [
 						{
-							"id": "237ee236-82c9-4f3f-8c9f-56a8c4e5c299",
+							"id": "891c17d0-cb9e-461b-ad80-20216416d33a",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -2351,7 +2643,7 @@
 					},
 					"response": [
 						{
-							"id": "1883d0aa-029e-4cbc-acad-3a8ba7f42510",
+							"id": "e5bf2f2d-62a6-4841-970c-6b5e5010bb1e",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2426,7 +2718,7 @@
 							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "c4c6b8e6-3587-4146-8ee9-da0bc386ee1a",
+							"id": "72bdbeab-9234-48c4-987a-d26b9155fad1",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2535,7 +2827,7 @@
 					},
 					"response": [
 						{
-							"id": "d718f03a-0299-4281-a3e5-7bf959d6dada",
+							"id": "3e2757fe-a80d-4841-829b-e9f39ef07384",
 							"name": "패스워드 설정이 되어 있는 유저",
 							"originalRequest": {
 								"method": "PUT",
@@ -2601,7 +2893,7 @@
 							"body": "{\"message\": \"400: exist password\"}"
 						},
 						{
-							"id": "05e1b0db-4481-456d-a3c3-5e7b2934bc05",
+							"id": "69515036-e8c2-479a-88cb-199ded6d5854",
 							"name": "신규 패스워드 설정",
 							"originalRequest": {
 								"method": "PUT",
@@ -2700,7 +2992,7 @@
 					},
 					"response": [
 						{
-							"id": "0d67e328-5139-4eb5-9b7f-9312fd3e8b32",
+							"id": "eba4e38b-86b3-4ab5-87c2-41c0fbf686df",
 							"name": "비밀번호 인증 성공",
 							"originalRequest": {
 								"method": "PUT",
@@ -2765,7 +3057,7 @@
 							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "bad9e47a-670a-4b40-97e3-58352de2bf60",
+							"id": "5102a298-afea-47c4-9f07-982671c1bd87",
 							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
 							"originalRequest": {
 								"method": "PUT",
@@ -2888,7 +3180,7 @@
 					},
 					"response": [
 						{
-							"id": "d94c941b-a8b0-4af5-a751-91a989bf3880",
+							"id": "31c5a5d9-6bd1-4eec-af46-21a3e3a68c95",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -2984,7 +3276,7 @@
 					},
 					"response": [
 						{
-							"id": "75fac287-903b-40a7-9762-3b07a0e6093e",
+							"id": "e1514232-089a-4e35-be79-d38d6c2dc3a0",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -3093,7 +3385,7 @@
 					},
 					"response": [
 						{
-							"id": "b165f21f-cd13-4d3a-a353-a247ed07d6db",
+							"id": "39e41193-87be-4779-b7e4-2c2a87eb3f58",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3220,7 +3512,7 @@
 					},
 					"response": [
 						{
-							"id": "f03ba26f-d7c1-4156-bdbe-bfc50999cccc",
+							"id": "57510397-b647-4590-ba94-8e4d19365b5f",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3348,7 +3640,7 @@
 					},
 					"response": [
 						{
-							"id": "93623c0e-4c56-471d-a662-25241f5c6e55",
+							"id": "70d003f5-5a07-45e6-8d4e-02c7fb4020fb",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -3466,7 +3758,7 @@
 					},
 					"response": [
 						{
-							"id": "0bdecfd8-b2cc-491a-84fc-39afe8688849",
+							"id": "4920726f-544b-4c90-ae71-5baa944f14c1",
 							"name": "/w/ticket/payment (400: not exist fee)",
 							"originalRequest": {
 								"method": "GET",
@@ -3534,7 +3826,7 @@
 							"body": "{\"message\": \"400: not exist fee\"}"
 						},
 						{
-							"id": "7ff36637-7f7f-494c-a325-52272c3bd2b0",
+							"id": "ca665801-4bfc-4918-b9c7-fd47edfd7e68",
 							"name": "/w/ticket/payment (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -3639,7 +3931,7 @@
 					},
 					"response": [
 						{
-							"id": "fab096ad-0a8d-43ed-ad9c-c35d15132b41",
+							"id": "2c6f111e-033b-41f2-bbbe-4b883e80e4a3",
 							"name": "/w/ticket/<oid>/payment/status (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -3707,7 +3999,7 @@
 							"body": "{\"data\": {\"imp_uid\": \"imp_079527261731\", \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"buyer_tel\": \"821032697178\", \"status\": \"paid\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\"}}"
 						},
 						{
-							"id": "2f65d71a-2d18-4077-92dc-3bfa768d7288",
+							"id": "24bba41e-dcea-4974-a377-1f2b47e938c9",
 							"name": "/w/ticket/<oid>/payment/status (not exist payment info)",
 							"originalRequest": {
 								"method": "GET",
@@ -3808,7 +4100,7 @@
 					},
 					"response": [
 						{
-							"id": "bf53e4e9-1176-498f-82dc-f99ba2eedd75",
+							"id": "f2297f2e-cb44-4f73-a755-60300d2c45fc",
 							"name": "/w/ticket/<oid>/payment/cancel (fail case)",
 							"originalRequest": {
 								"method": "PUT",
@@ -3878,7 +4170,7 @@
 							"body": "{\"message\": \"500: \\uacb0\\uc81c\\ucde8\\uc18c\\uc5d0 \\uc2e4\\ud328\\ud558\\uc600\\uc2b5\\ub2c8\\ub2e4. [501626|\\uae30 \\ucde8\\uc18c \\uac70\\ub798]\"}"
 						},
 						{
-							"id": "983f6159-8cdc-4c26-a4e0-f38d79d8257c",
+							"id": "938b87f0-bae3-4b64-8aad-b7a06701e566",
 							"name": "/w/ticket/<oid>/payment/cancel (not exist payment info for cancel)",
 							"originalRequest": {
 								"method": "PUT",
@@ -3950,7 +4242,7 @@
 							"body": "{\"message\": \"500: \\ucde8\\uc18c\\ud560 \\uacb0\\uc81c\\uac74\\uc774 \\uc874\\uc7ac\\ud558\\uc9c0 \\uc54a\\uc2b5\\ub2c8\\ub2e4.\"}"
 						},
 						{
-							"id": "829d69a6-fd1d-4b2b-8abf-868478916162",
+							"id": "70003a14-2f45-4499-bad0-7b17dc4541d9",
 							"name": "/w/ticket/<oid>/payment/cancel (success case)",
 							"originalRequest": {
 								"method": "PUT",
@@ -4022,7 +4314,7 @@
 							"body": "{\"data\": {\"card_quota\": 0, \"escrow\": false, \"imp_uid\": \"imp_658397387002\", \"buyer_postcode\": null, \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_amount\": 10000, \"merchant_uid\": \"5978254eba590e14c06fa2a4\", \"cancel_receipt_urls\": [\"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\"], \"vbank_num\": null, \"bank_name\": null, \"card_code\": \"361\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"custom_data\": null, \"vbank_name\": null, \"vbank_code\": null, \"cancel_history\": [{\"cancelled_at\": 1509677477, \"amount\": 10000, \"reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\"}], \"buyer_addr\": null, \"cancelled_at\": 1509677477, \"apply_num\": \"38397899\", \"card_name\": \"BC\\uce74\\ub4dc\", \"user_agent\": \"sorry_not_supported_anymore\", \"pg_provider\": \"html5_inicis\", \"buyer_email\": \"kevin.cho@rjkorea.com\", \"amount\": 10000, \"cancel_reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"vbank_date\": 0, \"status\": \"cancelled\", \"pay_method\": \"card\", \"paid_at\": 1509677427, \"failed_at\": 0, \"currency\": \"KRW\", \"fail_reason\": null, \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\", \"cash_receipt_issued\": false, \"vbank_holder\": null, \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"bank_code\": null, \"buyer_tel\": \"821032697178\"}}"
 						},
 						{
-							"id": "25c16804-ecde-436c-ae3a-44c52ff3c683",
+							"id": "3cf15e8e-b0d9-45f6-9257-571de7b5022f",
 							"name": "/w/ticket/<oid>/payment/cancel (already cancel)",
 							"originalRequest": {
 								"method": "PUT",
@@ -4131,7 +4423,7 @@
 					},
 					"response": [
 						{
-							"id": "bcd92693-0428-4ef9-9e8f-3faec5155c15",
+							"id": "902bd5f1-f812-46ba-ba6c-df166af6c8b8",
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
 								"method": "PUT",
@@ -4235,7 +4527,7 @@
 					},
 					"response": [
 						{
-							"id": "d17f59ab-3725-42f1-ae37-251cc8e4e3b4",
+							"id": "a28a7cc8-3147-4740-8217-0bb6e23d8013",
 							"name": "3개 티켓 다른 사람에게 전송",
 							"originalRequest": {
 								"method": "PUT",
@@ -4304,7 +4596,7 @@
 							"body": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}"
 						},
 						{
-							"id": "123eedf0-8bb9-4e4c-a467-b2a56d31ae5c",
+							"id": "3c26260c-bfe9-42da-9e41-d6d7e813820b",
 							"name": "3개 티켓을 자신에게 전송 (400 에러)",
 							"originalRequest": {
 								"method": "PUT",
@@ -4417,7 +4709,7 @@
 					},
 					"response": [
 						{
-							"id": "4ad8feff-0637-4f4b-a7a9-4d960a16c4f4",
+							"id": "8a9e5e0f-c070-4fdc-9fd0-3b8f585e8f8b",
 							"name": "마이티킷 리스트(status: register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -4545,7 +4837,7 @@
 					},
 					"response": [
 						{
-							"id": "486b46be-a6b6-4ad1-872a-ac18fca3187a",
+							"id": "f15e5c99-60e5-453c-967e-678c20e0d68f",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -4678,7 +4970,7 @@
 					},
 					"response": [
 						{
-							"id": "c70a0631-c831-450e-a527-9b8aec73d63a",
+							"id": "97793d2e-c758-42d2-a3e6-2d082912ba23",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -4797,7 +5089,7 @@
 					},
 					"response": [
 						{
-							"id": "eae7192e-0cc5-4395-8338-6d9b4c515835",
+							"id": "815f1c0d-cbf7-4da5-946c-550a4b80841b",
 							"name": "조건희 유저정보 가져오기",
 							"originalRequest": {
 								"method": "GET",
@@ -4916,7 +5208,7 @@
 					},
 					"response": [
 						{
-							"id": "a3772d9b-d61a-4623-ae82-d7c16211c1aa",
+							"id": "403a45dd-4226-4e44-8ba2-3e4b9bee8daa",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -4991,7 +5283,7 @@
 							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "37eb12f0-f0d1-42a6-baef-e89e9aad8c11",
+							"id": "da273b6c-9dca-4e66-8ab2-5692b00e05d7",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
