@@ -206,7 +206,7 @@ class UserMeImageUploadHandler(MultipartFormdataHandler):
         )
         img_dict = {
             'profile': {
-                'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/%s' % (config['aws']['res_bucket'], key)
+                'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
             }
         }
         query = {
@@ -218,8 +218,9 @@ class UserMeImageUploadHandler(MultipartFormdataHandler):
             }
         }
         await UserModel.update(query, document, False, False)
-        self.current_user['image'] = img_dict
-        self.response['data'] = self.current_user
+        self.response['data'] = {
+            'image': img_dict
+        }
         self.write_json()
 
     async def options(self, *args, **kwargs):
