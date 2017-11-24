@@ -264,7 +264,7 @@ class ContentImageUploadHandler(MultipartFormdataHandler):
         }
         document = {
             '$set': {
-                'image.%s.m' % type: 'https://s3.ap-northeast-2.amazonaws.com/%s/%s' % (config['aws']['res_bucket'], key),
+                'image.%s.m' % type: 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']),
                 'updated_at': datetime.utcnow()
             }
         }
