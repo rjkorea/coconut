@@ -70,6 +70,11 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'sms',
+                'type': dict,
+                'default': None
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)
