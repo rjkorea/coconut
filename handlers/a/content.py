@@ -149,7 +149,7 @@ class ContentHandler(JsonHandler):
         self.write_json()
 
 
-class ContentPostHandler(MultipartFormdataHandler):
+class ContentPostHandler(JsonHandler):
     @admin_auth_async
     async def post(self, *args, **kwargs):
         admin_oid = self.current_user['_id']
@@ -160,7 +160,7 @@ class ContentPostHandler(MultipartFormdataHandler):
         if not place or len(place) == 0:
             raise HTTPError(400, 'invalid place')
         desc = self.json_decoded_body.get('desc', None)
-
+        config = settings.settings()
         # generate short id
         while True:
             short_id = hashers.generate_random_string(ContentModel.SHORT_ID_LENGTH)
@@ -169,13 +169,28 @@ class ContentPostHandler(MultipartFormdataHandler):
                 break
 
         # create content model
-        content = ContentModel(raw_data=dict(
-            short_id=short_id,
-            admin_oid=admin_oid,
-            name=name,
-            place=place,
-            desc=desc
-        ))
+        doc = {
+            'short_id': short_id,
+            'admin_oid': admin_oid,
+            'name': name,
+            'place': place,
+            'desc': desc,
+            'sms': {
+                'message': 'http://%s:%d/l/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
+            },
+            'image': {
+                'poster': {
+                    'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/poster.m.png' % config['aws']['res_bucket']
+                },
+                'logo': {
+                    'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/logo.m.png' % config['aws']['res_bucket']
+                },
+                'og': {
+                    'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/og.m.png' % config['aws']['res_bucket']
+                }
+            }
+        }
+        content = ContentModel(raw_data=doc)
         if self.current_user['role'] == 'host':
             content.data['company_oid'] = self.current_user['company_oid']
         elif self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
@@ -186,31 +201,6 @@ class ContentPostHandler(MultipartFormdataHandler):
         else:
             pass
         content_oid = await content.insert()
-        # TODO file upload process
-        if self.request.files:
-            image = dict()
-            if 'poster' in self.request.files:
-                image['poster'] = {
-                    'm': '/content/%s/poster.m.%s' % (content_oid, self.request.files['poster'][0]['filename'].split('.')[-1])
-                }
-            if 'logo' in self.request.files:
-                image['logo'] = {
-                    'm': '/content/%s/logo.m.%s' % (content_oid, self.request.files['logo'][0]['filename'].split('.')[-1])
-                }
-            if 'og' in self.request.files:
-                image['og'] = {
-                    'm': '/content/%s/og.m.%s' % (content_oid, self.request.files['og'][0]['filename'].split('.')[-1])
-                }
-            query = {
-                '_id': ObjectId(content_oid)
-            }
-            document = {
-                '$set': {
-                    'image': image
-                }
-            }
-            await ContentModel.update(query, document)
-            content.data['image'] = image
         self.response['data'] = content.data
         self.write_json()
 
