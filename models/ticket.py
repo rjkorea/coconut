@@ -145,6 +145,11 @@ class TicketModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'history_send_user_oids',
+                'type': list,
+                'default': None
+            },
+            {
                 'key': 'ticket_type_oid',
                 'type': ObjectId,
                 'default': None
@@ -178,6 +183,46 @@ class TicketModel(BaseModel):
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)
+            },
+        ])
+        return specification
+
+
+class TicketLogModel(BaseModel):
+    MONGO_COLLECTION = 'ticket_log'
+    Status = Enum('Status', 'pend send register use cancel')
+
+    def __init__(self, *args, **kwargs):
+        super(TicketLogModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(TicketLogModel, self).specification
+        specification.extend([
+            {
+                'key': 'action',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'content_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'send_user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'receive_user_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'ticket_oids',
+                'type': list,
+                'default': None
             },
         ])
         return specification

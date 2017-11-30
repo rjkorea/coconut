@@ -31,7 +31,8 @@ url_patterns = [
 
     (r'/a/contents/?', a.content.ContentListHandler),
     (r'/a/content/(?P<_id>[^\/]+)/?', a.content.ContentHandler),
-    (r'/a/content/?', a.content.ContentHandler),
+    (r'/a/content/?', a.content.ContentPostHandler),
+    (r'/a/content/(?P<_id>[^\/]+)/image/(?P<type>[^\/]+)/?', a.content.ContentImageUploadHandler),
 
     (r'/a/ticket/types/?', a.ticket.TicketTypeListHandler),
     (r'/a/ticket/type/(?P<_id>[^\/]+)/?', a.ticket.TicketTypeHandler),
@@ -80,11 +81,14 @@ url_patterns = [
     (r'/w/user/?', w.user.UserHandler),
     (r'/w/user/me/?', w.user.UserMeHandler),
     (r'/w/user/me/password?', w.user.UserMePasswordHandler),
+    (r'/w/user/me/image?', w.user.UserMeImageUploadHandler),
 
     (r'/w/user/(?P<_id>[^\/]+)/new/password?', w.user.UserNewPasswordHandler),
     (r'/w/user/(?P<_id>[^\/]+)/auth/password?', w.user.UserAuthPasswordHandler),
+    (r'/w/smslogin?', w.user.SmsLoginHandler),
 
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
+    (r'/w/contents/?', w.content.ContentListHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
 
     (r'/w/ticket/orders/?', w.ticket.TicketOrderListHandler),
@@ -96,6 +100,10 @@ url_patterns = [
     (r'/w/ticket/send/batch/?', w.ticket.TicketSendBatchHandler),
     (r'/w/tickets/me/?', w.ticket.TicketListMeHandler),
     (r'/w/tickets/?', w.ticket.TicketListHandler),
+    (r'/w/ticket/logs/?', w.ticket.TicketLogsHandler),
+    (r'/w/ticket/payment/?', w.ticket.TicketPaymentHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/payment/status?', w.ticket.TicketPaymentStatusHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/payment/cancel?', w.ticket.TicketPaymentCancelHandler),
 
     (r'/w/qnas/?', w.qna.QnaListHandler),
 

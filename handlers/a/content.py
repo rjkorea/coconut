@@ -7,12 +7,15 @@ from tornado.web import HTTPError
 
 from common.decorators import admin_auth_async, parse_argument
 
-from handlers.base import JsonHandler
+from handlers.base import JsonHandler, BaseHandler, MultipartFormdataHandler
 from models.content import ContentModel
 from models.admin import AdminModel
 from models.company import CompanyModel
 
+from services.s3 import S3Service
+
 from common import hashers
+import settings
 
 
 def get_query_by_user(user=None):
@@ -144,3 +147,122 @@ class ContentHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class ContentPostHandler(JsonHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        admin_oid = self.current_user['_id']
+        name = self.json_decoded_body.get('name', None)
+        if not name or len(name) == 0:
+            raise HTTPError(400, 'invalid name')
+        place = self.json_decoded_body.get('place', None)
+        if not place or len(place) == 0:
+            raise HTTPError(400, 'invalid place')
+        desc = self.json_decoded_body.get('desc', None)
+        config = settings.settings()
+        # generate short id
+        while True:
+            short_id = hashers.generate_random_string(ContentModel.SHORT_ID_LENGTH)
+            duplicated_content = await ContentModel.find({'short_id': short_id})
+            if not duplicated_content:
+                break
+
+        # create content model
+        doc = {
+            'short_id': short_id,
+            'admin_oid': admin_oid,
+            'name': name,
+            'place': place,
+            'desc': desc,
+            'sms': {
+                'message': 'http://%s:%d/l/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
+            },
+            'image': {
+                'poster': {
+                    'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/poster.m.png' % config['aws']['res_bucket']
+                },
+                'logo': {
+                    'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/logo.m.png' % config['aws']['res_bucket']
+                },
+                'og': {
+                    'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/og.m.png' % config['aws']['res_bucket']
+                }
+            }
+        }
+        content = ContentModel(raw_data=doc)
+        if self.current_user['role'] == 'host':
+            content.data['company_oid'] = self.current_user['company_oid']
+        elif self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
+            company_oid = self.json_decoded_body.get('company_oid', None)
+            if not company_oid:
+                raise HTTPError(400, 'need company_oid when your role is super or admin')
+            content.data['company_oid'] = ObjectId(company_oid)
+        else:
+            pass
+        content_oid = await content.insert()
+        self.response['data'] = content.data
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentImageUploadHandler(MultipartFormdataHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        content_oid = kwargs.get('_id', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        type = kwargs.get('type', None)
+        if type not in ContentModel.IMAGE_TYPE:
+            raise HTTPError(400, 'invalid type')
+        if 'image' not in self.request.files:
+            raise HTTPError(400, 'invalid param, only image')
+        config = settings.settings()
+        img_extension = self.request.files['image'][0]['filename'].split('.')[-1]
+        key = 'content/%s/%s.m.%s' % (content_oid, type, img_extension)
+        cres = S3Service().client.create_multipart_upload(
+            ACL='public-read',
+            ContentType='image/%s' % img_extension,
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        upres = S3Service().client.upload_part(
+            UploadId=cres['UploadId'],
+            PartNumber=1,
+            Body=self.request.files['image'][0]['body'],
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        response = S3Service().client.complete_multipart_upload(
+            Bucket=config['aws']['res_bucket'],
+            Key=key,
+            UploadId=cres['UploadId'],
+            MultipartUpload={
+                'Parts': [
+                    {
+                        'ETag': upres['ETag'],
+                        'PartNumber': 1
+                    }
+                ]
+            }
+        )
+        query = {
+            '_id': ObjectId(content_oid)
+        }
+        document = {
+            '$set': {
+                'image.%s.m' % type: 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']),
+                'updated_at': datetime.utcnow()
+            }
+        }
+        await ContentModel.update(query, document, False, False)
+        self.response['data'] = document['$set']
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+

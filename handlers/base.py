@@ -6,7 +6,7 @@ from bson import ObjectId
 
 from tornado.web import RequestHandler, HTTPError
 from tornado.websocket import WebSocketHandler
-from tornado.escape import json_decode, utf8
+from tornado.escape import json_decode, utf8, url_unescape
 
 from common.utils import ApiJSONEncoder
 
@@ -104,6 +104,28 @@ class JsonHandler(BaseHandler):
         if self.request.body:
             try:
                 self.json_decoded_body = json_decode(utf8(self.request.body))
+            except ValueError:
+                raise HTTPError(400, 'Unable parse to JSON.')
+        else:
+            self.json_decoded_body = dict()
+
+    def set_default_headers(self):
+        super().set_default_headers()
+        self.set_header('Content-Type', 'application/json')
+
+
+class MultipartFormdataHandler(BaseHandler):
+    def __init__(self, application, request, **kwargs):
+        super().__init__(application, request, **kwargs)
+        self.json_decoded_body = dict()
+
+    def prepare(self):
+        super(MultipartFormdataHandler, self).prepare()
+
+        if self.request.body_arguments:
+            try:
+                for k, v in self.request.body_arguments.items():
+                    self.json_decoded_body[k] = url_unescape(v[0])
             except ValueError:
                 raise HTTPError(400, 'Unable parse to JSON.')
         else:

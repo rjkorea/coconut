@@ -8,9 +8,14 @@ from tornado.web import HTTPError
 from common import hashers
 from common.decorators import user_auth_async, parse_argument
 
-from handlers.base import JsonHandler
+from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.user import UserModel
 from models.session import UserSessionModel
+from models import send_sms
+
+from services.s3 import S3Service
+
+import settings
 
 
 class UserHandler(JsonHandler):
@@ -35,6 +40,8 @@ class UserHandler(JsonHandler):
             res['has_password'] = True
         else:
             res['has_password'] = False
+        if 'terms' in user:
+            res['terms'] = user['terms']
         self.response['data'] = res
         self.write_json()
 
@@ -62,6 +69,15 @@ class UserNewPasswordHandler(JsonHandler):
         if password != password2:
             raise HTTPError(400, 'password and password2 not matched')
         await UserModel.update({'_id': user['_id']}, {'$set': {'password': hashers.make_password(password)}})
+        terms = self.json_decoded_body.get('terms', None)
+        if terms == True or terms == False:
+            document = {
+                '$set': {
+                    'terms': {'privacy': terms, 'policy': terms}
+                }
+            }
+            await UserModel.update({'_id': ObjectId(user_oid)}, document, False, False)
+            user['terms'] = document['$set']['terms']
         session = UserSessionModel()
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
@@ -89,6 +105,15 @@ class UserAuthPasswordHandler(JsonHandler):
             raise HTTPError(400, 'invalid password')
         if not hashers.check_password(password, user['password']):
             raise HTTPError(400, 'invalid password')
+        terms = self.json_decoded_body.get('terms', None)
+        if terms == True or terms == False:
+            document = {
+                '$set': {
+                    'terms': {'privacy': terms, 'policy': terms}
+                }
+            }
+            await UserModel.update({'_id': ObjectId(user_oid)}, document, False, False)
+            user['terms'] = document['$set']['terms']
         session = UserSessionModel()
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
@@ -118,9 +143,6 @@ class UserMeHandler(JsonHandler):
 class UserMePasswordHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):
-        old_password = self.json_decoded_body.get('old_password', None)
-        if not old_password or len(old_password) == 0 or not hashers.validate_user_password(old_password):
-            raise HTTPError(400, 'invalid old_password')
         new_password_1 = self.json_decoded_body.get('new_password_1', None)
         if not new_password_1 or len(new_password_1) == 0 or not hashers.validate_user_password(new_password_1):
             raise HTTPError(400, 'invalid new_password_1')
@@ -129,8 +151,6 @@ class UserMePasswordHandler(JsonHandler):
             raise HTTPError(400, 'invalid new_password_2')
         if new_password_1 != new_password_2:
             raise HTTPError(400, 'new password 1 and 2 not matched')
-        if not hashers.check_password(old_password, self.current_user['password']):
-            raise HTTPError(400, 'not correct old password')
         query = {
             '_id': self.current_user['_id']
         }
@@ -143,6 +163,103 @@ class UserMePasswordHandler(JsonHandler):
         self.response['data'] = await UserModel.update(query, document)
         self.write_json()
 
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class UserMeImageUploadHandler(MultipartFormdataHandler):
+    @user_auth_async
+    async def post(self, *args, **kwargs):
+        user_oid = self.current_user['_id']
+        if 'profile' not in self.request.files:
+            raise HTTPError(400, 'invalid param, only profile')
+        # TODO upload s3
+        config = settings.settings()
+        img_extension = self.request.files['profile'][0]['filename'].split('.')[-1]
+        key = 'user/%s/profile.m.%s' % (str(self.current_user['_id']), img_extension)
+        cres = S3Service().client.create_multipart_upload(
+            ACL='public-read',
+            ContentType='image/%s' % img_extension,
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        upres = S3Service().client.upload_part(
+            UploadId=cres['UploadId'],
+            PartNumber=1,
+            Body=self.request.files['profile'][0]['body'],
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        response = S3Service().client.complete_multipart_upload(
+            Bucket=config['aws']['res_bucket'],
+            Key=key,
+            UploadId=cres['UploadId'],
+            MultipartUpload={
+                'Parts': [
+                    {
+                        'ETag': upres['ETag'],
+                        'PartNumber': 1
+                    }
+                ]
+            }
+        )
+        img_dict = {
+            'profile': {
+                'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+            }
+        }
+        query = {
+            '_id': self.current_user['_id']
+        }
+        document = {
+            '$set': {
+                'image': img_dict
+            }
+        }
+        await UserModel.update(query, document, False, False)
+        self.response['data'] = {
+            'image': img_dict
+        }
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class SmsLoginHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        name = self.json_decoded_body.get('name', None)
+        if not name:
+            raise HTTPError(400, 'invalid name')
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if not mobile_number:
+            raise HTTPError(400, 'invalid mobile_number')
+        content_oid = self.json_decoded_body.get('content_oid', None)
+        if not content_oid:
+            raise HTTPError(400, 'invalid content_oid')
+        user = await UserModel.find_one({'name': name, 'mobile_number': mobile_number})
+        if not user:
+            raise HTTPError(400, 'not exist user')
+        session = UserSessionModel()
+        session.data['user_oid'] = user['_id']
+        session_oid = await session.insert()
+        usk = str(session_oid)
+        config = settings.settings()
+        is_sent_receiver = await send_sms(
+            {
+                'type': 'unicode',
+                'from': 'tkit',
+                'to': mobile_number,
+                'text': 'http://%s:%s/smslogin?usk=%s&content_oid=%s' % (config['web']['host'], config['web']['port'], str(session_oid), content_oid)
+            }
+        )
+        self.response['message'] = 'check your sms'
+        self.response['is_sent_receiver'] = is_sent_receiver
+        self.write_json()
+        
+    
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()

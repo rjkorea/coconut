@@ -10,6 +10,8 @@ from urls import url_patterns
 
 from services.mongodb import MongodbService
 from services.sms import NexmoService
+from services.iamport import IamportService
+from services.s3 import S3Service
 
 
 class APIApplication(web.Application):
@@ -32,6 +34,8 @@ def main():
         logger.info('api start up on Tornado listen %d' % config['application']['port'])
         MongodbService(config=config['mongodb'])
         NexmoService(config=config['nexmo'])
+        IamportService(config=config['iamport'])
+        S3Service(config=config['aws'])
         ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
         logger.info('KeyboardInterrupt occured. Stopping instance')

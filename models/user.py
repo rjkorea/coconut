@@ -47,6 +47,11 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'terms',
+                'type': dict,
+                'default': None
+            },
+            {
                 'key': 'role',
                 'type': list,
                 'default': None
@@ -55,6 +60,11 @@ class UserModel(BaseModel):
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)
+            },
+            {
+                'key': 'image',
+                'type': dict,
+                'default': None
             },
         ])
         return specification
