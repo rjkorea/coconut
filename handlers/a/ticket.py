@@ -324,6 +324,12 @@ class TicketListHandler(JsonHandler):
             if 'receive_user_oid' in res:
                 res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
                 res.pop('receive_user_oid')
+            if 'history_send_user_oids' in res:
+                res['history_send_users'] = list()
+                for user_oid in res['history_send_user_oids']:
+                    user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                    res['history_send_users'].append(user)
+                res.pop('history_send_user_oids')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -381,6 +387,12 @@ class TicketHandler(JsonHandler):
         if 'receive_user_oid' in self.response['data']:
             self.response['data']['receive_user'] = await UserModel.get_id(self.response['data']['receive_user_oid'])
             self.response['data'].pop('receive_user_oid')
+        if 'history_send_user_oids' in self.response['data']:
+            self.response['data']['history_send_users'] = list()
+            for user_oid in self.response['data']['history_send_user_oids']:
+                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                self.response['data']['history_send_users'].append(user)
+            self.response['data'].pop('history_send_user_oids')
         self.write_json()
 
     async def options(self, *args, **kwargs):
