@@ -9,7 +9,7 @@ from common.decorators import admin_auth_async, parse_argument
 from common import constants
 
 from handlers.base import JsonHandler
-from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
+from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel, TicketLogModel
 from models.content import ContentModel
 from models.admin import AdminModel
 from models.user import UserModel
@@ -527,3 +527,35 @@ class TicketSmsSendHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketLogsHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        q = {}
+        if parsed_args['content_oid']:
+            q['content_oid'] = ObjectId(parsed_args['content_oid'])
+        count = await TicketLogModel.count(query=q)
+        result = await TicketLogModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for res in result:
+            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('mobile_number')])
+            res.pop('send_user_oid')
+            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
+            res.pop('receive_user_oid')
+            res['tickets'] = list()
+            for oid in res['ticket_oids']:
+                tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid')])
+                ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields=[('name'), ('desc')])
+                res['tickets'].append(ttm)
+            res.pop('ticket_oids')
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
