@@ -125,7 +125,7 @@ class TicketOrderModel(BaseModel):
 class TicketModel(BaseModel):
     MONGO_COLLECTION = 'ticket'
     SERIAL_NUMBER_LENGTH = 7
-    Status = Enum('Status', 'pend send register use cancel')
+    Status = Enum('Status', 'pend send register pay use cancel')
 
     def __init__(self, *args, **kwargs):
         super(TicketModel, self).__init__(*args, **kwargs)
@@ -190,7 +190,7 @@ class TicketModel(BaseModel):
 
 class TicketLogModel(BaseModel):
     MONGO_COLLECTION = 'ticket_log'
-    Status = Enum('Status', 'pend send register use cancel')
+    Status = Enum('Status', 'pend send register pay use cancel')
 
     def __init__(self, *args, **kwargs):
         super(TicketLogModel, self).__init__(*args, **kwargs)

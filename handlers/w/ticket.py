@@ -544,3 +544,33 @@ class TicketPaymentCancelHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketPaymentCompleteHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        payment = IamportService().client.find(merchant_uid=_id)
+        if payment == {}:
+            raise HTTPError(400, 'not exist payment info')
+        if payment['status'] == 'paid':
+            query = {
+                '_id': ObjectId(_id),
+                'status': TicketModel.Status.register.name
+            }
+            document = {
+                '$set': {
+                    'status': TicketModel.Status.pay.name,
+                    'updated_at': datetime.utcnow()
+                }
+            }
+            self.response['data'] = await TicketModel.update(query, document)
+            self.write_json()
+        else:
+            raise HTTPError(400, 'status is not paid on iamport')
+
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
