@@ -31,6 +31,7 @@ class DashboardHandler(JsonHandler):
                 'pend': 0,
                 'send': 0,
                 'register': 0,
+                'pay': 0,
                 'use': 0,
                 'cancel': 0
             },
