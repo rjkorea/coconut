@@ -133,7 +133,10 @@ class DashboardContentHandler(JsonHandler):
                 'cash': 0,
                 'creditcard': 0
             },
-            'pre_revenue': 0,
+            'pre_revenue': {
+                'amount': 0,
+                'count': 0
+            },
             'top_ticket_types': [],
             'top_ticket_orders': []
         }
