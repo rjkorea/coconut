@@ -491,11 +491,30 @@ class TicketPaymentStatusHandler(JsonHandler):
         if payment == {}:
             raise HTTPError(400, 'not exist payment info')
         data = dict(
+            imp_uid=payment['imp_uid'],
+            merchant_uid=payment['merchant_uid'],
             name=payment['name'],
+            currency=payment['currency'],
+            amount=payment['amount'],
+            status=payment['status'],
+            paid_at=payment['paid_at'],
+            receipt_url=payment['receipt_url'],
+            pg_provier=payment['pg_provider'],
+            pay_method=payment['pay_method'],
+            apply_num=payment['apply_num'],
             buyer_name=payment['buyer_name'],
             buyer_tel=payment['buyer_tel'],
-            status=payment['status'],
-            imp_uid=payment['imp_uid']
+            buyer_email=payment['buyer_email'],
+            card_name=payment['card_name'],
+            card_code=payment['card_code'],
+            card_quota=payment['card_quota'],
+            pg_tid=payment['pg_tid'],
+            user_agent=payment['user_agent'],
+            cancel_amount=payment['cancel_amount'],
+            cancel_reason=payment['cancel_reason'],
+            cancelled_at=payment['cancelled_at'],
+            cancel_receipt_urls=payment['cancel_receipt_urls'],
+            cancel_history=payment['cancel_history'],
         )
         self.response['data'] = data
         self.write_json()
