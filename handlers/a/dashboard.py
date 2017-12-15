@@ -111,6 +111,7 @@ class DashboardContentHandler(JsonHandler):
                 'pend': 0,
                 'send': 0,
                 'register': 0,
+                'pay': 0,
                 'use': 0,
                 'cancel': 0
             },
@@ -131,6 +132,10 @@ class DashboardContentHandler(JsonHandler):
             'revenue': {
                 'cash': 0,
                 'creditcard': 0
+            },
+            'pre_revenue': {
+                'amount': 0,
+                'count': 0
             },
             'top_ticket_types': [],
             'top_ticket_orders': []
@@ -316,6 +321,36 @@ class DashboardContentHandler(JsonHandler):
         aggs = await TicketModel.aggregate(pipeline, 5)
         for a in aggs:
             self.response['data']['revenue'][a['_id']] = a['revenue']
+
+        # count pre_revenue
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(content_oid),
+                    'status': TicketModel.Status.pay.name
+                }
+            },
+            {
+                '$unwind': {'path': '$days'}
+            },
+            {
+                '$group': {
+                    '_id': '$status',
+                    'pre_revenue': {
+                        '$sum': '$days.fee.price'
+                    },
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 5)
+        if aggs:
+            self.response['data']['pre_revenue'] = {
+                'amount': aggs[0]['pre_revenue'],
+                'count': aggs[0]['count']
+            }
         self.write_json()
 
     async def options(self, *args, **kwargs):
