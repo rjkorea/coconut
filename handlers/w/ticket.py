@@ -137,6 +137,8 @@ class TicketRegisterHandler(JsonHandler):
             raise HTTPError(400, 'used ticket can\'t register')
         if ticket['status'] == TicketModel.Status.cancel.name:
             raise HTTPError(400, 'canceled ticket can\'t register')
+        if ticket['status'] == TicketModel.Status.pay.name:
+            raise HTTPError(400, 'paid ticket can\'t register')
         exist_ticket = await TicketModel.find_one({'status': TicketModel.Status.register.name, 'content_oid': ticket['content_oid'], 'receive_user_oid': self.current_user['_id']})
         if exist_ticket:
             raise HTTPError(400, 'Already registered ticket on this content')
