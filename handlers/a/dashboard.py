@@ -207,6 +207,7 @@ class DashboardContentHandler(JsonHandler):
                         {
                             '$or': [
                                 {'status': TicketModel.Status.register.name},
+                                {'status': TicketModel.Status.pay.name},
                                 {'status': TicketModel.Status.use.name}
                             ]
                         }
