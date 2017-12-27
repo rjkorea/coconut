@@ -9,7 +9,7 @@ from common import hashers
 from common.decorators import user_auth_async, parse_argument
 
 from handlers.base import JsonHandler, MultipartFormdataHandler
-from models.user import UserModel
+from models.user import UserModel, UserAutologinModel
 from models.session import UserSessionModel
 from models import send_sms
 
@@ -228,7 +228,7 @@ class UserMeImageUploadHandler(MultipartFormdataHandler):
         self.write_json()
 
 
-class SmsLoginHandler(JsonHandler):
+class AutoLoginHandler(JsonHandler):
     async def put(self, *args, **kwargs):
         name = self.json_decoded_body.get('name', None)
         if not name:
@@ -246,19 +246,34 @@ class SmsLoginHandler(JsonHandler):
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
         usk = str(session_oid)
+        userautologin = UserAutologinModel()
+        userautologin.data['usk'] = session_oid
+        userautologin.data['content_oid'] = ObjectId(content_oid)
+        userautologin_oid = await userautologin.insert()
         config = settings.settings()
         is_sent_receiver = await send_sms(
             {
                 'type': 'unicode',
                 'from': 'tkit',
                 'to': mobile_number,
-                'text': 'http://%s:%s/smslogin?usk=%s&content_oid=%s' % (config['web']['host'], config['web']['port'], str(session_oid), content_oid)
+                'text': 'http://%s:%s/autologin/%s' % (config['web']['host'], config['web']['port'], userautologin_oid)
             }
         )
         self.response['message'] = 'check your sms'
         self.response['is_sent_receiver'] = is_sent_receiver
         self.write_json()
-        
+
+
+    async def get(self, *args, **kwargs):
+        autologin_oid = kwargs.get('_id', None)
+        if not autologin_oid or len(autologin_oid) != 24:
+            raise HTTPError(400, 'invalid autologin_oid')
+        result = await UserAutologinModel.find_one({'_id': ObjectId(autologin_oid)})
+        if not result:
+            raise HTTPError(400, 'not exist autologin session')
+        self.response['data'] = result
+        self.write_json()
+
     
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
