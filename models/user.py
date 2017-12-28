@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from bson import ObjectId
+
 from common import hashers
 
 from models.base import BaseModel
@@ -79,3 +81,27 @@ class UserModel(BaseModel):
 
     def set_password(self, password):
         self.data['password'] = hashers.make_password(password)
+
+
+class UserAutologinModel(BaseModel):
+    MONGO_COLLECTION = 'user_autologin'
+
+    def __init__(self, *args, **kwargs):
+        super(UserAutologinModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(UserAutologinModel, self).specification
+        specification.extend([
+            {
+                'key': 'usk',
+                'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'content_oid',
+                'type': ObjectId,
+                'default': None
+            },
+        ])
+        return specification
