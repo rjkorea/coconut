@@ -149,7 +149,7 @@ class ContentHandler(JsonHandler):
         self.write_json()
 
 
-class ContentPostHandler(MultipartFormdataHandler):
+class ContentPostHandler(JsonHandler):
     @admin_auth_async
     async def post(self, *args, **kwargs):
         admin_oid = self.current_user['_id']
