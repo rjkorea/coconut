@@ -135,6 +135,35 @@ class UserMeHandler(JsonHandler):
         self.response['data'] = user
         self.write_json()
 
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        set_doc = {
+            'updated_at': datetime.utcnow()
+        }
+        name = self.json_decoded_body.get('name', None)
+        if name:
+            set_doc['name'] = name
+        birthday = self.json_decoded_body.get('birthday', None)
+        if birthday:
+            set_doc['birthday'] = birthday
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if mobile_number:
+            set_doc['mobile_number'] = mobile_number
+        email = self.json_decoded_body.get('email', None)
+        if email:
+            set_doc['email'] = email
+        gender = self.json_decoded_body.get('gender', None)
+        if gender:
+            set_doc['gender'] = gender
+        query = {
+            '_id': self.current_user['_id']
+        }
+        document = {
+            '$set': set_doc
+        }
+        self.response['data'] = await UserModel.update(query, document)
+        self.write_json()
+
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
