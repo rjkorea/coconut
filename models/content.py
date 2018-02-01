@@ -75,6 +75,11 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'notice',
+                'type': dict,
+                'default': None
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)

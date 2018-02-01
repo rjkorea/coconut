@@ -175,6 +175,10 @@ class ContentPostHandler(JsonHandler):
             'name': name,
             'place': place,
             'desc': desc,
+            'when': {
+                'start': datetime.utcnow(),
+                'end': datetime.utcnow()
+            },
             'sms': {
                 'message': 'http://%s:%d/l/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             },
@@ -188,6 +192,10 @@ class ContentPostHandler(JsonHandler):
                 'og': {
                     'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/og.m.png' % config['aws']['res_bucket']
                 }
+            },
+            'notice': {
+                'enabled': False,
+                'message': '공지사항입니다.'
             }
         }
         content = ContentModel(raw_data=doc)
