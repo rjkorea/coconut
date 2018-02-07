@@ -41,7 +41,7 @@ class BaseModel(object):
     @classmethod
     async def find(cls, query={}, fields=None, sort=[('created_at', -1)], skip=0, limit=10):
         cursor = MongodbService().client[cls.MONGO_COLLECTION].find(query, fields).sort(sort).skip(skip).limit(limit)
-        return await cursor.to_list(length=limit if limit > 0 else None)
+        return await cursor.to_list(length=limit if limit >= 0 else None)
 
     @classmethod
     async def count(cls, query={}):
@@ -67,7 +67,7 @@ class BaseModel(object):
         if not pipeline:
             return None
         cursor = MongodbService().client[cls.MONGO_COLLECTION].aggregate(pipeline)
-        return await cursor.to_list(length=limit if limit > 0 else None)
+        return await cursor.to_list(length=limit if limit >= 0 else None)
 
     async def insert(self):
         if not hasattr(self, 'data'):
