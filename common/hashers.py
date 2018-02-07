@@ -7,7 +7,7 @@ import pbkdf2
 
 HASHING_ITERATIONS = 400
 ALLOWED_IN_SALT = string.ascii_letters + string.digits + './'
-ALLOWD_ADMIN_PASSWORD_PATTERN = r'[A-Za-z0-9@#$%^&+=]{8,}'
+ALLOWD_ADMIN_PASSWORD_PATTERN = r'[A-Za-z0-9!@#$%^&+=]{8,}'
 ALLOWD_USER_PASSWORD_PATTERN = r'[0-9]{4}'
 
 
@@ -28,7 +28,7 @@ def check_password(password, hashed_password):
 
 def validate_password(password=None):
     """
-    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9@#$%^&+=]{8,}'
+    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9!@#$%^&+=]{8,}'
     """
     if password is None:
         raise ValueError('password is required')
@@ -38,7 +38,7 @@ def validate_password(password=None):
 
 def validate_user_password(password=None):
     """
-    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9@#$%^&+=]{4}'
+    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9!@#$%^&+=]{4}'
     """
     if password is None:
         raise ValueError('password is required')
