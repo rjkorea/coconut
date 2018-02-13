@@ -62,15 +62,13 @@ class TicketTypeHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
-        price = self.json_decoded_body.get('price', None)
-        if not price or not isinstance(price, int):
-            raise HTTPError(400, 'invalid price')
         desc = self.json_decoded_body.get('desc', None)
         if not desc or len(desc) == 0:
             raise HTTPError(400, 'invalid desc')
         day = self.json_decoded_body.get('day', None)
         if not day or not isinstance(day, int):
             raise HTTPError(400, 'invalid day')
+        price = self.json_decoded_body.get('price', None)
 
         # create ticket type model
         ticket_type = TicketTypeModel(raw_data=dict(
