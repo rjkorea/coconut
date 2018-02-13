@@ -299,6 +299,7 @@ class DashboardContentHandler(JsonHandler):
             tto['ticket_register_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.register.name})
             tto['ticket_pay_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.pay.name})
             tto['ticket_use_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.use.name})
+            tto['ticket_cancel_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.cancel.name})
         self.response['data']['top_ticket_orders'] = top_ticket_orders
 
         #user aggregate for revenue
