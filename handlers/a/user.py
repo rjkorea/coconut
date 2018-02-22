@@ -154,3 +154,8 @@ class UserInitHandler(JsonHandler):
         }
         self.response['data'] = await UserModel.update(query, document)
         self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+        
