@@ -30,6 +30,7 @@ url_patterns = [
     (r'/a/users/?', a.user.UserListHandler),
     (r'/a/user/(?P<_id>[^\/]+)/?', a.user.UserHandler),
     (r'/a/user/?', a.user.UserHandler),
+    (r'/a/user/init/(?P<_id>[^\/]+)/?', a.user.UserInitHandler),
 
     (r'/a/contents/?', a.content.ContentListHandler),
     (r'/a/content/(?P<_id>[^\/]+)/?', a.content.ContentHandler),
