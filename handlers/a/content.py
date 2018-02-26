@@ -159,6 +159,9 @@ class ContentPostHandler(JsonHandler):
         place = self.json_decoded_body.get('place', None)
         if not place or len(place) == 0:
             raise HTTPError(400, 'invalid place')
+        when = self.json_decoded_body.get('when', None)
+        if not when or not isinstance(when, dict):
+            raise HTTPError(400, 'invalid when')
         desc = self.json_decoded_body.get('desc', None)
         config = settings.settings()
         # generate short id
@@ -167,7 +170,13 @@ class ContentPostHandler(JsonHandler):
             duplicated_content = await ContentModel.find({'short_id': short_id})
             if not duplicated_content:
                 break
-
+        try:
+            if 'start' in when:
+                when['start'] = datetime.strptime(when['start'], '%Y-%m-%dT%H:%M:%S')
+            if 'end' in when:
+                when['end'] = datetime.strptime(when['end'], '%Y-%m-%dT%H:%M:%S')
+        except ValueError as e:
+            raise HTTPError(400, e)
         # create content model
         doc = {
             'short_id': short_id,
@@ -175,10 +184,7 @@ class ContentPostHandler(JsonHandler):
             'name': name,
             'place': place,
             'desc': desc,
-            'when': {
-                'start': datetime.utcnow(),
-                'end': datetime.utcnow()
-            },
+            'when': when,
             'sms': {
                 'message': 'http://%s:%d/l/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             },

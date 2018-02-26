@@ -126,3 +126,36 @@ class UserHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class UserInitHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        user = await UserModel.find_one({'_id': ObjectId(_id)})
+        if not user:
+            raise HTTPError(400, 'not exist _id')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'terms': {
+                    'privacy': False,
+                    'policy': False
+                },
+                'updated_at': datetime.utcnow()
+            },
+            '$unset': {
+                'password': 1
+            }
+        }
+        self.response['data'] = await UserModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+        
