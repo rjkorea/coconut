@@ -289,10 +289,10 @@ class DashboardContentHandler(JsonHandler):
                 }
             },
             {
-                '$limit': 20
+                '$limit': 50
             }
         ]
-        top_ticket_orders = await TicketModel.aggregate(pipeline, 20)
+        top_ticket_orders = await TicketModel.aggregate(pipeline, 50)
         for tto in top_ticket_orders:
             tto['ticket_order'] = await TicketOrderModel.get_id(tto['_id'])
             tto['ticket_type'] = await TicketTypeModel.get_id(tto['ticket_order']['ticket_type_oid'])
