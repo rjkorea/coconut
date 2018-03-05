@@ -102,7 +102,8 @@ class TicketTypeHandler(JsonHandler):
         }
         if not desc or len(desc.strip()) == 0:
             document['$unset'] = {'desc': 1}
-            del document['$set']['desc']
+            if 'desc' in document['$set']:
+                del document['$set']['desc']
         self.response['data'] = await TicketTypeModel.update(query, document)
         self.write_json()
 
