@@ -33,6 +33,19 @@ def user_auth_async(method):
     return wrapper
 
 
+def user_access_token_auth_async(method):
+    @functools.wraps(method)
+    async def wrapper(self, *args, **kwargs):
+        self.current_user = await self.get_current_user_access_token_async()
+        if not self.current_user:
+            raise HTTPError(401, 'Permission denied')
+        else:
+            result = method(self, *args, **kwargs)
+            if result:
+                await result
+    return wrapper
+
+
 def app_auth_async(method):
     @functools.wraps(method)
     async def wrapper(self, *args, **kwargs):
