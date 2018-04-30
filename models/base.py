@@ -63,6 +63,16 @@ class BaseModel(object):
         return result
 
     @classmethod
+    async def insert_many(cls, query={}):
+        result = await MongodbService().client[cls.MONGO_COLLECTION].insert(query)
+        return result
+
+    @classmethod
+    async def delete_many(cls, query={}):
+        result = await MongodbService().client[cls.MONGO_COLLECTION].delete_many(query)
+        return result
+
+    @classmethod
     async def aggregate(cls, pipeline=[], limit=10):
         if not pipeline:
             return None
