@@ -3,6 +3,7 @@
 
 import json
 from bson import ObjectId
+import jwt
 
 from tornado.web import RequestHandler, HTTPError
 from tornado.websocket import WebSocketHandler
@@ -48,6 +49,12 @@ class BaseHandler(RequestHandler):
     def get_authorization(self):
         return self.request.headers.get('Authorization')
 
+    def get_authorization_access_token(self):
+        auth = self.request.headers.get('Authorization', None)
+        if auth:
+            return auth.strip().split(' ')[1]
+        return auth
+
     def get_authorization_usk(self):
         auth = self.request.headers.get('Authorization', None)
         if auth:
@@ -79,6 +86,17 @@ class BaseHandler(RequestHandler):
         if not session:
             return None
         return  await UserModel.find_one({'_id': session['user_oid']})
+
+    async def get_current_user_access_token_async(self):
+        current_user = None
+        access_token = self.get_authorization_access_token()
+        if not access_token:
+            return None
+        try:
+            decoded_jwt = jwt.decode(access_token, 'tkitcoconut', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise HTTPError(401, 'access token expired')
+        return  await UserModel.find_one({'_id': ObjectId(decoded_jwt['user_oid'])})
 
     async def get_current_app_async(self):
         mobile_app_key = self.get_cookie(self.COOKIE_KEYS['MOBILE_APP_KEY'], None)

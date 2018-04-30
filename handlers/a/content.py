@@ -11,6 +11,8 @@ from handlers.base import JsonHandler, BaseHandler, MultipartFormdataHandler
 from models.content import ContentModel
 from models.admin import AdminModel
 from models.company import CompanyModel
+from models.ticket import TicketModel
+from models.content_active_user import ContentActiveUser
 
 from services.s3 import S3Service
 
@@ -280,3 +282,54 @@ class ContentImageUploadHandler(MultipartFormdataHandler):
         self.response['message'] = 'OK'
         self.write_json()
 
+
+class ContentActiveUserHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, 'not exist _id')
+
+        q = {'content_oid': ObjectId(_id)}
+        res = await ContentActiveUser.find(q)
+        if res:
+            await ContentActiveUser.delete_many(q)
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(_id)
+                }
+            },
+            {
+                '$lookup': {
+                    'from': 'user',
+                    'localField': 'receive_user_oid',
+                    'foreignField': '_id',
+                    'as': 'receive_user'
+                }
+            },
+            {
+                '$group': {
+                    '_id': {
+                        'name': '$receive_user.name',
+                        'mobile_number': '$receive_user.mobile_number'
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, -1)
+        for au in aggs:
+            await ContentActiveUser.insert_many({
+                'content_oid': ObjectId(_id),
+                'name': au['_id']['name'][0],
+                'mobile_number': au['_id']['mobile_number'][0]
+            })
+        self.response['data'] = 'OK'
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()

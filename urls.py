@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, base, a, v1, t, w
+from handlers import index, base, a, v1, t, w, v2
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -36,6 +36,7 @@ url_patterns = [
     (r'/a/content/(?P<_id>[^\/]+)/?', a.content.ContentHandler),
     (r'/a/content/?', a.content.ContentPostHandler),
     (r'/a/content/(?P<_id>[^\/]+)/image/(?P<type>[^\/]+)/?', a.content.ContentImageUploadHandler),
+    (r'/a/content/(?P<_id>[^\/]+)/active/user/?', a.content.ContentActiveUserHandler),
 
     (r'/a/ticket/types/?', a.ticket.TicketTypeListHandler),
     (r'/a/ticket/type/(?P<_id>[^\/]+)/?', a.ticket.TicketTypeHandler),
@@ -77,6 +78,11 @@ url_patterns = [
 	# v1
 	# (r'/v1/invitation/submit/?', v1.invitation.SubmitHandler),
     # (r'/v1/admins/?', v1.invitation.AdminListHandler),
+
+    # v2
+    (r'/v2/auth/login/?', v2.auth.LoginHandler),
+
+    (r'/v2/user/me/?', v2.user.UserMeHandler),
 
     # w
     (r'/w/auth/login/?', w.auth.LoginHandler),

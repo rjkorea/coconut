@@ -1,21 +1,24 @@
 {
 	"info": {
+		"_postman_id": "d12dda01-c44c-4330-b520-474a9465dbba",
 		"name": "coconut",
-		"_postman_id": "80a80fc7-1b5d-bfa0-a92e-16ce60bd09dd",
 		"description": "Asyn API Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Test",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "index",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}",
 							"protocol": "{{protocol}}",
@@ -33,7 +36,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/test",
 							"protocol": "{{protocol}}",
@@ -113,7 +119,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/testws",
 							"protocol": "{{protocol}}",
@@ -139,7 +148,10 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://rest.nexmo.com/sms/json?api_key=7968a1e2&api_secret=a45366ce5d7a295c&to=821032697178&from=821032697178&type=unicode&text=티킷오더 발송 테스트 메세지 http://tkit.me/1432/invitation",
 							"protocol": "https",
@@ -178,8 +190,7 @@
 									"value": "티킷오더 발송 테스트 메세지 http://tkit.me/1432/invitation"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -187,7 +198,7 @@
 		},
 		{
 			"name": "admin(a)",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "/a/auth/register",
@@ -215,8 +226,7 @@
 								"auth",
 								"register"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -246,8 +256,7 @@
 								"auth",
 								"login"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -280,13 +289,40 @@
 								"a",
 								"admin"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/a/admin/<oid>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "25066626-9ab9-4119-b869-8e4646b9f83d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "59391d86-af11-416f-9200-a5d3348a1428",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -295,7 +331,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/admin/58634dcc6a9fab09b441a747",
 							"protocol": "{{protocol}}",
@@ -308,8 +347,7 @@
 								"admin",
 								"58634dcc6a9fab09b441a747"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -343,8 +381,7 @@
 								"admin",
 								"58634dcc6a9fab09b441a747"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -358,7 +395,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/admins?start=0&size=20",
 							"protocol": "{{protocol}}",
@@ -373,17 +413,14 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "20",
-									"equals": true
+									"value": "20"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -416,8 +453,7 @@
 								"a",
 								"user"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -431,7 +467,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/user/58bfafa55f5471325c68c4f3",
 							"protocol": "{{protocol}}",
@@ -444,8 +483,7 @@
 								"user",
 								"58bfafa55f5471325c68c4f3"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -479,8 +517,7 @@
 								"user",
 								"58bfafa55f5471325c68c4f3"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -515,8 +552,7 @@
 								"init",
 								"5931a3eabc2c44140e0dea91"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -530,7 +566,10 @@
 								"value": "csk=58ca31195f547161e34018bc"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/users?start=0&size=5&q=",
 							"protocol": "{{protocol}}",
@@ -556,8 +595,7 @@
 									"value": ""
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -590,8 +628,7 @@
 								"a",
 								"content"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -615,7 +652,6 @@
 								{
 									"key": "image",
 									"value": "",
-									"description": "",
 									"type": "file"
 								}
 							]
@@ -634,25 +670,22 @@
 								"image",
 								"poster"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "14146e5b-0d73-4a3f-9429-172f016cced6",
+							"id": "5fa93ff4-a2a2-41d6-806e-4c2416e223de",
 							"name": "/a/content/<oid>/image/poster (200 OK)",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "csk={{csk}}",
-										"disabled": false
+										"value": "csk={{csk}}"
 									},
 									{
 										"key": "Content-Type",
-										"value": "multipart/form-data",
-										"disabled": false
+										"value": "multipart/form-data"
 									}
 								],
 								"body": {
@@ -660,11 +693,8 @@
 									"formdata": [
 										{
 											"key": "image",
-											"description": "",
-											"type": "file",
-											"src": {
-												"0": {}
-											}
+											"value": null,
+											"type": "file"
 										}
 									]
 								},
@@ -687,7 +717,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -715,7 +744,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 1258,
 							"body": "{\"data\": {\"image.poster.m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/594246755f5471c519ecfc8c/poster.m.jpg\", \"updated_at\": 1511374018}}"
 						}
 					]
@@ -740,7 +768,6 @@
 								{
 									"key": "image",
 									"value": "",
-									"description": "",
 									"type": "file"
 								}
 							]
@@ -759,12 +786,11 @@
 								"image",
 								"logo"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "b0bca27a-0035-4a53-9a0c-1688c4e30e66",
+							"id": "fe911dec-2c97-4fdc-8e2b-986bcdc8f478",
 							"name": "/a/content/<oid>/image/logo (200 OK)",
 							"originalRequest": {
 								"method": "POST",
@@ -783,11 +809,8 @@
 									"formdata": [
 										{
 											"key": "image",
-											"description": "",
-											"type": "file",
-											"src": {
-												"0": {}
-											}
+											"value": null,
+											"type": "file"
 										}
 									]
 								},
@@ -810,7 +833,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -838,7 +860,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 231,
 							"body": "{\"data\": {\"image.logo.m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/594246755f5471c519ecfc8c/logo.m.png\", \"updated_at\": 1511374086}}"
 						}
 					]
@@ -863,7 +884,6 @@
 								{
 									"key": "image",
 									"value": "",
-									"description": "",
 									"type": "file"
 								}
 							]
@@ -882,8 +902,7 @@
 								"image",
 								"og"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -897,7 +916,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/58cf77cd5f5471137a04dc29",
 							"protocol": "{{protocol}}",
@@ -910,8 +932,7 @@
 								"content",
 								"58cf77cd5f5471137a04dc29"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -945,10 +966,125 @@
 								"content",
 								"594246755f5471c519ecfc8c"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
+				},
+				{
+					"name": "/a/content/<oid>/active/user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/active/user",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"594246755f5471c519ecfc8c",
+								"active",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "ce1a99e4-0c48-43a1-b450-2bdc8a50f042",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									},
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"건형 김\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/active/user",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"content",
+										"594246755f5471c519ecfc8c",
+										"active",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "14",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 Apr 2018 03:40:59 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 12:14:07 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"data\": \"OK\"}"
+						}
+					]
 				},
 				{
 					"name": "/a/contents",
@@ -960,7 +1096,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/contents?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -975,17 +1114,14 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -999,7 +1135,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard",
 							"protocol": "{{protocol}}",
@@ -1011,8 +1150,7 @@
 								"a",
 								"dashboard"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1026,7 +1164,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -1039,8 +1180,7 @@
 								"dashboard",
 								"594246755f5471c519ecfc8c"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1054,7 +1194,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/report/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -1067,12 +1210,11 @@
 								"report",
 								"594246755f5471c519ecfc8c"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "980890eb-f265-4dc5-b51e-1d5564fd8510",
+							"id": "58774a2d-7bc8-489f-9087-a33e6e261a53",
 							"name": "/a/report/<oid> (성공)",
 							"originalRequest": {
 								"method": "GET",
@@ -1082,7 +1224,10 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/report/594246755f5471c519ecfc8c",
 									"protocol": "{{protocol}}",
@@ -1100,7 +1245,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -1134,7 +1278,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 52,
 							"body": "{\"data\": {\"revenue\": {\"creditcard\": 1570000, \"cash\": 1370000, \"null\": 0}, \"total_forward\": 0, \"total_visit\": 1150}}"
 						}
 					]
@@ -1169,8 +1312,7 @@
 								"ticket",
 								"type"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1184,7 +1326,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/type/58d392345f547155bbcf8efe",
 							"protocol": "{{protocol}}",
@@ -1198,8 +1343,7 @@
 								"type",
 								"58d392345f547155bbcf8efe"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1234,8 +1378,7 @@
 								"type",
 								"58d392345f547155bbcf8efe"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1249,7 +1392,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/types?start=0&size=10&content_oid&admin_oid",
 							"protocol": "{{protocol}}",
@@ -1265,27 +1411,22 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "",
-									"equals": false
+									"value": null
 								},
 								{
 									"key": "admin_oid",
-									"value": "",
-									"equals": false
+									"value": null
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1319,8 +1460,7 @@
 								"ticket",
 								"order"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1354,8 +1494,7 @@
 								"ticket",
 								"order"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1369,7 +1508,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order/5962e0855f54713980796f5b/serial_number_list?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -1387,17 +1529,14 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1411,7 +1550,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order/58e33f305f54711359296bde",
 							"protocol": "{{protocol}}",
@@ -1425,8 +1567,7 @@
 								"order",
 								"58e33f305f54711359296bde"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1461,8 +1602,7 @@
 								"order",
 								"58e33f305f54711359296bde"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1476,7 +1616,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/orders?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -1492,17 +1635,14 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1538,8 +1678,7 @@
 								"5940d2785f5471904fd44561",
 								"send"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1575,8 +1714,7 @@
 								"sms",
 								"send"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1609,8 +1747,7 @@
 								"a",
 								"ticket"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1624,7 +1761,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/58ec77f15f54711c0baf9c1d",
 							"protocol": "{{protocol}}",
@@ -1637,8 +1777,7 @@
 								"ticket",
 								"58ec77f15f54711c0baf9c1d"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1672,8 +1811,7 @@
 								"ticket",
 								"58ec77f15f54711c0baf9c1d"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1709,8 +1847,7 @@
 								"register",
 								"user"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1745,8 +1882,7 @@
 								"595b3df85f5471064a96d722",
 								"cancel"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1760,7 +1896,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets?start=0&size=10&ticket_order_oid=59e078ea5f54710eea1b0938",
 							"protocol": "{{protocol}}",
@@ -1775,22 +1914,18 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "ticket_order_oid",
-									"value": "59e078ea5f54710eea1b0938",
-									"equals": true
+									"value": "59e078ea5f54710eea1b0938"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1804,7 +1939,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 							"protocol": "{{protocol}}",
@@ -1820,18 +1958,15 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "5951cc82ba590e3cec7f6031",
-									"equals": true
+									"value": "5951cc82ba590e3cec7f6031"
 								}
 							]
 						},
@@ -1839,43 +1974,44 @@
 					},
 					"response": [
 						{
-							"id": "8e57b9eb-7a1d-4cea-b4c2-e88b20974668",
+							"id": "b94817f4-e3d4-4d09-81ad-4877bd974265",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=5940efb15f5471a2b6750108"
+										"value": "csk={{csk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
 									],
 									"port": "{{port}}",
 									"path": [
-										"w",
-										"tickets"
+										"a",
+										"tickets",
+										"logs"
 									],
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "5951cc82ba590e3cec7f6031"
 										}
 									]
 								}
@@ -1883,7 +2019,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -1917,7 +2052,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 33,
 							"body": "{\"count\": 4, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6c\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6b\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
 						}
 					]
@@ -1951,8 +2085,7 @@
 								"a",
 								"company"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -1966,7 +2099,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/companies?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -1981,17 +2117,14 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2005,7 +2138,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/company/591a6ab35f54713ed47976b2",
 							"protocol": "{{protocol}}",
@@ -2018,8 +2154,7 @@
 								"company",
 								"591a6ab35f54713ed47976b2"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2053,8 +2188,7 @@
 								"company",
 								"591a6ab35f54713ed47976b2"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2087,8 +2221,7 @@
 								"a",
 								"place"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2102,7 +2235,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/places?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -2117,17 +2253,14 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2141,7 +2274,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/place/5922938c5f547186cf8d596d",
 							"protocol": "{{protocol}}",
@@ -2154,8 +2290,7 @@
 								"place",
 								"5922938c5f547186cf8d596d"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2189,8 +2324,7 @@
 								"place",
 								"5922938c5f547186cf8d596d"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2204,7 +2338,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/places/stats",
 							"protocol": "{{protocol}}",
@@ -2217,8 +2354,7 @@
 								"places",
 								"stats"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2253,8 +2389,7 @@
 								"58bfafa55f5471325c68c4f3",
 								"password"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2268,7 +2403,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard/58cf91e55f5471137a8ffd9e",
 							"protocol": "{{protocol}}",
@@ -2281,8 +2419,7 @@
 								"dashboard",
 								"58cf91e55f5471137a8ffd9e"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2311,7 +2448,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -2326,13 +2466,11 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
 						},
@@ -2340,33 +2478,39 @@
 					},
 					"response": [
 						{
-							"id": "264a5db4-c1cb-4517-a3e7-d5b348ce3830",
+							"id": "ab017b11-0897-465c-a5a8-cf57c5e9e1f1",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
-								"body": {},
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/countries?start=0&size=10",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/countries?start=0&size=10",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
 									],
 									"port": "{{port}}",
 									"path": [
-										"w",
+										"a",
 										"countries"
 									],
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										}
 									]
 								}
@@ -2374,7 +2518,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -2409,7 +2552,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Tue Jan 19 2038 03:14:07 GMT+0900 (KST)",
+									"expires": "Invalid Date",
 									"httpOnly": false,
 									"domain": "host.tkit.me",
 									"path": "/",
@@ -2418,7 +2561,6 @@
 									"key": "usk"
 								}
 							],
-							"responseTime": 20,
 							"body": "{\"data\": [{\"updated_at\": 1492070119, \"name\": \"Australia\", \"code\": \"61\", \"_id\": \"58ef24098705470b00874bd6\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Brazil\", \"code\": \"55\", \"_id\": \"58ef242c8705470b00874bd7\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Canada\", \"code\": \"1\", \"_id\": \"58ef248a8705470b00874bd8\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"China\", \"code\": \"86\", \"_id\": \"58ef24a58705470b00874bd9\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Germany\", \"code\": \"49\", \"_id\": \"58ef24cb8705470b00874bda\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Hong Kong\", \"code\": \"852\", \"_id\": \"58ef24f28705470b00874bdb\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Japan\", \"code\": \"81\", \"_id\": \"58ef253e8705470b00874bdc\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Singapore\", \"code\": \"65\", \"_id\": \"58ef256c8705470b00874bdd\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"South Korea\", \"code\": \"82\", \"_id\": \"58ef23d08705470b00874bd5\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Thailand\", \"code\": \"66\", \"_id\": \"58ef25828705470b00874bde\", \"enabled\": true, \"created_at\": 1492070061}], \"count\": 12}"
 						}
 					]
@@ -2433,7 +2575,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -2448,63 +2593,58 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "594246755f5471c519ecfc8c",
-									"equals": true
+									"value": "594246755f5471c519ecfc8c"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "f890f2f4-9efd-4f0a-b04e-a8ac2bdba540",
+							"id": "dc545396-5f90-4e46-af12-230306f35135",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=593e4c625f5471600c4c90c1",
-										"disabled": false
+										"value": "csk={{csk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
 									],
 									"port": "{{port}}",
 									"path": [
-										"w",
+										"a",
 										"qnas"
 									],
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "594246755f5471c519ecfc8c"
 										}
 									]
 								}
@@ -2512,7 +2652,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -2546,7 +2685,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 27,
 							"body": "{\"count\": 12, \"data\": [{\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423ad8fd183a8f160312b4\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b65fd183a8f160312b5\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b93fd183a8f160312b6\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b96fd183a8f160312b7\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b97fd183a8f160312b8\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b99fd183a8f160312b9\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9afd183a8f160312ba\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9bfd183a8f160312bb\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9cfd183a8f160312bc\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9dfd183a8f160312bd\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}]}"
 						}
 					]
@@ -2561,7 +2699,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/qna/59672be5ba590e656e4ce964",
 							"protocol": "{{protocol}}",
@@ -2574,8 +2715,7 @@
 								"qna",
 								"59672be5ba590e656e4ce964"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2609,8 +2749,7 @@
 								"qna",
 								"59672be5ba590e656e4ce964"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2643,8 +2782,7 @@
 								"a",
 								"qna"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -2652,7 +2790,7 @@
 		},
 		{
 			"name": "tablet(t)",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "/t/host",
@@ -2664,7 +2802,10 @@
 								"value": "mak=582d37225f54714def85effb; tak=asdf;"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/host",
 							"protocol": "{{protocol}}",
@@ -2676,8 +2817,7 @@
 								"t",
 								"host"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2691,7 +2831,10 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/contents",
 							"protocol": "{{protocol}}",
@@ -2703,8 +2846,7 @@
 								"t",
 								"contents"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2718,7 +2860,10 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/contents",
 							"protocol": "{{protocol}}",
@@ -2730,8 +2875,7 @@
 								"t",
 								"contents"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2745,7 +2889,10 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/dashboard/58ec69265f54711c0bd1368a",
 							"protocol": "{{protocol}}",
@@ -2758,8 +2905,7 @@
 								"dashboard",
 								"58ec69265f54711c0bd1368a"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2792,8 +2938,7 @@
 								"t",
 								"auth"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -2822,7 +2967,10 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -2844,8 +2992,7 @@
 									"value": "10"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}
@@ -2853,7 +3000,7 @@
 		},
 		{
 			"name": "web(w)",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "/w/user",
@@ -2878,13 +3025,11 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "조건희",
-									"equals": true
+									"value": "조건희"
 								},
 								{
 									"key": "mobile_number",
-									"value": "821032697178",
-									"equals": true
+									"value": "821032697178"
 								}
 							]
 						},
@@ -2892,82 +3037,7 @@
 					},
 					"response": [
 						{
-							"id": "27ba7ad6-e4d6-4f24-99e8-abb0fc3b4348",
-							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"user"
-									],
-									"query": [
-										{
-											"key": "name",
-											"value": "조건희",
-											"equals": true
-										},
-										{
-											"key": "mobile_number",
-											"value": "821032697178",
-											"equals": true
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "68",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 15 Jun 2017 01:47:53 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Etag",
-									"value": "\"47afa71c5382ac506a88b73655df22c240010de5\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"responseTime": 7,
-							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
-						},
-						{
-							"id": "875f535f-7f19-4535-b199-46744421019d",
+							"id": "0cf2e4b3-9752-4fee-84d5-3251866a771b",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -2990,13 +3060,11 @@
 									"query": [
 										{
 											"key": "name",
-											"value": "조건희",
-											"equals": true
+											"value": "조건희"
 										},
 										{
 											"key": "mobile_number",
-											"value": "821032697178",
-											"equals": true
+											"value": "821032697178"
 										}
 									]
 								}
@@ -3004,7 +3072,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3038,8 +3105,78 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 24,
 							"body": "{\"data\": {\"has_password\": true, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
+						},
+						{
+							"id": "e141e6fd-73f4-4636-b86f-5e359e51665e",
+							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "조건희"
+										},
+										{
+											"key": "mobile_number",
+											"value": "821032697178"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "68",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2017 01:47:53 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"47afa71c5382ac506a88b73655df22c240010de5\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						}
 					]
 				},
@@ -3076,20 +3213,19 @@
 					},
 					"response": [
 						{
-							"id": "ab417bc4-b37f-4371-be04-eaa4d913c58a",
+							"id": "e9c8d908-28e9-44b9-b64c-c53f878a8558",
 							"name": "패스워드 설정이 되어 있는 유저",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\"\n}"
+									"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\",\n\t\"terms\": true\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/new/password",
@@ -3110,7 +3246,6 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3138,11 +3273,10 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 17,
 							"body": "{\"message\": \"400: exist password\"}"
 						},
 						{
-							"id": "2e2d9620-aa55-4d4a-80de-202066b7ea1b",
+							"id": "b22e2c9c-22bd-41cc-a700-ec6e9591f424",
 							"name": "신규 패스워드 설정",
 							"originalRequest": {
 								"method": "PUT",
@@ -3154,7 +3288,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\"\n}"
+									"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\",\n\t\"terms\": true\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/new/password",
@@ -3175,7 +3309,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3203,7 +3336,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 24,
 							"body": "{\"data\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"usk\": \"5940f3885f5471a2b65cae74\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						}
 					]
@@ -3241,7 +3373,7 @@
 					},
 					"response": [
 						{
-							"id": "45f15f26-5e0c-469e-890c-077d75a8b697",
+							"id": "4ac51f94-ac5e-45f1-b7b8-a08c8e9014c4",
 							"name": "비밀번호 인증 성공",
 							"originalRequest": {
 								"method": "PUT",
@@ -3253,7 +3385,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"password\": \"1234\"\n}"
+									"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/auth/password",
@@ -3274,7 +3406,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3302,11 +3433,10 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 20,
 							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "ee3c4f65-fbe1-4981-a313-6661fe26a629",
+							"id": "ba809de8-8eca-475f-9e37-0b4786c67475",
 							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
 							"originalRequest": {
 								"method": "PUT",
@@ -3318,7 +3448,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"password\": \"1234\"\n}"
+									"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/auth/password",
@@ -3339,7 +3469,6 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3367,7 +3496,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 5,
 							"body": "{\"message\": \"400: does not set password\"}"
 						}
 					]
@@ -3401,8 +3529,7 @@
 								"w",
 								"autologin"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -3436,12 +3563,11 @@
 								"autologin",
 								"5a434a085f54711336570ecc"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "dd721443-314c-4271-9b48-b4162ddfc26e",
+							"id": "8bd14309-1274-477f-9f84-72feac0a03f7",
 							"name": "/w/autologin/<oid> (성공)",
 							"originalRequest": {
 								"method": "GET",
@@ -3476,7 +3602,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3510,93 +3635,21 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 36,
 							"body": "{\"data\": {\"updated_at\": 1514326904, \"_id\": \"5a434a085f54711336570ecc\", \"created_at\": 1514326904, \"usk\": \"5a434a085f54711336570ecb\", \"content_oid\": \"59e9bf995f54710f67bb237a\"}}"
 						},
 						{
-							"id": "086b0c0d-0eef-4f22-a817-4ce8981a41cd",
-							"name": "/w/autologin/<oid> (무효한 oid)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ec",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"autologin",
-										"5a434a085f54711336570ec"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "41",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 27 Dec 2017 07:37:47 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"responseTime": 27,
-							"body": "{\"message\": \"400: invalid autologin_oid\"}"
-						},
-						{
-							"id": "58fd3fcc-688b-4700-ba8a-7561c15a715e",
+							"id": "d91c8bc1-af02-47a0-b71e-00542b56b5be",
 							"name": "/w/autologin/<oid> (존재하지 않는 oid)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
+										"value": "usk={{usk}}"
 									},
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -3604,7 +3657,7 @@
 									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ec2",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -3613,14 +3666,13 @@
 									"path": [
 										"w",
 										"autologin",
-										"5a434a085f54711336570ec2"
+										"5a434a085f54711336570ecc"
 									]
 								}
 							},
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3648,8 +3700,72 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 23,
 							"body": "{\"message\": \"400: not exist autologin session\"}"
+						},
+						{
+							"id": "f31a409e-68d1-49fc-bd33-8d7c89835c36",
+							"name": "/w/autologin/<oid> (무효한 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"autologin",
+										"5a434a085f54711336570ecc"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "41",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:37:47 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: invalid autologin_oid\"}"
 						}
 					]
 				},
@@ -3658,7 +3774,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/content/atY3Nb7",
 							"protocol": "{{protocol}}",
@@ -3676,14 +3795,17 @@
 					},
 					"response": [
 						{
-							"id": "20faea7f-32a4-4a3f-8267-bfc68c56cc50",
+							"id": "a34c2bbb-ce40-46f1-809b-45b38ed53952",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/content/iB8n2mb",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/content/atY3Nb7",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -3692,14 +3814,13 @@
 									"path": [
 										"w",
 										"content",
-										"iB8n2mb"
+										"atY3Nb7"
 									]
 								}
 							},
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3733,7 +3854,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 6,
 							"body": "{\"data\": {\"name\": \"Rainbow island 2017\", \"place\": \"Jarasum, Gyeonggido\", \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"image\": {\"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}, \"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}}, \"created_at\": 1489965909, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"updated_at\": 1497463033, \"enabled\": true, \"short_id\": \"iB8n2mb\", \"company_oid\": \"59267101c8bd954d005597c7\"}}"
 						}
 					]
@@ -3743,7 +3863,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/contents?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -3758,13 +3881,11 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								}
 							]
 						},
@@ -3772,14 +3893,17 @@
 					},
 					"response": [
 						{
-							"id": "8165eaf9-7ee2-4b27-89a4-28d299cc83c8",
+							"id": "fba966d3-44f4-4651-ba7b-8e6ba6b2253a",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/content/iB8n2mb",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/contents?start=0&size=10",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -3787,15 +3911,23 @@
 									"port": "{{port}}",
 									"path": [
 										"w",
-										"content",
-										"iB8n2mb"
+										"contents"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
 									]
 								}
 							},
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3829,7 +3961,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 6,
 							"body": "{\"data\": {\"name\": \"Rainbow island 2017\", \"place\": \"Jarasum, Gyeonggido\", \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"image\": {\"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}, \"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}}, \"created_at\": 1489965909, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"updated_at\": 1497463033, \"enabled\": true, \"short_id\": \"iB8n2mb\", \"company_oid\": \"59267101c8bd954d005597c7\"}}"
 						}
 					]
@@ -3854,7 +3985,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -3881,12 +4015,15 @@
 					},
 					"response": [
 						{
-							"id": "04411afa-c14e-4846-9f68-e609b24b2759",
+							"id": "ed919cac-7f4e-4c18-bc2d-737b88c17a73",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/countries?start=0&size=10",
 									"protocol": "{{protocol}}",
@@ -3901,13 +4038,11 @@
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										}
 									]
 								}
@@ -3915,7 +4050,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -3950,7 +4084,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Tue Jan 19 2038 03:14:07 GMT+0900 (KST)",
+									"expires": "Invalid Date",
 									"httpOnly": false,
 									"domain": "host.tkit.me",
 									"path": "/",
@@ -3959,7 +4093,6 @@
 									"key": "usk"
 								}
 							],
-							"responseTime": 20,
 							"body": "{\"data\": [{\"updated_at\": 1492070119, \"name\": \"Australia\", \"code\": \"61\", \"_id\": \"58ef24098705470b00874bd6\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Brazil\", \"code\": \"55\", \"_id\": \"58ef242c8705470b00874bd7\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Canada\", \"code\": \"1\", \"_id\": \"58ef248a8705470b00874bd8\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"China\", \"code\": \"86\", \"_id\": \"58ef24a58705470b00874bd9\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Germany\", \"code\": \"49\", \"_id\": \"58ef24cb8705470b00874bda\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Hong Kong\", \"code\": \"852\", \"_id\": \"58ef24f28705470b00874bdb\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Japan\", \"code\": \"81\", \"_id\": \"58ef253e8705470b00874bdc\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Singapore\", \"code\": \"65\", \"_id\": \"58ef256c8705470b00874bdd\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"South Korea\", \"code\": \"82\", \"_id\": \"58ef23d08705470b00874bd5\", \"enabled\": true, \"created_at\": 1492070061}, {\"updated_at\": 1492070119, \"name\": \"Thailand\", \"code\": \"66\", \"_id\": \"58ef25828705470b00874bde\", \"enabled\": true, \"created_at\": 1492070061}], \"count\": 12}"
 						}
 					]
@@ -3974,7 +4107,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 							"protocol": "{{protocol}}",
@@ -3989,18 +4125,15 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "5951cc82ba590e3cec7f6031",
-									"equals": true
+									"value": "5951cc82ba590e3cec7f6031"
 								}
 							]
 						},
@@ -4008,19 +4141,22 @@
 					},
 					"response": [
 						{
-							"id": "5403aa7a-d5be-4bc2-a47f-bcb7a6d9742c",
+							"id": "6df2c9dd-0e08-47f0-9dcb-4a8eb4991723",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=5940efb15f5471a2b6750108"
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4033,18 +4169,15 @@
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "5951cc82ba590e3cec7f6031"
 										}
 									]
 								}
@@ -4052,7 +4185,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4086,7 +4218,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 33,
 							"body": "{\"count\": 4, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6c\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6b\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
 						}
 					]
@@ -4101,7 +4232,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 							"protocol": "{{protocol}}",
@@ -4117,18 +4251,15 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "5951cc82ba590e3cec7f6031",
-									"equals": true
+									"value": "5951cc82ba590e3cec7f6031"
 								}
 							]
 						},
@@ -4136,19 +4267,22 @@
 					},
 					"response": [
 						{
-							"id": "238b3b4c-e2dd-4673-9565-e8a3772a6f20",
+							"id": "69cae2e9-428c-4b8a-8c56-a64562aeb33a",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=5940efb15f5471a2b6750108"
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4156,23 +4290,21 @@
 									"port": "{{port}}",
 									"path": [
 										"w",
-										"tickets"
+										"ticket",
+										"logs"
 									],
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "5951cc82ba590e3cec7f6031"
 										}
 									]
 								}
@@ -4180,7 +4312,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4214,7 +4345,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 33,
 							"body": "{\"count\": 4, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6c\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6b\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
 						}
 					]
@@ -4229,7 +4359,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_079527261731",
 							"protocol": "{{protocol}}",
@@ -4245,95 +4378,27 @@
 							"query": [
 								{
 									"key": "imp_uid",
-									"value": "imp_079527261731",
-									"equals": true
+									"value": "imp_079527261731"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "5a5b3e9f-33a1-4ca5-8d23-46a196964335",
-							"name": "/w/ticket/payment (400: not exist fee)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
-									}
-								],
-								"body": {},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_869530953640",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"payment"
-									],
-									"query": [
-										{
-											"key": "imp_uid",
-											"value": "imp_869530953640",
-											"equals": true
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "33",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Nov 2017 02:32:39 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"responseTime": 137,
-							"body": "{\"message\": \"400: not exist fee\"}"
-						},
-						{
-							"id": "2e08ff85-44b0-477a-b024-07cdeb4b962e",
+							"id": "19c58ef0-bbad-4e0c-9622-e3e3b855e6a3",
 							"name": "/w/ticket/payment (success case)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_079527261731",
 									"protocol": "{{protocol}}",
@@ -4349,8 +4414,7 @@
 									"query": [
 										{
 											"key": "imp_uid",
-											"value": "imp_079527261731",
-											"equals": true
+											"value": "imp_079527261731"
 										}
 									]
 								}
@@ -4358,7 +4422,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4392,8 +4455,74 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 195,
 							"body": "{\"data\": {\"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_history\": [], \"amount\": 10000, \"imp_uid\": \"imp_079527261731\", \"pay_method\": \"card\", \"card_code\": \"361\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"buyer_tel\": \"821032697178\", \"apply_num\": \"33305906\", \"cancel_amount\": 0, \"currency\": \"KRW\", \"paid_at\": 1509592577, \"card_name\": \"BC\\uce74\\ub4dc\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171102121617261651&noMethod=1\", \"cancelled_at\": 0, \"merchant_uid\": \"597bf030ba590e7985d0fb6d\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171102121617261651\", \"user_agent\": \"sorry_not_supported_anymore\", \"status\": \"paid\", \"cancel_receipt_urls\": [], \"card_quota\": 0, \"pg_provier\": \"html5_inicis\", \"cancel_reason\": null, \"buyer_email\": \"kevin.cho@rjkorea.com\"}}"
+						},
+						{
+							"id": "56122a15-8338-43d4-857a-2380184f344e",
+							"name": "/w/ticket/payment (400: not exist fee)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_079527261731",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"payment"
+									],
+									"query": [
+										{
+											"key": "imp_uid",
+											"value": "imp_079527261731"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "33",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Nov 2017 02:32:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: not exist fee\"}"
 						}
 					]
 				},
@@ -4407,7 +4536,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
 							"protocol": "{{protocol}}",
@@ -4422,12 +4554,11 @@
 								"payment",
 								"status"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "1edbb94d-a4ac-44d6-a5b1-ca47ccf7a76e",
+							"id": "b1fbf33a-7ae3-4534-a186-f767a9e5a43a",
 							"name": "/w/ticket/<oid>/payment/status (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -4437,7 +4568,10 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
 									"protocol": "{{protocol}}",
@@ -4457,7 +4591,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4491,24 +4624,25 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 119,
 							"body": "{\"data\": {\"imp_uid\": \"imp_079527261731\", \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"buyer_tel\": \"821032697178\", \"status\": \"paid\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\"}}"
 						},
 						{
-							"id": "ebc49478-12d6-4709-8a26-c759992eb35d",
+							"id": "47d5d693-5c23-4169-9627-f891a2314d25",
 							"name": "/w/ticket/<oid>/payment/status (not exist payment info)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0f06d/payment/status",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4517,7 +4651,7 @@
 									"path": [
 										"w",
 										"ticket",
-										"597bf030ba590e7985d0f06d",
+										"597bf030ba590e7985d0fb6d",
 										"payment",
 										"status"
 									]
@@ -4526,7 +4660,6 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4554,7 +4687,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 129,
 							"body": "{\"message\": \"400: not exist payment info\"}"
 						}
 					]
@@ -4591,12 +4723,11 @@
 								"payment",
 								"complete"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "768df4f3-c5a0-48dd-aae1-c44dff0932a2",
+							"id": "2db973a5-92bf-4b4c-88c4-5ad26d1e426d",
 							"name": "/w/ticket/<oid>/payment/complete (400: status is not paid)",
 							"originalRequest": {
 								"method": "PUT",
@@ -4633,7 +4764,6 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4661,7 +4791,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 129,
 							"body": "{\"message\": \"400: status is not paid on iamport\"}"
 						}
 					]
@@ -4698,13 +4827,12 @@
 								"payment",
 								"cancel"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "16105e71-0fed-4aeb-a79c-b6f3e99ec2c0",
-							"name": "/w/ticket/<oid>/payment/cancel (fail case)",
+							"id": "b5bae320-e4b8-402b-94cc-27d520df3243",
+							"name": "/w/ticket/<oid>/payment/cancel (not exist payment info for cancel)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -4714,7 +4842,6 @@
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
 										"value": "application/json"
 									}
 								],
@@ -4723,7 +4850,7 @@
 									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/cancel",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5978254eba590e14c06fa2a4/payment/cancel",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4732,7 +4859,7 @@
 									"path": [
 										"w",
 										"ticket",
-										"597bf030ba590e7985d0fb6d",
+										"5978254eba590e14c06fa2a4",
 										"payment",
 										"cancel"
 									]
@@ -4741,79 +4868,6 @@
 							"status": "Internal Server Error",
 							"code": 500,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "136",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 03 Nov 2017 02:35:07 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"responseTime": 609,
-							"body": "{\"message\": \"500: \\uacb0\\uc81c\\ucde8\\uc18c\\uc5d0 \\uc2e4\\ud328\\ud558\\uc600\\uc2b5\\ub2c8\\ub2e4. [501626|\\uae30 \\ucde8\\uc18c \\uac70\\ub798]\"}"
-						},
-						{
-							"id": "25c91e37-d906-4579-b6bc-da117b7f4d1c",
-							"name": "/w/ticket/<oid>/payment/cancel (not exist payment info for cancel)",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
-									},
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"disabled": false
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb0d/payment/cancel",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"597bf030ba590e7985d0fb0d",
-										"payment",
-										"cancel"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4841,97 +4895,21 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 138,
 							"body": "{\"message\": \"500: \\ucde8\\uc18c\\ud560 \\uacb0\\uc81c\\uac74\\uc774 \\uc874\\uc7ac\\ud558\\uc9c0 \\uc54a\\uc2b5\\ub2c8\\ub2e4.\"}"
 						},
 						{
-							"id": "60f102da-fad9-42f1-b7ae-07252d37dfc0",
-							"name": "/w/ticket/<oid>/payment/cancel (success case)",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
-									},
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"disabled": false
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5978254eba590e14c06fa2a4/payment/cancel",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"5978254eba590e14c06fa2a4",
-										"payment",
-										"cancel"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "1730",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 03 Nov 2017 02:51:18 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"responseTime": 758,
-							"body": "{\"data\": {\"card_quota\": 0, \"escrow\": false, \"imp_uid\": \"imp_658397387002\", \"buyer_postcode\": null, \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_amount\": 10000, \"merchant_uid\": \"5978254eba590e14c06fa2a4\", \"cancel_receipt_urls\": [\"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\"], \"vbank_num\": null, \"bank_name\": null, \"card_code\": \"361\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"custom_data\": null, \"vbank_name\": null, \"vbank_code\": null, \"cancel_history\": [{\"cancelled_at\": 1509677477, \"amount\": 10000, \"reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\"}], \"buyer_addr\": null, \"cancelled_at\": 1509677477, \"apply_num\": \"38397899\", \"card_name\": \"BC\\uce74\\ub4dc\", \"user_agent\": \"sorry_not_supported_anymore\", \"pg_provider\": \"html5_inicis\", \"buyer_email\": \"kevin.cho@rjkorea.com\", \"amount\": 10000, \"cancel_reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"vbank_date\": 0, \"status\": \"cancelled\", \"pay_method\": \"card\", \"paid_at\": 1509677427, \"failed_at\": 0, \"currency\": \"KRW\", \"fail_reason\": null, \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\", \"cash_receipt_issued\": false, \"vbank_holder\": null, \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"bank_code\": null, \"buyer_tel\": \"821032697178\"}}"
-						},
-						{
-							"id": "474c166a-a56b-4c32-b79c-332ea14fbe9d",
+							"id": "cbb1e02b-cf34-48f8-9487-b5eadfb48cea",
 							"name": "/w/ticket/<oid>/payment/cancel (already cancel)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk={{usk}}",
-										"disabled": false
+										"value": "usk={{usk}}"
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -4957,7 +4935,6 @@
 							"status": "Internal Server Error",
 							"code": 500,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -4985,8 +4962,141 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 130,
 							"body": "{\"message\": \"500: \\uc774\\ubbf8 \\uc804\\uc561\\ucde8\\uc18c\\ub41c \\uc8fc\\ubb38\\uc785\\ub2c8\\ub2e4.\"}"
+						},
+						{
+							"id": "6c2cf0ae-09a1-4f25-8528-dd4df49f5fc6",
+							"name": "/w/ticket/<oid>/payment/cancel (fail case)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5978254eba590e14c06fa2a4/payment/cancel",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5978254eba590e14c06fa2a4",
+										"payment",
+										"cancel"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "136",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Nov 2017 02:35:07 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"500: \\uacb0\\uc81c\\ucde8\\uc18c\\uc5d0 \\uc2e4\\ud328\\ud558\\uc600\\uc2b5\\ub2c8\\ub2e4. [501626|\\uae30 \\ucde8\\uc18c \\uac70\\ub798]\"}"
+						},
+						{
+							"id": "4a680bec-dbf4-4394-aea3-eaa99224d792",
+							"name": "/w/ticket/<oid>/payment/cancel (success case)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5978254eba590e14c06fa2a4/payment/cancel",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5978254eba590e14c06fa2a4",
+										"payment",
+										"cancel"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "1730",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Nov 2017 02:51:18 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"card_quota\": 0, \"escrow\": false, \"imp_uid\": \"imp_658397387002\", \"buyer_postcode\": null, \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_amount\": 10000, \"merchant_uid\": \"5978254eba590e14c06fa2a4\", \"cancel_receipt_urls\": [\"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\"], \"vbank_num\": null, \"bank_name\": null, \"card_code\": \"361\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"custom_data\": null, \"vbank_name\": null, \"vbank_code\": null, \"cancel_history\": [{\"cancelled_at\": 1509677477, \"amount\": 10000, \"reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\"}], \"buyer_addr\": null, \"cancelled_at\": 1509677477, \"apply_num\": \"38397899\", \"card_name\": \"BC\\uce74\\ub4dc\", \"user_agent\": \"sorry_not_supported_anymore\", \"pg_provider\": \"html5_inicis\", \"buyer_email\": \"kevin.cho@rjkorea.com\", \"amount\": 10000, \"cancel_reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"vbank_date\": 0, \"status\": \"cancelled\", \"pay_method\": \"card\", \"paid_at\": 1509677427, \"failed_at\": 0, \"currency\": \"KRW\", \"fail_reason\": null, \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\", \"cash_receipt_issued\": false, \"vbank_holder\": null, \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"bank_code\": null, \"buyer_tel\": \"821032697178\"}}"
 						}
 					]
 				},
@@ -5021,19 +5131,18 @@
 								"5940d2785f5471904fd44563",
 								"register"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "764ac653-f370-4c35-a9d9-a8b5bca03476",
+							"id": "2bc03296-d24c-48a3-bd76-1dc16b236077",
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=593e4c625f5471600c4c90c1"
+										"value": "usk={{usk}}"
 									},
 									{
 										"key": "Content-Type",
@@ -5045,7 +5154,7 @@
 									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/594388d15f5471034ffcda28/register",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -5054,7 +5163,7 @@
 									"path": [
 										"w",
 										"ticket",
-										"594388d15f5471034ffcda28",
+										"5940d2785f5471904fd44563",
 										"register"
 									]
 								}
@@ -5062,7 +5171,6 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -5090,7 +5198,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 31,
 							"body": "{\"message\": \"400: Already registered ticket on this content\"}"
 						}
 					]
@@ -5125,88 +5232,18 @@
 								"ticket",
 								"send"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "d3d0ba78-cec6-4869-80d2-32b268c40f06",
-							"name": "3개 티켓 다른 사람에게 전송",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk=5941e8105f5471a2b6be0f80",
-										"disabled": false
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"ticket_oids\": [\n\t\t\"5942318a5f5471bfcf43b8ad\",\n\t\t\"5942318a5f5471bfcf43b8ab\",\n\t\t\"5942318a5f5471bfcf43b8ac\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"SELULKI\",\n\t\t\"mobile_number\": \"821030919199\"\n\t}\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"send"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "68",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 15 Jun 2017 07:08:59 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"responseTime": 27,
-							"body": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}"
-						},
-						{
-							"id": "0366e84a-6ee1-433f-bf06-9c48e46adf93",
+							"id": "9dd5fe00-8b6e-4786-b65c-5d3103771512",
 							"name": "3개 티켓을 자신에게 전송 (400 에러)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=5941e8105f5471a2b6be0f80"
+										"value": "usk={{usk}}"
 									},
 									{
 										"key": "Content-Type",
@@ -5215,7 +5252,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"ticket_oids\": [\n\t\t\"5942318a5f5471bfcf43b8ad\",\n\t\t\"5942318a5f5471bfcf43b8ab\",\n\t\t\"5942318a5f5471bfcf43b8ac\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"조건희\",\n\t\t\"mobile_number\": \"821032697178\"\n\t}\n}"
+									"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile_number\": \"821030623239\"\n\t}\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
@@ -5234,7 +5271,6 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -5262,8 +5298,72 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 26,
 							"body": "{\"message\": \"400: cannot send to myself\"}"
+						},
+						{
+							"id": "80e3da15-5c12-4ce4-8963-7a7fb75c02e0",
+							"name": "3개 티켓 다른 사람에게 전송",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile_number\": \"821030623239\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"send"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "68",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2017 07:08:59 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}"
 						}
 					]
 				},
@@ -5277,7 +5377,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/me?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
 							"protocol": "{{protocol}}",
@@ -5293,36 +5396,35 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "58cf91e55f5471137a8ffd9e",
-									"equals": true
+									"value": "58cf91e55f5471137a8ffd9e"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "4632ebf2-5605-487f-b079-8e5fbd1a6cc1",
+							"id": "e7786450-feb0-4bde-b2d1-2f43b062afbd",
 							"name": "마이티킷 리스트(status: register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=593e4c625f5471600c4c90c1"
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/me?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
 									"protocol": "{{protocol}}",
@@ -5338,18 +5440,15 @@
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "58cf91e55f5471137a8ffd9e"
 										}
 									]
 								}
@@ -5357,7 +5456,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -5391,7 +5489,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 21,
 							"body": "{\"count\": 2, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
 						}
 					]
@@ -5406,7 +5503,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -5421,39 +5521,37 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "594246755f5471c519ecfc8c",
-									"equals": true
+									"value": "594246755f5471c519ecfc8c"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "ffa5cd3b-98b3-4538-8719-1a2cab4218bb",
+							"id": "0090cd7a-3ab6-44b7-8256-c58321c55f19",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=593e4c625f5471600c4c90c1",
-										"disabled": false
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -5466,18 +5564,15 @@
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "594246755f5471c519ecfc8c"
 										}
 									]
 								}
@@ -5485,7 +5580,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -5519,7 +5613,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 27,
 							"body": "{\"count\": 12, \"data\": [{\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423ad8fd183a8f160312b4\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b65fd183a8f160312b5\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b93fd183a8f160312b6\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b96fd183a8f160312b7\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b97fd183a8f160312b8\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b99fd183a8f160312b9\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9afd183a8f160312ba\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9bfd183a8f160312bb\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9cfd183a8f160312bc\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9dfd183a8f160312bd\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}]}"
 						}
 					]
@@ -5534,7 +5627,10 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c&filter=mytkit",
 							"protocol": "{{protocol}}",
@@ -5549,44 +5645,41 @@
 							"query": [
 								{
 									"key": "start",
-									"value": "0",
-									"equals": true
+									"value": "0"
 								},
 								{
 									"key": "size",
-									"value": "10",
-									"equals": true
+									"value": "10"
 								},
 								{
 									"key": "content_oid",
-									"value": "594246755f5471c519ecfc8c",
-									"equals": true
+									"value": "594246755f5471c519ecfc8c"
 								},
 								{
 									"key": "filter",
-									"value": "mytkit",
-									"equals": true
+									"value": "mytkit"
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "ee1f0799-6300-470c-b14d-2a6bd2869956",
+							"id": "b0b197f1-8ee2-4b55-9a3b-a635c4b8e5ee",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "usk=593e4c625f5471600c4c90c1",
-										"disabled": false
+										"value": "usk={{usk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c&filter=mytkit",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -5599,18 +5692,19 @@
 									"query": [
 										{
 											"key": "start",
-											"value": "0",
-											"equals": true
+											"value": "0"
 										},
 										{
 											"key": "size",
-											"value": "10",
-											"equals": true
+											"value": "10"
 										},
 										{
 											"key": "content_oid",
-											"value": "58cf91e55f5471137a8ffd9e",
-											"equals": true
+											"value": "594246755f5471c519ecfc8c"
+										},
+										{
+											"key": "filter",
+											"value": "mytkit"
 										}
 									]
 								}
@@ -5618,7 +5712,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -5652,7 +5745,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 27,
 							"body": "{\"count\": 12, \"data\": [{\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423ad8fd183a8f160312b4\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b65fd183a8f160312b5\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b93fd183a8f160312b6\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b96fd183a8f160312b7\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b97fd183a8f160312b8\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b99fd183a8f160312b9\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9afd183a8f160312ba\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9bfd183a8f160312bb\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9cfd183a8f160312bc\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9dfd183a8f160312bd\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}]}"
 						}
 					]
@@ -5687,8 +5779,7 @@
 								"user",
 								"me"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -5722,30 +5813,27 @@
 								"user",
 								"me"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "e93722b4-1065-4243-b0aa-470b37728d17",
+							"id": "0b5d115f-d666-44ef-90e0-b35b363aae50",
 							"name": "조건희 유저정보 가져오기",
 							"originalRequest": {
-								"method": "GET",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									},
 									{
 										"key": "Authorization",
-										"value": "usk=5941e8105f5471a2b6be0f80",
-										"disabled": false
+										"value": "usk={{usk}}"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
+									"raw": "{\n\t\"name\": \"김유림\",\n\t\"birthday\": \"900127\",\n\t\"email\": \"flalgnsl@naver.com\",\n\t\"gender\": \"female\",\n\t\"mobile_number\": \"821086219127\"\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
@@ -5764,7 +5852,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Content-Length",
@@ -5798,7 +5885,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 16,
 							"body": "{\"data\": {\"role\": [\"broker\"], \"birthday\": \"20170615\", \"email\": \"takearest118@gmail.com\", \"access_code\": \"asdf\", \"updated_at\": 1497388008, \"password\": \"$p5k2$$Y2IhkSbqCi1NOcyLCQfvi.BBmkhkyUu5$kF27wh0vjhr5cOISfwiEBpBWm2oY5bUj\", \"_id\": \"5931a3eabc2c44140e0dea91\", \"gender\": \"male\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"name\": \"\\uc870\\uac74\\ud76c\", \"created_at\": 1497388008}}"
 						}
 					]
@@ -5823,7 +5909,6 @@
 								{
 									"key": "profile",
 									"value": "",
-									"description": "",
 									"type": "file"
 								}
 							]
@@ -5877,8 +5962,7 @@
 								"me",
 								"password"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -5887,7 +5971,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/order/waterbomb-2017-kbs",
 							"protocol": "{{protocol}}",
@@ -5934,10 +6021,176 @@
 								"q190uAv",
 								"register"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "v2",
+			"description": "TKIT 0.6",
+			"item": [
+				{
+					"name": "/v2/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"password\": \"2053\"\n}\n"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/login",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"login"
+							]
+						},
+						"description": "login"
+					},
+					"response": []
+				},
+				{
+					"name": "/v2/user/me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA2NzI4MzYsImlhdCI6MTUyMDU4NjQzNiwidXNlcl9vaWQiOiI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifQ.Ivnp2woPFWDsKXblFRhNu-5HLWewCpTVQCd6JROt12U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"user",
+								"me"
+							]
+						},
+						"description": "get me info"
+					},
+					"response": [
+						{
+							"id": "19446896-a63b-4671-ad70-20dd49f85008",
+							"name": "access token expired",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v2",
+										"user",
+										"me"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "40",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Mar 2018 09:06:11 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"401: access token expired\"}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "58983d4c-373d-45aa-918b-e9d383cf2ea5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3448f70b-1354-4316-9552-adab5bf98e24",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
 				}
 			]
 		}
