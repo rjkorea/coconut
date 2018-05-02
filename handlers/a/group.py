@@ -119,18 +119,36 @@ class GroupHandler(JsonHandler):
         self.write_json()
 
 
-class PlaceStatsHandler(JsonHandler):
+class GroupTicketListHandler(JsonHandler):
     @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
-        result = dict()
-        result['A'] = await PlaceModel.count(query={'area': 'A'})
-        result['B'] = await PlaceModel.count(query={'area': 'B'})
-        result['C'] = await PlaceModel.count(query={'area': 'C'})
-        result['D'] = await PlaceModel.count(query={'area': 'D'})
-        result['E'] = await PlaceModel.count(query={'area': 'E'})
-        result['F'] = await PlaceModel.count(query={'area': 'F'})
-        result['G'] = await PlaceModel.count(query={'area': 'G'})
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid)})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        parsed_args = kwargs.get('parsed_args')
+        q = dict(
+            content_oid=ObjectId(content_oid),
+            group_oid=ObjectId(group_oid)
+        )
+        if 'q' in parsed_args and parsed_args['q']:
+            q['$or'] = [
+                {'name': {'$regex': parsed_args['q']}},
+                {'mobile_number': {'$regex': parsed_args['q']}}
+            ]
+        count = await GroupTicketModel.count(query=q)
+        result = await GroupTicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
+        self.response['count'] = count
         self.write_json()
 
     async def options(self, *args, **kwargs):
