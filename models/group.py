@@ -16,6 +16,11 @@ class GroupModel(BaseModel):
         specification = super(GroupModel, self).specification
         specification.extend([
             {
+                'key': 'admin_oid',
+                'type': ObjectId,
+                'default': None
+            },
+            {
                 'key': 'content_oid',
                 'type': ObjectId,
                 'default': None
