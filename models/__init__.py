@@ -7,6 +7,7 @@ from common import hashers
 
 from models.user import UserModel
 from models.ticket import TicketTypeModel, TicketModel
+from models.group import GroupModel, GroupTicketModel
 
 from services.sms import NexmoService
 
@@ -42,6 +43,14 @@ async def create_ticket(ticket_order):
                 if not duplicated_ticket:
                     ticket.data['serial_number'] = serial_number
                     break
+        await ticket.insert()
+
+async def create_group_ticket(group):
+    for c in range(group['qty']):
+        ticket = GroupTicketModel(raw_data=dict(
+            content_oid=group['content_oid'],
+            group_oid=group['_id']
+        ))
         await ticket.insert()
 
 async def create_broker(receiver):

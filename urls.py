@@ -37,6 +37,7 @@ url_patterns = [
     (r'/a/content/?', a.content.ContentPostHandler),
     (r'/a/content/(?P<_id>[^\/]+)/image/(?P<type>[^\/]+)/?', a.content.ContentImageUploadHandler),
     (r'/a/content/(?P<_id>[^\/]+)/active/user/?', a.content.ContentActiveUserHandler),
+    (r'/a/content/(?P<_id>[^\/]+)/group/?', a.group.GroupHandler),
 
     (r'/a/ticket/types/?', a.ticket.TicketTypeListHandler),
     (r'/a/ticket/type/(?P<_id>[^\/]+)/?', a.ticket.TicketTypeHandler),
