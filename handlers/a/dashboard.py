@@ -293,14 +293,17 @@ class DashboardContentHandler(JsonHandler):
             }
         ]
         top_ticket_orders = await TicketModel.aggregate(pipeline, 50)
+        ttos = list()
         for tto in top_ticket_orders:
-            tto['ticket_order'] = await TicketOrderModel.get_id(tto['_id'])
-            tto['ticket_type'] = await TicketTypeModel.get_id(tto['ticket_order']['ticket_type_oid'])
-            tto['ticket_register_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.register.name})
-            tto['ticket_pay_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.pay.name})
-            tto['ticket_use_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.use.name})
-            tto['ticket_cancel_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.cancel.name})
-        self.response['data']['top_ticket_orders'] = top_ticket_orders
+            if tto['_id']:
+                tto['ticket_order'] = await TicketOrderModel.get_id(tto['_id'])
+                tto['ticket_type'] = await TicketTypeModel.get_id(tto['ticket_order']['ticket_type_oid'])
+                tto['ticket_register_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.register.name})
+                tto['ticket_pay_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.pay.name})
+                tto['ticket_use_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.use.name})
+                tto['ticket_cancel_cnt'] = await TicketModel.count({'ticket_order_oid': tto['_id'], 'status': TicketModel.Status.cancel.name})
+                ttos.append(tto)
+        self.response['data']['top_ticket_orders'] = ttos
 
         #user aggregate for revenue
         pipeline = [
