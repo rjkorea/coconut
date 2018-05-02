@@ -14,21 +14,25 @@ from models.content import ContentModel
 from models import create_group_ticket
 
 
-class PlaceListHandler(JsonHandler):
+class GroupListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
         parsed_args = kwargs.get('parsed_args')
         q = dict()
         if 'q' in parsed_args and parsed_args['q']:
             q['$or'] = [
                 {'name': {'$regex': parsed_args['q']}},
-                {'mobile_number': {'$regex': parsed_args['q']}},
-                {'area': {'$regex': parsed_args['q']}},
-                {'number': {'$regex': parsed_args['q']}}
+                {'desc': {'$regex': parsed_args['q']}}
             ]
-        count = await PlaceModel.count(query=q)
-        result = await PlaceModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        count = await GroupModel.count(query=q)
+        result = await GroupModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
