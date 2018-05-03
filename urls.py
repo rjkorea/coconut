@@ -41,6 +41,7 @@ url_patterns = [
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/?', a.group.GroupHandler),
     (r'/a/content/(?P<_id>[^\/]+)/groups/?', a.group.GroupListHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/tickets/?', a.group.GroupTicketListHandler),
+    (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/ticket/(?P<ticket_oid>[^\/]+)/?', a.group.GroupTicketHandler),
 
     (r'/a/ticket/types/?', a.ticket.TicketTypeListHandler),
     (r'/a/ticket/type/(?P<_id>[^\/]+)/?', a.ticket.TicketTypeHandler),
