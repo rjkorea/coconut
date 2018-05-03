@@ -25,7 +25,9 @@ class GroupListHandler(JsonHandler):
         if not content:
             raise HTTPError(400, 'no exists content')
         parsed_args = kwargs.get('parsed_args')
-        q = dict()
+        q = dict(
+            content_oid=content['_id']
+        )
         if 'q' in parsed_args and parsed_args['q']:
             q['$or'] = [
                 {'name': {'$regex': parsed_args['q']}},
