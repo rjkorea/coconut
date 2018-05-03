@@ -46,6 +46,24 @@ class GroupListHandler(JsonHandler):
 
 class GroupHandler(JsonHandler):
     @admin_auth_async
+    async def get(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        self.response['data'] = group
+        self.write_json()
+
+
+    @admin_auth_async
     async def post(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
@@ -104,18 +122,7 @@ class GroupHandler(JsonHandler):
         }
         self.response['data'] = await PlaceModel.update(query, document)
         self.write_json()
-
-    @admin_auth_async
-    async def get(self, *args, **kwargs):
-        _id = kwargs.get('_id', None)
-        if not _id or len(_id) != 24:
-            raise HTTPError(400, 'invalid _id')
-        place = await PlaceModel.find_one({'_id': ObjectId(_id)})
-        if not place:
-            raise HTTPError(400, 'not exist place')
-        self.response['data'] = place
-        self.write_json()
-
+        
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()

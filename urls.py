@@ -38,6 +38,7 @@ url_patterns = [
     (r'/a/content/(?P<_id>[^\/]+)/image/(?P<type>[^\/]+)/?', a.content.ContentImageUploadHandler),
     (r'/a/content/(?P<_id>[^\/]+)/active/user/?', a.content.ContentActiveUserHandler),
     (r'/a/content/(?P<_id>[^\/]+)/group/?', a.group.GroupHandler),
+    (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/?', a.group.GroupHandler),
     (r'/a/content/(?P<_id>[^\/]+)/groups/?', a.group.GroupListHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/tickets/?', a.group.GroupTicketListHandler),
 
