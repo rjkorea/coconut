@@ -34,9 +34,14 @@ class GroupListHandler(JsonHandler):
                 {'desc': {'$regex': parsed_args['q']}}
             ]
         count = await GroupModel.count(query=q)
-        result = await GroupModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
-        self.response['data'] = result
+        res = await GroupModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for r in res:
+            r['used_gt_cnt'] = await GroupTicketModel.count(query={'content_oid': content['_id'], 'group_oid': r['_id'], 'used': True})
+            r['reg_gt_cnt'] = await GroupTicketModel.count(query={'content_oid': content['_id'], 'group_oid': r['_id'], 'mobile_number': {'$exists': True}})
+        self.response['data'] = res
         self.response['count'] = count
+        group_ticket_count = await GroupTicketModel.count(query={'content_oid': content['_id']})
+        self.response['group_ticket_count'] = group_ticket_count
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -89,7 +94,6 @@ class GroupHandler(JsonHandler):
             qty=qty
         ))
         group_oid = await group.insert()
-        # TODO create tickets by qty
         await create_group_ticket(group.data)
         self.response['data'] = {
             '_id': group_oid
@@ -206,6 +210,9 @@ class GroupTicketHandler(JsonHandler):
         ticket = await GroupTicketModel.find_one({'_id': ObjectId(ticket_oid), 'group_oid': group['_id'], 'content_oid': content['_id']})
         if not ticket:
             raise HTTPError(400, 'no exists ticket')
+        duplicated_ticket = await GroupTicketModel.find_one({'content_oid': content['_id'], 'mobile_number': self.json_decoded_body['mobile_number'], '_id': {'$ne': ticket['_id']}})
+        if duplicated_ticket:
+            raise HTTPError(400, '%s가(이) %s를 사용하고 있습니다.' % (duplicated_ticket['name'], duplicated_ticket['mobile_number']))
         query = {
             '_id': ticket['_id'],
         }
@@ -219,4 +226,3 @@ class GroupTicketHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
-
