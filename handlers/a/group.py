@@ -66,8 +66,7 @@ class GroupHandler(JsonHandler):
             raise HTTPError(400, 'no exists group')
         self.response['data'] = group
         self.write_json()
-
-
+    
     @admin_auth_async
     async def post(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
@@ -168,6 +167,40 @@ class GroupTicketListHandler(JsonHandler):
 
 class GroupTicketHandler(JsonHandler):
     @admin_auth_async
+    async def post(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        group_ticket = GroupTicketModel(raw_data=dict(
+            content_oid=content['_id'],
+            group_oid=group['_id']
+        ))
+        group_ticket_oid = await group_ticket.insert()
+        if group_ticket_oid:
+            query = {
+                '_id': group['_id']
+            }
+            document = {
+                '$inc': {
+                    'qty': 1
+                }
+            }
+            await GroupModel.update(query, document)
+        self.response['data'] = {
+            '_id': group_ticket_oid
+        }
+        self.write_json()
+
+    @admin_auth_async
     async def get(self, *args, **kwargs):
         content_oid = kwargs.get('content_oid', None)
         if not content_oid or len(content_oid) != 24:
@@ -219,6 +252,82 @@ class GroupTicketHandler(JsonHandler):
         self.json_decoded_body['updated_at'] = datetime.utcnow()
         document = {
             '$set': self.json_decoded_body
+        }
+        self.response['data'] = await GroupTicketModel.update(query, document)
+        self.write_json()
+        
+    @admin_auth_async
+    async def delete(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        ticket_oid = kwargs.get('ticket_oid', None)
+        if not ticket_oid or len(ticket_oid) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        ticket = await GroupTicketModel.find_one({'_id': ObjectId(ticket_oid), 'group_oid': group['_id'], 'content_oid': content['_id']})
+        if not ticket:
+            raise HTTPError(400, 'no exists ticket')
+        res = await GroupTicketModel.delete_many({'_id': ticket['_id']})
+        if res.deleted_count == 1:
+            query = {
+                '_id': group['_id']
+            }
+            document = {
+                '$inc': {
+                    'qty': -1
+                }
+            }
+            await GroupModel.update(query, document)
+        self.response['data'] = res.deleted_count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class GroupTicketResetHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        ticket_oid = kwargs.get('ticket_oid', None)
+        if not ticket_oid or len(ticket_oid) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        ticket = await GroupTicketModel.find_one({'_id': ObjectId(ticket_oid), 'group_oid': group['_id'], 'content_oid': content['_id']})
+        if not ticket:
+            raise HTTPError(400, 'no exists ticket')
+        query = {
+            '_id': ticket['_id'],
+        }
+        document = {
+            '$set': {
+                'used': False,
+                'updated_at': datetime.utcnow()
+            },
+            '$unset': {
+                'name': 1,
+                'mobile_number': 1
+            }
         }
         self.response['data'] = await GroupTicketModel.update(query, document)
         self.write_json()
