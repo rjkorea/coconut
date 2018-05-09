@@ -40,8 +40,8 @@ _settings = dict(
         api_secret='8PJ0Bmp6JLDTBITQ281p2BuM5jJ0FpWOeGOQ2eWMZAGBizrkHtKK4ewaygadG72VORLR5IE5ikHBT8WA'
     ),
     aws=dict(
-        access_key='AKIAICUA3GQ2VL4WI7IQ',
-        secret_key='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',
+        access_key='AKIAJI4LNQW7WF5K7MKQ',
+        secret_key='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',
         res_bucket='res.tkit.me'
     )
 )
