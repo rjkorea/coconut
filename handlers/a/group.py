@@ -122,6 +122,25 @@ class GroupHandler(JsonHandler):
         }
         self.response['data'] = await GroupModel.update(query, document)
         self.write_json()
+
+    @admin_auth_async
+    async def delete(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        res = await GroupTicketModel.delete_many({'group_oid': group['_id']})
+        await GroupModel.delete_many({'_id': group['_id']})
+        self.response['data'] = res.deleted_count
+        self.write_json()
         
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
