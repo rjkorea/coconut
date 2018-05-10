@@ -262,9 +262,10 @@ class GroupTicketHandler(JsonHandler):
         ticket = await GroupTicketModel.find_one({'_id': ObjectId(ticket_oid), 'group_oid': group['_id'], 'content_oid': content['_id']})
         if not ticket:
             raise HTTPError(400, 'no exists ticket')
-        duplicated_ticket = await GroupTicketModel.find_one({'content_oid': content['_id'], 'mobile_number': self.json_decoded_body['mobile_number'], '_id': {'$ne': ticket['_id']}})
-        if duplicated_ticket:
-            raise HTTPError(400, '%s가(이) %s를 사용하고 있습니다.' % (duplicated_ticket['name'], duplicated_ticket['mobile_number']))
+        if 'used' not in self.json_decoded_body:
+            duplicated_ticket = await GroupTicketModel.find_one({'content_oid': content['_id'], 'mobile_number': self.json_decoded_body['mobile_number'], '_id': {'$ne': ticket['_id']}})
+            if duplicated_ticket:
+                raise HTTPError(400, '%s가(이) %s를 사용하고 있습니다.' % (duplicated_ticket['name'], duplicated_ticket['mobile_number']))
         query = {
             '_id': ticket['_id'],
         }
