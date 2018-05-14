@@ -355,3 +355,31 @@ class GroupTicketResetHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class SearchGroupTicketHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('q', str, None)])
+    async def get(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        parsed_args = kwargs.get('parsed_args')
+        q = dict(
+            content_oid=ObjectId(content_oid)
+        )
+        if 'q' in parsed_args and parsed_args['q']:
+            q['$or'] = [
+                {'name': {'$regex': parsed_args['q']}},
+                {'mobile_number': {'$regex': parsed_args['q']}}
+            ]
+        result = await GroupTicketModel.find_one(query=q)
+        self.response['data'] = result
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
