@@ -40,10 +40,12 @@ url_patterns = [
     (r'/a/content/(?P<_id>[^\/]+)/group/?', a.group.GroupHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/?', a.group.GroupHandler),
     (r'/a/content/(?P<_id>[^\/]+)/groups/?', a.group.GroupListHandler),
+    (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/sms/send/?', a.group.GroupSmsSendHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/ticket/?', a.group.GroupTicketHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/tickets/?', a.group.GroupTicketListHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/ticket/(?P<ticket_oid>[^\/]+)/?', a.group.GroupTicketHandler),
-    (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/ticket/(?P<ticket_oid>[^\/]+)/reset?', a.group.GroupTicketResetHandler),
+    (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/ticket/(?P<ticket_oid>[^\/]+)/reset/?', a.group.GroupTicketResetHandler),
+    (r'/a/content/(?P<content_oid>[^\/]+)/group/(?P<group_oid>[^\/]+)/ticket/(?P<ticket_oid>[^\/]+)/sms/send/?', a.group.GroupTicketSmsSendHandler),
     (r'/a/content/(?P<content_oid>[^\/]+)/group/ticket/search?', a.group.SearchGroupTicketHandler),
 
     (r'/a/ticket/types/?', a.ticket.TicketTypeListHandler),

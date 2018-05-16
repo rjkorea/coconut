@@ -45,6 +45,11 @@ class GroupModel(BaseModel):
                 'type': bool,
                 'default': (lambda: True)
             },
+            {
+                'key': 'sms',
+                'type': dict,
+                'default': None
+            },
         ])
         return specification
 

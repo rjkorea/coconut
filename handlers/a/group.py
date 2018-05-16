@@ -11,7 +11,7 @@ from handlers.base import JsonHandler
 from models.group import GroupModel, GroupTicketModel
 from models.content import ContentModel
 
-from models import create_group_ticket
+from models import create_group_ticket, send_sms
 
 
 class GroupListHandler(JsonHandler):
@@ -378,6 +378,93 @@ class SearchGroupTicketHandler(JsonHandler):
             ]
         result = await GroupTicketModel.find_one(query=q)
         self.response['data'] = result
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class GroupSmsSendHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        sms_message = self.json_decoded_body.get('sms_message', None)
+        if not sms_message or len(sms_message) == 0:
+            raise HTTPError(400, 'invalid sms_message')
+        query = {
+            'content_oid': ObjectId(content_oid),
+            'group_oid': ObjectId(group_oid),
+            'mobile_number': {
+                '$exists': True
+            },
+            'enabled': True
+        }
+        group_ticket_count = await GroupTicketModel.count(query)
+        group_tickets = await GroupTicketModel.find(query=query, limit=group_ticket_count)
+        if not group_tickets:
+            raise HTTPError(400, 'no exists registered user for group ticket')
+        for gt in group_tickets:
+            doc = {
+                'type': 'unicode',
+                'from': 'tkit',
+                'to': '82%s' % gt['mobile_number'][1:],
+                'text': sms_message
+            }
+            await send_sms(doc)
+        self.response['data'] = {
+            'sent_count': group_ticket_count
+        }
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class GroupTicketSmsSendHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        content_oid = kwargs.get('content_oid', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'no exists content')
+        group_oid = kwargs.get('group_oid', None)
+        if not group_oid or len(group_oid) != 24:
+            raise HTTPError(400, 'invalid group_oid')
+        group = await GroupModel.find_one({'_id': ObjectId(group_oid), 'content_oid': content['_id']})
+        if not group:
+            raise HTTPError(400, 'no exists group')
+        ticket_oid = kwargs.get('ticket_oid', None)
+        if not ticket_oid or len(ticket_oid) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        ticket = await GroupTicketModel.find_one({'_id': ObjectId(ticket_oid), 'group_oid': group['_id'], 'content_oid': content['_id'], 'mobile_number': {'$exists': True}, 'enabled': True})
+        if not ticket:
+            raise HTTPError(400, 'no exists ticket')
+        sms_message = self.json_decoded_body.get('sms_message', None)
+        if not sms_message or len(sms_message) == 0:
+            raise HTTPError(400, 'invalid sms_message')
+        doc = {
+            'type': 'unicode',
+            'from': 'tkit',
+            'to': '82%s' % ticket['mobile_number'][1:],
+            'text': sms_message
+        }
+        await send_sms(doc)
+        self.response['data'] = 'OK'
         self.write_json()
 
     async def options(self, *args, **kwargs):
