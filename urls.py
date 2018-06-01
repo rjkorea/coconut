@@ -65,6 +65,7 @@ url_patterns = [
     (r'/a/ticket/(?P<_id>[^\/]+)/cancel/?', a.ticket.TicketCancelHandler),
     (r'/a/ticket/(?P<_id>[^\/]+)/sms/send/?', a.ticket.TicketSmsSendHandler),
     (r'/a/tickets/logs/?', a.ticket.TicketLogsHandler),
+    (r'/a/tickets/entrance/?', a.ticket.TicketEntranceListHandler),
 
     (r'/a/places/?', a.place.PlaceListHandler),
     (r'/a/place/(?P<_id>[^\/]+)/?', a.place.PlaceHandler),

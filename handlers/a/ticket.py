@@ -562,3 +562,53 @@ class TicketLogsHandler(JsonHandler):
         self.write_json()
 
 
+class TicketEntranceListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10),
+        ('receive_user_oid', str, None),('company_oid', str, None), ('content_oid', str, None), ('ticket_order_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        q = {'$and': [{}]}
+        if parsed_args['company_oid']:
+            q['$and'].append({'company_oid': ObjectId(parsed_args['company_oid'])})
+        if parsed_args['content_oid']:
+            q['$and'].append({'content_oid': ObjectId(parsed_args['content_oid'])})
+        if parsed_args['receive_user_oid']:
+            q['$and'].append({'receive_user_oid': ObjectId(parsed_args['receive_user_oid'])})
+        if parsed_args['ticket_order_oid']:
+            q['$and'].append({'ticket_order_oid': ObjectId(parsed_args['ticket_order_oid'])})
+        search_q = {'$or': [
+            {'status': TicketModel.Status.register.name},
+            {'status': TicketModel.Status.pay.name},
+            {'status': TicketModel.Status.use.name},
+            {'status': TicketModel.Status.cancel.name}
+        ]}
+        q['$and'].append(search_q)
+        count = await TicketModel.count(query=q)
+        result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for res in result:
+            res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
+            res.pop('ticket_order_oid')
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            res.pop('ticket_type_oid')
+            res['content'] = await ContentModel.get_id(res['content_oid'])
+            res.pop('content_oid')
+            if 'send_user_oid' in res:
+                res['send_user'] = await UserModel.get_id(res['send_user_oid'])
+                res.pop('send_user_oid')
+            if 'receive_user_oid' in res:
+                res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
+                res.pop('receive_user_oid')
+            if 'history_send_user_oids' in res:
+                res['history_send_users'] = list()
+                for user_oid in res['history_send_user_oids']:
+                    user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                    res['history_send_users'].append(user)
+                res.pop('history_send_user_oids')
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
