@@ -42,6 +42,8 @@ class GroupListHandler(JsonHandler):
         self.response['count'] = count
         group_ticket_count = await GroupTicketModel.count(query={'content_oid': content['_id']})
         self.response['group_ticket_count'] = group_ticket_count
+        group_ticket_used_count = await GroupTicketModel.count(query={'content_oid': content['_id'], 'used': True})
+        self.response['group_ticket_used_count'] = group_ticket_used_count
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -262,10 +264,6 @@ class GroupTicketHandler(JsonHandler):
         ticket = await GroupTicketModel.find_one({'_id': ObjectId(ticket_oid), 'group_oid': group['_id'], 'content_oid': content['_id']})
         if not ticket:
             raise HTTPError(400, 'no exists ticket')
-        if 'used' not in self.json_decoded_body:
-            duplicated_ticket = await GroupTicketModel.find_one({'content_oid': content['_id'], 'mobile_number': self.json_decoded_body['mobile_number'], '_id': {'$ne': ticket['_id']}})
-            if duplicated_ticket:
-                raise HTTPError(400, '%s가(이) %s를 사용하고 있습니다.' % (duplicated_ticket['name'], duplicated_ticket['mobile_number']))
         query = {
             '_id': ticket['_id'],
         }
@@ -376,8 +374,15 @@ class SearchGroupTicketHandler(JsonHandler):
                 {'name': {'$regex': parsed_args['q']}},
                 {'mobile_number': {'$regex': parsed_args['q']}}
             ]
-        result = await GroupTicketModel.find_one(query=q)
-        self.response['data'] = result
+        count = await GroupTicketModel.count(query=q)
+        group_tickets = await GroupTicketModel.find(query=q)
+        for gt in group_tickets:
+            gt['group'] = await GroupModel.get_id(gt['group_oid'])
+            gt.pop('group_oid')
+            gt['content'] = await ContentModel.get_id(gt['content_oid'])
+            gt.pop('content_oid')
+        self.response['data'] = group_tickets
+        self.response['count'] = count
         self.write_json()
 
     async def options(self, *args, **kwargs):
