@@ -24,13 +24,14 @@ class AuthHandler(JsonHandler):
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number')
         auth_user = await UserModel.find_one({'mobile_number': mobile_number})
-        if not auth_user:
-            raise HTTPError(400, 'not exist mobile number')
         ws_data = dict(
             tablet_code=self.current_user['tablet_code'],
-            auth_user_oid=str(auth_user['_id']),
-            content_oid=str(content['_id'])
+            content_oid=str(content['_id']),
+            auth_user_oid=None,
+            mobile_number='0%s' % mobile_number[2:]
         )
+        if auth_user:
+            ws_data['auth_user_oid']=str(auth_user['_id'])
         WSHandler.write_to_clients(ws_data)
         self.response['data'] = auth_user
         self.write_json()
