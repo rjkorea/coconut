@@ -11,6 +11,7 @@ from models.company import CompanyModel
 from models.user import UserModel
 from models.content import ContentModel
 from models.ticket import TicketModel, TicketTypeModel, TicketOrderModel
+from models.group import GroupTicketModel
 
 from services.mongodb import MongodbService
 
@@ -22,11 +23,13 @@ class DashboardHandler(JsonHandler):
         total_user_count = await UserModel.count({'enabled': True})
         total_content_count = await ContentModel.count({'enabled': True})
         total_ticket_count = await TicketModel.count({'enabled': True})
+        total_group_ticket_count = await GroupTicketModel.count({'enabled': True, 'used': True})
         self.response['data'] = {
             'total_company_count': total_company_count,
             'total_user_count': total_user_count,
             'total_content_count': total_content_count,
             'total_ticket_count': total_ticket_count,
+            'total_group_ticket_count': total_group_ticket_count,
             'ticket_count': {
                 'pend': 0,
                 'send': 0,
