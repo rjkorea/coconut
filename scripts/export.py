@@ -35,10 +35,14 @@ def group_tickets(csvfile, mongo, contentid, dryrun):
             row = dict(
                 group_name=group['name'],
                 group_desc=group['desc'],
-                name=doc['name'],
-                mobile_number=doc['mobile_number'],
+                name='',
+                mobile_number='',
                 used=doc['used']
             )
+            if 'name' in doc:
+                row['name'] = doc['name']
+            if 'mobile_number' in doc:
+                row['mobile_number'] = doc['mobile_number']
             writer.writerow(row)
     else:
         click.secho('check parameters <python export.py  --help>', fg='red')
