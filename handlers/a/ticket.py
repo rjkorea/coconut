@@ -66,20 +66,13 @@ class TicketTypeHandler(JsonHandler):
         if not day or not isinstance(day, int):
             raise HTTPError(400, 'invalid day')
         desc = self.json_decoded_body.get('desc', None)
-        price = self.json_decoded_body.get('price', None)
-
-        # create ticket type model
         ticket_type = TicketTypeModel(raw_data=dict(
             admin_oid=admin_oid,
             content_oid=ObjectId(content_oid),
             name=name,
-            price=price,
+            desc=desc,
             day=day
         ))
-
-        if desc:
-            ticket_type.data['desc'] = desc
-
         await ticket_type.insert()
         self.response['data'] = ticket_type.data
         self.write_json()
@@ -95,15 +88,10 @@ class TicketTypeHandler(JsonHandler):
         query = {
             '_id': ObjectId(_id)
         }
-        desc = self.json_decoded_body.get('desc', None)
         self.json_decoded_body['updated_at'] = datetime.utcnow()
         document = {
             '$set': self.json_decoded_body
         }
-        if not desc or len(desc.strip()) == 0:
-            document['$unset'] = {'desc': 1}
-            if 'desc' in document['$set']:
-                del document['$set']['desc']
         self.response['data'] = await TicketTypeModel.update(query, document)
         self.write_json()
 

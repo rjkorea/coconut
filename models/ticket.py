@@ -36,7 +36,7 @@ class TicketTypeModel(BaseModel):
             },
             {
                 'key': 'desc',
-                'type': str,
+                'type': dict,
                 'default': None
             },
             {
