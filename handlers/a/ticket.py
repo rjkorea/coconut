@@ -436,7 +436,7 @@ class TicketEnterUserHandler(JsonHandler):
             if entered:
                 d.entered_at = datetime.utcnow()
         document = {
-            '$set': {                
+            '$set': {
                 'status': TicketModel.Status.use,
                 'days': days
             }
@@ -520,14 +520,36 @@ class TicketSmsSendHandler(JsonHandler):
         self.write_json()
 
 
-class TicketLogsHandler(JsonHandler):
+class TicketLogListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None), ('q', str, None)])
     async def get(self, *args, **kwargs):
-        parsed_args = kwargs.get('parsed_args')
         q = {}
-        if parsed_args['content_oid']:
-            q['content_oid'] = ObjectId(parsed_args['content_oid'])
+        parsed_args = kwargs.get('parsed_args')
+        if 'content_oid' in parsed_args and parsed_args['content_oid']:
+            q = {'$and': [{
+                'content_oid': ObjectId(parsed_args['content_oid'])
+            }]}
+        if 'q' in parsed_args and parsed_args['q']:
+            user_q = {'$or': [
+                {'name': {'$regex': parsed_args['q']}},
+                {'mobile_number': {'$regex': parsed_args['q']}}
+            ]}
+            users = await UserModel.find(query=user_q)
+            if users:
+                user_q = {
+                    '$or': [
+                        {'send_user_oid': { '$in': []}},
+                        {'receive_user_oid': { '$in': []}},
+                    ]
+                }
+                for user in users:
+                    user_q['$or'][0]['send_user_oid']['$in'].append(user['_id'])
+                    user_q['$or'][1]['receive_user_oid']['$in'].append(user['_id'])
+            if 'content_oid' in parsed_args and parsed_args['content_oid']:
+                q['$and'].append(user_q)
+            else:
+                q = user_q
         count = await TicketLogModel.count(query=q)
         result = await TicketLogModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
@@ -539,10 +561,50 @@ class TicketLogsHandler(JsonHandler):
             for oid in res['ticket_oids']:
                 tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid')])
                 ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields=[('name'), ('desc')])
-                res['tickets'].append(ttm)
+                ticket = {
+                    '_id': tm['_id'],
+                    'ticket_type': ttm
+                }
+                res['tickets'].append(ticket)
             res.pop('ticket_oids')
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketLogHandler(JsonHandler):
+    @admin_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket_log = await TicketLogModel.find_one({'_id': ObjectId(_id)})
+        if not ticket_log:
+            raise HTTPError(400, 'not exist ticket log')
+        ticket_log['send_user'] = await UserModel.get_id(ticket_log['send_user_oid'], fields=[('name'), ('mobile_number')])
+        ticket_log.pop('send_user_oid')
+        ticket_log['receive_user'] = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('name'), ('mobile_number')])
+        ticket_log.pop('receive_user_oid')
+        ticket_log['content'] = await ContentModel.get_id(ticket_log['content_oid'], fields=[('name')])
+        ticket_log.pop('content_oid')
+        ticket_log['tickets'] = list()
+        for oid in ticket_log['ticket_oids']:
+            tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid'), ('receive_user_oid'), ('status')])
+            ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields=[('name'), ('desc')])
+            receive_user = await UserModel.get_id(tm['receive_user_oid'], fields=[('name'), ('mobile_number')])
+            ticket = {
+                '_id': tm['_id'],
+                'ticket_type': ttm,
+                'receive_user': receive_user,
+                'status': tm['status']
+            }
+            ticket_log['tickets'].append(ticket)
+        ticket_log.pop('ticket_oids')
+        self.response['data'] = ticket_log
         self.write_json()
 
     async def options(self, *args, **kwargs):
