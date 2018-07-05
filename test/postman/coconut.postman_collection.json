@@ -674,7 +674,7 @@
 					},
 					"response": [
 						{
-							"id": "7caf4838-67f5-42ed-8312-b91ba322bfda",
+							"id": "d5387f84-ea56-4ac1-95ab-f268cf244dad",
 							"name": "/a/content/<oid>/image/poster (200 OK)",
 							"originalRequest": {
 								"method": "POST",
@@ -790,7 +790,7 @@
 					},
 					"response": [
 						{
-							"id": "be8be40f-0653-498c-8165-155a47e46be2",
+							"id": "909b7ed6-3603-4f0e-8028-045635703c93",
 							"name": "/a/content/<oid>/image/logo (200 OK)",
 							"originalRequest": {
 								"method": "POST",
@@ -1006,7 +1006,7 @@
 					},
 					"response": [
 						{
-							"id": "0f2234dc-04bf-474c-9afd-293124afb780",
+							"id": "752ba080-fae9-461f-880f-82b3a52acb5b",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
@@ -1167,6 +1167,45 @@
 					"response": []
 				},
 				{
+					"name": "/a/content/<oid>/group/ticket/search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/ticket/search?q=룸룸",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"5a9577965f54716b62c32f68",
+								"group",
+								"ticket",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "룸룸"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/a/content/<oid>/group/<oid>",
 					"request": {
 						"method": "GET",
@@ -1229,6 +1268,44 @@
 								"5a9577965f54716b62c32f68",
 								"group",
 								"5ae98b0a5f547150c37b9736"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/a/content/<oid>/group/<oid>/sms/send",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sms_message\": \"그룹메세지 테스트\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/5af2b3215f5471169fd259a2/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"5a9577965f54716b62c32f68",
+								"group",
+								"5af2b3215f5471169fd259a2",
+								"sms",
+								"send"
 							]
 						}
 					},
@@ -1384,6 +1461,46 @@
 								"5ae98d215f547150c3f6ffad",
 								"ticket",
 								"5ae98d215f547150c3f6ffae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/a/content/<oid>/group/<oid>/ticket/<oid>/sms/send",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sms_message\": \"그룹티켓 SMS 전송 테스트 메세지 입니다.\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/5af2b3215f5471169fd259a2/ticket/5af2b3215f5471169fd259a5/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"5a9577965f54716b62c32f68",
+								"group",
+								"5af2b3215f5471169fd259a2",
+								"ticket",
+								"5af2b3215f5471169fd259a5",
+								"sms",
+								"send"
 							]
 						}
 					},
@@ -1631,7 +1748,7 @@
 					},
 					"response": [
 						{
-							"id": "c9efa511-852d-4ab5-8505-3b433f627ca7",
+							"id": "54d39f88-8900-4d41-ba91-33977b6b0557",
 							"name": "/a/report/<oid> (성공)",
 							"originalRequest": {
 								"method": "GET",
@@ -2361,7 +2478,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=20&content_oid=&q=",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -2379,11 +2496,15 @@
 								},
 								{
 									"key": "size",
-									"value": "10"
+									"value": "20"
 								},
 								{
 									"key": "content_oid",
-									"value": "5951cc82ba590e3cec7f6031"
+									"value": ""
+								},
+								{
+									"key": "q",
+									"value": ""
 								}
 							]
 						},
@@ -2391,14 +2512,15 @@
 					},
 					"response": [
 						{
-							"id": "6d3dc35c-883d-4a1c-9303-2808bbd457d0",
-							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
+							"id": "30de13f6-ca07-49d4-bf18-d3de1a6c0938",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "csk={{csk}}"
+										"value": "csk={{csk}}",
+										"disabled": false
 									}
 								],
 								"body": {
@@ -2406,7 +2528,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=20&content_oid=&q=",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -2424,11 +2546,15 @@
 										},
 										{
 											"key": "size",
-											"value": "10"
+											"value": "20"
 										},
 										{
 											"key": "content_oid",
-											"value": "5951cc82ba590e3cec7f6031"
+											"value": ""
+										},
+										{
+											"key": "q",
+											"value": ""
 										}
 									]
 								}
@@ -2439,7 +2565,7 @@
 							"header": [
 								{
 									"key": "Content-Length",
-									"value": "8185",
+									"value": "14057",
 									"name": "Content-Length",
 									"description": "The length of the response body in octets (8-bit bytes)"
 								},
@@ -2451,13 +2577,13 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 14 Jun 2017 08:31:55 GMT",
+									"value": "Thu, 05 Jul 2018 12:44:31 GMT",
 									"name": "Date",
 									"description": "The date and time that the message was sent"
 								},
 								{
 									"key": "Etag",
-									"value": "\"3bf4b125a68bfd36ba199f1a0f8001a00c4adf54\"",
+									"value": "\"332fb0e386d30875330e97e2274a08bd905d19bb\"",
 									"name": "Etag",
 									"description": "An identifier for a specific version of a resource, often a message digest"
 								},
@@ -2468,8 +2594,130 @@
 									"description": "A name for the server"
 								}
 							],
-							"cookie": [],
-							"body": "{\"count\": 4, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6c\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6b\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 12:14:07 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"count\": 4637, \"data\": [{\"updated_at\": 1530478673, \"_id\": \"5b39bee15f547103bc6653fa\", \"tickets\": [{\"_id\": \"5b062f855f54711ca3b45161\", \"ticket_type\": {\"desc\": {\"value\": \"\\uc548\\ubcf4\\uc774\\uc9c0\\ub871\", \"enabled\": true}, \"_id\": \"5b062f6c5f54711ca3b4515e\", \"name\": \"\\uac8c\\uc2a4\\ud2b8\"}}], \"receive_user\": {\"_id\": \"594385e4ba590e3b9f995801\", \"name\": \"\\uae40\\uc720\\ub9bc\", \"mobile_number\": \"821086219127\"}, \"created_at\": 1530478673, \"action\": \"send\", \"content_oid\": \"5a9577965f54716b62c32f68\", \"send_user\": {\"_id\": \"5931a3eabc2c44140e0dea91\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}}, {\"updated_at\": 1530478457, \"_id\": \"5b39be095f547103bc6653f9\", \"tickets\": [{\"_id\": \"5b062f855f54711ca3b45160\", \"ticket_type\": {\"desc\": {\"value\": \"\\uc548\\ubcf4\\uc774\\uc9c0\\ub871\", \"enabled\": true}, \"_id\": \"5b062f6c5f54711ca3b4515e\", \"name\": \"\\uac8c\\uc2a4\\ud2b8\"}}], \"receive_user\": {\"_id\": \"594385e4ba590e3b9f995801\", \"name\": \"\\uae40\\uc720\\ub9bc\", \"mobile_number\": \"821086219127\"}, \"created_at\": 1530478457, \"action\": \"send\", \"content_oid\": \"5a9577965f54716b62c32f68\", \"send_user\": {\"_id\": \"5931a3eabc2c44140e0dea91\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}}, {\"updated_at\": 1514695551, \"_id\": \"5a48ea0fba590e6df948a036\", \"receive_user\": {\"_id\": \"5a48ea0fba590e6df948a035\", \"name\": \"\\uc774\\uc9c4\\uc6d0\", \"mobile_number\": \"821033552948\"}, \"created_at\": 1514695551, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a477952ba590e3e912c3d0e\", \"name\": \"\\uc774\\uc9c0\\ud604\", \"mobile_number\": \"821020125773\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a68\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514695473, \"_id\": \"5a48e9c1ba590e6df948a032\", \"receive_user\": {\"_id\": \"5a48e9c1ba590e6df948a031\", \"name\": \"\\uc774\\ubcd1\\uaddc\", \"mobile_number\": \"821090294646\"}, \"created_at\": 1514695473, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a477952ba590e3e912c3d0e\", \"name\": \"\\uc774\\uc9c0\\ud604\", \"mobile_number\": \"821020125773\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a67\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514695365, \"_id\": \"5a48e955ba590e6df948a02d\", \"receive_user\": {\"_id\": \"5a477952ba590e3e912c3d0e\", \"name\": \"\\uc774\\uc9c0\\ud604\", \"mobile_number\": \"821020125773\"}, \"created_at\": 1514695365, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a47780aba590e3e912c3ca7\", \"name\": \"\\uc740\\uc0c1\\uc6d0\", \"mobile_number\": \"821050309318\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a67\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a68\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514695295, \"_id\": \"5a48e90fba590e6df948a029\", \"receive_user\": {\"_id\": \"5a47780aba590e3e912c3ca7\", \"name\": \"\\uc740\\uc0c1\\uc6d0\", \"mobile_number\": \"821050309318\"}, \"created_at\": 1514695295, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"59704fa5ba590e14c06f9376\", \"name\": \"\\uc784\\uc815\\ud604\", \"mobile_number\": \"821022218294\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a67\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a68\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514694144, \"_id\": \"5a48e490ba590e6df948a00d\", \"receive_user\": {\"_id\": \"5a47a2e4ba590e3e912c471b\", \"name\": \"\\ucd5c\\ucc3d\\uc9c4\", \"mobile_number\": \"821086858064\"}, \"created_at\": 1514694144, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"59704fa5ba590e14c06f9376\", \"name\": \"\\uc784\\uc815\\ud604\", \"mobile_number\": \"821022218294\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a69\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514690690, \"_id\": \"5a48d712ba590e6df9489f5f\", \"receive_user\": {\"_id\": \"5a48d712ba590e6df9489f5e\", \"name\": \"\\uc131\\ubbfc\\uc6b0\", \"mobile_number\": \"821091892107\"}, \"created_at\": 1514690690, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a48d68fba590e6df9489f58\", \"name\": \"\\uae40\\ud615\\uc6b0\", \"mobile_number\": \"821027621177\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6a\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514690559, \"_id\": \"5a48d68fba590e6df9489f59\", \"receive_user\": {\"_id\": \"5a48d68fba590e6df9489f58\", \"name\": \"\\uae40\\ud615\\uc6b0\", \"mobile_number\": \"821027621177\"}, \"created_at\": 1514690559, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"59704fa5ba590e14c06f9376\", \"name\": \"\\uc784\\uc815\\ud604\", \"mobile_number\": \"821022218294\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6a\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a6b\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514689848, \"_id\": \"5a48d3c8ba590e6df9489f2e\", \"receive_user\": {\"_id\": \"5a48d3c8ba590e6df9489f2d\", \"name\": \"\\uae40\\uc694\\ud55c\", \"mobile_number\": \"821033256852\"}, \"created_at\": 1514689848, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a48cc1bba590e6df9489eb4\", \"name\": \"\\uc774\\uc9c4\\uacbd\", \"mobile_number\": \"821089917086\"}, \"tickets\": [{\"_id\": \"5a489992ba590e6901794af2\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514689800, \"_id\": \"5a48d398ba590e6df9489f28\", \"receive_user\": {\"_id\": \"5a48d398ba590e6df9489f27\", \"name\": \"\\uae40\\ud604\", \"mobile_number\": \"821031295129\"}, \"created_at\": 1514689800, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a48cc1bba590e6df9489eb4\", \"name\": \"\\uc774\\uc9c4\\uacbd\", \"mobile_number\": \"821089917086\"}, \"tickets\": [{\"_id\": \"5a48caccba590e6df9489e9c\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514687883, \"_id\": \"5a48cc1bba590e6df9489eb5\", \"receive_user\": {\"_id\": \"5a48cc1bba590e6df9489eb4\", \"name\": \"\\uc774\\uc9c4\\uacbd\", \"mobile_number\": \"821089917086\"}, \"created_at\": 1514687883, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a48cb78ba590e6df9489eaa\", \"name\": \"\\uad8c\\ub3c4\\uc5f0\", \"mobile_number\": \"821055879988\"}, \"tickets\": [{\"_id\": \"5a48caccba590e6df9489e9b\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a48caccba590e6df9489e9c\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a489992ba590e6901794af2\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"updated_at\": 1514687720, \"_id\": \"5a48cb78ba590e6df9489eab\", \"receive_user\": {\"_id\": \"5a48cb78ba590e6df9489eaa\", \"name\": \"\\uad8c\\ub3c4\\uc5f0\", \"mobile_number\": \"821055879988\"}, \"created_at\": 1514687720, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"596f27e9ba590e39d7aed445\", \"name\": \"\\uae40\\ucc3d\\uc724\", \"mobile_number\": \"821066906267\"}, \"tickets\": [{\"_id\": \"5a48caccba590e6df9489e9b\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a48caccba590e6df9489e9c\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a489992ba590e6901794af2\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48c1e1ba590e6d4549ecd1\", \"updated_at\": 1514685265, \"receive_user\": {\"_id\": \"59704fa5ba590e14c06f9376\", \"name\": \"\\uc784\\uc815\\ud604\", \"mobile_number\": \"821022218294\"}, \"created_at\": 1514685265, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"59574586ba590e0f1966f9cb\", \"name\": \"\\uc624\\uc815\\uadfc\", \"mobile_number\": \"821049279785\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6a\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a6b\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a69\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a67\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a68\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"_id\": \"5a4894deba590e6901794a66\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48bdb8ba590e6d4549ebd2\", \"updated_at\": 1514684200, \"receive_user\": {\"_id\": \"5a4318f6ba590e5a740d3ab7\", \"name\": \"\\ubd09\\uc9c4\\uc120\", \"mobile_number\": \"821025837187\"}, \"created_at\": 1514684200, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a48bbf7ba590e6d4549eb6c\", \"name\": \"\\uc774\\ub3c4\\uc624\", \"mobile_number\": \"821098659812\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6d\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48bcedba590e6d4549eba0\", \"updated_at\": 1514683997, \"receive_user\": {\"_id\": \"5a48bbf7ba590e6d4549eb6c\", \"name\": \"\\uc774\\ub3c4\\uc624\", \"mobile_number\": \"821098659812\"}, \"created_at\": 1514683997, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a41f99fba590e5a740d34c1\", \"name\": \"\\uae40\\ubbfc\\uc815\", \"mobile_number\": \"821088995252\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6d\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48bcedba590e6d4549eb9f\", \"updated_at\": 1514683997, \"receive_user\": {\"_id\": \"5a48bbf7ba590e6d4549eb6c\", \"name\": \"\\uc774\\ub3c4\\uc624\", \"mobile_number\": \"821098659812\"}, \"created_at\": 1514683997, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a41f99fba590e5a740d34c1\", \"name\": \"\\uae40\\ubbfc\\uc815\", \"mobile_number\": \"821088995252\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6d\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48bc8dba590e6d4549eb8a\", \"updated_at\": 1514683901, \"receive_user\": {\"_id\": \"5a48bc8dba590e6d4549eb89\", \"name\": \"\\uacf5\\uc9c4\\uc120\", \"mobile_number\": \"821028537187\"}, \"created_at\": 1514683901, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a41f99fba590e5a740d34c1\", \"name\": \"\\uae40\\ubbfc\\uc815\", \"mobile_number\": \"821088995252\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a6e\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48bc42ba590e6d4549eb7b\", \"updated_at\": 1514683826, \"receive_user\": {\"_id\": \"5a48bc42ba590e6d4549eb78\", \"name\": \"\\uc724\\ubbfc\\uc218\", \"mobile_number\": \"821093920851\"}, \"created_at\": 1514683826, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a41f99fba590e5a740d34c1\", \"name\": \"\\uae40\\ubbfc\\uc815\", \"mobile_number\": \"821088995252\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a70\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}, {\"_id\": \"5a48bc42ba590e6d4549eb7a\", \"updated_at\": 1514683826, \"receive_user\": {\"_id\": \"5a48bc42ba590e6d4549eb78\", \"name\": \"\\uc724\\ubbfc\\uc218\", \"mobile_number\": \"821093920851\"}, \"created_at\": 1514683826, \"action\": \"send\", \"content_oid\": \"5a0d2d4f33b66603b57a84e9\", \"send_user\": {\"_id\": \"5a41f99fba590e5a740d34c1\", \"name\": \"\\uae40\\ubbfc\\uc815\", \"mobile_number\": \"821088995252\"}, \"tickets\": [{\"_id\": \"5a4894deba590e6901794a70\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}]}]}"
+						}
+					]
+				},
+				{
+					"name": "/a/ticket/log/<oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/log/5a48e955ba590e6df948a02d",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"ticket",
+								"log",
+								"5a48e955ba590e6df948a02d"
+							]
+						},
+						"description": "log for send tickets"
+					},
+					"response": [
+						{
+							"id": "8e763edf-0583-48b4-9f18-5f6fc0c259de",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/log/5a48e955ba590e6df948a02d",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"ticket",
+										"log",
+										"5a48e955ba590e6df948a02d"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "1090",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 05 Jul 2018 13:07:46 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"cf1120572129ca935addd4976d6e0814ba2720d2\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Tue Jan 19 2038 12:14:07 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"data\": {\"updated_at\": 1514695365, \"_id\": \"5a48e955ba590e6df948a02d\", \"receive_user\": {\"_id\": \"5a477952ba590e3e912c3d0e\", \"name\": \"\\uc774\\uc9c0\\ud604\", \"mobile_number\": \"821020125773\"}, \"created_at\": 1514695365, \"action\": \"send\", \"tickets\": [{\"status\": \"use\", \"receive_user\": {\"_id\": \"5a48e9c1ba590e6df948a031\", \"name\": \"\\uc774\\ubcd1\\uaddc\", \"mobile_number\": \"821090294646\"}, \"_id\": \"5a4894deba590e6901794a67\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}, {\"status\": \"use\", \"receive_user\": {\"_id\": \"5a48ea0fba590e6df948a035\", \"name\": \"\\uc774\\uc9c4\\uc6d0\", \"mobile_number\": \"821033552948\"}, \"_id\": \"5a4894deba590e6901794a68\", \"ticket_type\": {\"desc\": {\"value\": \"VU ENT / New Invitation\", \"enabled\": true}, \"_id\": \"5a484090ba590e3e912c505e\", \"name\": \"The Final COUNTDOWN Invitation\"}}], \"send_user\": {\"_id\": \"5a47780aba590e3e912c3ca7\", \"name\": \"\\uc740\\uc0c1\\uc6d0\", \"mobile_number\": \"821050309318\"}, \"content\": {\"_id\": \"5a0d2d4f33b66603b57a84e9\", \"name\": \"The Final COUNTDOWN\"}}}"
 						}
 					]
 				},
@@ -2895,7 +3143,7 @@
 					},
 					"response": [
 						{
-							"id": "01dd7823-08de-4dcd-9c60-6e08949678ea",
+							"id": "a2d27a29-42e8-4be3-8a42-82de68572c03",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3025,7 +3273,7 @@
 					},
 					"response": [
 						{
-							"id": "b32d1027-7228-4ba1-acff-0d0869458f95",
+							"id": "bd6e05c8-d28d-4d0d-ab39-e37909515247",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3454,7 +3702,7 @@
 					},
 					"response": [
 						{
-							"id": "a45c4e6b-26db-44e5-ae99-5cc0659cd172",
+							"id": "6b45a54e-cca5-4d2a-bd0d-42ad2bd95dcf",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -3525,7 +3773,7 @@
 							"body": "{\"data\": {\"has_password\": true, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "a195ee68-ded5-47ea-9cc8-86688375f343",
+							"id": "2625dcf8-e312-4588-9eed-60c0f623124b",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -3630,7 +3878,7 @@
 					},
 					"response": [
 						{
-							"id": "0adae365-650a-4750-82bd-09a7a2a735a6",
+							"id": "5a7c725a-018d-4fea-ac2f-3e5f1959f0ca",
 							"name": "패스워드 설정이 되어 있는 유저",
 							"originalRequest": {
 								"method": "PUT",
@@ -3693,7 +3941,7 @@
 							"body": "{\"message\": \"400: exist password\"}"
 						},
 						{
-							"id": "6424421a-5dd7-4cf7-af4b-ab0d934b916c",
+							"id": "7e833484-0003-4e99-abfe-142c7d33148c",
 							"name": "신규 패스워드 설정",
 							"originalRequest": {
 								"method": "PUT",
@@ -3790,7 +4038,7 @@
 					},
 					"response": [
 						{
-							"id": "0c149a4c-252d-417a-ba2e-bc37e4db293a",
+							"id": "e24067f8-5ea1-4d4a-a320-80a6e1341161",
 							"name": "비밀번호 인증 성공",
 							"originalRequest": {
 								"method": "PUT",
@@ -3853,7 +4101,7 @@
 							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "60942f18-59c2-4f2d-8a40-22017d21e06a",
+							"id": "6f62ec13-0c1c-4329-b0c4-20d4c10ca9b4",
 							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
 							"originalRequest": {
 								"method": "PUT",
@@ -3984,7 +4232,7 @@
 					},
 					"response": [
 						{
-							"id": "f468a0eb-b465-4b67-abaa-63acd1cafa86",
+							"id": "e49cb575-cfe8-488f-9d0f-f6e6adba0234",
 							"name": "/w/autologin/<oid> (성공)",
 							"originalRequest": {
 								"method": "GET",
@@ -4055,7 +4303,7 @@
 							"body": "{\"data\": {\"updated_at\": 1514326904, \"_id\": \"5a434a085f54711336570ecc\", \"created_at\": 1514326904, \"usk\": \"5a434a085f54711336570ecb\", \"content_oid\": \"59e9bf995f54710f67bb237a\"}}"
 						},
 						{
-							"id": "215d9aa2-ba50-4ce9-8a44-1c7cc0b13ec2",
+							"id": "19cf1629-7fa4-4ede-a257-b94839975b68",
 							"name": "/w/autologin/<oid> (존재하지 않는 oid)",
 							"originalRequest": {
 								"method": "GET",
@@ -4120,7 +4368,7 @@
 							"body": "{\"message\": \"400: not exist autologin session\"}"
 						},
 						{
-							"id": "84a576d8-0713-49d3-81c6-be776ee73f84",
+							"id": "97775f85-561a-4b31-8a6c-b281c9b07ce0",
 							"name": "/w/autologin/<oid> (무효한 oid)",
 							"originalRequest": {
 								"method": "GET",
@@ -4212,7 +4460,7 @@
 					},
 					"response": [
 						{
-							"id": "372e9b00-708b-4225-b6e5-7f5766121692",
+							"id": "9c771788-69e5-41fc-a5ba-787c17c32a99",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -4310,7 +4558,7 @@
 					},
 					"response": [
 						{
-							"id": "80c1dab3-5e66-497b-b52f-02e6e795773b",
+							"id": "28d52341-27fe-42d9-ad2c-a271711c75d9",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -4432,7 +4680,7 @@
 					},
 					"response": [
 						{
-							"id": "73722e96-46ba-453d-9c43-2cb3454ae054",
+							"id": "5c575724-efef-4ec6-840e-ff65e6c5c9c2",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -4558,7 +4806,7 @@
 					},
 					"response": [
 						{
-							"id": "9e7b107c-08b1-4d6f-8933-6509b2fe05e8",
+							"id": "9c15887d-94cc-4d0d-aa42-67799dce7a20",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -4684,7 +4932,7 @@
 					},
 					"response": [
 						{
-							"id": "944662ff-3834-4f05-b759-8041ed6e20c4",
+							"id": "8dd5c9a4-aea8-4a68-aaad-abc508e9302c",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -4802,7 +5050,7 @@
 					},
 					"response": [
 						{
-							"id": "33fb4dfb-c306-4f9f-9df4-77621f2cc224",
+							"id": "42f5e347-20dd-416a-b150-93e7e810b54c",
 							"name": "/w/ticket/payment (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -4875,7 +5123,7 @@
 							"body": "{\"data\": {\"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_history\": [], \"amount\": 10000, \"imp_uid\": \"imp_079527261731\", \"pay_method\": \"card\", \"card_code\": \"361\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"buyer_tel\": \"821032697178\", \"apply_num\": \"33305906\", \"cancel_amount\": 0, \"currency\": \"KRW\", \"paid_at\": 1509592577, \"card_name\": \"BC\\uce74\\ub4dc\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171102121617261651&noMethod=1\", \"cancelled_at\": 0, \"merchant_uid\": \"597bf030ba590e7985d0fb6d\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171102121617261651\", \"user_agent\": \"sorry_not_supported_anymore\", \"status\": \"paid\", \"cancel_receipt_urls\": [], \"card_quota\": 0, \"pg_provier\": \"html5_inicis\", \"cancel_reason\": null, \"buyer_email\": \"kevin.cho@rjkorea.com\"}}"
 						},
 						{
-							"id": "290bfe1a-ea98-4e72-abf3-fa591c038b24",
+							"id": "19746848-eefa-4911-bfbe-c56a341ef895",
 							"name": "/w/ticket/payment (400: not exist fee)",
 							"originalRequest": {
 								"method": "GET",
@@ -4975,7 +5223,7 @@
 					},
 					"response": [
 						{
-							"id": "1155904c-327a-4882-8c9e-254dd39a5380",
+							"id": "2f266cec-d214-455e-8ff2-727aba58ece6",
 							"name": "/w/ticket/<oid>/payment/status (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -5044,7 +5292,7 @@
 							"body": "{\"data\": {\"imp_uid\": \"imp_079527261731\", \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"buyer_tel\": \"821032697178\", \"status\": \"paid\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\"}}"
 						},
 						{
-							"id": "b4fd6cbf-f147-49e5-9234-3c939a44f2b6",
+							"id": "5672eefd-877a-4ff8-973c-5ac2ad6840bd",
 							"name": "/w/ticket/<oid>/payment/status (not exist payment info)",
 							"originalRequest": {
 								"method": "GET",
@@ -5144,7 +5392,7 @@
 					},
 					"response": [
 						{
-							"id": "1305d3b2-89f2-4039-92ca-0ebb6ec06435",
+							"id": "01ee86d6-3719-4581-83c5-69c0c535ef69",
 							"name": "/w/ticket/<oid>/payment/complete (400: status is not paid)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5248,7 +5496,7 @@
 					},
 					"response": [
 						{
-							"id": "b8706a85-48e9-483a-867f-095a6fdf9303",
+							"id": "fc483648-bcc4-40c0-b18a-4bfb8f8ea0e6",
 							"name": "/w/ticket/<oid>/payment/cancel (not exist payment info for cancel)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5315,7 +5563,7 @@
 							"body": "{\"message\": \"500: \\ucde8\\uc18c\\ud560 \\uacb0\\uc81c\\uac74\\uc774 \\uc874\\uc7ac\\ud558\\uc9c0 \\uc54a\\uc2b5\\ub2c8\\ub2e4.\"}"
 						},
 						{
-							"id": "b924609c-340c-4041-a8ef-230eee25e88f",
+							"id": "01916228-e032-4b29-b37b-407def93f684",
 							"name": "/w/ticket/<oid>/payment/cancel (already cancel)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5382,7 +5630,7 @@
 							"body": "{\"message\": \"500: \\uc774\\ubbf8 \\uc804\\uc561\\ucde8\\uc18c\\ub41c \\uc8fc\\ubb38\\uc785\\ub2c8\\ub2e4.\"}"
 						},
 						{
-							"id": "63d8b029-d2e7-4761-89e7-aa2e5c37ee8e",
+							"id": "709c5bcd-aa6a-4967-8e13-eb3aafbe0ae1",
 							"name": "/w/ticket/<oid>/payment/cancel (fail case)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5449,7 +5697,7 @@
 							"body": "{\"message\": \"500: \\uacb0\\uc81c\\ucde8\\uc18c\\uc5d0 \\uc2e4\\ud328\\ud558\\uc600\\uc2b5\\ub2c8\\ub2e4. [501626|\\uae30 \\ucde8\\uc18c \\uac70\\ub798]\"}"
 						},
 						{
-							"id": "0e95058e-737d-4933-b47f-5371a4527f79",
+							"id": "756e5eb9-548f-49bc-829e-20fe79f9909b",
 							"name": "/w/ticket/<oid>/payment/cancel (success case)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5552,7 +5800,7 @@
 					},
 					"response": [
 						{
-							"id": "28cd37dd-06b3-45ce-81dc-2bd0f0212648",
+							"id": "8003a724-5c89-491f-81f2-36edb718c718",
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5653,7 +5901,7 @@
 					},
 					"response": [
 						{
-							"id": "ce17d753-9c6b-416e-972f-f98cc26d95d5",
+							"id": "d6870594-4c82-4a98-bd63-c4abddb925b9",
 							"name": "3개 티켓을 자신에게 전송 (400 에러)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5718,7 +5966,7 @@
 							"body": "{\"message\": \"400: cannot send to myself\"}"
 						},
 						{
-							"id": "c6f5f260-7c0a-4ef1-9a55-1010108db1fc",
+							"id": "105165ae-4f36-48b8-acea-b92b1beece25",
 							"name": "3개 티켓 다른 사람에게 전송",
 							"originalRequest": {
 								"method": "PUT",
@@ -5828,7 +6076,7 @@
 					},
 					"response": [
 						{
-							"id": "95908d99-0fe4-41a9-b840-59d081064584",
+							"id": "0f8b1d82-4952-4625-9a1b-08842ff8f713",
 							"name": "마이티킷 리스트(status: register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -5953,7 +6201,7 @@
 					},
 					"response": [
 						{
-							"id": "7877bc6b-f8da-449b-a02f-7712588e6b2e",
+							"id": "b78b07be-ca66-4661-ad0d-fd570fc3df47",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -6081,7 +6329,7 @@
 					},
 					"response": [
 						{
-							"id": "37d14bd3-43ac-404c-9e65-323a35cdb385",
+							"id": "34cabda2-e6f8-42bc-a3aa-c50193ea29d6",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -6234,7 +6482,7 @@
 					},
 					"response": [
 						{
-							"id": "480cedee-8832-4a9d-9ce1-665b082f4a07",
+							"id": "615b72aa-ea56-410b-977e-18553bb57f71",
 							"name": "조건희 유저정보 가져오기",
 							"originalRequest": {
 								"method": "PUT",
@@ -6515,7 +6763,7 @@
 					},
 					"response": [
 						{
-							"id": "77476db7-1eb5-4c1d-a4e3-6383c2b6cdde",
+							"id": "072945a1-b8f4-4344-b740-7dd3d12b6add",
 							"name": "access token expired",
 							"originalRequest": {
 								"method": "GET",
