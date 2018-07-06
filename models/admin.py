@@ -8,7 +8,7 @@ from models.base import BaseModel
 
 class AdminModel(BaseModel):
     MONGO_COLLECTION = 'admin'
-    ROLE = ('admin', 'host', 'super', 'staff')
+    ROLE = ('admin', 'host', 'super', 'staff', 'pro')
 
     def __init__(self, *args, **kwargs):
         super(AdminModel, self).__init__(*args, **kwargs)

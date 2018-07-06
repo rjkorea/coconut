@@ -38,6 +38,12 @@ def get_query_by_user(user=None):
                 'company_oid': user['company_oid']
             }
         )
+    elif user['role'] == 'pro':
+        q['$and'].append(
+            {
+                'company_oid': user['company_oid']
+            }
+        )
     else:
         pass
     return q
@@ -104,7 +110,7 @@ class ContentHandler(JsonHandler):
             place=place,
             desc=desc
         ))
-        if self.current_user['role'] == 'host':
+        if self.current_user['role'] == 'host' or self.current_user['role'] == 'pro':
             content.data['company_oid'] = self.current_user['company_oid']
         elif self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
             company_oid = self.json_decoded_body.get('company_oid', None)
@@ -207,7 +213,7 @@ class ContentPostHandler(JsonHandler):
             }
         }
         content = ContentModel(raw_data=doc)
-        if self.current_user['role'] == 'host':
+        if self.current_user['role'] == 'host' or self.current_user['role'] == 'pro':
             content.data['company_oid'] = self.current_user['company_oid']
         elif self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
             company_oid = self.json_decoded_body.get('company_oid', None)

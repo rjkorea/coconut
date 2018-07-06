@@ -45,7 +45,7 @@ class RegisterHandler(JsonHandler):
             name=name,
             role=role
         ))
-        if 'host' in role:
+        if 'host' in role or 'pro' in role:
             mobile_number = self.json_decoded_body.get('mobile_number', None)
             if not mobile_number or len(mobile_number) == 0:
                 raise HTTPError(400, 'invalid mobile_number')
