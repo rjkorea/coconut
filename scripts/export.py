@@ -58,9 +58,10 @@ def user_ticket():
 @click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
 @click.option('-i', '--contentid', help='content id')
 @click.option('-s', '--status', help='status(send, register, pay, use, cancel')
+@click.option('--fee', is_flag=True, help='ticket fee')
 @click.option('--dryrun', is_flag=True, help='dry run test')
 @click.confirmation_option(help='Are you sure you import to mongodb?')
-def user_tickets(csvfile, mongo, contentid, status, dryrun):
+def user_tickets(csvfile, mongo, contentid, status, fee, dryrun):
     click.secho('= params info =', fg='cyan')
     click.secho('csvfile: %s' % (csvfile), fg='green')
     click.secho('mongodb: %s' % (mongo), fg='green')
@@ -69,8 +70,12 @@ def user_tickets(csvfile, mongo, contentid, status, dryrun):
         fieldnames = ['name', 'mobile_number']
         writer = csv.writer(open(csvfile, 'w'))
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        ticket_orders = mongo_client['coconut']['ticket_order'].find({'content_oid': ObjectId(contentid), 'fee.price': {'$exists': True}}, [('_id')])
+        if fee:
+            cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status, 'ticket_order_oid': {'$in': [to['_id'] for to in ticket_orders]}})
+        else:
+            cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status, 'ticket_order_oid': {'$nin': [to['_id'] for to in ticket_orders]}})
         users_map = dict()
-        cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status})
         while cursor.alive:
             doc = cursor.next()
             user = mongo_client['coconut']['user'].find_one({'_id': doc['receive_user_oid']})
