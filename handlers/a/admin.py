@@ -22,7 +22,8 @@ def get_query_by_user(user=None):
                     {'role': 'super'},
                     {'role': 'admin'},
                     {'role': 'host'},
-                    {'role': 'staff'}
+                    {'role': 'staff'},
+                    {'role': 'pro'},
                 ]
             }
         )
@@ -31,11 +32,25 @@ def get_query_by_user(user=None):
             {
                 '$or': [
                     {'role': 'host'},
-                    {'role': 'staff'}
+                    {'role': 'staff'},
+                    {'role': 'pro'},
                 ]
             }
         )
     elif user['role'] == 'host':
+        q['$and'].append(
+            {
+                '$or': [
+                    {'role': 'staff'}
+                ]
+            }
+        )
+        q['$and'].append(
+            {
+                'company_oid': user['company_oid']
+            }
+        )
+    elif user['role'] == 'pro':
         q['$and'].append(
             {
                 '$or': [
@@ -92,7 +107,7 @@ class AdminHandler(JsonHandler):
         if not role or len(role) == 0:
             raise HTTPError(400, 'invalid role')
         if role not in AdminModel.ROLE:
-            raise HTTPError(400, 'invalid role (admin, host, staff and super)')
+            raise HTTPError(400, 'invalid role (admin, host, staff, pro and super)')
         email = self.json_decoded_body.get('email', None)
         if not email or len(email) == 0:
             raise HTTPError(400, 'invalid email')
@@ -122,7 +137,7 @@ class AdminHandler(JsonHandler):
         ))
         admin.set_password(password)
         company_oid = self.json_decoded_body.get('company_oid', None)
-        if company_oid and (role=='host' or role=='staff'):
+        if company_oid and (role=='host' or role=='staff' or role=='pro'):
             admin.data['company_oid'] = ObjectId(company_oid)
         await admin.insert()
         self.response['data'] = admin.data
