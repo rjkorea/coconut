@@ -74,7 +74,7 @@ def user_tickets(csvfile, mongo, contentid, status, fee, dryrun):
         if fee:
             cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status, 'ticket_order_oid': {'$in': [to['_id'] for to in ticket_orders]}})
         else:
-            cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status, 'ticket_order_oid': {'$nin': [to['_id'] for to in ticket_orders]}})
+            cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status})
         users_map = dict()
         while cursor.alive:
             doc = cursor.next()
