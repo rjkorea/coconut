@@ -265,7 +265,7 @@ class DashboardContentHandler(JsonHandler):
                 '$limit': 20
             }
         ]
-        top_ticket_types = await TicketModel.aggregate(pipeline, 20)
+        top_ticket_types = await TicketModel.aggregate(pipeline, 10)
         for ttt in top_ticket_types:
             ttt['ticket_type'] = await TicketTypeModel.get_id(ttt['_id'], fields=[('name'), ('desc')])
             ttt['ticket_register_cnt'] = await TicketModel.count({'ticket_type_oid': ttt['_id'], 'status': TicketModel.Status.register.name})
@@ -295,7 +295,7 @@ class DashboardContentHandler(JsonHandler):
                 '$limit': 50
             }
         ]
-        top_ticket_orders = await TicketModel.aggregate(pipeline, 50)
+        top_ticket_orders = await TicketModel.aggregate(pipeline, 10)
         ttos = list()
         for tto in top_ticket_orders:
             if tto['_id']:
