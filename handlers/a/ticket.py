@@ -557,6 +557,8 @@ class TicketLogListHandler(JsonHandler):
             res.pop('send_user_oid')
             res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
             res.pop('receive_user_oid')
+            res['content'] = await ContentModel.get_id(res['content_oid'], fields=[('name')])
+            res.pop('content_oid')
             res['tickets'] = list()
             for oid in res['ticket_oids']:
                 tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid')])
