@@ -64,7 +64,7 @@ class RankHandler(JsonHandler):
                 '$limit': parsed_args['size']
             }
         ]
-        ticket_orders_stats = await TicketModel.aggregate(pipeline, 20)
+        ticket_orders_stats = await TicketModel.aggregate(pipeline, parsed_args['size'])
         for tos in ticket_orders_stats:
             tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile_number')])
             tos.pop('_id')
