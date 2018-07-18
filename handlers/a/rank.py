@@ -7,7 +7,8 @@ from tornado.web import HTTPError
 from common.decorators import admin_auth_async, parse_argument
 
 from handlers.base import JsonHandler
-from models.ticket import TicketModel, TicketOrderModel
+from models.ticket import TicketModel, TicketOrderModel, TicketTypeModel
+from models.content import ContentModel
 
 
 class RankHandler(JsonHandler):
@@ -25,27 +26,32 @@ class RankHandler(JsonHandler):
             {
                 '$group': {
                     '_id': '$ticket_order_oid',
-                    "send_count": {
+                    "pend": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "pend" ] }, 1, 0 ]
+                        }
+                    },
+                    "send": {
                         "$sum": {
                             "$cond": [ { "$eq": [ "$status", "send" ] }, 1, 0 ]
                         }
                     },
-                    "register_count": {
+                    "register": {
                         "$sum": {
                             "$cond": [ { "$eq": [ "$status", "register" ] }, 1, 0 ]
                         }
                     },
-                    "pay_count": {
+                    "pay": {
                         "$sum": {
                             "$cond": [ { "$eq": [ "$status", "pay" ] }, 1, 0 ]
                         }
                     },
-                    "use_count": {
+                    "use": {
                         "$sum": {
                             "$cond": [ { "$eq": [ "$status", "use" ] }, 1, 0 ]
                         }
                     },
-                    "cancel_count": {
+                    "cancel": {
                         "$sum": {
                             "$cond": [ { "$eq": [ "$status", "cancel" ] }, 1, 0 ]
                         }
@@ -66,8 +72,10 @@ class RankHandler(JsonHandler):
         ]
         ticket_orders_stats = await TicketModel.aggregate(pipeline, parsed_args['size'])
         for tos in ticket_orders_stats:
-            tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile_number')])
+            tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile_number'), ('ticket_type_oid'), ('content_oid')])
             tos.pop('_id')
+            tos['ticket_type'] = await TicketTypeModel.get_id(tos['ticket_order']['ticket_type_oid'], fields=[('name'), ('desc')])
+            tos['content'] = await ContentModel.get_id(tos['ticket_order']['content_oid'], fields=[('name')])
         self.response['data'] = ticket_orders_stats
         self.write_json()
 
