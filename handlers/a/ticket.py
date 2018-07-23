@@ -170,6 +170,11 @@ class TicketOrderHandler(JsonHandler):
             raise HTTPError(400, 'invalid receiver')
         if 'mobile_number' not in receiver or 'name' not in receiver:
             raise HTTPError(400, 'invalid mobile_number | name')
+        receiver['mobile_number'] = receiver['mobile_number'].strip()
+        if receiver['mobile_number'].startswith('82'):
+            if receiver['mobile_number'][2:4] != '10' or len(receiver['mobile_number'][4:]) < 7 or len(receiver['mobile_number'][4:]) > 8:
+                raise HTTPError(400, 'incorrect mobile number format')
+        receiver['name'] = receiver['name'].strip()
         expiry_date = self.json_decoded_body.get('expiry_date', None)
         if not expiry_date or len(expiry_date) == 0:
             raise HTTPError(400, 'invalid expiry_date')
