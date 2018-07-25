@@ -3708,6 +3708,149 @@
 			]
 		},
 		{
+			"name": "tablet web(tw)",
+			"description": null,
+			"item": [
+				{
+					"name": "/tw/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"roomy.han@rjkorea.com\",\n\t\"password\": \"01087858906\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/auth/login",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"tw",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/tw/contents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contenst",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"tw",
+								"contents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/tw/contents/<content_oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contents/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"t",
+								"contents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/tw/countries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/countries?start=0&size=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"tw",
+								"countries"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "web(w)",
 			"description": null,
 			"item": [
