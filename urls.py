@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, base, a, v1, t, w, v2
+from handlers import index, base, a, v1, t, tw, w, v2
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -121,6 +121,12 @@ url_patterns = [
     (r'/t/dashboard/(?P<_id>[^\/]+)/?', t.dashboard.DashboardHandler),
     (r'/t/auth/?', t.auth.AuthHandler),
     (r'/t/countries/?', t.util.CountryListHandler),
+
+    # tw (tablet web)
+    (r'/tw/auth/login/?', tw.auth.LoginHandler),
+    (r'/tw/contents/?', tw.contents.ContentsListHandler),
+    (r'/tw/contents/(?P<_id>[^\/]+)/?', tw.contents.ContentsHandler),
+    (r'/tw/countries/?', tw.utils.CountryListHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
