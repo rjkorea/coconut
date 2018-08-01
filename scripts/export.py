@@ -8,6 +8,8 @@ import csv
 import click
 from pymongo import MongoClient
 
+from iamport import Iamport
+
 
 @click.group()
 def group_ticket():
@@ -101,9 +103,9 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
     click.secho('= params info =', fg='cyan')
     click.secho('csvfile: %s' % (csvfile), fg='green')
     click.secho('mongodb: %s' % (mongo), fg='green')
-    now = datetime.utcnow()
     if csvfile and mongo:
-        fieldnames = ['content_name', 'ticket_type_name', 'ticket_type_desc', 'price', 'status', 'user_name', 'user_mobile_number']
+        iamport_client = Iamport(imp_key='4335180923213950', imp_secret='8PJ0Bmp6JLDTBITQ281p2BuM5jJ0FpWOeGOQ2eWMZAGBizrkHtKK4ewaygadG72VORLR5IE5ikHBT8WA')
+        fieldnames = ['_id', 'content_name', 'ticket_type_name', 'ticket_type_desc', 'price', 'pay_type', 'pay_method', 'pg_provider', 'card_name', 'paid_at', 'status', 'user_name', 'user_mobile_number']
         writer = csv.DictWriter(open(csvfile, 'w'), fieldnames=fieldnames)
         writer.writeheader()
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
@@ -126,18 +128,33 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
             pprint(tickets)
             pprint(len(tickets))
         else:
-            for ticket in tickets   :
+            for ticket in tickets:
                 row = dict(
+                    _id=str(ticket['_id']),
                     content_name=ticket['content']['name'],
                     ticket_type_name=ticket['ticket_type']['name'],
                     ticket_type_desc=ticket['ticket_type']['desc']['value'],
                     price=0,
+                    pay_type='',
+                    pay_method='',
+                    pg_provider='',
+                    card_name='',
+                    paid_at='',
                     status=ticket['status'],
                     user_name=ticket['receive_user']['name'],
                     user_mobile_number=ticket['receive_user']['mobile_number']
                 )
                 if 'fee' in ticket['days'][0]:
                     row['price'] = ticket['days'][0]['fee']['price']
+                    row['pay_method'] = ticket['days'][0]['fee']['method']
+                pay_online = iamport_client.find(merchant_uid=str(ticket['_id']))
+                if pay_online and pay_online['status'] == 'paid':
+                    row['pay_type'] = 'online'
+                    row['pg_provider']= pay_online['pg_provider']
+                    row['card_name'] = pay_online['card_name']
+                    row['paid_at'] = datetime.fromunixtimestamp(pay_online['paid_at'])
+                else:
+                    row['pay_type'] = 'offline'
                 writer.writerow(row)
             pprint(len(tickets))
 
