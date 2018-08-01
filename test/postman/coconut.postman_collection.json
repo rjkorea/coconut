@@ -3785,15 +3785,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contents/",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contents/5b024f902f30094d50e46ac8",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"t",
-								"contents"
+								"tw",
+								"contents",
+								"5b024f902f30094d50e46ac8"
 							]
 						}
 					},
@@ -3818,7 +3819,12 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
