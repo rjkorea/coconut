@@ -152,7 +152,7 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
                     row['pay_type'] = 'online'
                     row['pg_provider']= pay_online['pg_provider']
                     row['card_name'] = pay_online['card_name']
-                    row['paid_at'] = datetime.fromunixtimestamp(pay_online['paid_at'])
+                    row['paid_at'] = datetime.fromtimestamp(pay_online['paid_at'])
                 else:
                     row['pay_type'] = 'offline'
                 writer.writerow(row)
