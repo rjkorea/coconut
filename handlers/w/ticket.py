@@ -187,6 +187,10 @@ class TicketSendHandler(JsonHandler):
         ticket_oids = self.json_decoded_body.get('ticket_oids', None)
         if not ticket_oids or not isinstance(ticket_oids, list):
             raise HTTPError(400, 'invalid ticket_oids')
+        for t_oid in ticket_oids:
+            ticket = await TicketModel.find_one({'_id': ObjectId(t_oid)})
+            if ticket and ticket['receive_user_oid'] != self.current_user['_id']:
+                raise HTTPError(400, 'is not your ticket')
         receive_user = self.json_decoded_body.get('receive_user', None)
         if not receive_user or not isinstance(receive_user, dict):
             raise HTTPError(400, 'invalid receive_user')
