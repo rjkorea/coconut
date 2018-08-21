@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, base, a, v1, t, tw, w, v2
+from handlers import index, base, a, v1, t, tw, w, v2, wpc, wm
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -113,6 +113,14 @@ url_patterns = [
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register?', w.ticket.TicketSerialNumberRegisterHandler),
+
+    # /w/pc
+    (r'/w/pc/contents/?', wpc.content.ContentListHandler),
+    (r'/w/pc/content/(?P<_id>[^\/]+)/?', wpc.content.ContentHandler),
+
+    # /w/m
+    (r'/w/m/contents/?', wm.content.ContentListHandler),
+    (r'/w/m/content/(?P<_id>[^\/]+)/?', wm.content.ContentHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),
