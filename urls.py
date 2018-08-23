@@ -117,10 +117,13 @@ url_patterns = [
     # /w/pc
     (r'/w/pc/contents/?', wpc.content.ContentListHandler),
     (r'/w/pc/content/(?P<_id>[^\/]+)/?', wpc.content.ContentHandler),
+    (r'/w/pc/sns/?', wpc.content.SnsContentListHandler),
+    (r'/w/pc/sms/link/send/?', wpc.content.SendSmsBuyLinkHandler),
 
     # /w/m
     (r'/w/m/contents/?', wm.content.ContentListHandler),
     (r'/w/m/content/(?P<_id>[^\/]+)/?', wm.content.ContentHandler),
+    (r'/w/m/sns/?', wm.content.SnsContentListHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),

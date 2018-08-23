@@ -7094,6 +7094,130 @@
 						"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)"
 					},
 					"response": []
+				},
+				{
+					"name": "/w/pc/sns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sns",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"pc",
+								"sns"
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/pc/sms/link/send",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content_oid\": \"5b1513f5ba590e015ee4ee2b\",\n\t\"name\": \"한아름\",\n\t\"mobile_number\": \"821087858906\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sms/link/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"pc",
+								"sms",
+								"link",
+								"send"
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content_oid\": \"5b1513f5ba590e015ee4ee2b\",\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sms/link/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"pc",
+										"sms",
+										"link",
+										"send"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "26",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Aug 2018 10:14:11 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"is_sent_receiver\": true}"
+						}
+					]
 				}
 			]
 		},
@@ -7160,6 +7284,32 @@
 							]
 						},
 						"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/m/sns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/sns",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"sns"
+							]
+						},
+						"description": "로그인 필요없음"
 					},
 					"response": []
 				}
