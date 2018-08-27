@@ -4,7 +4,9 @@ from datetime import datetime
 from bson import ObjectId
 
 import csv
+import json
 import click
+from pprint import pprint
 from pymongo import MongoClient
 
 
@@ -109,7 +111,7 @@ def tickets(csvfile, mongo, contentid, dryrun):
 
             # TODO add empty ticket_order_oid
             line['ticket_order_oid'] = None
-            
+
             # TODO add ticket_type_oid
             line['ticket_type_oid'] = mongo_client['coconut']['ticket_type'].find_one({'name': line['ticket_type']})['_id']
             line.pop('ticket_type')
@@ -195,7 +197,98 @@ def group_tickets(csvfile, mongo, contentid, adminid, dryrun):
         click.secho('check parameters <python import.py  --help>', fg='red')
 
 
-cli = click.CommandCollection(sources=[invitation, ticket, group_ticket])
+@click.group()
+def list_ticket():
+    pass
+
+@list_ticket.command()
+@click.option('-c', '--csvfile', help='csv filename')
+@click.option('-j', '--jsonfile', help='json filename')
+@click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('--dryrun', is_flag=True, help='dry run test')
+@click.confirmation_option(help='Are you sure you import ticket to mongodb?')
+def list_tickets(csvfile, jsonfile, mongo, dryrun):
+    click.secho('= params info =', fg='cyan')
+    click.secho('jsonfile: %s' % (jsonfile), fg='green')
+    click.secho('csvfile: %s' % (csvfile), fg='green')
+    click.secho('mongodb: %s' % (mongo), fg='green')
+    now = datetime.utcnow()
+    if csvfile and mongo and jsonfile:
+        mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        json_data = open(jsonfile).read()
+        ticket_order = json.loads(json_data)
+        res = csv.DictReader(open(csvfile, 'r'))
+        except_users = list()
+        pprint('deploy tickets')
+        for i, line in enumerate(res):
+            name = line['name'].strip()
+            mobile_number = '82%s' % line['mobile_number'].strip().replace(' ', '').replace('-', '')[1:]
+            if len(mobile_number) != 12:
+                except_users.append({'name': name, 'mobile_number': mobile_number})
+                continue
+            user = mongo_client['coconut']['user'].find_one({'name': name, 'mobile_number': mobile_number})
+            if user:
+                user_oid = user['_id']
+            else:
+                user_oid = mongo_client['coconut']['user'].insert({
+                    'name': name,
+                    'mobile_number': mobile_number,
+                    'terms': {
+                        'policy': False,
+                        'privacy': False
+                    },
+                    'enabled': True,
+                    'created_at': now,
+                    'updated_at': now
+                })
+            doc = {
+                'content_oid': ObjectId(ticket_order['content_oid']),
+                'ticket_type_oid': ObjectId(ticket_order['ticket_type_oid']),
+                'admin_oid': ObjectId(ticket_order['admin_oid']),
+                'user_oid': user_oid,
+                'qty': ticket_order['qty'],
+                'expiry_date': datetime.strptime(ticket_order['expiry_date'], '%Y-%m-%dT%H:%M:%S'),
+                'enabled': True,
+                'created_at': now,
+                'updated_at': now,
+                'receiver': {
+                    'name': name,
+                    'mobile_number': mobile_number,
+                    'sms': {
+                        'count': 1,
+                        'sent_at': now
+                    }
+                }
+            }
+            if 'fee' in ticket_order:
+                doc['fee'] = ticket_order['fee']
+            ticket_order_oid = mongo_client['coconut']['ticket_order'].insert(doc)
+            for t in range(ticket_order['qty']):
+                doc = {
+                    'content_oid': ObjectId(ticket_order['content_oid']),
+                    'ticket_type_oid': ObjectId(ticket_order['ticket_type_oid']),
+                    'ticket_order_oid': ticket_order_oid,
+                    'receive_user_oid': user_oid,
+                    'status': 'send',
+                    'days': [{
+                        'entered': False,
+                        'day': 1
+                    }],
+                    'enabled': True,
+                    'created_at': now,
+                    'updated_at': now
+                }
+                if 'fee' in ticket_order:
+                    doc['days'][0]['fee'] = ticket_order['fee']
+                ticket_oid = mongo_client['coconut']['ticket'].insert(doc)
+            pprint({'index': i, 'name': name, 'mobile_number': mobile_number})
+        pprint('except users')
+        pprint(except_users)
+    else:
+        click.secho('check parameters <python import.py  --help>', fg='red')
+
+
+cli = click.CommandCollection(sources=[invitation, ticket, group_ticket, list_ticket])
 
 
 if __name__ == '__main__':
