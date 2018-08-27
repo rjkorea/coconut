@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d12dda01-c44c-4330-b520-474a9465dbba",
+		"_postman_id": "42e1d142-4ff6-4d71-bb96-a16b9787fe05",
 		"name": "coconut",
 		"description": "Asyn API Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -8,7 +8,6 @@
 	"item": [
 		{
 			"name": "Test",
-			"description": null,
 			"item": [
 				{
 					"name": "index",
@@ -198,7 +197,6 @@
 		},
 		{
 			"name": "admin(a)",
-			"description": null,
 			"item": [
 				{
 					"name": "/a/auth/register",
@@ -674,7 +672,6 @@
 					},
 					"response": [
 						{
-							"id": "dca0f7a6-c786-4f3f-9349-474005e58ee0",
 							"name": "/a/content/<oid>/image/poster (200 OK)",
 							"originalRequest": {
 								"method": "POST",
@@ -693,7 +690,7 @@
 									"formdata": [
 										{
 											"key": "image",
-											"value": null,
+											"value": "",
 											"type": "file"
 										}
 									]
@@ -790,7 +787,6 @@
 					},
 					"response": [
 						{
-							"id": "befe0c1f-934d-4441-a57a-ea8b26f440d2",
 							"name": "/a/content/<oid>/image/logo (200 OK)",
 							"originalRequest": {
 								"method": "POST",
@@ -809,7 +805,7 @@
 									"formdata": [
 										{
 											"key": "image",
-											"value": null,
+											"value": "",
 											"type": "file"
 										}
 									]
@@ -1006,25 +1002,22 @@
 					},
 					"response": [
 						{
-							"id": "9e5047af-9918-4420-9be7-f175bf266b9e",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									},
 									{
 										"key": "Authorization",
-										"value": "csk={{csk}}",
-										"disabled": false
+										"value": "csk={{csk}}"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"건형 김\"\n}"
+									"raw": ""
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/594246755f5471c519ecfc8c/active/user",
@@ -1073,7 +1066,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Tue Jan 19 2038 12:14:07 GMT+0900 (KST)",
+									"expires": "Invalid Date",
 									"httpOnly": false,
 									"domain": "localhost",
 									"path": "/",
@@ -1748,7 +1741,6 @@
 					},
 					"response": [
 						{
-							"id": "22cc2b24-d082-457c-898f-300a71853f62",
 							"name": "/a/report/<oid> (성공)",
 							"originalRequest": {
 								"method": "GET",
@@ -2512,15 +2504,13 @@
 					},
 					"response": [
 						{
-							"id": "271645ae-6435-416d-a744-61a0c595ddb4",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "csk={{csk}}",
-										"disabled": false
+										"value": "csk={{csk}}"
 									}
 								],
 								"body": {
@@ -2557,7 +2547,8 @@
 											"value": ""
 										}
 									]
-								}
+								},
+								"description": "log for send tickets"
 							},
 							"status": "OK",
 							"code": 200,
@@ -2596,7 +2587,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Tue Jan 19 2038 12:14:07 GMT+0900 (KST)",
+									"expires": "Invalid Date",
 									"httpOnly": false,
 									"domain": "localhost",
 									"path": "/",
@@ -2641,15 +2632,13 @@
 					},
 					"response": [
 						{
-							"id": "292a5228-e00f-4e85-8e14-e4c0260073b9",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "csk={{csk}}",
-										"disabled": false
+										"value": "csk={{csk}}"
 									}
 								],
 								"body": {
@@ -2669,7 +2658,8 @@
 										"log",
 										"5a48e955ba590e6df948a02d"
 									]
-								}
+								},
+								"description": "log for send tickets"
 							},
 							"status": "OK",
 							"code": 200,
@@ -2708,7 +2698,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Tue Jan 19 2038 12:14:07 GMT+0900 (KST)",
+									"expires": "Invalid Date",
 									"httpOnly": false,
 									"domain": "localhost",
 									"path": "/",
@@ -3187,7 +3177,6 @@
 					},
 					"response": [
 						{
-							"id": "9e240f6b-633c-4a7a-914d-a29383b97d4c",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3222,7 +3211,8 @@
 											"value": "10"
 										}
 									]
-								}
+								},
+								"description": "로그인 필요없음"
 							},
 							"status": "OK",
 							"code": 200,
@@ -3317,7 +3307,6 @@
 					},
 					"response": [
 						{
-							"id": "71ea3a31-c714-4764-b489-2b4e28be3de1",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -3499,7 +3488,6 @@
 		},
 		{
 			"name": "tablet(t)",
-			"description": null,
 			"item": [
 				{
 					"name": "/t/host",
@@ -3709,7 +3697,6 @@
 		},
 		{
 			"name": "tablet web(tw)",
-			"description": null,
 			"item": [
 				{
 					"name": "/tw/auth/login",
@@ -3756,7 +3743,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contenst",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contents",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -3858,7 +3845,6 @@
 		},
 		{
 			"name": "web(w)",
-			"description": null,
 			"item": [
 				{
 					"name": "/w/user",
@@ -3895,7 +3881,6 @@
 					},
 					"response": [
 						{
-							"id": "33679030-7bbf-4777-b7e7-3a1edc33a072",
 							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -3925,7 +3910,8 @@
 											"value": "821032697178"
 										}
 									]
-								}
+								},
+								"description": "name과 mobile_number에 해당하는 유저의 _id 정보를 가져온다"
 							},
 							"status": "OK",
 							"code": 200,
@@ -3966,7 +3952,6 @@
 							"body": "{\"data\": {\"has_password\": true, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						},
 						{
-							"id": "38565f96-67b8-48fc-8d66-cc34f48d8c4e",
 							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
 							"originalRequest": {
 								"method": "GET",
@@ -3996,7 +3981,8 @@
 											"value": "821032697178"
 										}
 									]
-								}
+								},
+								"description": "name과 mobile_number에 해당하는 유저의 _id 정보를 가져온다"
 							},
 							"status": "OK",
 							"code": 200,
@@ -4071,7 +4057,6 @@
 					},
 					"response": [
 						{
-							"id": "2e8689b1-f8f4-409b-8d72-c71debc96985",
 							"name": "패스워드 설정이 되어 있는 유저",
 							"originalRequest": {
 								"method": "PUT",
@@ -4099,7 +4084,8 @@
 										"new",
 										"password"
 									]
-								}
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
 							},
 							"status": "Bad Request",
 							"code": 400,
@@ -4134,7 +4120,6 @@
 							"body": "{\"message\": \"400: exist password\"}"
 						},
 						{
-							"id": "3ed2de1f-25ff-4c2b-a20c-28a7634a6a83",
 							"name": "신규 패스워드 설정",
 							"originalRequest": {
 								"method": "PUT",
@@ -4162,7 +4147,8 @@
 										"new",
 										"password"
 									]
-								}
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
 							},
 							"status": "OK",
 							"code": 200,
@@ -4231,70 +4217,6 @@
 					},
 					"response": [
 						{
-							"id": "5fe9ebb8-b0a3-48c1-ba74-a95f64c2d562",
-							"name": "비밀번호 인증 성공",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/auth/password",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"user",
-										"5931a3eabc2c44140e0dea91",
-										"auth",
-										"password"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "343",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 14 Jun 2017 08:25:21 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
-						},
-						{
-							"id": "30e6dda0-d7f9-4a30-9b8d-7bfddecc9183",
 							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
 							"originalRequest": {
 								"method": "PUT",
@@ -4322,7 +4244,8 @@
 										"auth",
 										"password"
 									]
-								}
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
 							},
 							"status": "Bad Request",
 							"code": 400,
@@ -4355,6 +4278,69 @@
 							],
 							"cookie": [],
 							"body": "{\"message\": \"400: does not set password\"}"
+						},
+						{
+							"name": "비밀번호 인증 성공",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/5931a3eabc2c44140e0dea91/auth/password",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"user",
+										"5931a3eabc2c44140e0dea91",
+										"auth",
+										"password"
+									]
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "343",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2017 08:25:21 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
 						}
 					]
 				},
@@ -4425,7 +4411,134 @@
 					},
 					"response": [
 						{
-							"id": "1316e8a8-c35f-4cf8-be89-45ea694496e8",
+							"name": "/w/autologin/<oid> (존재하지 않는 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"autologin",
+										"5a434a085f54711336570ecc"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:38:19 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: not exist autologin session\"}"
+						},
+						{
+							"name": "/w/autologin/<oid> (무효한 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"autologin",
+										"5a434a085f54711336570ecc"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "41",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:37:47 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: invalid autologin_oid\"}"
+						},
+						{
 							"name": "/w/autologin/<oid> (성공)",
 							"originalRequest": {
 								"method": "GET",
@@ -4494,136 +4607,6 @@
 							],
 							"cookie": [],
 							"body": "{\"data\": {\"updated_at\": 1514326904, \"_id\": \"5a434a085f54711336570ecc\", \"created_at\": 1514326904, \"usk\": \"5a434a085f54711336570ecb\", \"content_oid\": \"59e9bf995f54710f67bb237a\"}}"
-						},
-						{
-							"id": "fd741a19-3bad-48a5-abb8-dba690c70921",
-							"name": "/w/autologin/<oid> (존재하지 않는 oid)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"autologin",
-										"5a434a085f54711336570ecc"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "47",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 27 Dec 2017 07:38:19 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"message\": \"400: not exist autologin session\"}"
-						},
-						{
-							"id": "5525eb56-b3a6-4bb7-8747-0198242f85b4",
-							"name": "/w/autologin/<oid> (무효한 oid)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"autologin",
-										"5a434a085f54711336570ecc"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "41",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 27 Dec 2017 07:37:47 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"message\": \"400: invalid autologin_oid\"}"
 						}
 					]
 				},
@@ -4653,7 +4636,6 @@
 					},
 					"response": [
 						{
-							"id": "871f7340-766e-46b5-bbe2-f9f20265f40b",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -4674,7 +4656,8 @@
 										"content",
 										"atY3Nb7"
 									]
-								}
+								},
+								"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)"
 							},
 							"status": "OK",
 							"code": 200,
@@ -4751,7 +4734,6 @@
 					},
 					"response": [
 						{
-							"id": "f96628fd-709d-4cb3-a1b1-01add86efef9",
 							"name": "로그인 화면에서 보이는 컨텐츠 정보",
 							"originalRequest": {
 								"method": "GET",
@@ -4781,7 +4763,8 @@
 											"value": "10"
 										}
 									]
-								}
+								},
+								"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)"
 							},
 							"status": "OK",
 							"code": 200,
@@ -4873,7 +4856,6 @@
 					},
 					"response": [
 						{
-							"id": "4740b1d0-45ac-48af-b7c7-126511228ab4",
 							"name": "국가코드 알파벳순서 정렬 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -4903,7 +4885,8 @@
 											"value": "10"
 										}
 									]
-								}
+								},
+								"description": "로그인 필요없음"
 							},
 							"status": "OK",
 							"code": 200,
@@ -4999,7 +4982,6 @@
 					},
 					"response": [
 						{
-							"id": "30b34980-4cca-4c0f-88a3-55025131bd13",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -5038,7 +5020,8 @@
 											"value": "5951cc82ba590e3cec7f6031"
 										}
 									]
-								}
+								},
+								"description": "티켓리스트 api\nusk로 api 접근인증한다"
 							},
 							"status": "OK",
 							"code": 200,
@@ -5125,7 +5108,6 @@
 					},
 					"response": [
 						{
-							"id": "dbae4c14-27a7-44dc-87e4-821ab2a5eff9",
 							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -5165,7 +5147,8 @@
 											"value": "5951cc82ba590e3cec7f6031"
 										}
 									]
-								}
+								},
+								"description": "log for send tickets"
 							},
 							"status": "OK",
 							"code": 200,
@@ -5243,7 +5226,6 @@
 					},
 					"response": [
 						{
-							"id": "2ae3b992-807a-40ab-896d-327f8e52e2c9",
 							"name": "/w/ticket/payment (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -5316,7 +5298,6 @@
 							"body": "{\"data\": {\"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_history\": [], \"amount\": 10000, \"imp_uid\": \"imp_079527261731\", \"pay_method\": \"card\", \"card_code\": \"361\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"buyer_tel\": \"821032697178\", \"apply_num\": \"33305906\", \"cancel_amount\": 0, \"currency\": \"KRW\", \"paid_at\": 1509592577, \"card_name\": \"BC\\uce74\\ub4dc\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171102121617261651&noMethod=1\", \"cancelled_at\": 0, \"merchant_uid\": \"597bf030ba590e7985d0fb6d\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171102121617261651\", \"user_agent\": \"sorry_not_supported_anymore\", \"status\": \"paid\", \"cancel_receipt_urls\": [], \"card_quota\": 0, \"pg_provier\": \"html5_inicis\", \"cancel_reason\": null, \"buyer_email\": \"kevin.cho@rjkorea.com\"}}"
 						},
 						{
-							"id": "abdd87fe-67e9-49da-9a4b-aa9bf8442d94",
 							"name": "/w/ticket/payment (400: not exist fee)",
 							"originalRequest": {
 								"method": "GET",
@@ -5416,7 +5397,68 @@
 					},
 					"response": [
 						{
-							"id": "357b035e-e39c-4b3c-8148-04ab170bde67",
+							"name": "/w/ticket/<oid>/payment/status (not exist payment info)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"597bf030ba590e7985d0fb6d",
+										"payment",
+										"status"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "42",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Nov 2017 06:25:04 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: not exist payment info\"}"
+						},
+						{
 							"name": "/w/ticket/<oid>/payment/status (success case)",
 							"originalRequest": {
 								"method": "GET",
@@ -5483,69 +5525,6 @@
 							],
 							"cookie": [],
 							"body": "{\"data\": {\"imp_uid\": \"imp_079527261731\", \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"buyer_tel\": \"821032697178\", \"status\": \"paid\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\"}}"
-						},
-						{
-							"id": "07300729-dc15-405f-8532-b0913d6ea07c",
-							"name": "/w/ticket/<oid>/payment/status (not exist payment info)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"597bf030ba590e7985d0fb6d",
-										"payment",
-										"status"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "42",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Nov 2017 06:25:04 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"message\": \"400: not exist payment info\"}"
 						}
 					]
 				},
@@ -5585,7 +5564,6 @@
 					},
 					"response": [
 						{
-							"id": "22de4310-a531-4bd8-beb8-f7c31de87f4b",
 							"name": "/w/ticket/<oid>/payment/complete (400: status is not paid)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5689,8 +5667,7 @@
 					},
 					"response": [
 						{
-							"id": "8cc54bfb-e869-4ec2-ae38-9bc29f568e50",
-							"name": "/w/ticket/<oid>/payment/cancel (not exist payment info for cancel)",
+							"name": "/w/ticket/<oid>/payment/cancel (success case)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -5723,13 +5700,13 @@
 									]
 								}
 							},
-							"status": "Internal Server Error",
-							"code": 500,
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Content-Length",
-									"value": "114",
+									"value": "1730",
 									"name": "Content-Length",
 									"description": "The length of the response body in octets (8-bit bytes)"
 								},
@@ -5741,7 +5718,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 03 Nov 2017 02:40:03 GMT",
+									"value": "Fri, 03 Nov 2017 02:51:18 GMT",
 									"name": "Date",
 									"description": "The date and time that the message was sent"
 								},
@@ -5753,77 +5730,9 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\"message\": \"500: \\ucde8\\uc18c\\ud560 \\uacb0\\uc81c\\uac74\\uc774 \\uc874\\uc7ac\\ud558\\uc9c0 \\uc54a\\uc2b5\\ub2c8\\ub2e4.\"}"
+							"body": "{\"data\": {\"card_quota\": 0, \"escrow\": false, \"imp_uid\": \"imp_658397387002\", \"buyer_postcode\": null, \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_amount\": 10000, \"merchant_uid\": \"5978254eba590e14c06fa2a4\", \"cancel_receipt_urls\": [\"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\"], \"vbank_num\": null, \"bank_name\": null, \"card_code\": \"361\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"custom_data\": null, \"vbank_name\": null, \"vbank_code\": null, \"cancel_history\": [{\"cancelled_at\": 1509677477, \"amount\": 10000, \"reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\"}], \"buyer_addr\": null, \"cancelled_at\": 1509677477, \"apply_num\": \"38397899\", \"card_name\": \"BC\\uce74\\ub4dc\", \"user_agent\": \"sorry_not_supported_anymore\", \"pg_provider\": \"html5_inicis\", \"buyer_email\": \"kevin.cho@rjkorea.com\", \"amount\": 10000, \"cancel_reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"vbank_date\": 0, \"status\": \"cancelled\", \"pay_method\": \"card\", \"paid_at\": 1509677427, \"failed_at\": 0, \"currency\": \"KRW\", \"fail_reason\": null, \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\", \"cash_receipt_issued\": false, \"vbank_holder\": null, \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"bank_code\": null, \"buyer_tel\": \"821032697178\"}}"
 						},
 						{
-							"id": "a7d8ebf9-9d52-46b0-8ac0-6747cc0251d5",
-							"name": "/w/ticket/<oid>/payment/cancel (already cancel)",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5978254eba590e14c06fa2a4/payment/cancel",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"5978254eba590e14c06fa2a4",
-										"payment",
-										"cancel"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "95",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 03 Nov 2017 10:03:12 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"message\": \"500: \\uc774\\ubbf8 \\uc804\\uc561\\ucde8\\uc18c\\ub41c \\uc8fc\\ubb38\\uc785\\ub2c8\\ub2e4.\"}"
-						},
-						{
-							"id": "039aaed6-3147-4c4e-800a-9fadbe888ea3",
 							"name": "/w/ticket/<oid>/payment/cancel (fail case)",
 							"originalRequest": {
 								"method": "PUT",
@@ -5890,8 +5799,7 @@
 							"body": "{\"message\": \"500: \\uacb0\\uc81c\\ucde8\\uc18c\\uc5d0 \\uc2e4\\ud328\\ud558\\uc600\\uc2b5\\ub2c8\\ub2e4. [501626|\\uae30 \\ucde8\\uc18c \\uac70\\ub798]\"}"
 						},
 						{
-							"id": "e3f07c89-4f35-454a-b98a-354c779a64f0",
-							"name": "/w/ticket/<oid>/payment/cancel (success case)",
+							"name": "/w/ticket/<oid>/payment/cancel (already cancel)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -5924,13 +5832,13 @@
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "Internal Server Error",
+							"code": 500,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Content-Length",
-									"value": "1730",
+									"value": "95",
 									"name": "Content-Length",
 									"description": "The length of the response body in octets (8-bit bytes)"
 								},
@@ -5942,7 +5850,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 03 Nov 2017 02:51:18 GMT",
+									"value": "Fri, 03 Nov 2017 10:03:12 GMT",
 									"name": "Date",
 									"description": "The date and time that the message was sent"
 								},
@@ -5954,7 +5862,73 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\"data\": {\"card_quota\": 0, \"escrow\": false, \"imp_uid\": \"imp_658397387002\", \"buyer_postcode\": null, \"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_amount\": 10000, \"merchant_uid\": \"5978254eba590e14c06fa2a4\", \"cancel_receipt_urls\": [\"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\"], \"vbank_num\": null, \"bank_name\": null, \"card_code\": \"361\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"custom_data\": null, \"vbank_name\": null, \"vbank_code\": null, \"cancel_history\": [{\"cancelled_at\": 1509677477, \"amount\": 10000, \"reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171103115027560565&noMethod=1\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\"}], \"buyer_addr\": null, \"cancelled_at\": 1509677477, \"apply_num\": \"38397899\", \"card_name\": \"BC\\uce74\\ub4dc\", \"user_agent\": \"sorry_not_supported_anymore\", \"pg_provider\": \"html5_inicis\", \"buyer_email\": \"kevin.cho@rjkorea.com\", \"amount\": 10000, \"cancel_reason\": \"\\ud68c\\uc0ac\\uc5d0\\uc11c \\ucd9c\\uc7a5\\uac00\\uac8c \\ub418\\uc5c8\\uc5b4\\uc694 \\u3160\\u3160\", \"vbank_date\": 0, \"status\": \"cancelled\", \"pay_method\": \"card\", \"paid_at\": 1509677427, \"failed_at\": 0, \"currency\": \"KRW\", \"fail_reason\": null, \"pg_tid\": \"INIMX_ISP_INIpayTest20171103115027560565\", \"cash_receipt_issued\": false, \"vbank_holder\": null, \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"bank_code\": null, \"buyer_tel\": \"821032697178\"}}"
+							"body": "{\"message\": \"500: \\uc774\\ubbf8 \\uc804\\uc561\\ucde8\\uc18c\\ub41c \\uc8fc\\ubb38\\uc785\\ub2c8\\ub2e4.\"}"
+						},
+						{
+							"name": "/w/ticket/<oid>/payment/cancel (not exist payment info for cancel)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reason\": \"회사에서 출장가게 되었어요 ㅠㅠ\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5978254eba590e14c06fa2a4/payment/cancel",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5978254eba590e14c06fa2a4",
+										"payment",
+										"cancel"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "114",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Nov 2017 02:40:03 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"500: \\ucde8\\uc18c\\ud560 \\uacb0\\uc81c\\uac74\\uc774 \\uc874\\uc7ac\\ud558\\uc9c0 \\uc54a\\uc2b5\\ub2c8\\ub2e4.\"}"
 						}
 					]
 				},
@@ -5993,7 +5967,6 @@
 					},
 					"response": [
 						{
-							"id": "5331f9cb-5c7e-4416-a5ca-49e890d1616f",
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
 								"method": "PUT",
@@ -6094,7 +6067,6 @@
 					},
 					"response": [
 						{
-							"id": "28d45398-dcf9-4bc7-a50c-7d622873353b",
 							"name": "3개 티켓을 자신에게 전송 (400 에러)",
 							"originalRequest": {
 								"method": "PUT",
@@ -6159,7 +6131,6 @@
 							"body": "{\"message\": \"400: cannot send to myself\"}"
 						},
 						{
-							"id": "068c44dc-7039-4280-96d6-73682973038e",
 							"name": "3개 티켓 다른 사람에게 전송",
 							"originalRequest": {
 								"method": "PUT",
@@ -6269,7 +6240,6 @@
 					},
 					"response": [
 						{
-							"id": "05a47a50-a45b-48c5-87eb-e3f338772bef",
 							"name": "마이티킷 리스트(status: register/use/cancel)",
 							"originalRequest": {
 								"method": "GET",
@@ -6394,7 +6364,6 @@
 					},
 					"response": [
 						{
-							"id": "2808a290-1c5d-45d1-b3ac-226cd5f69aaf",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -6522,7 +6491,6 @@
 					},
 					"response": [
 						{
-							"id": "d8cbcd48-2b7d-48f0-806d-e2cce0964354",
 							"name": "Q/A 리스트",
 							"originalRequest": {
 								"method": "GET",
@@ -6675,7 +6643,6 @@
 					},
 					"response": [
 						{
-							"id": "b5568d21-8e52-4e78-9db7-5be6d315f51b",
 							"name": "조건희 유저정보 가져오기",
 							"originalRequest": {
 								"method": "PUT",
@@ -6887,7 +6854,6 @@
 		},
 		{
 			"name": "v2",
-			"description": "TKIT 0.6",
 			"item": [
 				{
 					"name": "/v2/auth/login",
@@ -6956,9 +6922,18 @@
 					},
 					"response": [
 						{
-							"id": "82c7456b-556d-4666-953f-86d821e31037",
 							"name": "access token expired",
 							"originalRequest": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA2NzI4MzYsImlhdCI6MTUyMDU4NjQzNiwidXNlcl9vaWQiOiI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifQ.Ivnp2woPFWDsKXblFRhNu-5HLWewCpTVQCd6JROt12U",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"body": {
@@ -6977,7 +6952,8 @@
 										"user",
 										"me"
 									]
-								}
+								},
+								"description": "get me info"
 							},
 							"status": "Unauthorized",
 							"code": 401,
@@ -7014,6 +6990,7 @@
 					]
 				}
 			],
+			"description": "TKIT 0.6",
 			"auth": {
 				"type": "bearer",
 				"bearer": [
@@ -7049,6 +7026,292 @@
 							"});"
 						]
 					}
+				}
+			]
+		},
+		{
+			"name": "web pc (w/pc)",
+			"item": [
+				{
+					"name": "/w/pc/contents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/contents?start=0&size=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"pc",
+								"contents"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/pc/content/(oid)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/content/5afa8f4bba590e4ce2618b54",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"pc",
+								"content",
+								"5afa8f4bba590e4ce2618b54"
+							]
+						},
+						"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/pc/sns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sns",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"pc",
+								"sns"
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/pc/sms/link/send",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content_oid\": \"5b1513f5ba590e015ee4ee2b\",\n\t\"name\": \"한아름\",\n\t\"mobile_number\": \"821087858906\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sms/link/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"pc",
+								"sms",
+								"link",
+								"send"
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content_oid\": \"5b1513f5ba590e015ee4ee2b\",\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sms/link/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"pc",
+										"sms",
+										"link",
+										"send"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "26",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Aug 2018 10:14:11 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"is_sent_receiver\": true}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "web m (w/m)",
+			"item": [
+				{
+					"name": "/w/m/contents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/contents?start=0&size=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"contents"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/m/content/(oid)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/content/5afa8f4bba590e4ce2618b54",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"content",
+								"5afa8f4bba590e4ce2618b54"
+							]
+						},
+						"description": "로그인 필요없음,\nshort_id 또는 oid를 파라미터로 사용(초기값은 short_id)"
+					},
+					"response": []
+				},
+				{
+					"name": "/w/m/sns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/sns",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"sns"
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": []
 				}
 			]
 		}

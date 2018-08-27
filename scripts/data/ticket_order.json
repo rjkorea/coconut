@@ -1,0 +1,11 @@
+{
+    "content_oid": "5afa8f4bba590e4ce2618b54", 
+    "ticket_type_oid": "5b597617ba590e137223837d", 
+    "qty": 10, 
+    "expiry_date": "2018-12-31T07:01:00", 
+    "fee": {
+        "price": 1000,
+        "method": "creditcard"
+    }, 
+    "admin_oid": "58bfafa55f5471325c68c4f3"
+}
