@@ -59,6 +59,9 @@ class TicketTypeHandler(JsonHandler):
         content_oid = self.json_decoded_body.get('content_oid', None)
         if not content_oid or len(content_oid) != 24:
             raise HTTPError(400, 'invalid content_oid')
+        type = self.json_decoded_body.get('type', None)
+        if not type or type not in TicketTypeModel.TICKET_TYPE:
+            raise HTTPError(400, 'invalid type')
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
@@ -69,6 +72,7 @@ class TicketTypeHandler(JsonHandler):
         ticket_type = TicketTypeModel(raw_data=dict(
             admin_oid=admin_oid,
             content_oid=ObjectId(content_oid),
+            type=type,
             name=name,
             desc=desc,
             day=day
@@ -185,11 +189,13 @@ class TicketOrderHandler(JsonHandler):
         receiver['sms'] = {
             'count': 0
         }
+        ticket_type = await TicketTypeModel.get_id(ObjectId(ticket_type_oid))
         # create ticket order model
         ticket_order = TicketOrderModel(raw_data=dict(
             admin_oid=admin_oid,
             content_oid=ObjectId(content_oid),
             ticket_type_oid=ObjectId(ticket_type_oid),
+            type=ticket_type['type'],
             qty=qty,
             receiver=receiver,
             expiry_date=expiry_date

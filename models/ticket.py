@@ -11,6 +11,7 @@ from models.base import BaseModel
 
 class TicketTypeModel(BaseModel):
     MONGO_COLLECTION = 'ticket_type'
+    TICKET_TYPE = ('general', 'network')
 
     def __init__(self, *args, **kwargs):
         super(TicketTypeModel, self).__init__(*args, **kwargs)
@@ -27,6 +28,11 @@ class TicketTypeModel(BaseModel):
             {
                 'key': 'admin_oid',
                 'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'type',
+                'type': str,
                 'default': None
             },
             {
@@ -86,6 +92,11 @@ class TicketOrderModel(BaseModel):
             {
                 'key': 'ticket_type_oid',
                 'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'type',
+                'type': str,
                 'default': None
             },
             {
@@ -162,6 +173,11 @@ class TicketModel(BaseModel):
             {
                 'key': 'content_oid',
                 'type': ObjectId,
+                'default': None
+            },
+            {
+                'key': 'type',
+                'type': str,
                 'default': None
             },
             {
