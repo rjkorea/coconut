@@ -5106,89 +5106,7 @@
 						},
 						"description": "log for send tickets"
 					},
-					"response": [
-						{
-							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"logs"
-									],
-									"query": [
-										{
-											"key": "start",
-											"value": "0"
-										},
-										{
-											"key": "size",
-											"value": "10"
-										},
-										{
-											"key": "content_oid",
-											"value": "5951cc82ba590e3cec7f6031"
-										}
-									]
-								},
-								"description": "log for send tickets"
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "8185",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 14 Jun 2017 08:31:55 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Etag",
-									"value": "\"3bf4b125a68bfd36ba199f1a0f8001a00c4adf54\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"count\": 4, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6c\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"send\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6b\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "/w/ticket/payment",
@@ -7224,6 +7142,845 @@
 		{
 			"name": "web m (w/m)",
 			"item": [
+				{
+					"name": "/w/m/user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user?name=조건희&mobile_number=821032697178",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "조건희"
+								},
+								{
+									"key": "mobile_number",
+									"value": "821032697178"
+								}
+							]
+						},
+						"description": "name과 mobile_number에 해당하는 유저의 _id 정보를 가져온다"
+					},
+					"response": [
+						{
+							"name": "유저 정보 가져오기 (패스워드 설정이 안되어 있는 경우)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user?name=조건희&mobile_number=821032697178",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "조건희"
+										},
+										{
+											"key": "mobile_number",
+											"value": "821032697178"
+										}
+									]
+								},
+								"description": "name과 mobile_number에 해당하는 유저의 _id 정보를 가져온다"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "68",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2017 01:47:53 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"47afa71c5382ac506a88b73655df22c240010de5\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"has_password\": false, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
+						},
+						{
+							"name": "유저 정보 가져오기 (패스워드 설정이 되어 있는 경우)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user?name=조건희&mobile_number=821032697178",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "조건희"
+										},
+										{
+											"key": "mobile_number",
+											"value": "821032697178"
+										}
+									]
+								},
+								"description": "name과 mobile_number에 해당하는 유저의 _id 정보를 가져온다"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "67",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2017 02:08:19 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"e82b45ab372a989bea319d2ceb98f58931455f6c\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"has_password\": true, \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
+						}
+					]
+				},
+				{
+					"name": "/w/m/user/<oid>/new/password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\",\n\t\"terms\": true\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/5931a3eabc2c44140e0dea91/new/password",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"user",
+								"5931a3eabc2c44140e0dea91",
+								"new",
+								"password"
+							]
+						},
+						"description": "response의 'usk'값을 이용하여 api에 접근한다"
+					},
+					"response": [
+						{
+							"name": "신규 패스워드 설정",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\",\n\t\"terms\": true\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/5931a3eabc2c44140e0dea91/new/password",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user",
+										"5931a3eabc2c44140e0dea91",
+										"new",
+										"password"
+									]
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "255",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2017 08:27:52 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"usk\": \"5940f3885f5471a2b65cae74\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
+						},
+						{
+							"name": "패스워드 설정이 되어 있는 유저",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"1234\",\n\t\"password2\": \"1234\",\n\t\"terms\": true\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/5931a3eabc2c44140e0dea91/new/password",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user",
+										"5931a3eabc2c44140e0dea91",
+										"new",
+										"password"
+									]
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "34",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2017 08:27:15 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: exist password\"}"
+						}
+					]
+				},
+				{
+					"name": "/w/m/user/<oid>/auth/password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/5931a3eabc2c44140e0dea91/auth/password",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"user",
+								"5931a3eabc2c44140e0dea91",
+								"auth",
+								"password"
+							]
+						},
+						"description": "response의 'usk'값을 이용하여 api에 접근한다"
+					},
+					"response": [
+						{
+							"name": "비밀번호 인증 성공",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/5931a3eabc2c44140e0dea91/auth/password",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user",
+										"5931a3eabc2c44140e0dea91",
+										"auth",
+										"password"
+									]
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "343",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2017 08:25:21 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"usk\": \"5940f2f15f5471a2b65cae73\", \"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$83XP/NPc.tMgdERsnmDI/fc7VAaZm2qv$hPrCy1B35zJnZsrC.skbwjN7iWoguC3O\", \"_id\": \"5931a3eabc2c44140e0dea91\"}}"
+						},
+						{
+							"name": "비밀번호가 설정되어 있지 않는 유저 로그인",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"4321\",\n\t\"terms\": true\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/5931a3eabc2c44140e0dea91/auth/password",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user",
+										"5931a3eabc2c44140e0dea91",
+										"auth",
+										"password"
+									]
+								},
+								"description": "response의 'usk'값을 이용하여 api에 접근한다"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "41",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2017 01:50:07 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: does not set password\"}"
+						}
+					]
+				},
+				{
+					"name": "/w/m/autologin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"autologin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}",
+										"disabled": false
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"autologin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "55",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 04 Sep 2018 04:13:17 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Wed Sep 26 2018 17:10:01 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|5ba3a8f5|024e90b599f02a5e6900b55befd8b657|1535357401",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"message\": \"check your sms\", \"is_sent_receiver\": true}"
+						}
+					]
+				},
+				{
+					"name": "/w/m/autologin/<oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"autologin",
+								"5b8e065d5f5471af55848f83"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/w/autologin/<oid> (무효한 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"autologin",
+										"5b8e065d5f5471af55848f83"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "41",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:37:47 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: invalid autologin_oid\"}"
+						},
+						{
+							"name": "/w/autologin/<oid> (존재하지 않는 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"autologin",
+										"5b8e065d5f5471af55848f83"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:38:19 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: not exist autologin session\"}"
+						},
+						{
+							"name": "/w/autologin/<oid> (성공)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"autologin",
+										"5b8e065d5f5471af55848f83"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "175",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:35:17 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"e247a7392e8410798156382744f620ae607e1902\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"updated_at\": 1514326904, \"_id\": \"5a434a085f54711336570ecc\", \"created_at\": 1514326904, \"usk\": \"5a434a085f54711336570ecb\", \"content_oid\": \"59e9bf995f54710f67bb237a\"}}"
+						}
+					]
+				},
 				{
 					"name": "/w/m/contents",
 					"request": {
