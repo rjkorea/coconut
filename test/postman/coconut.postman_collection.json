@@ -7312,6 +7312,333 @@
 						"description": "로그인 필요없음"
 					},
 					"response": []
+				},
+				{
+					"name": "/w/m/content/(oid)/ticket/orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/content/5afa8f4bba590e4ce2618b54/ticket/orders?start=0&size=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"content",
+								"5afa8f4bba590e4ce2618b54",
+								"ticket",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "로그인 필요"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/content/5afa8f4bba590e4ce2618b54/ticket/orders?start=0&size=10",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"content",
+										"5afa8f4bba590e4ce2618b54",
+										"ticket",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "509",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Sep 2018 08:15:42 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"0b2ade553729d217e5f062705c80689fd2149712\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Wed Sep 26 2018 17:10:01 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|5ba3a8f5|024e90b599f02a5e6900b55befd8b657|1535357401",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"count\": 2, \"data\": [{\"pend\": 5, \"price\": 1000, \"qty\": 5, \"name\": \"\\uc77c\\ubc18 \\uc720\\ub8cc\\ud2f0\\ucf13 \\uc774\\ub984 \\ud14c\\uc2a4\\ud2b8\", \"desc\": {\"value\": \"\\uc77c\\ubc18 \\uc720\\ub8cc\\ud2f0\\ucf13 \\uc124\\uba85 \\ud14c\\uc2a4\\ud2b8\", \"enabled\": true}, \"_id\": \"5b8ce5565f5471a161f3dea0\"}, {\"name\": \"\\uc77c\\ubc18\\ud2f0\\ucf13 \\uc774\\ub984 \\ud14c\\uc2a4\\ud2b8\", \"pend\": 10, \"desc\": {\"value\": \"\\uc77c\\ubc18\\ud2f0\\ucf13 \\uc124\\uba85 \\ud14c\\uc2a4\\ud2b8\", \"enabled\": true}, \"_id\": \"5b8ce1785f5471a16187c2b6\", \"qty\": 10}]}"
+						}
+					]
+				},
+				{
+					"name": "/w/m/ticket/send",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ticket_orders\": [\n\t\t{\n\t\t\t\"_id\": \"5b8ce5565f5471a161f3dea0\",\n\t\t\t\"qty\": 0\n\t\t},\n\t\t{\n\t\t\t\"_id\": \"5b8ce1785f5471a16187c2b6\",\n\t\t\t\"qty\": 1\n\t\t}\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/ticket/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"ticket",
+								"send"
+							]
+						},
+						"description": "로그인 필요"
+					},
+					"response": [
+						{
+							"name": "400: can't buy ticket",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}",
+										"disabled": false
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ticket_orders\": [\n\t\t{\n\t\t\t\"_id\": \"5b8ce5565f5471a161f3dea0\",\n\t\t\t\"qty\": 1\n\t\t},\n\t\t{\n\t\t\t\"_id\": \"5b8ce1785f5471a16187c2b6\",\n\t\t\t\"qty\": 1\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/ticket/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"ticket",
+										"send"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "81",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Sep 2018 10:41:10 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Wed Sep 26 2018 17:10:01 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|5ba3a8f5|024e90b599f02a5e6900b55befd8b657|1535357401",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"message\": \"400: can't buy ticket (ticket_order_oid: 5b8ce5565f5471a161f3dea0)\"}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}",
+										"disabled": false
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ticket_orders\": [\n\t\t{\n\t\t\t\"_id\": \"5b8ce5565f5471a161f3dea0\",\n\t\t\t\"qty\": 0\n\t\t},\n\t\t{\n\t\t\t\"_id\": \"5b8ce1785f5471a16187c2b6\",\n\t\t\t\"qty\": 1\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/ticket/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"ticket",
+										"send"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "14",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Sep 2018 10:48:13 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Wed Sep 26 2018 17:10:01 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|5ba3a8f5|024e90b599f02a5e6900b55befd8b657|1535357401",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"data\": \"OK\"}"
+						}
+					]
 				}
 			]
 		}
