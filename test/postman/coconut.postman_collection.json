@@ -7143,6 +7143,139 @@
 			"name": "web m (w/m)",
 			"item": [
 				{
+					"name": "/w/m/countries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/countries?start=0&size=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"countries"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "로그인 필요없음"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/countries?start=0&size=20",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"countries"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "729",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 04 Sep 2018 06:56:09 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"9b9bc6d57ee52954cb09a9e1403aa139e9fa6b59\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Wed Sep 26 2018 17:10:01 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|5ba3a8f5|024e90b599f02a5e6900b55befd8b657|1535357401",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"count\": 5, \"data\": [{\"created_at\": 1492037661, \"enabled\": true, \"name\": \"Singapore\", \"code\": \"65\", \"updated_at\": 1492037719, \"_id\": \"58ef256c8705470b00874bdd\"}, {\"created_at\": 1492037661, \"enabled\": true, \"name\": \"South Korea\", \"code\": \"82\", \"updated_at\": 1492037719, \"_id\": \"58ef23d08705470b00874bd5\"}, {\"created_at\": 1492037661, \"enabled\": true, \"name\": \"Taiwan\", \"code\": \"886\", \"updated_at\": 1492037719, \"_id\": \"5b8e2bb6ef8f3bb0ebdfa5d7\"}, {\"created_at\": 1492037661, \"enabled\": true, \"name\": \"Thailand\", \"code\": \"66\", \"updated_at\": 1492037719, \"_id\": \"58ef25828705470b00874bde\"}, {\"created_at\": 1492037661, \"enabled\": true, \"name\": \"United States\", \"code\": \"1\", \"updated_at\": 1492037719, \"_id\": \"58ef25fc8705470b00874be0\"}]}"
+						}
+					]
+				},
+				{
 					"name": "/w/m/user",
 					"request": {
 						"method": "GET",

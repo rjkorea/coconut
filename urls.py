@@ -121,6 +121,7 @@ url_patterns = [
     (r'/w/pc/sms/link/send/?', wpc.content.SendSmsBuyLinkHandler),
 
     # /w/m
+    (r'/w/m/countries/?', wm.user.CountryListHandler),
     (r'/w/m/user/?', wm.user.UserHandler),
     (r'/w/m/user/(?P<_id>[^\/]+)/new/password?', wm.user.UserNewPasswordHandler),
     (r'/w/m/user/(?P<_id>[^\/]+)/auth/password?', wm.user.UserAuthPasswordHandler),
