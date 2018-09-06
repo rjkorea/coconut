@@ -18,6 +18,40 @@ from models import send_sms
 import settings
 
 
+class UserRegisterHandler(JsonHandler):
+    async def post(self, *args, **kwargs):
+        name = self.json_decoded_body.get('name', None)
+        if not name or len(name) == 0:
+            raise HTTPError(400, 'invalid name')
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if not mobile_number or len(mobile_number) == 0:
+            raise HTTPError(400, 'invalid mobile_number')
+        password = self.json_decoded_body.get('password', None)
+        if not password or len(password) == 0 or not hashers.validate_user_password(password):
+            raise HTTPError(400, 'invalid password')
+        password2 = self.json_decoded_body.get('password2', None)
+        if not password or len(password) == 0 or not hashers.validate_user_password(password):
+            raise HTTPError(400, 'invalid password2')
+        if password != password2:
+            raise HTTPError(400, 'password and password2 not matched')
+        duplicated_user = await UserModel.find_one({'name': name, 'mobile_number': mobile_number, 'enabled': True})
+        if duplicated_user:
+            raise HTTPError(400, 'already exist user')
+        user = UserModel(raw_data=dict(
+            name=name,
+            mobile_number=mobile_number,
+            terms={'privacy': True, 'policy': True}
+        ))
+        user.set_password(password)
+        await user.insert()
+        self.response['data'] = user.data
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class UserHandler(JsonHandler):
     @parse_argument([('name', str, None), ('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
