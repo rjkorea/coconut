@@ -34,9 +34,9 @@ class UserRegisterHandler(JsonHandler):
             raise HTTPError(400, 'invalid password2')
         if password != password2:
             raise HTTPError(400, 'password and password2 not matched')
-        duplicated_user = await UserModel.find_one({'name': name, 'mobile_number': mobile_number, 'enabled': True})
+        duplicated_user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
         if duplicated_user:
-            raise HTTPError(400, 'already exist user')
+            raise HTTPError(400, 'already exist mobile number')
         user = UserModel(raw_data=dict(
             name=name,
             mobile_number=mobile_number,
