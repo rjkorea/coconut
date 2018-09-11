@@ -39,6 +39,7 @@ class TicketOrderListHandler(JsonHandler):
             if 'fee' in to:
                 doc['price'] = to['fee']['price']
             doc['pend'] = await TicketModel.count({'ticket_type_oid': to['ticket_type_oid'], 'status': TicketModel.Status.pend.name})
+            doc['reserved'] = await TicketModel.count({'ticket_type_oid': to['ticket_type_oid'], 'status': TicketModel.Status.send.name, 'receive_user_oid': self.current_user['_id']})
             result.append(doc)
         self.response['count'] = count
         self.response['data'] = result
