@@ -8357,6 +8357,117 @@
 					]
 				},
 				{
+					"name": "/w/m/user/me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"user",
+								"me"
+							]
+						},
+						"description": "로그인 필요"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/me",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"m",
+										"user",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "599",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Sep 2018 06:29:05 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"27fed8bc19079d68023c4af5ee21a4b7b2d326df\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Wed Sep 26 2018 17:10:01 GMT+0900 (KST)",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|5ba3a8f5|024e90b599f02a5e6900b55befd8b657|1535357401",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"data\": {\"role\": [\"broker\"], \"image\": {\"profile\": {\"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/user/594385e4ba590e3b9f995801/profile.m.jpg?versionId=YGG2D0YqXg0C9l_toD.QyAX.HJYt_B3h\"}}, \"gender\": \"female\", \"birthday\": \"900127\", \"updated_at\": 1519168811, \"_id\": \"594385e4ba590e3b9f995801\", \"name\": \"\\uae40\\uc720\\ub9bc\", \"mobile_number\": \"821086219127\", \"enabled\": true, \"password\": \"$p5k2$$X1l0eIORmd/HD6TqjrKXkduzkTf6V7DV$TdSyLeNoeiw8W3IOVg.ALJ5sTWaZbD39\", \"access_code\": \"1234\", \"email\": \"grace.kim@rjkorea.com\", \"created_at\": 1497565012, \"terms\": {\"policy\": true, \"privacy\": true}}}"
+						}
+					]
+				},
+				{
 					"name": "/w/m/contents",
 					"request": {
 						"method": "GET",
