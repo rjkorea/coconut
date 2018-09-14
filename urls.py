@@ -118,12 +118,23 @@ url_patterns = [
     (r'/w/pc/contents/?', wpc.content.ContentListHandler),
     (r'/w/pc/content/(?P<_id>[^\/]+)/?', wpc.content.ContentHandler),
     (r'/w/pc/sns/?', wpc.content.SnsContentListHandler),
+    (r'/w/pc/countries/?', wpc.user.CountryListHandler),
     (r'/w/pc/sms/link/send/?', wpc.content.SendSmsBuyLinkHandler),
 
     # /w/m
+    (r'/w/m/countries/?', wm.user.CountryListHandler),
+    (r'/w/m/user/?', wm.user.UserHandler),
+    (r'/w/m/user/me/?', wm.user.UserMeHandler),
+    (r'/w/m/user/register/?', wm.user.UserRegisterHandler),
+    (r'/w/m/user/(?P<_id>[^\/]+)/new/password?', wm.user.UserNewPasswordHandler),
+    (r'/w/m/user/(?P<_id>[^\/]+)/auth/password?', wm.user.UserAuthPasswordHandler),
+    (r'/w/m/autologin/?', wm.user.AutoLoginHandler),
+    (r'/w/m/autologin/(?P<_id>[^\/]+)/?', wm.user.AutoLoginHandler),
     (r'/w/m/contents/?', wm.content.ContentListHandler),
     (r'/w/m/content/(?P<_id>[^\/]+)/?', wm.content.ContentHandler),
     (r'/w/m/sns/?', wm.content.SnsContentListHandler),
+    (r'/w/m/content/(?P<_id>[^\/]+)/ticket/orders?', wm.ticket.TicketOrderListHandler),
+    (r'/w/m/ticket/send?', wm.ticket.TicketSendHandler),
 
     # t (tablet)
     (r'/t/host/?', t.admin.AdminHandler),

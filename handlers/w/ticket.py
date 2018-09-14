@@ -123,7 +123,7 @@ class TicketUsedListHandler(JsonHandler):
 
 
 class TicketRegisterHandler(JsonHandler):
-    @user_auth_async        
+    @user_auth_async
     async def put(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
@@ -139,7 +139,21 @@ class TicketRegisterHandler(JsonHandler):
             raise HTTPError(400, 'canceled ticket can\'t register')
         if ticket['status'] == TicketModel.Status.pay.name:
             raise HTTPError(400, 'paid ticket can\'t register')
-        exist_ticket = await TicketModel.find_one({'ticket_type_oid': ticket['ticket_type_oid'], 'status': TicketModel.Status.register.name, 'content_oid': ticket['content_oid'], 'receive_user_oid': self.current_user['_id']})
+        q = {
+            '$and': [
+                {'ticket_type_oid': ticket['ticket_type_oid']},
+                {'content_oid': ticket['content_oid']},
+                {'receive_user_oid': self.current_user['_id']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name},
+                    ]
+                }
+            ]
+        }
+        exist_ticket = await TicketModel.find_one(q)
         if exist_ticket:
             raise HTTPError(400, 'Already registered ticket type on this content')
 

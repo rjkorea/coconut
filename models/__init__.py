@@ -32,6 +32,7 @@ async def create_ticket(ticket_order):
             receive_user_oid=ticket_order['user_oid'],
             ticket_order_oid=ticket_order['_id'],
             ticket_type_oid=ticket_type['_id'],
+            type=ticket_type['type'],
             content_oid=ticket_type['content_oid'],
             days=days
         ))
