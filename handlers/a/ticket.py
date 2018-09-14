@@ -641,6 +641,7 @@ class TicketEntranceListHandler(JsonHandler):
         if parsed_args['ticket_order_oid']:
             q['$and'].append({'ticket_order_oid': ObjectId(parsed_args['ticket_order_oid'])})
         search_q = {'$or': [
+            {'status': TicketModel.Status.send.name},
             {'status': TicketModel.Status.register.name},
             {'status': TicketModel.Status.pay.name},
             {'status': TicketModel.Status.use.name},
