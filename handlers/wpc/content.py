@@ -76,7 +76,7 @@ class SendSmsBuyLinkHandler(JsonHandler):
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number')
         config = settings.settings()
-        message = 'http://%s:%s/content/%s/buy 티켓링크가 도착했습니다.' % (config['tweb']['host'], config['tweb']['port'], content_oid)
+        message = '%s://%s:%s/detailed-content/%s 티켓링크가 도착했습니다.' % (config['tweb']['host'], config['tweb']['host'], config['tweb']['port'], content_oid)
         # send SMS
         is_sent_receiver = await send_sms(
             {

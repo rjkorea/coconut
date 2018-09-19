@@ -37,8 +37,9 @@ _settings = dict(
     ),
     tweb=dict(
         name='tomato',
-        host='m.tkit.me',
-        port=80,
+        protocol='https',
+        host='tkit.me',
+        port=443,
     ),
     iamport=dict(
         api_key='4335180923213950',
