@@ -73,6 +73,8 @@ class SendSmsBuyLinkHandler(JsonHandler):
         if not content_oid or len(content_oid) != 24:
             raise HTTPError(400, 'invalid content_oid')
         content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'not exist content')
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number')
