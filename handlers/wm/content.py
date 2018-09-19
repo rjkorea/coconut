@@ -26,7 +26,7 @@ class ContentHandler(JsonHandler):
         if not content:
             raise HTTPError(400, 'not exist content')
         q = {
-            'content_oid': ObjectId(_id),
+            'content_oid': content['_id'],
             'type': 'general',
             'enabled': True
         }
