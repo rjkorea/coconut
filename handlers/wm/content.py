@@ -47,8 +47,8 @@ class ContentListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        count = await ContentModel.count(query={'enabled': True, 'company_oid': ObjectId('5922bc83c8bd9535771cf837')})
-        result = await ContentModel.find(query={'enabled': True, 'company_oid': ObjectId('5922bc83c8bd9535771cf837')}, fields=[('name'), ('desc'), ('when'), ('place'), ('image')], skip=parsed_args['start'], limit=parsed_args['size'])
+        count = await ContentModel.count(query={'enabled': True})
+        result = await ContentModel.find(query={'enabled': True}, fields=[('name'), ('desc'), ('when'), ('place'), ('image')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
