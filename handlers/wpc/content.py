@@ -40,8 +40,8 @@ class ContentListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        count = await ContentModel.count(query={'enabled': True, 'company_oid': ObjectId('5922bc83c8bd9535771cf837')})
-        result = await ContentModel.find(query={'enabled': True, 'company_oid': ObjectId('5922bc83c8bd9535771cf837')}, fields=[('name'), ('desc'), ('when'), ('place'), ('image')], skip=parsed_args['start'], limit=parsed_args['size'])
+        count = await ContentModel.count(query={'enabled': True})
+        result = await ContentModel.find(query={'enabled': True}, fields=[('name'), ('desc'), ('when'), ('place'), ('image')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -72,11 +72,14 @@ class SendSmsBuyLinkHandler(JsonHandler):
         content_oid = self.json_decoded_body.get('content_oid', None)
         if not content_oid or len(content_oid) != 24:
             raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.find_one({'_id': ObjectId(content_oid)})
+        if not content:
+            raise HTTPError(400, 'not exist content')
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number')
         config = settings.settings()
-        message = 'http://%s:%s/content/%s/buy 티켓링크가 도착했습니다.' % (config['tweb']['host'], config['tweb']['port'], content_oid)
+        message = ' %s://%s:%s/d/%s 티켓링크가 도착했습니다.' % (config['tweb']['protocol'], config['tweb']['host'], config['tweb']['port'], content['short_id'])
         # send SMS
         is_sent_receiver = await send_sms(
             {
