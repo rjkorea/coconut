@@ -22,7 +22,7 @@ _settings = dict(
         )
     ),
     mongodb=dict(
-        host='localhost',
+        host='11.0.1.90',
         port=27017,
         db='coconut'
     ),
