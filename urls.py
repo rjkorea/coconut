@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, base, a, v1, t, tw, w, v2, wpc, wm
+from handlers import index, base, a, v1, t, tw, w, v2, wpc, wm, q
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -149,6 +149,10 @@ url_patterns = [
     (r'/tw/contents/?', tw.contents.ContentsListHandler),
     (r'/tw/contents/(?P<_id>[^\/]+)/?', tw.contents.ContentsHandler),
     (r'/tw/countries/?', tw.utils.CountryListHandler),
+
+    # q (qrcode app)
+    (r'/q/auth/login/?', q.auth.LoginHandler),
+    (r'/q/contents/me/?', q.content.ContentListMeHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
