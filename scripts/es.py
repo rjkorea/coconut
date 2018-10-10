@@ -291,8 +291,16 @@ def gen_user(cursor):
         enabled=cursor['enabled'],
         created_at=cursor['created_at'].strftime('%Y-%m-%dT%H:%M:%S+0000'),
     )
-    if 'birthday' in cursor:
-        user['birthday'] = str(cursor['birthday'][:2])
+    if 'birthday' in cursor and cursor['birthday'].strip():
+        if len(cursor['birthday'].strip()) == 8:
+            user['birthday'] = str(cursor['birthday'])
+            user['age'] = 2018-int(user['birthday'][:4])
+        elif len(cursor['birthday'].strip()) == 6:
+            if cursor['birthday'][0] == '0' or cursor['birthday'][0] == '1':
+                user['birthday'] = '20%s' % cursor['birthday']
+            else:
+                user['birthday'] = '19%s' % cursor['birthday']
+            user['age'] = 2018-int(user['birthday'][:4])
     if 'gender' in cursor:
         user['gender'] = str(cursor['gender'])
     return user
