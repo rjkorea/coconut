@@ -153,6 +153,7 @@ url_patterns = [
     # q (qrcode app)
     (r'/q/auth/login/?', q.auth.LoginHandler),
     (r'/q/contents/me/?', q.content.ContentListMeHandler),
+    (r'/q/content/(?P<_id>[^\/]+)/tickets/?', q.ticket.TicketListUserHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
