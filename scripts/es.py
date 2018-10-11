@@ -288,6 +288,7 @@ def add_users_index(cursor):
 def gen_user(cursor):
     user = dict(
         _id=str(cursor['_id']),
+        mobile_number=cursor['mobile_number'],
         enabled=cursor['enabled'],
         created_at=cursor['created_at'].strftime('%Y-%m-%dT%H:%M:%S+0000'),
     )
