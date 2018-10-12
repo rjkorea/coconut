@@ -49,3 +49,40 @@ class TicketListUserHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketEnterUserHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
+        fee_method = self.json_decoded_body.get('fee_method', None)
+        days = [{
+                'entered': True,
+                'day': 1,
+                'entered_at': datetime.utcnow()
+        }]
+        if 'fee' in ticket['days'][0]:
+            days[0]['fee'] = {
+                'price': ticket['days'][0]['fee']['price'],
+                'method': fee_method
+            }
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'status': TicketModel.Status.use.name,
+                'days': days
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()

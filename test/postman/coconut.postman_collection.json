@@ -8957,6 +8957,158 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/q/content/(oid)/tickets?user_oid=xxxxx",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/content/5b7d1c17ba590e510352db36/tickets?user_oid=5931a3eabc2c44140e0dea91&start=0&size=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"q",
+								"content",
+								"5b7d1c17ba590e510352db36",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "user_oid",
+									"value": "5931a3eabc2c44140e0dea91"
+								},
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/q/content/5b7d1c17ba590e510352db36/tickets?user_oid=5931a3eabc2c44140e0dea91&start=0&size=10",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"q",
+										"content",
+										"5b7d1c17ba590e510352db36",
+										"tickets"
+									],
+									"query": [
+										{
+											"key": "user_oid",
+											"value": "5931a3eabc2c44140e0dea91"
+										},
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Oct 2018 06:50:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "544"
+								},
+								{
+									"key": "Etag",
+									"value": "\"7f485de5b45883b091f98ad73e9cae374f7c0268\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"days\": [\n                {\n                    \"entered\": true,\n                    \"day\": 1,\n                    \"entered_at\": 1535089305\n                }\n            ],\n            \"status\": \"use\",\n            \"content_oid\": \"5b7d1c17ba590e510352db36\",\n            \"content\": {\n                \"name\": \"VIBE GRAND OPEN SIK-K\",\n                \"image\": {\n                    \"logo\": {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b7d1c17ba590e510352db36/logo.m.png?versionId=sPjlALAg13YwiFlOTGSqI4BWg0_Jy8D6\"\n                    }\n                }\n            },\n            \"ticket_type_oid\": \"5b7d1cbaba590e510352db39\",\n            \"_id\": \"5b7d2696ba590e510352ef5d\",\n            \"ticket_type\": {\n                \"name\": \"초대권\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"1 FREE DRINK\"\n                }\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/q/ticket/(oid)/enter",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fee_method\": \"creditcard\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/ticket/5b7d2696ba590e510352ef5d/enter",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"q",
+								"ticket",
+								"5b7d2696ba590e510352ef5d",
+								"enter"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "for qrcode app (ios and android)",
