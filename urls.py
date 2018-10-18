@@ -16,7 +16,7 @@ url_patterns = [
     (r'/a/dashboard/(?P<_id>[^\/]+)/?', a.dashboard.DashboardContentHandler),
     (r'/a/tim/matrix/ticket/order/(?P<_id>[^\/]+)/?', a.tim.MatrixTicketOrderHandler),
     (r'/a/tim/matrix/ticket/type/(?P<_id>[^\/]+)/?', a.tim.MatrixTicketTypeHandler),
-    (r'/a/report/(?P<_id>[^\/]+)/?', a.report.ReportContentHandler),
+    (r'/a/tim/report/(?P<_id>[^\/]+)/?', a.tim.ReportHandler),
     (r'/a/companies/?', a.company.CompanyListHandler),
     (r'/a/company/(?P<_id>[^\/]+)/?', a.company.CompanyHandler),
     (r'/a/company/?', a.company.CompanyHandler),
