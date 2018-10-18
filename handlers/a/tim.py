@@ -11,7 +11,7 @@ from models.ticket import TicketModel, TicketOrderModel, TicketTypeModel
 from models.content import ContentModel
 
 
-class RankHandler(JsonHandler):
+class MatrixTicketOrderHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('sort', str, 'register_count')])
     async def get(self, *args, **kwargs):

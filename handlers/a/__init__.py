@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from handlers.a import auth, company, admin, user, content, ticket, invitation, notification, dashboard, place, qna, util, report, group, rank
+from handlers.a import auth, company, admin, user, content, ticket, invitation, notification, dashboard, place, qna, util, report, group, tim
