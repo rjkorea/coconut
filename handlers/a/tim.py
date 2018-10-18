@@ -82,3 +82,74 @@ class MatrixTicketOrderHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class MatrixTicketTypeHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('sort', str, 'register_count')])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        content_oid = kwargs.get('_id', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        pipeline = [
+            {
+                '$match': {'content_oid': ObjectId(content_oid)}
+            },
+            {
+                '$group': {
+                    '_id': '$ticket_type_oid',
+                    "pend": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "pend" ] }, 1, 0 ]
+                        }
+                    },
+                    "send": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "send" ] }, 1, 0 ]
+                        }
+                    },
+                    "register": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "register" ] }, 1, 0 ]
+                        }
+                    },
+                    "pay": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "pay" ] }, 1, 0 ]
+                        }
+                    },
+                    "use": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "use" ] }, 1, 0 ]
+                        }
+                    },
+                    "cancel": {
+                        "$sum": {
+                            "$cond": [ { "$eq": [ "$status", "cancel" ] }, 1, 0 ]
+                        }
+                    }
+                }
+            },
+            {
+                '$sort': {
+                    parsed_args['sort']: -1
+                }
+            },
+            {
+                '$skip': parsed_args['start']
+            },
+            {
+                '$limit': parsed_args['size']
+            }
+        ]
+        ticket_types_stats = await TicketModel.aggregate(pipeline, parsed_args['size'])
+        for tts in ticket_types_stats:
+            tts['ticket_type'] = await TicketTypeModel.get_id(tts['_id'], fields=[('name'), ('desc')])
+            tts.pop('_id')
+        self.response['data'] = ticket_types_stats
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
