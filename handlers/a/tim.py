@@ -210,3 +210,89 @@ class ReportHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class AnalyticsHandler(JsonHandler):
+    @admin_auth_async
+    async def get(self, *args, **kwargs):
+        content_oid = kwargs.get('_id', None)
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        self.response['data'] = {
+            'ticket_count': {
+                'pend': 0,
+                'send': 0,
+                'register': 0,
+                'pay': 0,
+                'use': 0,
+                'cancel': 0
+            },
+            'gender': {}
+        }
+        query = {
+            'content_oid': ObjectId(content_oid),
+            'enabled': True
+        }
+        # aggregate count for ticket
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(content_oid)
+                }
+            },
+            {
+                '$group': {
+                    '_id': '$status',
+                    'cnt': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 10)
+        for a in aggs:
+            self.response['data']['ticket_count'][a['_id']] = a['cnt']
+        # aggregate count for gender
+        pipeline = [
+            {
+                '$match': {
+                    '$and': [
+                        {'content_oid': ObjectId(content_oid)},
+                        {
+                            '$or': [
+                                {'status': TicketModel.Status.register.name},
+                                {'status': TicketModel.Status.pay.name},
+                                {'status': TicketModel.Status.use.name}
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                '$lookup': {
+                    'from': 'user',
+                    'localField': 'receive_user_oid',
+                    'foreignField': '_id',
+                    'as': 'receive_user'
+                }
+            },
+            {
+                '$group': {
+                    '_id': '$receive_user.gender',
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 10)
+        import logging
+        logging.info(aggs)
+        for a in aggs:
+            if a['_id']:
+                self.response['data']['gender'][a['_id'][0]] = a['count']
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()

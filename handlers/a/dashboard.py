@@ -97,9 +97,7 @@ class DashboardContentHandler(JsonHandler):
             'revenue': {
                 'amount': 0,
                 'count': 0
-            },
-            'top_ticket_types': [],
-            'top_ticket_orders': []
+            }
         }
         query = {
             'content_oid': ObjectId(content_oid),
