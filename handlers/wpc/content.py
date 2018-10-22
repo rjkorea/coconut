@@ -8,6 +8,7 @@ import requests
 
 from handlers.base import JsonHandler
 from models.content import ContentModel
+from models.ticket import TicketOrderModel
 
 from common import hashers
 from common.decorators import parse_argument
@@ -28,6 +29,17 @@ class ContentHandler(JsonHandler):
             content = await ContentModel.find_one({'short_id': _id})
         if not content:
             raise HTTPError(400, 'not exist content')
+        q = {
+            'content_oid': content['_id'],
+            'type': 'general',
+            'enabled': True
+        }
+        to_count = await TicketOrderModel.count(q)
+        if to_count:
+            content['ticket_open'] = True
+        else:
+            content['ticket_open'] = False
+
         self.response['data'] = content
         self.write_json()
 
