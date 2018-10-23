@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "51f35ff4-4a73-43f1-bbf8-9702c8b5a2fb",
+		"_postman_id": "bfd4c6b8-f375-4fd1-932d-7ff7127ea152",
 		"name": "hanrabong api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -77,6 +77,97 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/q/user/(oid)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/user/5931a3eabc2c44140e0dea91",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"q",
+								"user",
+								"5931a3eabc2c44140e0dea91"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/q/user/5931a3eabc2c44140e0dea91",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"q",
+										"user",
+										"5931a3eabc2c44140e0dea91"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 23 Oct 2018 01:40:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Etag",
+									"value": "\"1e4a3a62981be4f9acd5fd42870c1fe0c1b09105\""
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"_id\": \"5931a3eabc2c44140e0dea91\",\n        \"mobile_number\": \"821032697178\",\n        \"name\": \"조건희\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "/q/content/(oid)/tickets?user_oid=xxxxx",
