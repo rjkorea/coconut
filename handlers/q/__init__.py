@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from handlers.q import auth, content, ticket
+from handlers.q import auth, content, ticket, user

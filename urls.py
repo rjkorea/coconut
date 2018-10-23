@@ -157,6 +157,7 @@ url_patterns = [
     (r'/q/contents/me/?', q.content.ContentListMeHandler),
     (r'/q/content/(?P<_id>[^\/]+)/tickets/?', q.ticket.TicketListUserHandler),
     (r'/q/ticket/(?P<_id>[^\/]+)/enter/?', q.ticket.TicketEnterUserHandler),
+    (r'/q/user/(?P<_id>[^\/]+)/?', q.user.UserHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
