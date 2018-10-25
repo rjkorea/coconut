@@ -135,6 +135,7 @@ url_patterns = [
     (r'/w/m/autologin/(?P<_id>[^\/]+)/?', wm.user.AutoLoginHandler),
     (r'/w/m/contents/?', wm.content.ContentListHandler),
     (r'/w/m/content/(?P<_id>[^\/]+)/?', wm.content.ContentHandler),
+    (r'/w/m/contents/me?', wm.content.ContentListMeHandler),
     (r'/w/m/sns/?', wm.content.SnsContentListHandler),
     (r'/w/m/content/(?P<_id>[^\/]+)/ticket/orders?', wm.ticket.TicketOrderListHandler),
     (r'/w/m/ticket/send?', wm.ticket.TicketSendHandler),

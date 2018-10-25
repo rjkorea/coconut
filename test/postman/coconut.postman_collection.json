@@ -8833,6 +8833,38 @@
 					]
 				},
 				{
+					"name": "/w/m/contents/me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/contents/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"contents",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/w/m/contents",
 					"request": {
 						"method": "GET",
