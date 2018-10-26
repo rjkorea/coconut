@@ -149,6 +149,10 @@ class ContentHandler(JsonHandler):
         content = await ContentModel.find_one({'_id': ObjectId(_id)})
         if not content:
             raise HTTPError(400, 'not exist content')
+        company = await CompanyModel.get_id(content['company_oid'], fields=[('name')])
+        content['company'] = company
+        admin = await AdminModel.get_id(content['admin_oid'], fields=[('name')])
+        content['admin'] = admin
         self.response['data'] = content
         self.write_json()
 

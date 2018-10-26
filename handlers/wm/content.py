@@ -8,10 +8,10 @@ import requests
 
 from handlers.base import JsonHandler
 from models.content import ContentModel
-from models.ticket import TicketOrderModel
+from models.ticket import TicketOrderModel, TicketModel
 
 from common import hashers
-from common.decorators import parse_argument
+from common.decorators import parse_argument, user_auth_async
 
 
 class ContentHandler(JsonHandler):
@@ -51,6 +51,43 @@ class ContentListHandler(JsonHandler):
         result = await ContentModel.find(query={'enabled': True}, fields=[('name'), ('desc'), ('when'), ('place'), ('image')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentListMeHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+
+        # aggregate for count of content ticket
+        pipeline = [
+            {
+                '$match': {
+                    'enabled': True,
+                    'receive_user_oid': self.current_user['_id']
+                }
+            },
+            {
+                '$group': {
+                    '_id': '$content_oid',
+                    'ticket_count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 20)
+        for a in aggs:
+            content = await ContentModel.get_id(a['_id'])
+            a['name'] = content['name']
+            a['when'] = content['when']
+            a['image'] = content['image']
+        self.response['data'] = sorted(aggs, key=lambda k: k['when']['start'], reverse=True)
+        self.response['count'] = len(aggs)
         self.write_json()
 
     async def options(self, *args, **kwargs):

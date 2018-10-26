@@ -682,8 +682,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"value": "",
-									"type": "file"
+									"type": "file",
+									"src": ""
 								}
 							]
 						},
@@ -723,8 +723,8 @@
 									"formdata": [
 										{
 											"key": "image",
-											"value": "",
-											"type": "file"
+											"type": "file",
+											"src": ""
 										}
 									]
 								},
@@ -797,8 +797,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"value": "",
-									"type": "file"
+									"type": "file",
+									"src": ""
 								}
 							]
 						},
@@ -838,8 +838,8 @@
 									"formdata": [
 										{
 											"key": "image",
-											"value": "",
-											"type": "file"
+											"type": "file",
+											"src": ""
 										}
 									]
 								},
@@ -912,8 +912,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"value": "",
-									"type": "file"
+									"type": "file",
+									"src": ""
 								}
 							]
 						},
@@ -1745,7 +1745,7 @@
 					"response": []
 				},
 				{
-					"name": "/a/report/<oid>",
+					"name": "/a/tim/analytics/<oid>",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1759,7 +1759,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/report/594246755f5471c519ecfc8c",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/analytics/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -1767,6 +1767,38 @@
 							"port": "{{port}}",
 							"path": [
 								"a",
+								"tim",
+								"analytics",
+								"594246755f5471c519ecfc8c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/a/tim/report/<oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/report/594246755f5471c519ecfc8c",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"tim",
 								"report",
 								"594246755f5471c519ecfc8c"
 							]
@@ -1774,7 +1806,7 @@
 					},
 					"response": [
 						{
-							"name": "/a/report/<oid> (성공)",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -1788,7 +1820,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/report/594246755f5471c519ecfc8c",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/report/594246755f5471c519ecfc8c",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -1796,6 +1828,7 @@
 									"port": "{{port}}",
 									"path": [
 										"a",
+										"tim",
 										"report",
 										"594246755f5471c519ecfc8c"
 									]
@@ -1806,38 +1839,28 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Content-Length",
-									"value": "115",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 28 Dec 2017 17:12:13 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
 									"key": "Etag",
-									"value": "\"2141eef638f9d3509a2141b18ed239e1a215717b\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"value": "\"3089f04bcea6cf26c51501a05c7466b5d7fc8465\""
 								},
 								{
 									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Oct 2018 09:10:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "135"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
 								}
 							],
 							"cookie": [],
-							"body": "{\"data\": {\"revenue\": {\"creditcard\": 1570000, \"cash\": 1370000, \"null\": 0}, \"total_forward\": 0, \"total_visit\": 1150}}"
+							"body": "{\n    \"data\": {\n        \"total_visit\": 1599,\n        \"total_forward\": 0,\n        \"commission\": 0.07,\n        \"revenue\": {\n            \"creditcard\": 2610000,\n            \"null\": 0,\n            \"cash\": 1920000\n        }\n    }\n}"
 						}
 					]
 				},
@@ -6198,6 +6221,270 @@
 					]
 				},
 				{
+					"name": "/w/ticket/(oid)/enter",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b7d2696ba590e510352ef5d/enter",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5b7d2696ba590e510352ef5d",
+								"enter"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400: invalid _id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b7d2696ba590e510352ef5/enter",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5b7d2696ba590e510352ef5",
+										"enter"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Oct 2018 04:51:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid _id\"\n}"
+						},
+						{
+							"name": "400: not exist ticket",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/1b7d2696ba590e510352ef5d/enter",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"1b7d2696ba590e510352ef5d",
+										"enter"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Oct 2018 04:52:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: not exist ticket\"\n}"
+						},
+						{
+							"name": "400: not owned by user",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b7d2696ba590e510352ef5d/enter",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5b7d2696ba590e510352ef5d",
+										"enter"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Oct 2018 04:51:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: not owned by user\"\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b7d2696ba590e510352ef5d/enter",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5b7d2696ba590e510352ef5d",
+										"enter"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Oct 2018 05:06:41 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"nModified\": 1,\n        \"updatedExisting\": true,\n        \"n\": 1\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "/w/tickets/me",
 					"request": {
 						"method": "GET",
@@ -6734,8 +7021,8 @@
 							"formdata": [
 								{
 									"key": "profile",
-									"value": "",
-									"type": "file"
+									"type": "file",
+									"src": ""
 								}
 							]
 						},
@@ -8546,6 +8833,38 @@
 					]
 				},
 				{
+					"name": "/w/m/contents/me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/contents/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"m",
+								"contents",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/w/m/contents",
 					"request": {
 						"method": "GET",
@@ -9026,6 +9345,36 @@
 									"key": "size",
 									"value": "10"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/q/user/(oid)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/user/5931a3eabc2c44140e0dea91",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"q",
+								"user",
+								"5931a3eabc2c44140e0dea91"
 							]
 						}
 					},

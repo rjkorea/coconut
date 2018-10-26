@@ -112,6 +112,7 @@ url_patterns = [
     (r'/w/ticket/(?P<_id>[^\/]+)/payment/status?', w.ticket.TicketPaymentStatusHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/payment/cancel?', w.ticket.TicketPaymentCancelHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/payment/complete?', w.ticket.TicketPaymentCompleteHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/enter?', w.ticket.TicketEnterUserHandler),
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register?', w.ticket.TicketSerialNumberRegisterHandler),
@@ -134,6 +135,7 @@ url_patterns = [
     (r'/w/m/autologin/(?P<_id>[^\/]+)/?', wm.user.AutoLoginHandler),
     (r'/w/m/contents/?', wm.content.ContentListHandler),
     (r'/w/m/content/(?P<_id>[^\/]+)/?', wm.content.ContentHandler),
+    (r'/w/m/contents/me?', wm.content.ContentListMeHandler),
     (r'/w/m/sns/?', wm.content.SnsContentListHandler),
     (r'/w/m/content/(?P<_id>[^\/]+)/ticket/orders?', wm.ticket.TicketOrderListHandler),
     (r'/w/m/ticket/send?', wm.ticket.TicketSendHandler),
@@ -157,6 +159,7 @@ url_patterns = [
     (r'/q/contents/me/?', q.content.ContentListMeHandler),
     (r'/q/content/(?P<_id>[^\/]+)/tickets/?', q.ticket.TicketListUserHandler),
     (r'/q/ticket/(?P<_id>[^\/]+)/enter/?', q.ticket.TicketEnterUserHandler),
+    (r'/q/user/(?P<_id>[^\/]+)/?', q.user.UserHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
