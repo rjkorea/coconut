@@ -180,21 +180,6 @@ class TicketRegisterHandler(JsonHandler):
         self.write_json()
 
 
-class TicketCancelHandler(JsonHandler):
-    @user_auth_async
-    async def put(self, *args, **kwargs):
-        _id = kwargs.get('_id', None)
-        if not _id or len(_id) != 24:
-            raise HTTPError(400, 'invalid _id')
-        self.response['_id'] = _id
-        self.response['data'] = self.json_decoded_body
-        self.write_json()
-
-    async def options(self, *args, **kwargs):
-        self.response['message'] = 'OK'
-        self.write_json()
-
-
 class TicketSendHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):
@@ -645,6 +630,36 @@ class TicketEnterUserHandler(JsonHandler):
             '$set': {
                 'status': TicketModel.Status.use.name,
                 'days': days
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketRegisterCancelHandler(JsonHandler):
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
+        if self.current_user['_id'] != ticket['receive_user_oid']:
+            raise HTTPError(400, 'not owned by user')
+        if ticket['status'] != TicketModel.Status.register.name:
+            raise HTTPError(400, 'only register ticket can cancel')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'status': TicketModel.Status.send.name,
+                'updated_at': datetime.utcnow()
             }
         }
         self.response['data'] = await TicketModel.update(query, document)

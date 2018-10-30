@@ -936,6 +936,49 @@
 					"response": []
 				},
 				{
+					"name": "/a/content/<oid>/image/<param>",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5afa8f4bba590e4ce2618b54/image/extra_0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"content",
+								"5afa8f4bba590e4ce2618b54",
+								"image",
+								"extra_0"
+							]
+						},
+						"description": "param type\n- extra_0: extra image 0\n- extra_1: extra image 1\n- extra_2: extra image 2\n- extra_3: extra image 3\n- extra_4: extra image 4"
+					},
+					"response": []
+				},
+				{
 					"name": "/a/content/<oid>",
 					"request": {
 						"method": "GET",
@@ -6056,6 +6099,42 @@
 							"body": "{\"message\": \"400: Already registered ticket on this content\"}"
 						}
 					]
+				},
+				{
+					"name": "/w/ticket/<oid>/register/cancel",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register/cancel",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5940d2785f5471904fd44563",
+								"register",
+								"cancel"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "/w/ticket/send",
