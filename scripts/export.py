@@ -110,7 +110,17 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
         writer.writeheader()
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         if contentid:
-            q = { 'content_oid': ObjectId(contentid) }
+           q = {
+                '$and': [
+                    {'content_oid': ObjectId(contentid)},
+                    {
+                        '$or': [
+                            {'status': 'use'},
+                            {'status': 'pay'}
+                        ]
+                    }
+                ]
+            }
         else:
             q = {}
         tickets = list()

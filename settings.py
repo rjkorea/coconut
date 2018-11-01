@@ -21,13 +21,13 @@ _settings = dict(
             ipad_id='582d37225f54714def85effb'
         )
     ),
-    mongodb=dict(
+    mongodb = dict(
         host='11.0.1.90',
         port=27017,
         db='coconut'
     ),
-    nexmo=dict(
-        api_key='7968a1e2',
+    nexmo = dict(
+        api_key='7968a1e2', 
         api_secret='a45366ce5d7a295c'
     ),
     web=dict(
@@ -46,8 +46,8 @@ _settings = dict(
         api_secret='8PJ0Bmp6JLDTBITQ281p2BuM5jJ0FpWOeGOQ2eWMZAGBizrkHtKK4ewaygadG72VORLR5IE5ikHBT8WA'
     ),
     aws=dict(
-        access_key='AKIAICUA3GQ2VL4WI7IQ',
-        secret_key='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',
+        access_key='AKIAJRLZGNWWWHRYRG7Q',
+        secret_key='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',
         res_bucket='res.tkit.me'
     )
 )
