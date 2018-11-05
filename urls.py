@@ -113,6 +113,7 @@ url_patterns = [
     (r'/w/ticket/(?P<_id>[^\/]+)/payment/cancel?', w.ticket.TicketPaymentCancelHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/payment/complete?', w.ticket.TicketPaymentCompleteHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/enter?', w.ticket.TicketEnterUserHandler),
+    (r'/w/ticket/types/me?', w.ticket.TicketTypeListMeHandler),
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register?', w.ticket.TicketSerialNumberRegisterHandler),

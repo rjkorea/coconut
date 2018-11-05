@@ -6692,6 +6692,48 @@
 					]
 				},
 				{
+					"name": "/w/ticket/types/me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5afa8f4bba590e4ce2618b54&status=send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"types",
+								"me"
+							],
+							"query": [
+								{
+									"key": "content_oid",
+									"value": "5afa8f4bba590e4ce2618b54"
+								},
+								{
+									"key": "status",
+									"value": "send"
+								}
+							]
+						},
+						"description": "request params\n- content_oid\n- status (send, register, pay, use, cancel)"
+					},
+					"response": []
+				},
+				{
 					"name": "/w/qnas",
 					"request": {
 						"method": "GET",

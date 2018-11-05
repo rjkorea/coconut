@@ -658,3 +658,51 @@ class TicketRegisterCancelHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketTypeListMeHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('content_oid', str, None), ('status', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        # aggregate ticket type
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(parsed_args['content_oid']),
+                    'status': parsed_args['status'],
+                    'enabled': True,
+                    'receive_user_oid': self.current_user['_id']
+                }
+            },
+            {
+                '$group': {
+                    '_id': '$ticket_type_oid',
+                    'ticket_count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 20)
+        for a in aggs:
+            ticket_type = await TicketTypeModel.get_id(a['_id'])
+            a['name'] = ticket_type['name']
+            a['when'] = ticket_type['desc']
+        self.response['data'] = aggs
+        self.response['count'] = len(aggs)
+        self.write_json()
+
+    def ticket_open(self, x):
+        utcnow = datetime.utcnow()
+        if 'end' in x['when']:
+            return x['when']['end'] > utcnow
+        else:
+            return (x['when']['start'] + timedelta(days=1)) > utcnow
+        return True
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
