@@ -695,13 +695,34 @@ class TicketTypeListMeHandler(JsonHandler):
         self.response['count'] = len(aggs)
         self.write_json()
 
-    def ticket_open(self, x):
-        utcnow = datetime.utcnow()
-        if 'end' in x['when']:
-            return x['when']['end'] > utcnow
-        else:
-            return (x['when']['start'] + timedelta(days=1)) > utcnow
-        return True
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketTypeTicketListMeHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('status', str, None)])
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or (len(_id) != 24 and len(_id) != 7):
+            raise HTTPError(400, 'invalid ticket_type_oid')
+        parsed_args = kwargs.get('parsed_args')
+        q = {
+            '$and': [
+                {
+                    'ticket_type_oid': ObjectId(_id),
+                    'status': parsed_args['status'],
+                    'receive_user_oid': self.current_user['_id'],
+                    'enabled': True
+                }
+            ]
+        }
+        count = await TicketModel.count(query=q)
+        result = await TicketModel.find(query=q, fields=[('_id')], skip=parsed_args['start'], limit=parsed_args['size'])
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
