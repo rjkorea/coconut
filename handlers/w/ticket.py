@@ -690,7 +690,7 @@ class TicketTypeListMeHandler(JsonHandler):
         for a in aggs:
             ticket_type = await TicketTypeModel.get_id(a['_id'])
             a['name'] = ticket_type['name']
-            a['when'] = ticket_type['desc']
+            a['desc'] = ticket_type['desc']
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
