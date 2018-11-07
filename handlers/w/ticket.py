@@ -180,6 +180,39 @@ class TicketRegisterHandler(JsonHandler):
         self.write_json()
 
 
+class TicketMultiRegisterHandler(JsonHandler):
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        ticket_oids = self.json_decoded_body.get('ticket_oids', None)
+        if not ticket_oids or len(ticket_oids) == 0:
+            raise HTTPError(400, 'invalid ticket_oids')
+        email = self.json_decoded_body.get('email', None)
+        birthday = self.json_decoded_body.get('birthday', None)
+        gender = self.json_decoded_body.get('gender', None)
+        if email and birthday and gender:
+            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
+        query = {
+            '_id': {
+                '$in': []
+            }
+        }
+        for t in ticket_oids:
+            query['_id']['$in'].append(ObjectId(t))
+        document = {
+            '$set': {
+                'receive_user_oid': self.current_user['_id'],
+                'status': TicketModel.Status.register.name,
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document, False, True)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class TicketSendHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):
