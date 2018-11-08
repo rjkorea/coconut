@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
+from datetime import datetime, timedelta
 
 from tornado.web import HTTPError
 
@@ -86,9 +87,18 @@ class ContentListMeHandler(JsonHandler):
             a['name'] = content['name']
             a['when'] = content['when']
             a['image'] = content['image']
-        self.response['data'] = sorted(aggs, key=lambda k: k['when']['start'], reverse=True)
-        self.response['count'] = len(aggs)
+        data = sorted(filter(self.ticket_open, aggs), key=lambda k: k['when']['start'], reverse=True)
+        self.response['data'] = data
+        self.response['count'] = len(data)
         self.write_json()
+
+    def ticket_open(self, x):
+        utcnow = datetime.utcnow()
+        if 'end' in x['when']:
+            return x['when']['end'] > utcnow
+        else:
+            return (x['when']['start'] + timedelta(days=1)) > utcnow
+        return True
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'

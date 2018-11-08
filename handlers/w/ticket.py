@@ -180,14 +180,32 @@ class TicketRegisterHandler(JsonHandler):
         self.write_json()
 
 
-class TicketCancelHandler(JsonHandler):
+class TicketMultiRegisterHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):
-        _id = kwargs.get('_id', None)
-        if not _id or len(_id) != 24:
-            raise HTTPError(400, 'invalid _id')
-        self.response['_id'] = _id
-        self.response['data'] = self.json_decoded_body
+        ticket_oids = self.json_decoded_body.get('ticket_oids', None)
+        if not ticket_oids or len(ticket_oids) == 0:
+            raise HTTPError(400, 'invalid ticket_oids')
+        email = self.json_decoded_body.get('email', None)
+        birthday = self.json_decoded_body.get('birthday', None)
+        gender = self.json_decoded_body.get('gender', None)
+        if email and birthday and gender:
+            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
+        query = {
+            '_id': {
+                '$in': []
+            }
+        }
+        for t in ticket_oids:
+            query['_id']['$in'].append(ObjectId(t))
+        document = {
+            '$set': {
+                'receive_user_oid': self.current_user['_id'],
+                'status': TicketModel.Status.register.name,
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document, False, True)
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -303,28 +321,18 @@ class TicketListMeHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None), ('status', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
-            '$and': [
-                {
-                    'receive_user_oid': self.current_user['_id'],
-                    'enabled': True
-                },
-                {
-                    '$or': [
-                        {'status': TicketModel.Status.send.name},
-                        {'status': TicketModel.Status.register.name},
-                        {'status': TicketModel.Status.pay.name},
-                        {'status': TicketModel.Status.use.name},
-                        {'status': TicketModel.Status.cancel.name}
-                    ]
-                }
-            ]
+            'receive_user_oid': self.current_user['_id'],
+            'enabled': True,
+            'status': {'$ne': TicketModel.Status.pend.name}
         }
         if parsed_args['content_oid']:
-            q['$and'][0]['content_oid'] = ObjectId(parsed_args['content_oid'])
+            q['content_oid'] = ObjectId(parsed_args['content_oid'])
+        if parsed_args['status']:
+            q['status'] = parsed_args['status']
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
@@ -648,6 +656,105 @@ class TicketEnterUserHandler(JsonHandler):
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketRegisterCancelHandler(JsonHandler):
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
+        if self.current_user['_id'] != ticket['receive_user_oid']:
+            raise HTTPError(400, 'not owned by user')
+        if ticket['status'] != TicketModel.Status.register.name:
+            raise HTTPError(400, 'only register ticket can cancel')
+        query = {
+            '_id': ObjectId(_id)
+        }
+        document = {
+            '$set': {
+                'status': TicketModel.Status.send.name,
+                'updated_at': datetime.utcnow()
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketTypeListMeHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('content_oid', str, None), ('status', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        # aggregate ticket type
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(parsed_args['content_oid']),
+                    'status': parsed_args['status'],
+                    'enabled': True,
+                    'receive_user_oid': self.current_user['_id']
+                }
+            },
+            {
+                '$group': {
+                    '_id': '$ticket_type_oid',
+                    'ticket_count': {
+                        '$sum': 1
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 20)
+        for a in aggs:
+            ticket_type = await TicketTypeModel.get_id(a['_id'])
+            a['name'] = ticket_type['name']
+            a['desc'] = ticket_type['desc']
+        self.response['data'] = aggs
+        self.response['count'] = len(aggs)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketTypeTicketListMeHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('status', str, None)])
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or (len(_id) != 24 and len(_id) != 7):
+            raise HTTPError(400, 'invalid ticket_type_oid')
+        parsed_args = kwargs.get('parsed_args')
+        q = {
+            '$and': [
+                {
+                    'ticket_type_oid': ObjectId(_id),
+                    'status': parsed_args['status'],
+                    'receive_user_oid': self.current_user['_id'],
+                    'enabled': True
+                }
+            ]
+        }
+        count = await TicketModel.count(query=q)
+        result = await TicketModel.find(query=q, fields=[('_id')], skip=parsed_args['start'], limit=parsed_args['size'])
+        self.response['data'] = result
+        self.response['count'] = count
         self.write_json()
 
     async def options(self, *args, **kwargs):

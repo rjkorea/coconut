@@ -209,7 +209,24 @@ class ContentPostHandler(JsonHandler):
                 },
                 'og': {
                     'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/og.m.png' % config['aws']['res_bucket']
-                }
+                },
+                'extra': [
+                    {
+                        'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/extra_0.m.png' % config['aws']['res_bucket']
+                    },
+                    {
+                        'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/extra_1.m.png' % config['aws']['res_bucket']
+                    },
+                    {
+                        'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/extra_2.m.png' % config['aws']['res_bucket']
+                    },
+                    {
+                        'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/extra_3.m.png' % config['aws']['res_bucket']
+                    },
+                    {
+                        'm': 'https://s3.ap-northeast-2.amazonaws.com/%s/content/default/extra_4.m.png' % config['aws']['res_bucket']
+                    }
+                ]
             },
             'notice': {
                 'enabled': False,
@@ -278,12 +295,20 @@ class ContentImageUploadHandler(MultipartFormdataHandler):
         query = {
             '_id': ObjectId(content_oid)
         }
-        document = {
-            '$set': {
-                'image.%s.m' % type: 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']),
-                'updated_at': datetime.utcnow()
+        if type == ContentModel.IMAGE_TYPE[0] or type == ContentModel.IMAGE_TYPE[1] or type == ContentModel.IMAGE_TYPE[2]:
+            document = {
+                '$set': {
+                    'image.%s.m' % type: 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']),
+                    'updated_at': datetime.utcnow()
+                }
             }
-        }
+        else:
+            document = {
+                '$set': {
+                    'image.extra.%s.m' % type[-1:]: 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']),
+                    'updated_at': datetime.utcnow()
+                }
+            }
         await ContentModel.update(query, document, False, False)
         self.response['data'] = document['$set']
         self.write_json()

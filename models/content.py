@@ -10,7 +10,7 @@ from models.base import BaseModel
 class ContentModel(BaseModel):
     MONGO_COLLECTION = 'content'
     SHORT_ID_LENGTH = 7
-    IMAGE_TYPE = ('logo', 'poster', 'og')
+    IMAGE_TYPE = ('logo', 'poster', 'og', 'extra_0', 'extra_1', 'extra_2', 'extra_3', 'extra_4')
 
     def __init__(self, *args, **kwargs):
         super(ContentModel, self).__init__(*args, **kwargs)
