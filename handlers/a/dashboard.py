@@ -20,7 +20,7 @@ class DashboardHandler(JsonHandler):
     @admin_auth_async
     async def get(self, *args, **kwargs):
         total_company_count = await CompanyModel.count({'enabled': True})
-        total_user_count = await UserModel.count({'enabled': True})
+        total_user_count = await UserModel.count({})
         total_content_count = await ContentModel.count({'enabled': True})
         total_ticket_count = await TicketModel.count({'enabled': True})
         self.response['data'] = {
@@ -39,7 +39,8 @@ class DashboardHandler(JsonHandler):
             'gender_count': {
                 'male': 0,
                 'female': 0
-            }
+            },
+            'monthly_new_users': []
         }
         # aggregate tickets
         pipeline = [
@@ -70,6 +71,31 @@ class DashboardHandler(JsonHandler):
         res = await UserModel.aggregate(pipeline, 10)
         for r in res:
             self.response['data']['gender_count'][r['_id']] = r['count']
+        
+        # aggregate monthly new users
+        pipeline = [
+            {
+                '$group': {
+                    '_id': {
+                        '$dateToString': {
+                            'format': '%Y-%m',
+                            'date': '$created_at'
+                        }
+                    },
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            },
+            {
+                '$sort': {
+                    '_id': -1
+                }
+            }
+        ]
+        res = await UserModel.aggregate(pipeline, 12)
+        for m in res:
+            self.response['data']['monthly_new_users'].insert(0, m)
         self.write_json()
 
     async def options(self, *args, **kwargs):
