@@ -261,17 +261,6 @@ class TicketSendHandler(JsonHandler):
         self.write_json()
 
 
-class TicketSendBatchHandler(JsonHandler):
-    @user_auth_async
-    async def put(self, *args, **kwargs):
-        self.response['data'] = 'batch'
-        self.write_json()
-
-    async def options(self, *args, **kwargs):
-        self.response['message'] = 'OK'
-        self.write_json()
-
-
 class TicketListMeHandler(JsonHandler):
     @user_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
@@ -419,6 +408,40 @@ class TicketSerialNumberRegisterHandler(JsonHandler):
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketSendUserListHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('q', str, None)])
+    async def get(self, *args, **kwargs):
+        q = {
+            '$and': [
+                {'send_user_oid': self.current_user['_id']}
+            ]
+        }
+        parsed_args = kwargs.get('parsed_args')
+        if 'q' in parsed_args and parsed_args['q']:
+            user_q = {
+                'name': {'$regex': parsed_args['q']},
+            }
+            users = await UserModel.find(query=user_q)
+            if users:
+                q['$and'].append({'receive_user_oid': {'$in': []}})
+                for user in users:
+                    q['$and'][1]['receive_user_oid']['$in'].append(user['_id'])
+        result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
+        for res in result:
+            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
+            if 'name' in receive_user:
+                res['name'] = receive_user['name']
+                res['mobile_number'] = receive_user['mobile_number']
+            res.pop('receive_user_oid')
+        self.response['data'] = result
         self.write_json()
 
     async def options(self, *args, **kwargs):
