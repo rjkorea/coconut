@@ -441,7 +441,18 @@ class TicketSendUserListHandler(JsonHandler):
                 res['name'] = receive_user['name']
                 res['mobile_number'] = receive_user['mobile_number']
             res.pop('receive_user_oid')
-        self.response['data'] = result
+        send_user_dict = dict()
+        for r in result:
+            if 'mobile_number' in r:
+                send_user_dict[r['mobile_number']] = {
+                    '_id': r['_id'],
+                    'name': r['name'],
+                    'created_at': r['created_at']
+                }
+        send_user_list = list()
+        for k, v in send_user_dict.items():
+            send_user_list.append({'mobile_number': k, 'name': v['name'], 'created_at': v['created_at'], '_id': v['_id']})
+        self.response['data'] = send_user_list[:20]
         self.write_json()
 
     async def options(self, *args, **kwargs):
