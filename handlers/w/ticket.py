@@ -429,11 +429,11 @@ class TicketSendUserListHandler(JsonHandler):
             user_q = {
                 'name': {'$regex': parsed_args['q']},
             }
-            users = await UserModel.find(query=user_q)
+            users = await UserModel.find(query=user_q, limit=50)
             if users:
-                q['$and'].append({'receive_user_oid': {'$in': []}})
+                q['$and'].append({'$or': []})
                 for user in users:
-                    q['$and'][1]['receive_user_oid']['$in'].append(user['_id'])
+                    q['$and'][1]['$or'].append({'receive_user_oid': user['_id']})
         result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
         for res in result:
             receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
