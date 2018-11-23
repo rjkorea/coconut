@@ -434,6 +434,10 @@ class TicketSendUserListHandler(JsonHandler):
                 q['$and'].append({'$or': []})
                 for user in users:
                     q['$and'][1]['$or'].append({'receive_user_oid': user['_id']})
+            else:
+                self.response['data'] = list()
+                self.write_json()
+                return
         result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
         for res in result:
             receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
