@@ -9,6 +9,7 @@ from common.decorators import admin_auth_async, parse_argument
 
 from handlers.base import JsonHandler
 from models.ticket import TicketModel, TicketTypeModel
+from models.user import UserModel
 from models.content import ContentModel
 
 
@@ -22,6 +23,9 @@ class TicketListUserHandler(JsonHandler):
         parsed_args = kwargs.get('parsed_args')
         if not parsed_args['user_oid'] or len(parsed_args['user_oid']) != 24:
             raise HTTPError(400, 'invalid user_oid ')
+        user = await UserModel.find_one({'_id': ObjectId(parsed_args['user_oid'])})
+        if not user:
+            raise HTTPError(400, 'no exist user')
         q = {
             '$and': [
                 {'content_oid': ObjectId(content_oid)},
