@@ -182,12 +182,8 @@ class TicketOrderHandler(JsonHandler):
                 raise HTTPError(400, 'incorrect mobile number format')
         receiver['name'] = receiver['name'].strip()
         expiry_date = self.json_decoded_body.get('expiry_date', None)
-        if not expiry_date or len(expiry_date) == 0:
+        if not expiry_date:
             raise HTTPError(400, 'invalid expiry_date')
-        try:
-            expiry_date = datetime.strptime(expiry_date, '%Y-%m-%dT%H:%M:%S')
-        except ValueError as e:
-            raise HTTPError(400, e)
         receiver['sms'] = {
             'count': 0
         }
