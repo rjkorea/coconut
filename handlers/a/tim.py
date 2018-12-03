@@ -219,6 +219,7 @@ class AnalyticsHandler(JsonHandler):
         if not content_oid or len(content_oid) != 24:
             raise HTTPError(400, 'invalid content_oid')
         self.response['data'] = {
+            'total_forward': 0,
             'ticket_count': {
                 'pend': 0,
                 'send': 0,
@@ -226,6 +227,10 @@ class AnalyticsHandler(JsonHandler):
                 'pay': 0,
                 'use': 0,
                 'cancel': 0
+            },
+            'revenue': {
+                'cash': 0,
+                'creditcard': 0
             },
             'gender': {}
         }
@@ -286,11 +291,38 @@ class AnalyticsHandler(JsonHandler):
             }
         ]
         aggs = await TicketModel.aggregate(pipeline, 10)
-        import logging
-        logging.info(aggs)
         for a in aggs:
             if a['_id']:
                 self.response['data']['gender'][a['_id'][0]] = a['count']
+        #user aggregate for revenue
+        pipeline = [
+            {
+                '$match': {
+                    'content_oid': ObjectId(content_oid),
+                    'enabled': True,
+                    'status': TicketModel.Status.use.name
+                }
+            },
+            {
+                '$unwind': {'path': '$days'}
+            },
+            {
+                '$group': {
+                    '_id': '$days.fee.method',
+                    'revenue': {
+                        '$sum': '$days.fee.price'
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 5)
+        for a in aggs:
+            self.response['data']['revenue'][a['_id']] = a['revenue']
+        q = {
+            'content_oid': ObjectId(content_oid),
+            'action': TicketLogModel.Status.send.name
+        }
+        self.response['data']['total_forward'] = await TicketLogModel.count(query=q)
         self.write_json()
 
     async def options(self, *args, **kwargs):
