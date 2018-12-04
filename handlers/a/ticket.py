@@ -65,17 +65,19 @@ class TicketTypeHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
-        day = self.json_decoded_body.get('day', None)
-        if not day or not isinstance(day, int):
-            raise HTTPError(400, 'invalid day')
         desc = self.json_decoded_body.get('desc', None)
+        expiry_date = self.json_decoded_body.get('expiry_date', None)
+        if not expiry_date:
+            raise HTTPError(400, 'invalid expiry date')
+        price = self.json_decoded_body.get('price', 0)
         ticket_type = TicketTypeModel(raw_data=dict(
             admin_oid=admin_oid,
             content_oid=ObjectId(content_oid),
             type=type,
             name=name,
             desc=desc,
-            day=day
+            expiry_date=datetime.strptime(expiry_date, '%Y-%m-%dT%H:%M:%S'),
+            price=price
         ))
         await ticket_type.insert()
         self.response['data'] = ticket_type.data
@@ -180,12 +182,8 @@ class TicketOrderHandler(JsonHandler):
                 raise HTTPError(400, 'incorrect mobile number format')
         receiver['name'] = receiver['name'].strip()
         expiry_date = self.json_decoded_body.get('expiry_date', None)
-        if not expiry_date or len(expiry_date) == 0:
+        if not expiry_date:
             raise HTTPError(400, 'invalid expiry_date')
-        try:
-            expiry_date = datetime.strptime(expiry_date, '%Y-%m-%dT%H:%M:%S')
-        except ValueError as e:
-            raise HTTPError(400, e)
         receiver['sms'] = {
             'count': 0
         }

@@ -14,6 +14,7 @@ url_patterns = [
     (r'/a/auth/login/?', a.auth.LoginHandler),
     (r'/a/dashboard/?', a.dashboard.DashboardHandler),
     (r'/a/dashboard/(?P<_id>[^\/]+)/?', a.dashboard.DashboardContentHandler),
+    (r'/a/stats/(?P<_id>[^\/]+)/?', a.stats.StatsContentHandler),
     (r'/a/tim/matrix/ticket/order/(?P<_id>[^\/]+)/?', a.tim.MatrixTicketOrderHandler),
     (r'/a/tim/matrix/ticket/type/(?P<_id>[^\/]+)/?', a.tim.MatrixTicketTypeHandler),
     (r'/a/tim/report/(?P<_id>[^\/]+)/?', a.tim.ReportHandler),

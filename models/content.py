@@ -55,6 +55,11 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'tags',
+                'type': list,
+                'default': None
+            },
+            {
                 'key': 'genre',
                 'type': list,
                 'default': None

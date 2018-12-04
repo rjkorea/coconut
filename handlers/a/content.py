@@ -119,8 +119,10 @@ class ContentHandler(JsonHandler):
             content.data['company_oid'] = ObjectId(company_oid)
         else:
             pass
-        await content.insert()
-        self.response['data'] = content.data
+        id = await content.insert()
+        self.response['data'] = {
+            'content_oid': str(id)
+        }
         self.write_json()
 
     @admin_auth_async
@@ -174,7 +176,11 @@ class ContentPostHandler(JsonHandler):
         when = self.json_decoded_body.get('when', None)
         if not when or not isinstance(when, dict):
             raise HTTPError(400, 'invalid when')
+        tags = self.json_decoded_body.get('tags', None)
+        if not tags or not isinstance(tags, list):
+            raise HTTPError(400, 'invalid tags')
         desc = self.json_decoded_body.get('desc', None)
+        notice = self.json_decoded_body.get('notice', {'enabled': False, 'message': '공지사항입니다.'})
         config = settings.settings()
         # generate short id
         while True:
@@ -197,6 +203,7 @@ class ContentPostHandler(JsonHandler):
             'place': place,
             'desc': desc,
             'when': when,
+            'tags': tags,
             'sms': {
                 'message': 'http://%s:%d/l/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             },
@@ -228,10 +235,7 @@ class ContentPostHandler(JsonHandler):
                     }
                 ]
             },
-            'notice': {
-                'enabled': False,
-                'message': '공지사항입니다.'
-            }
+            'notice': notice
         }
         content = ContentModel(raw_data=doc)
         if self.current_user['role'] == 'host' or self.current_user['role'] == 'pro':
@@ -244,7 +248,9 @@ class ContentPostHandler(JsonHandler):
         else:
             pass
         content_oid = await content.insert()
-        self.response['data'] = content.data
+        self.response['data'] = {
+            'content_oid': content_oid
+        }
         self.write_json()
 
     async def options(self, *args, **kwargs):

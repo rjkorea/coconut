@@ -7,6 +7,7 @@ from tornado.web import HTTPError
 
 from handlers.base import JsonHandler
 from models.admin import AdminModel
+from models.company import CompanyModel
 from models.session import AdminSessionModel
 
 from common import hashers
@@ -75,11 +76,23 @@ class LoginHandler(JsonHandler):
         if not hashers.check_password(password, admin['password']):
             raise HTTPError(400, 'invalid password')
         self.current_user = admin
+        now = datetime.utcnow()
         session = AdminSessionModel()
         session.data['admin_oid'] = admin['_id']
         session_oid = await session.insert()
-        admin['csk'] = str(session_oid)
-        self.response['data'] = admin
+        company = await CompanyModel.get_id(admin['company_oid'])
+        data = {
+            '_id': admin['_id'],
+            'name': admin['name'],
+            'csk': str(session_oid),
+            'role': admin['role'],
+            'company_name': company['name'],
+            'company_oid': admin['company_oid'],
+            'login_at': now
+        }
+        if 'tablet_code' in admin:
+            data['tablet_code'] = admin['tablet_code']
+        self.response['data'] = data
         self.write_json()
 
     async def options(self, *args, **kwargs):
