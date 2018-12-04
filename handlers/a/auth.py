@@ -81,15 +81,18 @@ class LoginHandler(JsonHandler):
         session.data['admin_oid'] = admin['_id']
         session_oid = await session.insert()
         company = await CompanyModel.get_id(admin['company_oid'])
-        self.response['data'] = {
+        data = {
             '_id': admin['_id'],
             'name': admin['name'],
             'csk': str(session_oid),
             'role': admin['role'],
-            'tablet_code': admin['tablet_code'],
             'company_name': company['name'],
+            'company_oid': admin['company_oid'],
             'login_at': now
         }
+        if 'tablet_code' in admin:
+            data['tablet_code'] = admin['tablet_code']
+        self.response['data'] = data
         self.write_json()
 
     async def options(self, *args, **kwargs):
