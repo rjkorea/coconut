@@ -7,8 +7,10 @@ from tornado.web import HTTPError
 
 from handlers.base import JsonHandler
 from models.user import UserModel
+from models.session import UserSessionModel
 
 from common.decorators import parse_argument
+from common import hashers
 
 
 class DuplicatedHandler(JsonHandler):
@@ -34,5 +36,37 @@ class DuplicatedHandler(JsonHandler):
         self.write_json()
 
     async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class LoginHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        type = self.json_decoded_body.get('type', None)
+        if not type:
+            raise HTTPError(400, 'type param is required(email, kakao, facebook, google, naver)')
+        if type == 'email':
+            email = self.json_decoded_body.get('email', None)
+            if not email:
+                raise HTTPError(400, 'invalid email')
+            password = self.json_decoded_body.get('password', None)
+            if not password:
+                raise HTTPError(400, 'invalid password')
+            user = await UserModel.find_one({'email': email, 'enabled': True})
+            if not user:
+                raise HTTPError(400, 'no exist email')
+            if not hashers.check_password(password, user['password']):
+                raise HTTPError(400, 'invalid password')
+        else:
+            raise HTTPError(400, 'invalid type(email, kakao, facebook, google, naver)')
+        session = UserSessionModel()
+        session.data['user_oid'] = user['_id']
+        session_oid = await session.insert()
+        self.response['data'] = {
+            'usk': str(session_oid)
+        }
+        self.write_json()
+
+    async def option(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
