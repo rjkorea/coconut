@@ -44,17 +44,17 @@ class LoginHandler(JsonHandler):
     async def post(self, *args, **kwargs):
         type = self.json_decoded_body.get('type', None)
         if not type:
-            raise HTTPError(400, 'type param is required(email, kakao, facebook, google, naver)')
-        if type == 'email':
-            email = self.json_decoded_body.get('email', None)
-            if not email:
-                raise HTTPError(400, 'invalid email')
+            raise HTTPError(400, 'type param is required(mobile_number, kakao, facebook, google, naver)')
+        if type == 'mobile_number':
+            mobile_number = self.json_decoded_body.get('mobile_number', None)
+            if not mobile_number:
+                raise HTTPError(400, 'invalid mobile_number')
             password = self.json_decoded_body.get('password', None)
             if not password:
                 raise HTTPError(400, 'invalid password')
-            user = await UserModel.find_one({'email': email, 'enabled': True})
+            user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
             if not user:
-                raise HTTPError(400, 'no exist email')
+                raise HTTPError(400, 'no exist mobile_number')
             if not hashers.check_password(password, user['password']):
                 raise HTTPError(400, 'invalid password')
         elif type == 'kakao' or type == 'facebook' or type == 'google' or type == 'naver':
@@ -65,7 +65,7 @@ class LoginHandler(JsonHandler):
             if not user:
                 raise HTTPError(400, 'no exist user')
         else:
-            raise HTTPError(400, 'invalid type(email, kakao, facebook, google, naver)')
+            raise HTTPError(400, 'invalid type(mobile_number, kakao, facebook, google, naver)')
         session = UserSessionModel()
         session.data['user_oid'] = user['_id']
         session_oid = await session.insert()
