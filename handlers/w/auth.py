@@ -41,7 +41,7 @@ class DuplicatedHandler(JsonHandler):
 
 
 class LoginHandler(JsonHandler):
-    async def put(self, *args, **kwargs):
+    async def post(self, *args, **kwargs):
         type = self.json_decoded_body.get('type', None)
         if not type:
             raise HTTPError(400, 'type param is required(email, kakao, facebook, google, naver)')
