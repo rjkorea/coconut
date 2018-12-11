@@ -57,6 +57,13 @@ class LoginHandler(JsonHandler):
                 raise HTTPError(400, 'no exist email')
             if not hashers.check_password(password, user['password']):
                 raise HTTPError(400, 'invalid password')
+        elif type == 'kakao':
+            id = self.json_decoded_body.get('id', None)
+            if not id:
+                raise HTTPError(400, 'invalid id')
+            user = await UserModel.find_one({'sns.kakao.id': id, 'enabled': True})
+            if not user:
+                raise HTTPError(400, 'no exist user')
         else:
             raise HTTPError(400, 'invalid type(email, kakao, facebook, google, naver)')
         session = UserSessionModel()
