@@ -74,6 +74,6 @@ class LoginHandler(JsonHandler):
         }
         self.write_json()
 
-    async def option(self, *args, **kwargs):
+    async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
