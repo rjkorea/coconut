@@ -4236,7 +4236,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"kakao\": {\n\t\t\t\"id\": \"982432250\"\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"type\": \"kakao\",\n\t\t\"id\": \"982432250\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
@@ -4359,6 +4359,110 @@
 							"body": "{\n    \"message\": \"400: invalid gender(male, female, not_specific)\"\n}"
 						},
 						{
+							"name": "400: invalid sns(type and id)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"type\": \"kakao\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 10:30:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid sns(type and id)\"\n}"
+						},
+						{
+							"name": "200 OK SNS with Kakao",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"type\": \"kakao\",\n\t\t\"id\": \"982432250\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 10:21:26 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
 							"name": "200 OK mobile number",
 							"originalRequest": {
 								"method": "POST",
@@ -4461,58 +4565,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"400: exist mobile number\"\n}"
-						},
-						{
-							"name": "OK with SNS(Kakao)",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"kakao\": {\n\t\t\t\"id\": \"982432250\"\n\t\t}\n\t}\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "14"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 12 Dec 2018 09:40:55 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": \"OK\"\n}"
 						}
 					]
 				},

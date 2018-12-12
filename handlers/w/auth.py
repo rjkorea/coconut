@@ -50,6 +50,8 @@ class RegisterHandler(JsonHandler):
         ))
         sns = self.json_decoded_body.get('sns', None)
         if sns:
+            if 'type' not in sns or 'id' not in sns:
+                raise HTTPError(400, 'invalid sns(type and id)')
             user.data['sns'] = sns
         user.set_password(password)
         await user.insert()
