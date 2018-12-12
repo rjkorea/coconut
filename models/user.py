@@ -54,6 +54,11 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'sns',
+                'type': dict,
+                'default': None
+            },
+            {
                 'key': 'terms',
                 'type': dict,
                 'default': None

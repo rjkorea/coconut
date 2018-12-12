@@ -87,6 +87,8 @@ url_patterns = [
     (r'/v2/user/me/?', v2.user.UserMeHandler),
 
     # w
+    (r'/w/auth/user/?', w.auth.UserHandler),
+    (r'/w/auth/register/?', w.auth.RegisterHandler),
     (r'/w/auth/login/?', w.auth.LoginHandler),
     (r'/w/auth/duplicated/?', w.auth.DuplicatedHandler),
     (r'/w/user/?', w.user.UserHandler),
