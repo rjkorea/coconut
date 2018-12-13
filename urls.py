@@ -91,6 +91,8 @@ url_patterns = [
     (r'/w/auth/register/?', w.auth.RegisterHandler),
     (r'/w/auth/login/?', w.auth.LoginHandler),
     (r'/w/auth/duplicated/?', w.auth.DuplicatedHandler),
+    (r'/w/auth/autologin/?', w.auth.AutoLoginHandler),
+    (r'/w/auth/autologin/(?P<_id>[^\/]+)/?', w.auth.AutoLoginHandler),
     (r'/w/user/?', w.user.UserHandler),
     (r'/w/user/me/?', w.user.UserMeHandler),
     (r'/w/user/me/password?', w.user.UserMePasswordHandler),
