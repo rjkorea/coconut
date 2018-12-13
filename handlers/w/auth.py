@@ -100,7 +100,7 @@ class LoginHandler(JsonHandler):
             if not mobile_number:
                 raise HTTPError(400, 'invalid mobile_number')
             password = self.json_decoded_body.get('password', None)
-            if not password:
+            if not password or len(password) < 4:
                 raise HTTPError(400, 'invalid password')
             user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
             if not user:
