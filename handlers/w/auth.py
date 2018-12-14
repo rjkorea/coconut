@@ -130,7 +130,7 @@ class UserHandler(JsonHandler):
     @parse_argument([('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if not parsed_args['mobile_number'] or len(parsed_args['mobile_number']) == 0:
+        if not parsed_args['mobile_number'] or len(parsed_args['mobile_number']) < 9:
             raise HTTPError(400, 'invalid mobile_number')
         q = {
             'mobile_number': parsed_args['mobile_number'],
