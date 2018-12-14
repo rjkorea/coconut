@@ -94,11 +94,21 @@ class TicketTypeHandler(JsonHandler):
         query = {
             '_id': ObjectId(_id)
         }
+        self.json_decoded_body['expiry_date'] = datetime.strptime(self.json_decoded_body['expiry_date'], '%Y-%m-%dT%H:%M:%S')
         self.json_decoded_body['updated_at'] = datetime.utcnow()
         document = {
             '$set': self.json_decoded_body
         }
-        self.response['data'] = await TicketTypeModel.update(query, document)
+        self.response['data'] = await TicketTypeModel.update(query, document, False, False)
+        await TicketOrderModel.update(
+            {'ticket_type_oid': ObjectId(_id)},
+            {
+                '$set': {
+                    'expiry_date': self.json_decoded_body['expiry_date'],
+                    'updated_at': self.json_decoded_body['updated_at']
+                }
+            },
+            False, True)
         self.write_json()
 
     @admin_auth_async
@@ -196,7 +206,7 @@ class TicketOrderHandler(JsonHandler):
             type=ticket_type['type'],
             qty=qty,
             receiver=receiver,
-            expiry_date=expiry_date
+            expiry_date=datetime.fromtimestamp(expiry_date)
         ))
         fee = self.json_decoded_body.get('fee', None)
         if fee:
