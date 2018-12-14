@@ -20,7 +20,7 @@ import settings
 class RegisterHandler(JsonHandler):
     async def post(self, *args, **kwargs):
         mobile_number = self.json_decoded_body.get('mobile_number', None)
-        if not mobile_number or len(mobile_number) == 0:
+        if not mobile_number or len(mobile_number) < 9 :
             raise HTTPError(400, 'invalid mobile_number')
         duplicated_user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
         if duplicated_user:
@@ -101,7 +101,7 @@ class LoginHandler(JsonHandler):
             raise HTTPError(400, 'type param is required(mobile_number)')
         if type == 'mobile_number':
             mobile_number = self.json_decoded_body.get('mobile_number', None)
-            if not mobile_number:
+            if not mobile_number or len(mobile_number) < 9:
                 raise HTTPError(400, 'invalid mobile_number')
             password = self.json_decoded_body.get('password', None)
             if not password or len(password) < 4:
