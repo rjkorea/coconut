@@ -23,7 +23,7 @@ class RegisterHandler(JsonHandler):
         if not mobile_number or len(mobile_number) < 9 :
             raise HTTPError(400, 'invalid mobile_number')
         duplicated_user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
-        if duplicated_user:
+        if duplicated_user and not dupicated_user['password']:
             raise HTTPError(400, 'exist mobile number')
         email = self.json_decoded_body.get('email', None)
         if not email or len(email) == 0:
