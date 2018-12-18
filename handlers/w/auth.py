@@ -23,7 +23,7 @@ class RegisterHandler(JsonHandler):
         if not mobile_number or len(mobile_number) < 9 :
             raise HTTPError(400, 'invalid mobile_number')
         duplicated_user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
-        if duplicated_user and not dupicated_user['password']:
+        if duplicated_user and 'password' in duplicated_user:
             raise HTTPError(400, 'exist mobile number')
         email = self.json_decoded_body.get('email', None)
         if not email or len(email) == 0:
@@ -43,22 +43,51 @@ class RegisterHandler(JsonHandler):
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_user_password_v2(password):
             raise HTTPError(400, 'invalid password')
-        user = UserModel(raw_data=dict(
-            mobile_number=mobile_number,
-            email=email,
-            name=name,
-            last_name=last_name,
-            birthday=birthday,
-            gender=gender,
-            terms={'privacy': True, 'policy': True}
-        ))
-        sns = self.json_decoded_body.get('sns', None)
-        if sns:
-            if 'type' not in sns or 'id' not in sns:
-                raise HTTPError(400, 'invalid sns(type and id)')
-            user.data['sns'] = sns
-        user.set_password(password)
-        await user.insert()
+
+        if duplicated_user and 'password' not in duplicated_user:
+            doc = dict(
+                mobile_number=mobile_number,
+                email=email,
+                name=name,
+                last_name=last_name,
+                birthday=birthday,
+                gender=gender,
+                terms={
+                    'privacy': True,
+                    'policy': True
+                },
+                password=hashers.make_password(password),
+                updated_at=datetime.utcnow()
+            )
+            sns = self.json_decoded_body.get('sns', None)
+            if sns:
+                if 'type' not in sns or 'id' not in sns:
+                    raise HTTPError(400, 'invalid sns(type and id)')
+                doc['sns'] = sns
+            await UserModel.update(
+                {'_id': duplicated_user['_id'], 'enabled': True},
+                {
+                    '$set': doc
+                },
+                False, False
+            )
+        else:
+            user = UserModel(raw_data=dict(
+                mobile_number=mobile_number,
+                email=email,
+                name=name,
+                last_name=last_name,
+                birthday=birthday,
+                gender=gender,
+                terms={'privacy': True, 'policy': True}
+            ))
+            sns = self.json_decoded_body.get('sns', None)
+            if sns:
+                if 'type' not in sns or 'id' not in sns:
+                    raise HTTPError(400, 'invalid sns(type and id)')
+                user.data['sns'] = sns
+            user.set_password(password)
+            await user.insert()
         self.response['data'] = 'OK'
         self.write_json()
 
