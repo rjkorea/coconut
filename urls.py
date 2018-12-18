@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import index, base, a, v1, t, tw, w, v2, wpc, wm, q
+from handlers import index, base, a, v1, t, tw, w, v2, wpc, wm, q, d
 
 url_patterns = [
     (r'/', index.IndexHandler),
@@ -169,6 +169,9 @@ url_patterns = [
     (r'/q/content/(?P<_id>[^\/]+)/tickets/?', q.ticket.TicketListUserHandler),
     (r'/q/ticket/(?P<_id>[^\/]+)/enter/?', q.ticket.TicketEnterUserHandler),
     (r'/q/user/(?P<_id>[^\/]+)/?', q.user.UserHandler),
+
+    # debug
+    (r'/d/user/(?P<_id>[^\/]+)/?', d.user.UserHandler),
 
     # web socket handler
     (r'/ws/?', base.WSHandler),
