@@ -323,7 +323,7 @@ class TicketListHandler(JsonHandler):
         if parsed_args['status']:
             q['status'] = parsed_args['status']
         count = await TicketModel.count(query=q)
-        result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        result = await TicketModel.find(query=q, sort=[('status', 1), ('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
             res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
             res.pop('ticket_type_oid')
