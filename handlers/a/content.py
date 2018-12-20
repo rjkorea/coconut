@@ -136,6 +136,13 @@ class ContentHandler(JsonHandler):
         query = {
             '_id': ObjectId(_id)
         }
+        try:
+            when = self.json_decoded_body.get('when', None)
+            if when:
+                self.json_decoded_body['when']['start'] = datetime.strptime(when['start'], '%Y-%m-%dT%H:%M:%S')
+                self.json_decoded_body['when']['end'] = datetime.strptime(when['end'], '%Y-%m-%dT%H:%M:%S')
+        except ValueError as e:
+            raise HTTPError(400, e)
         self.json_decoded_body['updated_at'] = datetime.utcnow()
         document = {
             '$set': self.json_decoded_body
@@ -205,7 +212,7 @@ class ContentPostHandler(JsonHandler):
             'when': when,
             'tags': tags,
             'sms': {
-                'message': 'http://%s:%d/l/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
+                'message': 'http://%s:%d/in/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             },
             'image': {
                 'poster': {

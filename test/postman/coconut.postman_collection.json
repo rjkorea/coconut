@@ -646,7 +646,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"company_oid\": \"5922bc83c8bd9535771cf837\",\n\t\"name\": \"테스트 페스티벌\",\n\t\"place\": \"디엠씨 중앙광장\",\n\t\"desc\": \"이추운겨울 테스터들과 함께하는 페스페스티벌 우당탕탕탕!!!\",\n\t\"when\": {\n\t\t\"start\": \"2018-02-20T00:00:00\",\n\t\t\"end\": \"2018-02-23T00:00:00\"\n\t}\n}"
+							"raw": "{\n\t\"company_oid\": \"5922bc83c8bd9535771cf837\",\n\t\"name\": \"테스트 페스티벌\",\n\t\"place\": \"디엠씨 중앙광장\",\n\t\"desc\": \"이추운겨울 테스터들과 함께하는 페스페스티벌 우당탕탕탕!!!\",\n\t\"tags\": [\"festival\", \"show\"],\n\t\"notice\": {\n\t\t\"enabled\": true,\n\t\t\"message\": \"공지사항 테스트 메세지\"\n\t},\n\t\"when\": {\n\t\t\"start\": \"2018-02-20T09:00:00\",\n\t\t\"end\": \"2018-02-23T14:00:00\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content",
@@ -1781,6 +1781,36 @@
 							"path": [
 								"a",
 								"dashboard",
+								"594246755f5471c519ecfc8c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/a/stats/<oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/stats/594246755f5471c519ecfc8c",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"stats",
 								"594246755f5471c519ecfc8c"
 							]
 						}
@@ -3996,6 +4026,1527 @@
 			"name": "web(w)",
 			"item": [
 				{
+					"name": "/w/auth/user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=821012345678",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"user"
+							],
+							"query": [
+								{
+									"key": "mobile_number",
+									"value": "821012345678"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK 준회원",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=821012345678",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "mobile_number",
+											"value": "821012345678"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "Etag",
+									"value": "\"6d5b7106018c705e357d7e2063c532dea46144bf\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:22:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"has_password\": false\n    }\n}"
+						},
+						{
+							"name": "400: no exist user 비회원",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=8210326178",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "mobile_number",
+											"value": "8210326178"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:24:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: no exist user\"\n}"
+						},
+						{
+							"name": "200 OK 회원",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=821032697178",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "mobile_number",
+											"value": "821032697178"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:24:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "Etag",
+									"value": "\"a8e20f5f876513c4b8218775ff1e4eaa254cd5b2\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"has_password\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/auth/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"type\": \"kakao\",\n\t\t\"id\": \"982432250\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"register"
+							]
+						},
+						"description": "response의 'usk'값을 이용하여 api에 접근한다"
+					},
+					"response": [
+						{
+							"name": "400: invalid birthday(YYYYMMDD)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"wrong 19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 02:19:09 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid birthday(YYYYMMDD)\"\n}"
+						},
+						{
+							"name": "400: invalid gender(male, female, not_specific)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"nothing\",\n\t\"password\": \"ilovetkit\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 02:17:22 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid gender(male, female, not_specific)\"\n}"
+						},
+						{
+							"name": "400: invalid sns(type and id)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"type\": \"kakao\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 10:30:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid sns(type and id)\"\n}"
+						},
+						{
+							"name": "200 OK SNS with Kakao",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\",\n\t\"sns\": {\n\t\t\"type\": \"kakao\",\n\t\t\"id\": \"982432250\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 10:21:26 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "200 OK mobile number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"ilovetkit\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 02:15:41 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "400: exist mobile number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"email\": \"takearest118@gmail.com\",\n\t\"name\": \"Kevin\",\n\t\"last_name\": \"Cho\",\n\t\"birthday\": \"19900101\",\n\t\"gender\": \"male\",\n\t\"password\": \"2133\",\n\t\"sns\": {\n\t\t\"kakao\": {\n\t\t\t\"id\": \"982432250\"\n\t\t}\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 02:05:59 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: exist mobile number\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mobile_number\",\n\t\"mobile_number\": \"821012345678\",\n\t\"password\": \"ilovetkit\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"login"
+							]
+						},
+						"description": "response의 'usk'값을 이용하여 api에 접근한다"
+					},
+					"response": [
+						{
+							"name": "400: wrong password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"mobile_number\",\n\t\"mobile_number\": \"821012345678\",\n\t\"password\": \"ilovetkt\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:45:07 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: wrong password\"\n}"
+						},
+						{
+							"name": "200 OK mobile_number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"mobile_number\",\n\t\"mobile_number\": \"821032697178\",\n\t\"password\": \"2053\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Dec 2018 09:20:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"usk\": \"5c0f816c5f54710f285970c3\"\n    }\n}"
+						},
+						{
+							"name": "400: invalid mobile_number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"mobile_number\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:42:16 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid mobile_number\"\n}"
+						},
+						{
+							"name": "400: invalid password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"mobile_number\",\n\t\"mobile_number\": \"821012345678\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:43:11 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid password\"\n}"
+						},
+						{
+							"name": "400: invalid type(mobile_number)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"kakao\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/login",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Dec 2018 09:37:56 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: invalid type(mobile_number)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/auth/duplicated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?mobile_number=821032697178",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"duplicated"
+							],
+							"query": [
+								{
+									"key": "mobile_number",
+									"value": "821032697178"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK mobile number",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?mobile_number=821032697178",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"duplicated"
+									],
+									"query": [
+										{
+											"key": "mobile_number",
+											"value": "821032697178"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 07 Dec 2018 10:04:51 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "\"c5fe92b7f009eb6c6af12a1e0c337f3180263e95\""
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "200 OK email",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?email=takearest118@gmail.com",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"duplicated"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "takearest118@gmail.com"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"c5fe92b7f009eb6c6af12a1e0c337f3180263e95\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 07 Dec 2018 10:02:41 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "400: no exist mobile number",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?mobile_number=82103",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"duplicated"
+									],
+									"query": [
+										{
+											"key": "mobile_number",
+											"value": "82103"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 07 Dec 2018 10:05:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: no exist mobile number\"\n}"
+						},
+						{
+							"name": "400: no exist email",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?email=kevin.cho@rjkorea.com",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"duplicated"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "kevin.cho@rjkorea.com"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 07 Dec 2018 10:03:11 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: no exist email\"\n}"
+						},
+						{
+							"name": "400: no params (email or mobile_number)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"duplicated"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 07 Dec 2018 10:02:08 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: no params (email or mobile_number)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/auth/autologin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"autologin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"autologin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Dec 2018 08:08:47 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"is_sent_receiver\": true,\n    \"message\": \"check your sms\"\n}"
+						},
+						{
+							"name": "400: not exist user",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile_number\": \"821012345678\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"autologin"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Dec 2018 08:09:18 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: not exist user\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/auth/autologin/<oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin/5a434a085f54711336570ecc",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"autologin",
+								"5a434a085f54711336570ecc"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/w/auth/autologin/<oid> (성공)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"autologin",
+										"5a434a085f54711336570ecc"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "175",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:35:17 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Etag",
+									"value": "\"e247a7392e8410798156382744f620ae607e1902\"",
+									"name": "Etag",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"data\": {\"updated_at\": 1514326904, \"_id\": \"5a434a085f54711336570ecc\", \"created_at\": 1514326904, \"usk\": \"5a434a085f54711336570ecb\", \"content_oid\": \"59e9bf995f54710f67bb237a\"}}"
+						},
+						{
+							"name": "/w/auth/autologin/<oid> (무효한 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"autologin",
+										"5a434a085f54711336570ecc"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "41",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:37:47 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: invalid autologin_oid\"}"
+						},
+						{
+							"name": "/w/autologin/<oid> (존재하지 않는 oid)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin/5a434a085f54711336570ecc",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"autologin",
+										"5a434a085f54711336570ecc"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Dec 2017 07:38:19 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: not exist autologin session\"}"
+						}
+					]
+				},
+				{
 					"name": "/w/user",
 					"request": {
 						"method": "GET",
@@ -5804,6 +7355,107 @@
 					]
 				},
 				{
+					"name": "/w/ticket/<oid>/register",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5940d2785f5471904fd44563",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5940d2785f5471904fd44563",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "61",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Jun 2017 05:32:30 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"400: Already registered ticket on this content\"}"
+						}
+					]
+				},
+				{
 					"name": "/w/ticket/<oid>/payment/cancel",
 					"request": {
 						"method": "PUT",
@@ -6101,107 +7753,6 @@
 							],
 							"cookie": [],
 							"body": "{\"message\": \"500: \\uc774\\ubbf8 \\uc804\\uc561\\ucde8\\uc18c\\ub41c \\uc8fc\\ubb38\\uc785\\ub2c8\\ub2e4.\"}"
-						}
-					]
-				},
-				{
-					"name": "/w/ticket/<oid>/register",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "usk={{usk}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
-						},
-						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{hostname}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"w",
-								"ticket",
-								"5940d2785f5471904fd44563",
-								"register"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"5940d2785f5471904fd44563",
-										"register"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "61",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 21 Jun 2017 05:32:30 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"message\": \"400: Already registered ticket on this content\"}"
 						}
 					]
 				},
@@ -9918,6 +11469,85 @@
 							""
 						]
 					}
+				}
+			]
+		},
+		{
+			"name": "debug(d)",
+			"item": [
+				{
+					"name": "/d/user/(oid)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/d/user/5b4efba4ba590e4758269150",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"d",
+								"user",
+								"5b4efba4ba590e4758269150"
+							]
+						},
+						"description": "Set enabled field False to delete user"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/d/user/5b4efba4ba590e4758269150",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"d",
+										"user",
+										"5b4efba4ba590e4758269150"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Dec 2018 05:48:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"updatedExisting\": true,\n        \"nModified\": 1,\n        \"n\": 1,\n        \"ok\": 1\n    }\n}"
+						}
+					]
 				}
 			]
 		}

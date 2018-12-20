@@ -9,6 +9,7 @@ HASHING_ITERATIONS = 400
 ALLOWED_IN_SALT = string.ascii_letters + string.digits + './'
 ALLOWD_ADMIN_PASSWORD_PATTERN = r'[A-Za-z0-9!@#$%^&+=]{8,}'
 ALLOWD_USER_PASSWORD_PATTERN = r'[0-9]{4}'
+ALLOWD_USER_PASSWORD_PATTERN_V2 = r'[A-Za-z0-9!@#$%^&+=]{8,}'
 
 
 def generate_random_string(len=12, allowed_chars=string.ascii_letters+string.digits):
@@ -38,10 +39,20 @@ def validate_password(password=None):
 
 def validate_user_password(password=None):
     """
-    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9!@#$%^&+=]{4}'
+    ALLOWED_PASSWORD_PATTERN = r'[0-9]{4}'
     """
     if password is None:
         raise ValueError('password is required')
     if re.match(ALLOWD_USER_PASSWORD_PATTERN, password):
+        return True
+    return False
+
+def validate_user_password_v2(password=None):
+    """
+    ALLOWED_PASSWORD_PATTERN = r'[A-Za-z0-9!@#$%^&+=]{8,}'
+    """
+    if password is None:
+        raise ValueError('password is required')
+    if re.match(ALLOWD_USER_PASSWORD_PATTERN_V2, password):
         return True
     return False

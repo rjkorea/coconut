@@ -24,6 +24,11 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'last_name',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'email',
                 'type': str,
                 'default': None
@@ -46,6 +51,11 @@ class UserModel(BaseModel):
             {
                 'key': 'birthday',
                 'type': str,
+                'default': None
+            },
+            {
+                'key': 'sns',
+                'type': dict,
                 'default': None
             },
             {
