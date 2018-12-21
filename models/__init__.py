@@ -55,7 +55,7 @@ async def create_group_ticket(group):
         await ticket.insert()
 
 async def create_broker(receiver):
-    broker = await UserModel.find_one({'mobile_number': receiver['mobile_number']})
+    broker = await UserModel.find_one({'mobile_number': receiver['mobile_number'], 'enabled': True})
     if broker:
         return broker['_id']
     else:
@@ -67,7 +67,7 @@ async def create_broker(receiver):
         return id
 
 async def create_user(user):
-    res = await UserModel.find_one({'mobile_number': user['mobile_number']})
+    res = await UserModel.find_one({'mobile_number': user['mobile_number'], 'enabled': True})
     if res:
         return res 
     else:
