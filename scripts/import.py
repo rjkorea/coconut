@@ -242,6 +242,7 @@ def list_tickets(csvfile, jsonfile, mongo, dryrun):
                     'updated_at': now
                 })
             doc = {
+                'type': 'network',
                 'content_oid': ObjectId(ticket_order['content_oid']),
                 'ticket_type_oid': ObjectId(ticket_order['ticket_type_oid']),
                 'admin_oid': ObjectId(ticket_order['admin_oid']),
@@ -265,6 +266,7 @@ def list_tickets(csvfile, jsonfile, mongo, dryrun):
             ticket_order_oid = mongo_client['coconut']['ticket_order'].insert(doc)
             for t in range(ticket_order['qty']):
                 doc = {
+                    'type': 'network',
                     'content_oid': ObjectId(ticket_order['content_oid']),
                     'ticket_type_oid': ObjectId(ticket_order['ticket_type_oid']),
                     'ticket_order_oid': ticket_order_oid,
