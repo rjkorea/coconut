@@ -65,6 +65,13 @@ class TestHandler(JsonHandler):
         self.write_json()
 
 
+class WebHookTestHandler(JsonHandler):
+    async def post(self, *args, **kwargs):
+        data = self.json_decoded_body
+        self.response['data'] = data
+        self.write_json()
+
+
 class WSTestHandler(JsonHandler):
     async def get(self, *args, **kwargs):
         data=dict(hello='world',

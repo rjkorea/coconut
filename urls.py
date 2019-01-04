@@ -8,6 +8,7 @@ url_patterns = [
     (r'/test/?', index.TestHandler),
     (r'/test/(?P<oid>[^\/]+)/?', index.TestHandler),
     (r'/testws/?', index.WSTestHandler),
+    (r'/test/web/hook/?', index.WebHookTestHandler),
 
     # admin
     (r'/a/auth/register/?', a.auth.RegisterHandler),
