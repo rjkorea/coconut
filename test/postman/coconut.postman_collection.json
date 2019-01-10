@@ -225,6 +225,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/test/web/hook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_1234567890\",\n\t\"merchant_uid\": \"merchant_1234567890\",\n\t\"status\": \"ready\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/test/web/hook",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"test",
+								"web",
+								"hook"
+							]
+						},
+						"description": "web hook for iamport"
+					},
+					"response": []
 				}
 			]
 		},
@@ -260,6 +293,282 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/a/auth/signup/personal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"mobile_number\": \"821032697178\",\n\t\"name\": \"건희\",\n\t\"last_name\": \"조\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/personal",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"auth",
+								"signup",
+								"personal"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"mobile_number\": \"821032697178\",\n\t\"name\": \"건희\",\n\t\"last_name\": \"조\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/personal",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"personal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 09:45:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "400: duplicated email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"mobile_number\": \"821032697178\",\n\t\"name\": \"건희\",\n\t\"last_name\": \"조\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/personal",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"personal"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 09:41:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: duplicated email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/auth/signup/business",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"auth",
+								"signup",
+								"business"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"business"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 10:25:47 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "400: duplicated email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"business"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 10:27:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: duplicated email\"\n}"
+						}
+					]
 				},
 				{
 					"name": "/a/auth/login",

@@ -23,6 +23,11 @@ class AdminModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'last_name',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'email',
                 'type': str,
                 'default': None
@@ -48,6 +53,11 @@ class AdminModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'type',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'company_oid',
                 'type': ObjectId,
                 'default': None
@@ -58,8 +68,53 @@ class AdminModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'company_name',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'fax',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'tel',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'website',
                 'type': str,
+                'default': None
+            },
+            {
+                'key': 'birthday',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'gender',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'business_license',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'manager',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'president',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'bank',
+                'type': dict,
                 'default': None
             },
             {
