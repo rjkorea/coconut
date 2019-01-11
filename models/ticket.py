@@ -66,6 +66,11 @@ class TicketTypeModel(BaseModel):
                 'default': (lambda: {'name': 'tkit-mint', 'value': '#62aab8'})
             },
             {
+                'key': 'duplicated_registration',
+                'type': bool,
+                'default': (lambda: False)
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)

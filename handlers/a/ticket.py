@@ -67,6 +67,7 @@ class TicketTypeHandler(JsonHandler):
             raise HTTPError(400, 'invalid name')
         desc = self.json_decoded_body.get('desc', None)
         color = self.json_decoded_body.get('color', None)
+        duplicated_registration = self.json_decoded_body.get('duplicated_registration', False)
         expiry_date = self.json_decoded_body.get('expiry_date', None)
         if not expiry_date:
             raise HTTPError(400, 'invalid expiry date')
@@ -78,8 +79,9 @@ class TicketTypeHandler(JsonHandler):
             name=name,
             desc=desc,
             color=color,
+            duplicated_registration=duplicated_registration,
             expiry_date=datetime.strptime(expiry_date, '%Y-%m-%dT%H:%M:%S'),
-            price=price
+            price=price,
         ))
         await ticket_type.insert()
         self.response['data'] = ticket_type.data

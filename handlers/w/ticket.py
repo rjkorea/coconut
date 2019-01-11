@@ -155,7 +155,11 @@ class TicketRegisterHandler(JsonHandler):
         }
         exist_ticket = await TicketModel.find_one(q)
         if exist_ticket:
-            raise HTTPError(400, 'Already registered ticket type on this content')
+            ticket_type = await TicketTypeModel.get_id(exist_ticket['ticket_type_oid'])
+            if 'duplicated_registration' in ticket_type and ticket_type['duplicated_registration']:
+                continue
+            else:
+                raise HTTPError(400, 'Already registered ticket type on this content')
 
         email = self.json_decoded_body.get('email', None)
         birthday = self.json_decoded_body.get('birthday', None)
