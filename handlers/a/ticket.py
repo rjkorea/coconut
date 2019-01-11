@@ -66,6 +66,7 @@ class TicketTypeHandler(JsonHandler):
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
         desc = self.json_decoded_body.get('desc', None)
+        color = self.json_decoded_body.get('color', None)
         expiry_date = self.json_decoded_body.get('expiry_date', None)
         if not expiry_date:
             raise HTTPError(400, 'invalid expiry date')
@@ -76,6 +77,7 @@ class TicketTypeHandler(JsonHandler):
             type=type,
             name=name,
             desc=desc,
+            color=color,
             expiry_date=datetime.strptime(expiry_date, '%Y-%m-%dT%H:%M:%S'),
             price=price
         ))
