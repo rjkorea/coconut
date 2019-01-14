@@ -556,7 +556,7 @@ class TicketPaymentHandler(JsonHandler):
         if 'imp_uid' not in parsed_args:
             raise HTTPError(400, 'invalid imp_uid')
         payment_result = IamportService().client.find(imp_uid=parsed_args['imp_uid'])
-        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid']), 'status': TicketModel.Status.register.name})
+        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid'])})
         if not ticket:
             raise HTTPError(400, 'invalid payment')
         if 'fee' in ticket['days'][0]:
