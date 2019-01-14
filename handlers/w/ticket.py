@@ -709,6 +709,36 @@ class TicketPaymentCompleteHandler(JsonHandler):
         else:
             raise HTTPError(400, 'status is not paid on iamport')
 
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketPaymentUpdateHandler(JsonHandler):
+    async def post(self, *args, **kwargs):
+        merchant_uid = self.json_decoded_body.get('merchant_uid', None)
+        if not merchant_uid or len(merchant_uid) == 0:
+            raise HTTPError(400, 'invalid merchant_uid')
+        status = self.json_decoded_body.get('status', None)
+        if not status or status != 'paid':
+            raise HTTPError(400, 'invalid status')
+        payment = IamportService().client.find(merchant_uid=merchant_uid)
+        if payment == {}:
+            raise HTTPError(400, 'not exist payment info')
+        if payment['status'] == 'paid':
+            query = {
+                '_id': ObjectId(merchant_uid)
+            }
+            document = {
+                '$set': {
+                    'status': TicketModel.Status.pay.name,
+                    'updated_at': datetime.utcnow()
+                }
+            }
+            self.response['data'] = await TicketModel.update(query, document)
+            self.write_json()
+        else:
+            raise HTTPError(400, 'status is not paid on iamport')
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
