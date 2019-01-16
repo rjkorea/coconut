@@ -815,19 +815,24 @@ class TicketRegisterCancelHandler(JsonHandler):
 
 class TicketTypeListMeHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('content_oid', str, None), ('status', str, None)])
+    @parse_argument([('content_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
             raise HTTPError(400, 'invalid content_oid')
+        now = datetime.utcnow()
+        ticket_types = await TicketTypeModel.find({'content_oid': ObjectId(parsed_args['content_oid']), 'expiry_date': {'$gte': now}, 'enabled': True}, fields=[('_id')], skip=0, limit=100)
         # aggregate ticket type
         pipeline = [
             {
                 '$match': {
                     'content_oid': ObjectId(parsed_args['content_oid']),
-                    'status': parsed_args['status'],
+                    'status': TicketModel.Status.send.name,
                     'enabled': True,
-                    'receive_user_oid': self.current_user['_id']
+                    'receive_user_oid': self.current_user['_id'],
+                    'ticket_type_oid': {
+                        '$in': [ObjectId(tt['_id']) for tt in ticket_types]
+                    }
                 }
             },
             {
@@ -839,11 +844,15 @@ class TicketTypeListMeHandler(JsonHandler):
                 }
             }
         ]
-        aggs = await TicketModel.aggregate(pipeline, 20)
+        aggs = await TicketModel.aggregate(pipeline, 50)
         for a in aggs:
             ticket_type = await TicketTypeModel.get_id(a['_id'])
             a['name'] = ticket_type['name']
             a['desc'] = ticket_type['desc']
+            a['expiry_date'] = ticket_type['expiry_date']
+            a['price'] = ticket_type['price']
+            content = await ContentModel.get_id(ticket_type['content_oid'])
+            a['content'] = content['name']
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
