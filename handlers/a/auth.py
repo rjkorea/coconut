@@ -79,7 +79,7 @@ class SignupPersonalHandler(JsonHandler):
         if not mobile_number or len(mobile_number) == 0:
             raise HTTPError(400, 'invalid mobile_number')
         birthday = self.json_decoded_body.get('birthday', None)
-        if not mobile_number or len(mobile_number) == 0:
+        if not birthday or len(birthday) < 8:
             raise HTTPError(400, 'invalid birthday')
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_password(password):
