@@ -9,7 +9,6 @@ from models.country import CountryModel
 
 
 class CountryListHandler(JsonHandler):
-    @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
