@@ -884,8 +884,12 @@ class TicketTypeListMeHandler(JsonHandler):
             a['desc'] = ticket_type['desc']
             a['expiry_date'] = ticket_type['expiry_date']
             a['price'] = ticket_type['price']
+            if 'color' in ticket_type:
+                a['color'] = ticket_type['color']
             content = await ContentModel.get_id(ticket_type['content_oid'])
-            a['content'] = content['name']
+            a['content'] = {
+                'name': content['name']
+            }
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
