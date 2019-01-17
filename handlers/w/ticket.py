@@ -353,6 +353,39 @@ class TicketListHandler(JsonHandler):
         self.write_json()
 
 
+class TicketHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        ticket_oid = kwargs.get('_id', None)
+        if not ticket_oid or len(ticket_oid) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        ticket = await TicketModel.get_id(ObjectId(ticket_oid))
+        ticket['ticket_type'] = await TicketTypeModel.get_id(ticket['ticket_type_oid'])
+        ticket.pop('ticket_type_oid')
+        ticket['ticket_order'] = await TicketOrderModel.get_id(ticket['ticket_order_oid'])
+        ticket.pop('ticket_order_oid')
+        ticket['content'] = await ContentModel.get_id(ticket['content_oid'])
+        ticket.pop('content_oid')
+        if 'send_user_oid'in ticket:
+            ticket['send_user'] = await UserModel.get_id(ticket['send_user_oid'])
+            ticket.pop('send_user_oid')
+        if 'receive_user_oid'in ticket:
+            ticket['receive_user'] = await UserModel.get_id(ticket['receive_user_oid'])
+            ticket.pop('receive_user_oid')
+        if 'history_send_user_oids' in ticket:
+            ticket['history_send_users'] = list()
+            for user_oid in ticket['history_send_user_oids']:
+                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                ticket['history_send_users'].append(user)
+            ticket.pop('history_send_user_oids')
+        self.response['data'] = ticket
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class TicketValidateListHandler(JsonHandler):
     @user_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
