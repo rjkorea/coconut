@@ -132,7 +132,7 @@ url_patterns = [
     (r'/w/ticket/send/users?', w.ticket.TicketSendUserListHandler),
     (r'/w/tickets/me/?', w.ticket.TicketListMeHandler),
     (r'/w/tickets/?', w.ticket.TicketListHandler),
-    (r'/w/ticket/(?P<_id>[^\/]+)/?', w.ticket.TicketHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/detail?', w.ticket.TicketHandler),
     (r'/w/tickets/validate?', w.ticket.TicketValidateListHandler),
     (r'/w/ticket/logs/?', w.ticket.TicketLogsHandler),
     (r'/w/ticket/payment/?', w.ticket.TicketPaymentHandler),
