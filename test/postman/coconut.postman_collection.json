@@ -225,6 +225,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/test/web/hook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_1234567890\",\n\t\"merchant_uid\": \"merchant_1234567890\",\n\t\"status\": \"ready\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/test/web/hook",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"test",
+								"web",
+								"hook"
+							]
+						},
+						"description": "web hook for iamport"
+					},
+					"response": []
 				}
 			]
 		},
@@ -260,6 +293,282 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/a/auth/signup/personal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"mobile_number\": \"821032697178\",\n\t\"name\": \"건희\",\n\t\"last_name\": \"조\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/personal",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"auth",
+								"signup",
+								"personal"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"mobile_number\": \"821032697178\",\n\t\"name\": \"건희\",\n\t\"last_name\": \"조\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/personal",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"personal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 09:45:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "400: duplicated email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"mobile_number\": \"821032697178\",\n\t\"name\": \"건희\",\n\t\"last_name\": \"조\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/personal",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"personal"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 09:41:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: duplicated email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/auth/signup/business",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"auth",
+								"signup",
+								"business"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"business"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 10:25:47 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"OK\"\n}"
+						},
+						{
+							"name": "400: duplicated email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"auth",
+										"signup",
+										"business"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jan 2019 10:27:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"400: duplicated email\"\n}"
+						}
+					]
 				},
 				{
 					"name": "/a/auth/login",
@@ -6767,6 +7076,209 @@
 					]
 				},
 				{
+					"name": "/w/ticket/(oid)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5b1625f4ba590e015ee4f174"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5b1625f4ba590e015ee4f174"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"48fabbdf8aa0650eb56b8ddba12493ebe3efb747\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jan 2019 02:16:59 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3621"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"_id\": \"5b1625f4ba590e015ee4f174\",\n        \"days\": [\n            {\n                \"day\": 1,\n                \"entered\": true,\n                \"entered_at\": 1528600495\n            }\n        ],\n        \"send_user\": {\n            \"_id\": \"5b1637d8ba590e015ee4f2dd\",\n            \"name\": \"유한수\",\n            \"birthday\": \"19890826\",\n            \"email\": \"tjcoms.hans@gmail.com\",\n            \"created_at\": 1528150344,\n            \"updated_at\": 1528150344,\n            \"password\": \"$p5k2$$aEA2W1cx7tIwagov2i.C.PLcm/6zNVVI$9PpxGd612S7lCb7V/5FLYUt5trNkJFFJ\",\n            \"enabled\": true,\n            \"gender\": \"male\",\n            \"mobile_number\": \"821064862610\",\n            \"terms\": {\n                \"privacy\": true,\n                \"policy\": true\n            }\n        },\n        \"ticket_order\": {\n            \"_id\": \"5b1625f4ba590e015ee4f158\",\n            \"user_oid\": \"596f52d1ba590e0b720ab1fb\",\n            \"receiver\": {\n                \"mobile_number\": \"821099734220\",\n                \"name\": \"강준호\",\n                \"sms\": {\n                    \"sent_at\": 1528147039,\n                    \"count\": 1\n                }\n            },\n            \"created_at\": 1528145764,\n            \"ticket_type_oid\": \"5b161e90ba590e015ee4ee3c\",\n            \"type\": \"network\",\n            \"updated_at\": 1528145764,\n            \"content_oid\": \"5b15135bba590e015ee4ee2a\",\n            \"enabled\": true,\n            \"admin_oid\": \"58634f596a9fab09b441a74a\",\n            \"expiry_date\": 1528599600,\n            \"qty\": 300\n        },\n        \"created_at\": 1528145764,\n        \"receive_user\": {\n            \"_id\": \"5b1d15f8ba590e0315c13793\",\n            \"name\": \"또안\",\n            \"birthday\": \"19840828\",\n            \"email\": \"zilong222@naver.com\",\n            \"mobile_number\": \"82918885443\",\n            \"updated_at\": 1528600424,\n            \"password\": \"$p5k2$$6VuJGe0ZaVm7LodEkze2Op2oM6ODggpj$RlYfF5KwTu/nU0eyKV3LW51HqszYfW52\",\n            \"enabled\": true,\n            \"gender\": \"male\",\n            \"created_at\": 1528600424,\n            \"terms\": {\n                \"privacy\": true,\n                \"policy\": true\n            }\n        },\n        \"history_send_users\": [\n            {\n                \"_id\": \"596f52d1ba590e0b720ab1fb\",\n                \"name\": \"강준호\",\n                \"mobile_number\": \"821099734220\"\n            },\n            {\n                \"_id\": \"5964c21fba590e508162d48e\",\n                \"name\": \"유지현\",\n                \"mobile_number\": \"821041080731\"\n            },\n            {\n                \"_id\": \"5b1637d8ba590e015ee4f2dd\",\n                \"name\": \"유한수\",\n                \"mobile_number\": \"821064862610\"\n            }\n        ],\n        \"status\": \"use\",\n        \"content\": {\n            \"_id\": \"5b15135bba590e015ee4ee2a\",\n            \"name\": \"PRIVATE SUNDAY ONE DAY\",\n            \"short_id\": \"bm9KVG7\",\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"place\": \"GRAND INTERCONTINENTAL PARNAS\",\n            \"sms\": {\n                \"message\": \"http://i.tkit.me:80/l/bm9KVG7 기본티켓링크\"\n            },\n            \"admin_oid\": \"5a7d2caeba590e1155d8bd42\",\n            \"image\": {\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/og.m.png?versionId=.9et.9NFQURi_UY_A5nY8redHXfT3tlP\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/logo.m.png?versionId=6EIt0sdsMBG1mRsrMyvnf4DO84jw1l6r\"\n                },\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/poster.m.png?versionId=RCn_s0JdoPT2dOp0hAergIDIZW6R6sUt\"\n                }\n            },\n            \"when\": {\n                \"start\": 1528556400\n            },\n            \"enabled\": true,\n            \"created_at\": 1528075467,\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"공지사항입니다.\"\n            },\n            \"updated_at\": 1528077336,\n            \"commission\": 0.07,\n            \"desc\": \"GA\"\n        },\n        \"updated_at\": 1528600495,\n        \"type\": \"network\",\n        \"enabled\": true,\n        \"ticket_type\": {\n            \"day\": 1,\n            \"_id\": \"5b161e90ba590e015ee4ee3c\",\n            \"name\": \"GA SUNDAY\",\n            \"desc\": {\n                \"value\": \"General Admission.\",\n                \"enabled\": true\n            },\n            \"type\": \"network\",\n            \"updated_at\": 1528143872,\n            \"price\": 0,\n            \"content_oid\": \"5b15135bba590e015ee4ee2a\",\n            \"enabled\": true,\n            \"admin_oid\": \"58634f596a9fab09b441a74a\",\n            \"created_at\": 1528143872\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/tickets/validate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/validate?start=0&size=0&content_oid=5c009e465f547109247f758f",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"tickets",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "0"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c009e465f547109247f758f"
+								}
+							]
+						},
+						"description": "티켓리스트 api\nusk로 api 접근인증한다\n# request params\n- content_oid\n- start\n- size"
+					},
+					"response": [
+						{
+							"name": "200 OK (just get count)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/validate?start=0&size=0&content_oid=5c009e465f547109247f758f",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"tickets",
+										"validate"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "0"
+										},
+										{
+											"key": "content_oid",
+											"value": "5c009e465f547109247f758f"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"3bfbea4ea07297b721c276a49ccb0266de272250\""
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Jan 2019 04:42:07 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [],\n    \"count\": 20\n}"
+						}
+					]
+				},
+				{
 					"name": "/w/ticket/logs",
 					"request": {
 						"method": "GET",
@@ -7087,6 +7599,44 @@
 							"body": "{\"data\": {\"name\": \"WATERBOMB 2017 \\uac8c\\uc2a4\\ud2b8 \\ucd08\\ub300\\uad8c \\ud658\\uacbd\\ubd80\\ub2f4\\uae08\", \"cancel_history\": [], \"amount\": 10000, \"imp_uid\": \"imp_079527261731\", \"pay_method\": \"card\", \"card_code\": \"361\", \"buyer_name\": \"\\uc870\\uac74\\ud76c\", \"buyer_tel\": \"821032697178\", \"apply_num\": \"33305906\", \"cancel_amount\": 0, \"currency\": \"KRW\", \"paid_at\": 1509592577, \"card_name\": \"BC\\uce74\\ub4dc\", \"receipt_url\": \"https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=INIMX_ISP_INIpayTest20171102121617261651&noMethod=1\", \"cancelled_at\": 0, \"merchant_uid\": \"597bf030ba590e7985d0fb6d\", \"pg_tid\": \"INIMX_ISP_INIpayTest20171102121617261651\", \"user_agent\": \"sorry_not_supported_anymore\", \"status\": \"paid\", \"cancel_receipt_urls\": [], \"card_quota\": 0, \"pg_provier\": \"html5_inicis\", \"cancel_reason\": null, \"buyer_email\": \"kevin.cho@rjkorea.com\"}}"
 						}
 					]
+				},
+				{
+					"name": "/w/ticket/payment/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"merchant_uid\": \"5931a1f8bc2c4426fe86a7dd\",\n\t\"status\": \"paid\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment/update",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"payment",
+								"update"
+							]
+						},
+						"description": "Web Hook for Iamport"
+					},
+					"response": []
 				},
 				{
 					"name": "/w/ticket/<oid>/payment/status",
@@ -8442,7 +8992,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "usk={{usk}}"
+								"value": "usk=5938f49a5f5471259d521341"
 							}
 						],
 						"body": {
@@ -8450,7 +9000,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5afa8f4bba590e4ce2618b54&status=send",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c009e465f547109247f758f",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -8465,17 +9015,77 @@
 							"query": [
 								{
 									"key": "content_oid",
-									"value": "5afa8f4bba590e4ce2618b54"
-								},
-								{
-									"key": "status",
-									"value": "send"
+									"value": "5c009e465f547109247f758f"
 								}
 							]
 						},
 						"description": "request params\n- content_oid\n- status (send, register, pay, use, cancel)"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk=5938f49a5f5471259d521341"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c009e465f547109247f758f",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"types",
+										"me"
+									],
+									"query": [
+										{
+											"key": "content_oid",
+											"value": "5c009e465f547109247f758f"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1369"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jan 2019 09:28:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"9bc3003bb5dfc0ccdc55ee80d2c8c9bb3d7f375e\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"expiry_date\": 1551309088,\n            \"_id\": \"5c3825a05f547120f37bb857\",\n            \"content\": \"뇌섹남 페스티벌\",\n            \"desc\": {\n                \"value\": \"완전 허용\",\n                \"enabled\": true\n            },\n            \"name\": \"중복 등록 허용 티켓\",\n            \"ticket_count\": 10,\n            \"price\": 0\n        },\n        {\n            \"expiry_date\": 1548879319,\n            \"_id\": \"5c3826885f547120f37bb858\",\n            \"content\": \"뇌섹남 페스티벌\",\n            \"desc\": {\n                \"value\": \"등록을 완전 허용하지 않음\",\n                \"enabled\": false\n            },\n            \"name\": \"중복 등록 미허용\",\n            \"ticket_count\": 10,\n            \"price\": 0\n        },\n        {\n            \"expiry_date\": 1548861254,\n            \"_id\": \"5c3818835f547120f33adae3\",\n            \"content\": \"뇌섹남 페스티벌\",\n            \"desc\": {\n                \"value\": \"컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 \",\n                \"enabled\": true\n            },\n            \"name\": \"티켓 컬러\",\n            \"ticket_count\": 10,\n            \"price\": 10000\n        }\n    ],\n    \"count\": 3\n}"
+						}
+					]
 				},
 				{
 					"name": "/w/ticket/type/(oid)/tickets",

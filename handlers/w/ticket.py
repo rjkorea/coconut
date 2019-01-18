@@ -155,8 +155,9 @@ class TicketRegisterHandler(JsonHandler):
         }
         exist_ticket = await TicketModel.find_one(q)
         if exist_ticket:
-            raise HTTPError(400, 'Already registered ticket type on this content')
-
+            ticket_type = await TicketTypeModel.get_id(exist_ticket['ticket_type_oid'])
+            if 'duplicated_registration' not in ticket_type or not ticket_type['duplicated_registration']:
+                raise HTTPError(400, 'Already registered ticket type on this content')
         email = self.json_decoded_body.get('email', None)
         birthday = self.json_decoded_body.get('birthday', None)
         gender = self.json_decoded_body.get('gender', None)
@@ -323,7 +324,91 @@ class TicketListHandler(JsonHandler):
         if parsed_args['status']:
             q['status'] = parsed_args['status']
         count = await TicketModel.count(query=q)
-        result = await TicketModel.find(query=q, sort=[('status', 1), ('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        for res in result:
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            res.pop('ticket_type_oid')
+            res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
+            res.pop('ticket_order_oid')
+            res['content'] = await ContentModel.get_id(res['content_oid'])
+            res.pop('content_oid')
+            if 'send_user_oid'in res:
+                res['send_user'] = await UserModel.get_id(res['send_user_oid'])
+                res.pop('send_user_oid')
+            if 'receive_user_oid'in res:
+                res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
+                res.pop('receive_user_oid')
+            if 'history_send_user_oids' in res:
+                res['history_send_users'] = list()
+                for user_oid in res['history_send_user_oids']:
+                    user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                    res['history_send_users'].append(user)
+                res.pop('history_send_user_oids')
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        ticket_oid = kwargs.get('_id', None)
+        if not ticket_oid or len(ticket_oid) != 24:
+            raise HTTPError(400, 'invalid ticket_oid')
+        ticket = await TicketModel.get_id(ObjectId(ticket_oid))
+        ticket['ticket_type'] = await TicketTypeModel.get_id(ticket['ticket_type_oid'])
+        ticket.pop('ticket_type_oid')
+        ticket['ticket_order'] = await TicketOrderModel.get_id(ticket['ticket_order_oid'])
+        ticket.pop('ticket_order_oid')
+        ticket['content'] = await ContentModel.get_id(ticket['content_oid'])
+        ticket.pop('content_oid')
+        if 'send_user_oid'in ticket:
+            ticket['send_user'] = await UserModel.get_id(ticket['send_user_oid'])
+            ticket.pop('send_user_oid')
+        if 'receive_user_oid'in ticket:
+            ticket['receive_user'] = await UserModel.get_id(ticket['receive_user_oid'])
+            ticket.pop('receive_user_oid')
+        if 'history_send_user_oids' in ticket:
+            ticket['history_send_users'] = list()
+            for user_oid in ticket['history_send_user_oids']:
+                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                ticket['history_send_users'].append(user)
+            ticket.pop('history_send_user_oids')
+        self.response['data'] = ticket
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketValidateListHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        q = {
+            'content_oid': ObjectId(parsed_args['content_oid']),
+            'enabled': True,
+            'expiry_date': {
+                '$gte': datetime.utcnow()
+            }
+        }
+        ticket_types = await TicketTypeModel.find(query=q, fields=[('_id')], skip=0, limit=100)
+        q = {
+            'receive_user_oid': self.current_user['_id'],
+            'enabled': True,
+            'status': TicketModel.Status.send.name,
+            'ticket_type_oid': {
+                '$in': [ObjectId(tt['_id']) for tt in ticket_types]
+            }
+        }
+        count = await TicketModel.count(query=q)
+        result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
             res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
             res.pop('ticket_type_oid')
@@ -504,7 +589,7 @@ class TicketPaymentHandler(JsonHandler):
         if 'imp_uid' not in parsed_args:
             raise HTTPError(400, 'invalid imp_uid')
         payment_result = IamportService().client.find(imp_uid=parsed_args['imp_uid'])
-        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid']), 'status': TicketModel.Status.register.name})
+        ticket = await TicketModel.find_one({'_id': ObjectId(payment_result['merchant_uid'])})
         if not ticket:
             raise HTTPError(400, 'invalid payment')
         if 'fee' in ticket['days'][0]:
@@ -657,6 +742,36 @@ class TicketPaymentCompleteHandler(JsonHandler):
         else:
             raise HTTPError(400, 'status is not paid on iamport')
 
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketPaymentUpdateHandler(JsonHandler):
+    async def post(self, *args, **kwargs):
+        merchant_uid = self.json_decoded_body.get('merchant_uid', None)
+        if not merchant_uid or len(merchant_uid) == 0:
+            raise HTTPError(400, 'invalid merchant_uid')
+        status = self.json_decoded_body.get('status', None)
+        if not status or status != 'paid':
+            raise HTTPError(400, 'invalid status')
+        payment = IamportService().client.find(merchant_uid=merchant_uid)
+        if payment == {}:
+            raise HTTPError(400, 'not exist payment info')
+        if payment['status'] == 'paid':
+            query = {
+                '_id': ObjectId(merchant_uid)
+            }
+            document = {
+                '$set': {
+                    'status': TicketModel.Status.pay.name,
+                    'updated_at': datetime.utcnow()
+                }
+            }
+            self.response['data'] = await TicketModel.update(query, document)
+            self.write_json()
+        else:
+            raise HTTPError(400, 'status is not paid on iamport')
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
@@ -733,19 +848,24 @@ class TicketRegisterCancelHandler(JsonHandler):
 
 class TicketTypeListMeHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('content_oid', str, None), ('status', str, None)])
+    @parse_argument([('content_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
             raise HTTPError(400, 'invalid content_oid')
+        now = datetime.utcnow()
+        ticket_types = await TicketTypeModel.find({'content_oid': ObjectId(parsed_args['content_oid']), 'expiry_date': {'$gte': now}, 'enabled': True}, fields=[('_id')], skip=0, limit=100)
         # aggregate ticket type
         pipeline = [
             {
                 '$match': {
                     'content_oid': ObjectId(parsed_args['content_oid']),
-                    'status': parsed_args['status'],
+                    'status': TicketModel.Status.send.name,
                     'enabled': True,
-                    'receive_user_oid': self.current_user['_id']
+                    'receive_user_oid': self.current_user['_id'],
+                    'ticket_type_oid': {
+                        '$in': [ObjectId(tt['_id']) for tt in ticket_types]
+                    }
                 }
             },
             {
@@ -757,11 +877,19 @@ class TicketTypeListMeHandler(JsonHandler):
                 }
             }
         ]
-        aggs = await TicketModel.aggregate(pipeline, 20)
+        aggs = await TicketModel.aggregate(pipeline, 50)
         for a in aggs:
             ticket_type = await TicketTypeModel.get_id(a['_id'])
             a['name'] = ticket_type['name']
             a['desc'] = ticket_type['desc']
+            a['expiry_date'] = ticket_type['expiry_date']
+            a['price'] = ticket_type['price']
+            if 'color' in ticket_type:
+                a['color'] = ticket_type['color']
+            content = await ContentModel.get_id(ticket_type['content_oid'])
+            a['content'] = {
+                'name': content['name']
+            }
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
