@@ -444,7 +444,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"mobile_number\": \"821032697178\",\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
@@ -474,7 +474,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"mobile_number\": \"821032697178\",\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
@@ -527,7 +527,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
+									"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"주식회사 티킷\",\n\t\"bank\": {\n\t\t\"name\": \"기업은행\",\n\t\t\"number\": \"01032697178\",\n\t\t\"owner\": \"조건희\"\n\t},\n\t\"mobile_number\": \"821032697178\",\n\t\"business_license\": {\n\t\t\"number\": \"6608100252\",\n\t\t\"category1\": \"서비스\",\n\t\t\"category2\": \"어플리케이션 개발 및 공급\"\n\t},\n\t\"manager\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"president\": {\n\t\t\"last_name\": \"조\",\n\t\t\"name\": \"건희\"\n\t},\n\t\"fax\": \"0264090630\",\n\t\"tel\": \"0226719100\"\n\t\t\n}"
 								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/auth/signup/business",
@@ -3975,6 +3975,183 @@
 			]
 		},
 		{
+			"name": "v2",
+			"item": [
+				{
+					"name": "/v2/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"password\": \"2053\"\n}\n"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/login",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"login"
+							]
+						},
+						"description": "login"
+					},
+					"response": []
+				},
+				{
+					"name": "/v2/user/me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA2NzI4MzYsImlhdCI6MTUyMDU4NjQzNiwidXNlcl9vaWQiOiI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifQ.Ivnp2woPFWDsKXblFRhNu-5HLWewCpTVQCd6JROt12U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"user",
+								"me"
+							]
+						},
+						"description": "get me info"
+					},
+					"response": [
+						{
+							"name": "access token expired",
+							"originalRequest": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA2NzI4MzYsImlhdCI6MTUyMDU4NjQzNiwidXNlcl9vaWQiOiI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifQ.Ivnp2woPFWDsKXblFRhNu-5HLWewCpTVQCd6JROt12U",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v2",
+										"user",
+										"me"
+									]
+								},
+								"description": "get me info"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "40",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Mar 2018 09:06:11 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\": \"401: access token expired\"}"
+						}
+					]
+				}
+			],
+			"description": "TKIT 0.6",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "58983d4c-373d-45aa-918b-e9d383cf2ea5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3448f70b-1354-4316-9552-adab5bf98e24",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
 			"name": "tablet(t)",
 			"item": [
 				{
@@ -7090,7 +7267,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174/detail",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -7099,7 +7276,8 @@
 							"path": [
 								"w",
 								"ticket",
-								"5b1625f4ba590e015ee4f174"
+								"5b1625f4ba590e015ee4f174",
+								"detail"
 							]
 						}
 					},
@@ -7119,7 +7297,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174/detail",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -7128,7 +7306,8 @@
 									"path": [
 										"w",
 										"ticket",
-										"5b1625f4ba590e015ee4f174"
+										"5b1625f4ba590e015ee4f174",
+										"detail"
 									]
 								}
 							},
@@ -7137,28 +7316,28 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
 								{
-									"key": "Etag",
-									"value": "\"48fabbdf8aa0650eb56b8ddba12493ebe3efb747\""
+									"key": "Content-Length",
+									"value": "3621"
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 17 Jan 2019 02:16:59 GMT"
+									"value": "Thu, 17 Jan 2019 10:51:11 GMT"
 								},
 								{
-									"key": "Content-Length",
-									"value": "3621"
+									"key": "Etag",
+									"value": "\"c4e53034e2b9b620907591b50c6120f6434434a3\""
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"_id\": \"5b1625f4ba590e015ee4f174\",\n        \"days\": [\n            {\n                \"day\": 1,\n                \"entered\": true,\n                \"entered_at\": 1528600495\n            }\n        ],\n        \"send_user\": {\n            \"_id\": \"5b1637d8ba590e015ee4f2dd\",\n            \"name\": \"유한수\",\n            \"birthday\": \"19890826\",\n            \"email\": \"tjcoms.hans@gmail.com\",\n            \"created_at\": 1528150344,\n            \"updated_at\": 1528150344,\n            \"password\": \"$p5k2$$aEA2W1cx7tIwagov2i.C.PLcm/6zNVVI$9PpxGd612S7lCb7V/5FLYUt5trNkJFFJ\",\n            \"enabled\": true,\n            \"gender\": \"male\",\n            \"mobile_number\": \"821064862610\",\n            \"terms\": {\n                \"privacy\": true,\n                \"policy\": true\n            }\n        },\n        \"ticket_order\": {\n            \"_id\": \"5b1625f4ba590e015ee4f158\",\n            \"user_oid\": \"596f52d1ba590e0b720ab1fb\",\n            \"receiver\": {\n                \"mobile_number\": \"821099734220\",\n                \"name\": \"강준호\",\n                \"sms\": {\n                    \"sent_at\": 1528147039,\n                    \"count\": 1\n                }\n            },\n            \"created_at\": 1528145764,\n            \"ticket_type_oid\": \"5b161e90ba590e015ee4ee3c\",\n            \"type\": \"network\",\n            \"updated_at\": 1528145764,\n            \"content_oid\": \"5b15135bba590e015ee4ee2a\",\n            \"enabled\": true,\n            \"admin_oid\": \"58634f596a9fab09b441a74a\",\n            \"expiry_date\": 1528599600,\n            \"qty\": 300\n        },\n        \"created_at\": 1528145764,\n        \"receive_user\": {\n            \"_id\": \"5b1d15f8ba590e0315c13793\",\n            \"name\": \"또안\",\n            \"birthday\": \"19840828\",\n            \"email\": \"zilong222@naver.com\",\n            \"mobile_number\": \"82918885443\",\n            \"updated_at\": 1528600424,\n            \"password\": \"$p5k2$$6VuJGe0ZaVm7LodEkze2Op2oM6ODggpj$RlYfF5KwTu/nU0eyKV3LW51HqszYfW52\",\n            \"enabled\": true,\n            \"gender\": \"male\",\n            \"created_at\": 1528600424,\n            \"terms\": {\n                \"privacy\": true,\n                \"policy\": true\n            }\n        },\n        \"history_send_users\": [\n            {\n                \"_id\": \"596f52d1ba590e0b720ab1fb\",\n                \"name\": \"강준호\",\n                \"mobile_number\": \"821099734220\"\n            },\n            {\n                \"_id\": \"5964c21fba590e508162d48e\",\n                \"name\": \"유지현\",\n                \"mobile_number\": \"821041080731\"\n            },\n            {\n                \"_id\": \"5b1637d8ba590e015ee4f2dd\",\n                \"name\": \"유한수\",\n                \"mobile_number\": \"821064862610\"\n            }\n        ],\n        \"status\": \"use\",\n        \"content\": {\n            \"_id\": \"5b15135bba590e015ee4ee2a\",\n            \"name\": \"PRIVATE SUNDAY ONE DAY\",\n            \"short_id\": \"bm9KVG7\",\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"place\": \"GRAND INTERCONTINENTAL PARNAS\",\n            \"sms\": {\n                \"message\": \"http://i.tkit.me:80/l/bm9KVG7 기본티켓링크\"\n            },\n            \"admin_oid\": \"5a7d2caeba590e1155d8bd42\",\n            \"image\": {\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/og.m.png?versionId=.9et.9NFQURi_UY_A5nY8redHXfT3tlP\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/logo.m.png?versionId=6EIt0sdsMBG1mRsrMyvnf4DO84jw1l6r\"\n                },\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/poster.m.png?versionId=RCn_s0JdoPT2dOp0hAergIDIZW6R6sUt\"\n                }\n            },\n            \"when\": {\n                \"start\": 1528556400\n            },\n            \"enabled\": true,\n            \"created_at\": 1528075467,\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"공지사항입니다.\"\n            },\n            \"updated_at\": 1528077336,\n            \"commission\": 0.07,\n            \"desc\": \"GA\"\n        },\n        \"updated_at\": 1528600495,\n        \"type\": \"network\",\n        \"enabled\": true,\n        \"ticket_type\": {\n            \"day\": 1,\n            \"_id\": \"5b161e90ba590e015ee4ee3c\",\n            \"name\": \"GA SUNDAY\",\n            \"desc\": {\n                \"value\": \"General Admission.\",\n                \"enabled\": true\n            },\n            \"type\": \"network\",\n            \"updated_at\": 1528143872,\n            \"price\": 0,\n            \"content_oid\": \"5b15135bba590e015ee4ee2a\",\n            \"enabled\": true,\n            \"admin_oid\": \"58634f596a9fab09b441a74a\",\n            \"created_at\": 1528143872\n        }\n    }\n}"
+							"body": "{\n    \"data\": {\n        \"ticket_order\": {\n            \"admin_oid\": \"58634f596a9fab09b441a74a\",\n            \"receiver\": {\n                \"sms\": {\n                    \"count\": 1,\n                    \"sent_at\": 1528147039\n                },\n                \"name\": \"강준호\",\n                \"mobile_number\": \"821099734220\"\n            },\n            \"ticket_type_oid\": \"5b161e90ba590e015ee4ee3c\",\n            \"created_at\": 1528145764,\n            \"enabled\": true,\n            \"user_oid\": \"596f52d1ba590e0b720ab1fb\",\n            \"content_oid\": \"5b15135bba590e015ee4ee2a\",\n            \"updated_at\": 1528145764,\n            \"type\": \"network\",\n            \"expiry_date\": 1528599600,\n            \"_id\": \"5b1625f4ba590e015ee4f158\",\n            \"qty\": 300\n        },\n        \"ticket_type\": {\n            \"admin_oid\": \"58634f596a9fab09b441a74a\",\n            \"enabled\": true,\n            \"created_at\": 1528143872,\n            \"name\": \"GA SUNDAY\",\n            \"content_oid\": \"5b15135bba590e015ee4ee2a\",\n            \"desc\": {\n                \"enabled\": true,\n                \"value\": \"General Admission.\"\n            },\n            \"day\": 1,\n            \"type\": \"network\",\n            \"updated_at\": 1528143872,\n            \"price\": 0,\n            \"_id\": \"5b161e90ba590e015ee4ee3c\"\n        },\n        \"content\": {\n            \"admin_oid\": \"5a7d2caeba590e1155d8bd42\",\n            \"place\": \"GRAND INTERCONTINENTAL PARNAS\",\n            \"image\": {\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/og.m.png?versionId=.9et.9NFQURi_UY_A5nY8redHXfT3tlP\"\n                },\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/logo.m.png?versionId=6EIt0sdsMBG1mRsrMyvnf4DO84jw1l6r\"\n                },\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/res.tkit.me/content/5b15135bba590e015ee4ee2a/poster.m.png?versionId=RCn_s0JdoPT2dOp0hAergIDIZW6R6sUt\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ]\n            },\n            \"enabled\": true,\n            \"desc\": \"GA\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"공지사항입니다.\"\n            },\n            \"when\": {\n                \"start\": 1528556400\n            },\n            \"created_at\": 1528075467,\n            \"short_id\": \"bm9KVG7\",\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"commission\": 0.07,\n            \"name\": \"PRIVATE SUNDAY ONE DAY\",\n            \"updated_at\": 1528077336,\n            \"sms\": {\n                \"message\": \"http://i.tkit.me:80/l/bm9KVG7 기본티켓링크\"\n            },\n            \"_id\": \"5b15135bba590e015ee4ee2a\"\n        },\n        \"enabled\": true,\n        \"days\": [\n            {\n                \"day\": 1,\n                \"entered\": true,\n                \"entered_at\": 1528600495\n            }\n        ],\n        \"history_send_users\": [\n            {\n                \"_id\": \"596f52d1ba590e0b720ab1fb\",\n                \"name\": \"강준호\",\n                \"mobile_number\": \"821099734220\"\n            },\n            {\n                \"_id\": \"5964c21fba590e508162d48e\",\n                \"name\": \"유지현\",\n                \"mobile_number\": \"821041080731\"\n            },\n            {\n                \"_id\": \"5b1637d8ba590e015ee4f2dd\",\n                \"name\": \"유한수\",\n                \"mobile_number\": \"821064862610\"\n            }\n        ],\n        \"receive_user\": {\n            \"created_at\": 1528600424,\n            \"enabled\": true,\n            \"password\": \"$p5k2$$6VuJGe0ZaVm7LodEkze2Op2oM6ODggpj$RlYfF5KwTu/nU0eyKV3LW51HqszYfW52\",\n            \"birthday\": \"19840828\",\n            \"name\": \"또안\",\n            \"mobile_number\": \"82918885443\",\n            \"terms\": {\n                \"privacy\": true,\n                \"policy\": true\n            },\n            \"updated_at\": 1528600424,\n            \"gender\": \"male\",\n            \"_id\": \"5b1d15f8ba590e0315c13793\",\n            \"email\": \"zilong222@naver.com\"\n        },\n        \"created_at\": 1528145764,\n        \"send_user\": {\n            \"created_at\": 1528150344,\n            \"enabled\": true,\n            \"password\": \"$p5k2$$aEA2W1cx7tIwagov2i.C.PLcm/6zNVVI$9PpxGd612S7lCb7V/5FLYUt5trNkJFFJ\",\n            \"birthday\": \"19890826\",\n            \"name\": \"유한수\",\n            \"updated_at\": 1528150344,\n            \"terms\": {\n                \"privacy\": true,\n                \"policy\": true\n            },\n            \"mobile_number\": \"821064862610\",\n            \"gender\": \"male\",\n            \"_id\": \"5b1637d8ba590e015ee4f2dd\",\n            \"email\": \"tjcoms.hans@gmail.com\"\n        },\n        \"updated_at\": 1528600495,\n        \"status\": \"use\",\n        \"type\": \"network\",\n        \"_id\": \"5b1625f4ba590e015ee4f174\"\n    }\n}"
 						}
 					]
 				},
@@ -9066,24 +9245,24 @@
 									"value": "TornadoServer/4.4.2"
 								},
 								{
-									"key": "Content-Length",
-									"value": "1369"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 16 Jan 2019 09:28:35 GMT"
+									"key": "Etag",
+									"value": "\"7623c432bb9f141664e4be2e3397823caceb0c39\""
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
 								{
-									"key": "Etag",
-									"value": "\"9bc3003bb5dfc0ccdc55ee80d2c8c9bb3d7f375e\""
+									"key": "Content-Length",
+									"value": "1561"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jan 2019 09:47:08 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": [\n        {\n            \"expiry_date\": 1551309088,\n            \"_id\": \"5c3825a05f547120f37bb857\",\n            \"content\": \"뇌섹남 페스티벌\",\n            \"desc\": {\n                \"value\": \"완전 허용\",\n                \"enabled\": true\n            },\n            \"name\": \"중복 등록 허용 티켓\",\n            \"ticket_count\": 10,\n            \"price\": 0\n        },\n        {\n            \"expiry_date\": 1548879319,\n            \"_id\": \"5c3826885f547120f37bb858\",\n            \"content\": \"뇌섹남 페스티벌\",\n            \"desc\": {\n                \"value\": \"등록을 완전 허용하지 않음\",\n                \"enabled\": false\n            },\n            \"name\": \"중복 등록 미허용\",\n            \"ticket_count\": 10,\n            \"price\": 0\n        },\n        {\n            \"expiry_date\": 1548861254,\n            \"_id\": \"5c3818835f547120f33adae3\",\n            \"content\": \"뇌섹남 페스티벌\",\n            \"desc\": {\n                \"value\": \"컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 \",\n                \"enabled\": true\n            },\n            \"name\": \"티켓 컬러\",\n            \"ticket_count\": 10,\n            \"price\": 10000\n        }\n    ],\n    \"count\": 3\n}"
+							"body": "{\n    \"data\": [\n        {\n            \"_id\": \"5c3825a05f547120f37bb857\",\n            \"name\": \"중복 등록 허용 티켓\",\n            \"expiry_date\": 1551309088,\n            \"ticket_count\": 10,\n            \"desc\": {\n                \"value\": \"완전 허용\",\n                \"enabled\": true\n            },\n            \"content\": {\n                \"name\": \"뇌섹남 페스티벌\"\n            },\n            \"color\": {\n                \"value\": \"#8f6dab\",\n                \"name\": \"ultra-bora\"\n            },\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5c3826885f547120f37bb858\",\n            \"name\": \"중복 등록 미허용\",\n            \"expiry_date\": 1548879319,\n            \"ticket_count\": 10,\n            \"desc\": {\n                \"value\": \"등록을 완전 허용하지 않음\",\n                \"enabled\": false\n            },\n            \"content\": {\n                \"name\": \"뇌섹남 페스티벌\"\n            },\n            \"color\": {\n                \"value\": \"#62aab8\",\n                \"name\": \"tkit-mint\"\n            },\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5c3818835f547120f33adae3\",\n            \"name\": \"티켓 컬러\",\n            \"expiry_date\": 1548861254,\n            \"ticket_count\": 10,\n            \"desc\": {\n                \"value\": \"컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 \",\n                \"enabled\": true\n            },\n            \"content\": {\n                \"name\": \"뇌섹남 페스티벌\"\n            },\n            \"color\": {\n                \"value\": \"#f6d87f\",\n                \"name\": \"mustard-norang\"\n            },\n            \"price\": 10000\n        }\n    ],\n    \"count\": 3\n}"
 						}
 					]
 				},
@@ -9662,183 +9841,6 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "v2",
-			"item": [
-				{
-					"name": "/v2/auth/login",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"password\": \"2053\"\n}\n"
-						},
-						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/login",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{hostname}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"v2",
-								"auth",
-								"login"
-							]
-						},
-						"description": "login"
-					},
-					"response": []
-				},
-				{
-					"name": "/v2/user/me",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA2NzI4MzYsImlhdCI6MTUyMDU4NjQzNiwidXNlcl9vaWQiOiI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifQ.Ivnp2woPFWDsKXblFRhNu-5HLWewCpTVQCd6JROt12U",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{hostname}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"v2",
-								"user",
-								"me"
-							]
-						},
-						"description": "get me info"
-					},
-					"response": [
-						{
-							"name": "access token expired",
-							"originalRequest": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA2NzI4MzYsImlhdCI6MTUyMDU4NjQzNiwidXNlcl9vaWQiOiI1OTMxYTNlYWJjMmM0NDE0MGUwZGVhOTEifQ.Ivnp2woPFWDsKXblFRhNu-5HLWewCpTVQCd6JROt12U",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"v2",
-										"user",
-										"me"
-									]
-								},
-								"description": "get me info"
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "40",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 09 Mar 2018 09:06:11 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"message\": \"401: access token expired\"}"
-						}
-					]
-				}
-			],
-			"description": "TKIT 0.6",
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{access_token}}",
-						"type": "string"
-					}
-				]
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "58983d4c-373d-45aa-918b-e9d383cf2ea5",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "3448f70b-1354-4316-9552-adab5bf98e24",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"response is ok\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"pm.test(\"Response time is less than 200ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);",
-							"});"
-						]
-					}
 				}
 			]
 		},
