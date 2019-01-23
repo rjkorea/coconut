@@ -12162,6 +12162,384 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "admin v2(a/v2)",
+			"item": [
+				{
+					"name": "/a/v2/content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "is_private",
+									"value": "false",
+									"description": "비공개",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ultra Music Festival KOREA 2019",
+									"type": "text"
+								},
+								{
+									"key": "tags",
+									"value": "공연,페스티벌",
+									"description": "카테고리",
+									"type": "text"
+								},
+								{
+									"key": "images_0",
+									"description": "대표 이미지",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "images_1",
+									"description": "추가 이미지 1",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "images_2",
+									"description": "추가 이미지 2",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "images_3",
+									"description": "추가 이미지 3",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "images_4",
+									"description": "추가 이미지 4",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "images_5",
+									"description": "추가 이미지 5",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "images_6",
+									"description": "추가 이미지 6",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "place_name",
+									"value": "잠실종합운동장",
+									"description": "장소 이",
+									"type": "text"
+								},
+								{
+									"key": "place_url",
+									"value": "http://place.map.daum.net/8530688",
+									"description": "지도 서비스 해당 좌표 URL",
+									"type": "text"
+								},
+								{
+									"key": "place_x",
+									"value": "127.07302567658165",
+									"description": "경도 (longitude)",
+									"type": "text"
+								},
+								{
+									"key": "place_y",
+									"value": "37.51458927326663",
+									"description": "위도 (latitude)",
+									"type": "text"
+								},
+								{
+									"key": "when_start",
+									"value": "2019-06-05T03:00:00",
+									"description": "행사 시작 일시 (%Y-%m-%dT%H:%M:%S)",
+									"type": "text"
+								},
+								{
+									"key": "when_end",
+									"value": "2019-06-06T14:00:00",
+									"description": "행사 종료 일 (%Y-%m-%dT%H:%M:%S)",
+									"type": "text"
+								},
+								{
+									"key": "host_name",
+									"value": "RJ KOREA Entertainment",
+									"type": "text"
+								},
+								{
+									"key": "host_email",
+									"value": "tkitzoa@rjkorea.com",
+									"type": "text"
+								},
+								{
+									"key": "host_tel",
+									"value": "028282889888",
+									"type": "text"
+								},
+								{
+									"key": "site_url",
+									"value": "https://tkit.me",
+									"description": "행사 홈페이지",
+									"type": "text"
+								},
+								{
+									"key": "video_url",
+									"value": "https://www.youtube.com/watch?v=ckPaFQUkpKg",
+									"type": "text"
+								},
+								{
+									"key": "notice",
+									"value": "행사 시작 일시는 2019.06.22 11:00 부터 입장합니다. 미리 등록하고 ...",
+									"type": "text"
+								},
+								{
+									"key": "desc",
+									"value": "2019년 국내 최대 페스티벌이 잠실에 찾아옵니다.....",
+									"type": "text"
+								},
+								{
+									"key": "comments_type",
+									"value": "guestbook",
+									"type": "text"
+								},
+								{
+									"key": "comments_private",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "is_private",
+											"value": "false",
+											"description": "비공개",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Ultra Music Festival KOREA 2019",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "공연,페스티벌",
+											"description": "카테고리",
+											"type": "text"
+										},
+										{
+											"key": "images_0",
+											"description": "대표 이미지",
+											"type": "file"
+										},
+										{
+											"key": "images_1",
+											"description": "추가 이미지 1",
+											"type": "file"
+										},
+										{
+											"key": "images_2",
+											"description": "추가 이미지 2",
+											"type": "file"
+										},
+										{
+											"key": "images_3",
+											"description": "추가 이미지 3",
+											"type": "file"
+										},
+										{
+											"key": "images_4",
+											"description": "추가 이미지 4",
+											"type": "file"
+										},
+										{
+											"key": "images_5",
+											"description": "추가 이미지 5",
+											"type": "file"
+										},
+										{
+											"key": "images_6",
+											"description": "추가 이미지 6",
+											"type": "file"
+										},
+										{
+											"key": "place_name",
+											"value": "잠실종합운동장",
+											"description": "장소 이",
+											"type": "text"
+										},
+										{
+											"key": "place_url",
+											"value": "http://place.map.daum.net/8530688",
+											"description": "지도 서비스 해당 좌표 URL",
+											"type": "text"
+										},
+										{
+											"key": "place_x",
+											"value": "127.07302567658165",
+											"description": "경도 (longitude)",
+											"type": "text"
+										},
+										{
+											"key": "place_y",
+											"value": "37.51458927326663",
+											"description": "위도 (latitude)",
+											"type": "text"
+										},
+										{
+											"key": "when_start",
+											"value": "2019-06-05T03:00:00",
+											"description": "행사 시작 일시 (%Y-%m-%dT%H:%M:%S)",
+											"type": "text"
+										},
+										{
+											"key": "when_end",
+											"value": "2019-06-06T14:00:00",
+											"description": "행사 종료 일 (%Y-%m-%dT%H:%M:%S)",
+											"type": "text"
+										},
+										{
+											"key": "host_name",
+											"value": "RJ KOREA Entertainment",
+											"type": "text"
+										},
+										{
+											"key": "host_email",
+											"value": "tkitzoa@rjkorea.com",
+											"type": "text"
+										},
+										{
+											"key": "host_tel",
+											"value": "028282889888",
+											"type": "text"
+										},
+										{
+											"key": "site_url",
+											"value": "https://tkit.me",
+											"description": "행사 홈페이지",
+											"type": "text"
+										},
+										{
+											"key": "video_url",
+											"value": "https://www.youtube.com/watch?v=ckPaFQUkpKg",
+											"type": "text"
+										},
+										{
+											"key": "notice",
+											"value": "행사 시작 일시는 2019.06.22 11:00 부터 입장합니다. 미리 등록하고 ...",
+											"type": "text"
+										},
+										{
+											"key": "desc",
+											"value": "2019년 국내 최대 페스티벌이 잠실에 찾아옵니다.....",
+											"type": "text"
+										},
+										{
+											"key": "comments_type",
+											"value": "guestbook",
+											"type": "text"
+										},
+										{
+											"key": "comments_private",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 23 Jan 2019 10:25:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"content_oid\": \"5c48412d5f54716889406d38\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "api version 2 for host user"
 		}
 	]
 }
