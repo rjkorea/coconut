@@ -76,6 +76,7 @@ url_patterns = [
 
     # admin v2
     (r'/a/v2/content/?', av2.content.ContentPostHandler),
+    (r'/a/v2/contents/?', av2.content.ContentListHandler),
 
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),

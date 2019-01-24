@@ -9,9 +9,6 @@ from common.decorators import admin_auth_async, parse_argument
 
 from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.content import ContentModel
-from models.admin import AdminModel
-from models.company import CompanyModel
-from models.ticket import TicketModel
 
 from services.s3 import S3Service
 
@@ -200,6 +197,36 @@ class ContentPostHandler(MultipartFormdataHandler):
             )
             doc['images.%s.m'%k[-1]] = 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
         return doc
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('status', str, None), ('start', int, 0), ('size', int, 10)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        now = datetime.utcnow()
+        q = dict(
+            admin_oid=self.current_user['_id'],
+            enabled=True
+        )
+        if parsed_args['status']:
+            if parsed_args['status'] == 'open':
+                q['when.end'] = {
+                    '$gte': now
+                }
+            elif parsed_args['status'] == 'closed':
+                q['when.end'] = {
+                    '$lt': now
+                }
+        count = await ContentModel.count(query=q)
+        result = await ContentModel.find(query=q, sort=[('when.start', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
