@@ -55,15 +55,6 @@ class ContentPostHandler(MultipartFormdataHandler):
             when_end = datetime.strptime(when_end, '%Y-%m-%dT%H:%M:%S')
         except ValueError:
             raise HTTPError(400, 'invalid date format(YYYY-mm-ddTHH:MM:SS)')
-        host_name = self.json_decoded_body.get('host_name', None)
-        if not host_name or len(host_name) == 0:
-            raise HTTPError(400, 'invalid host_name')
-        host_email = self.json_decoded_body.get('host_email', None)
-        if not host_email or len(host_email) == 0:
-            raise HTTPError(400, 'invalid host_email')
-        host_tel = self.json_decoded_body.get('host_tel', None)
-        if not host_tel or len(host_tel) == 0:
-            raise HTTPError(400, 'invalid host_tel')
         comments_type = self.json_decoded_body.get('comments_type', 'preview')
         if comments_type not in ('preview', 'guestbook'):
             raise HTTPError(400, 'invalid comments_type (preview, guestbook)')
@@ -72,6 +63,18 @@ class ContentPostHandler(MultipartFormdataHandler):
             duplicated_content = await ContentModel.find({'short_id': short_id})
             if not duplicated_content:
                 break
+        if 'type' in self.current_user and self.current_user['type'] == 'business':
+            default_host = dict(
+                name=self.current_user['name'],
+                email=self.current_user['email'],
+                tel=self.current_user['tel']
+            )
+        else:
+            default_host = dict(
+                name=self.current_user['name'],
+                email=self.current_user['email'],
+                tel=self.current_user['mobile_number']
+            )
         config = settings.settings()
         doc = dict(
             short_id=short_id,
@@ -88,11 +91,7 @@ class ContentPostHandler(MultipartFormdataHandler):
                 start=when_start,
                 end=when_end
             ),
-            host=dict(
-                name=host_name,
-                email=host_email,
-                tel=host_tel
-            ),
+            host=default_host,
             notice=dict(
                 enabled=False,
                 message=''
@@ -145,6 +144,12 @@ class ContentPostHandler(MultipartFormdataHandler):
             doc['comments']['type'] = comments_type
         if self.json_decoded_body.get('comments_private', False):
             doc['comments']['is_private'] = self.json_decoded_body.get('comments_private')
+        if self.json_decoded_body.get('host_name', None):
+            doc['host']['name'] = self.json_decoded_body.get('host_name')
+        if self.json_decoded_body.get('host_email', None):
+            doc['host']['email'] = self.json_decoded_body.get('host_email')
+        if self.json_decoded_body.get('host_tel', None):
+            doc['host']['tel'] = self.json_decoded_body.get('host_tel', None)
         content = ContentModel(raw_data=doc)
         content_oid = await content.insert()
 
