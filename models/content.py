@@ -45,11 +45,6 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'image',
-                'type': dict,
-                'default': None
-            },
-            {
                 'key': 'images',
                 'type': list,
                 'default': None
@@ -61,16 +56,6 @@ class ContentModel(BaseModel):
             },
             {
                 'key': 'tags',
-                'type': list,
-                'default': None
-            },
-            {
-                'key': 'genre',
-                'type': list,
-                'default': None
-            },
-            {
-                'key': 'lineup',
                 'type': list,
                 'default': None
             },
