@@ -15,6 +15,8 @@ ALLOWD_USER_PASSWORD_PATTERN_V2 = r'[A-Za-z0-9!@#$%^&+=]{8,}'
 def generate_random_string(len=12, allowed_chars=string.ascii_letters+string.digits):
     return ''.join(random.choice(allowed_chars) for i in range(len))
 
+def generate_random_number(len=6, allowed_chars=string.digits):
+    return ''.join(random.choice(allowed_chars) for i in range(len))
 
 def make_password(password=None):
     if password is None:
