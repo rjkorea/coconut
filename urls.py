@@ -75,9 +75,11 @@ url_patterns = [
     (r'/a/countries/?', a.util.CountryListHandler),
 
     # admin v2
+    (r'/a/v2/auth/email/find/verification/?', av2.auth.EmailFindVerification),
+    (r'/a/v2/auth/email/find/verification/(?P<code>[^\/]+)?', av2.auth.EmailFindVerification),
     (r'/a/v2/content/?', av2.content.ContentPostHandler),
     (r'/a/v2/contents/?', av2.content.ContentListHandler),
-
+    
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),

@@ -6,15 +6,15 @@ from datetime import datetime
 from models.base import BaseModel
 
 
-class SmsVerificationModel(BaseModel):
-    MONGO_COLLECTION = 'sms_verification'
+class VerificationModel(BaseModel):
+    MONGO_COLLECTION = 'verification'
 
     def __init__(self, *args, **kwargs):
-        super(SmsVerificationModel, self).__init__(*args, **kwargs)
+        super(VerificationModel, self).__init__(*args, **kwargs)
 
     @property
     def specification(self):
-        specification = super(SmsVerificationModel, self).specification
+        specification = super(VerificationModel, self).specification
         specification.extend([
             {
                 'key': 'code',
