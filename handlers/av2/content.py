@@ -20,6 +20,10 @@ class ContentPostHandler(MultipartFormdataHandler):
     @admin_auth_async
     async def post(self, *args, **kwargs):
         is_private = self.json_decoded_body.get('is_private', False)
+        if is_private == 'true':
+            is_private = True
+        elif is_private == 'false':
+            is_private = False
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, self.set_error(1, 'invalid name'))
@@ -77,7 +81,7 @@ class ContentPostHandler(MultipartFormdataHandler):
             short_id=short_id,
             is_private=is_private,
             name=name,
-            tags=[t.strip() for t in tags.split(',')],
+            tags=eval(tags),
             place=dict(
                 name=place_name,
                 url=place_url,
@@ -140,7 +144,10 @@ class ContentPostHandler(MultipartFormdataHandler):
         if comments_type:
             doc['comments']['type'] = comments_type
         if self.json_decoded_body.get('comments_private', False):
-            doc['comments']['is_private'] = self.json_decoded_body.get('comments_private')
+            if self.json_decoded_body.get('comments_private') == 'true':
+                doc['comments']['is_private'] = True
+            elif self.json_decoded_body.get('comments_private') == 'false':
+                doc['comments']['is_private'] = False
         if self.json_decoded_body.get('host_name', None):
             doc['host']['name'] = self.json_decoded_body.get('host_name')
         if self.json_decoded_body.get('host_email', None):
