@@ -208,6 +208,8 @@ class ContentListHandler(JsonHandler):
     @parse_argument([('status', str, None), ('start', int, 0), ('size', int, 10)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
+        if 'status' in parsed_args and parsed_args['status'] not in ('open', 'closed'):
+            raise HTTPError(400, self.set_error(1, 'invalid status (open, closed)'))
         now = datetime.utcnow()
         q = dict(
             admin_oid=self.current_user['_id'],
