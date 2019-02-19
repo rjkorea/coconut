@@ -131,14 +131,20 @@ class SignupBusinessHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
+        mobile_number = self.json_decoded_body.get('mobile_number', None)
+        if not mobile_number or len(mobile_number) == 0:
+            raise HTTPError(400, 'invalid mobile_number')
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_password(password):
             raise HTTPError(400, 'invalid password')
         business_license = self.json_decoded_body.get('business_license', None)
         if not business_license or len(business_license) == 0:
             raise HTTPError(400, 'invalid business_license')
+        manager = self.json_decoded_body.get('manager', None)
+        if not manager or not isinstance(manager, dict):
+            raise HTTPError(400, 'invalid manager')
         president = self.json_decoded_body.get('president', None)
-        if not president or len(president) == 0:
+        if not president or not isinstance(president, dict):
             raise HTTPError(400, 'invalid president')
         bank = self.json_decoded_body.get('bank', None)
         if not bank or len(bank) == 0:
@@ -153,7 +159,7 @@ class SignupBusinessHandler(JsonHandler):
             name=name,
             contact=dict(
                 name=name,
-                mobile_number=tel,
+                mobile_number=mobile_number,
                 email=email
             ),
             enabled=True
@@ -164,8 +170,10 @@ class SignupBusinessHandler(JsonHandler):
             type='business',
             email=email,
             name=name,
+            mobile_number=mobile_number,
             business_license=business_license,
             president=president,
+            manager=manager,
             bank=bank,
             fax=fax,
             tel=tel,

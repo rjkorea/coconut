@@ -3,6 +3,7 @@
 
 import json
 from bson import ObjectId
+from ast import literal_eval
 import jwt
 
 from tornado.web import RequestHandler, HTTPError
@@ -37,13 +38,20 @@ class BaseHandler(RequestHandler):
             self.set_header('Access-Control-Allow-Credentials', 'true')
             self.set_header('Access-Control-Max-Age', 1800)
 
+    def set_error(self, code, message):
+        return repr(dict(code=code, message=message))
+
     def write_json(self):
         output = json.dumps(self.response, cls=ApiJSONEncoder)
         self.write(output)
 
     def write_error(self, status_code, **kwargs):
         self.set_status(status_code)
-        self.response['message'] = '%d: %s' % (status_code, getattr(kwargs['exc_info'][1], 'log_message'))
+        error = getattr(kwargs['exc_info'][1], 'log_message')
+        if error.startswith('{'):
+            self.response['error'] = literal_eval(getattr(kwargs['exc_info'][1], 'log_message'))
+        else:
+            self.response['message'] = '%d: %s' % (status_code, getattr(kwargs['exc_info'][1], 'log_message'))
         self.write_json()
 
     def get_authorization(self):

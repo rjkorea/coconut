@@ -45,27 +45,17 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'image',
-                'type': dict,
+                'key': 'images',
+                'type': list,
                 'default': None
             },
             {
                 'key': 'place',
-                'type': str,
+                'type': dict,
                 'default': None
             },
             {
                 'key': 'tags',
-                'type': list,
-                'default': None
-            },
-            {
-                'key': 'genre',
-                'type': list,
-                'default': None
-            },
-            {
-                'key': 'lineup',
                 'type': list,
                 'default': None
             },
@@ -81,6 +71,31 @@ class ContentModel(BaseModel):
             },
             {
                 'key': 'notice',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'host',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'site_url',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'video_url',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'is_private',
+                'type': bool,
+                'default': (lambda: False)
+            },
+            {
+                'key': 'comments',
                 'type': dict,
                 'default': None
             },
