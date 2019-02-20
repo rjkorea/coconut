@@ -76,12 +76,13 @@ url_patterns = [
 
     # admin v2
     (r'/a/v2/auth/email/find/verification/?', av2.auth.EmailFindVerificationHandler),
-    (r'/a/v2/auth/email/find/verification/(?P<code>[^\/]+)?', av2.auth.EmailFindVerificationHandler),
+    (r'/a/v2/auth/email/find/verification/(?P<code>[^\/]+)/?', av2.auth.EmailFindVerificationHandler),
     (r'/a/v2/auth/password/reset/verification/?', av2.auth.PasswordResetVerificationHandler),
-    (r'/a/v2/auth/password/reset/verification/(?P<code>[^\/]+)?', av2.auth.PasswordResetVerificationHandler),
+    (r'/a/v2/auth/password/reset/verification/(?P<code>[^\/]+)/?', av2.auth.PasswordResetVerificationHandler),
     (r'/a/v2/auth/password/reset/?', av2.auth.PasswordResetHandler),
     (r'/a/v2/content/?', av2.content.ContentPostHandler),
     (r'/a/v2/contents/?', av2.content.ContentListHandler),
+    (r'/a/v2/content/(?P<_id>[^\/]+)/?', av2.content.ContentHandler),
     
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
