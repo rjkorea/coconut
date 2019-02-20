@@ -210,6 +210,23 @@ class ContentPostHandler(MultipartFormdataHandler):
         self.write_json()
 
 
+class ContentUpdateHandler(MultipartFormdataHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        self.response['data'] = content
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class ContentListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('status', str, None), ('start', int, 0), ('size', int, 10)])
