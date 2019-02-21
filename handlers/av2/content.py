@@ -210,23 +210,6 @@ class ContentPostHandler(MultipartFormdataHandler):
         self.write_json()
 
 
-class ContentUpdateHandler(MultipartFormdataHandler):
-    @admin_auth_async
-    async def post(self, *args, **kwargs):
-        _id = kwargs.get('_id', None)
-        if not _id or len(_id) != 24:
-            raise HTTPError(400, self.set_error(1, 'invalid id'))
-        content = await ContentModel.find_one({'_id': ObjectId(_id)})
-        if not content:
-            raise HTTPError(400, self.set_error(1, 'not exist content'))
-        self.response['data'] = content
-        self.write_json()
-
-    async def options(self, *args, **kwargs):
-        self.response['message'] = 'OK'
-        self.write_json()
-
-
 class ContentListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('status', str, None), ('start', int, 0), ('size', int, 10)])
@@ -274,6 +257,87 @@ class ContentHandler(JsonHandler):
         if not content:
             raise HTTPError(400, self.set_error(1, 'not exist content'))
         self.response['data'] = content
+        self.write_json()
+
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        is_private = self.json_decoded_body.get('is_private', False)
+        if is_private == 'true':
+            is_private = True
+        elif is_private == 'false':
+            is_private = False
+        name = self.json_decoded_body.get('name', None)
+        tags = self.json_decoded_body.get('tags', None)
+        if tags:
+            tags=eval(tags)
+        else:
+            tags=None
+        place_name = self.json_decoded_body.get('place_name', None)
+        place_url = self.json_decoded_body.get('place_url', None)
+        place_x = self.json_decoded_body.get('place_x', None)
+        place_y = self.json_decoded_body.get('place_y', None)
+        when_start = self.json_decoded_body.get('when_start', None)
+        when_end = self.json_decoded_body.get('when_end', None)
+        try:
+            when_start = datetime.strptime(when_start, '%Y-%m-%dT%H:%M:%S')
+            when_end = datetime.strptime(when_end, '%Y-%m-%dT%H:%M:%S')
+        except ValueError:
+            raise HTTPError(400, self.set_error(1, 'invalid date(when_start/when_end) format(YYYY-mm-ddTHH:MM:SS)'))
+        comments_type = self.json_decoded_body.get('comments_type', 'preview')
+        if comments_type not in ('preview', 'guestbook'):
+            raise HTTPError(400, self.set_error(1, 'invalid comments_type (preview, guestbook)'))
+        site_url = self.json_decoded_body.get('site_url', None)
+        video_url = self.json_decoded_body.get('video_url', None)
+        notice_message = self.json_decoded_body.get('notice', None)
+        desc = self.json_decoded_body.get('desc', None)
+        if self.json_decoded_body.get('comments_private', False):
+            if self.json_decoded_body.get('comments_private') == 'true':
+                comments_private = True
+            elif self.json_decoded_body.get('comments_private') == 'false':
+                comments_private = False
+        host_name = self.json_decoded_body.get('host_name', None)
+        host_email = self.json_decoded_body.get('host_email', None)
+        host_tel = self.json_decoded_body.get('host_tel', None)
+        set_doc = dict(
+            is_private=is_private,
+            name=name,
+            tags=tags,
+            place=dict(
+                name=place_name,
+                url=place_url,
+                x=place_x,
+                y=place_y
+            ),
+            when=dict(
+                start=when_start,
+                end=when_end
+            ),
+            host=dict(
+                host_name=host_name,
+                host_email=host_email,
+                host_tel=host_tel
+            ),
+            site_url=site_url,
+            video_url=video_url,
+            notice=dict(
+                enabled=True,
+                message=notice_message
+            ),
+            comments=dict(
+                type=comments_type,
+                is_private=comments_private
+            ),
+            desc=desc,
+            updated_at=datetime.utcnow()
+        )
+        updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = updated
         self.write_json()
 
     async def options(self, *args, **kwargs):
