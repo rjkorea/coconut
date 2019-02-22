@@ -22,7 +22,9 @@ class StatsContentHandler(JsonHandler):
         content_oid = kwargs.get('_id', None)
         if not content_oid or len(content_oid) != 24:
             raise HTTPError(400, 'invalid content_oid')
+        content = await ContentModel.get_id(ObjectId(content_oid), fields=[('name')])
         self.response['data'] = {
+            'content': content['name'],
             'total_viral': 0,
             'revenue': {
                 'amount': 0,
