@@ -223,7 +223,7 @@ class ContentListHandler(JsonHandler):
             )
         else:
             q = dict(
-                admin_oid=self.current_user['_id'],
+                company_oid=self.current_user['company_oid'],
                 enabled=True
             )
         now = datetime.utcnow()
