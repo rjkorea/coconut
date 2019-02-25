@@ -218,14 +218,9 @@ class ContentListHandler(JsonHandler):
         if 'status' in parsed_args and parsed_args['status'] not in ('open', 'closed'):
             raise HTTPError(400, self.set_error(1, 'invalid status (open, closed)'))
         if self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
-            q = dict(
-                enabled=True
-            )
+            q = dict()
         else:
-            q = dict(
-                company_oid=self.current_user['company_oid'],
-                enabled=True
-            )
+            q = dict(company_oid=self.current_user['company_oid'])
         now = datetime.utcnow()
         if parsed_args['status']:
             if parsed_args['status'] == 'open':
