@@ -13870,6 +13870,118 @@
 					]
 				},
 				{
+					"name": "/a/v2/content/(oid)/image/main",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/main",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content",
+								"5c6a63155f5471084f696eb4",
+								"image",
+								"main"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/main",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"main"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 07:41:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c6a63155f5471084f696eb4/images_0.m.jpeg?versionId=G1IMhtIYeEsjLryqg1qCmnxdeY0D7ji1\"\n}"
+						}
+					]
+				},
+				{
 					"name": "/a/v2/content/(oid)",
 					"request": {
 						"method": "GET",
