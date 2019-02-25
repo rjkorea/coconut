@@ -13982,6 +13982,322 @@
 					]
 				},
 				{
+					"name": "/a/v2/content/(oid)/image/extra",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content",
+								"5c6a63155f5471084f696eb4",
+								"image",
+								"extra"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 08:33:05 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c6a63155f5471084f696eb4/images_1.m.png?versionId=0TIdwFhqZCea7J0JH_qXh9ybE2CrqUFe\"\n}"
+						},
+						{
+							"name": "400 exceed max image",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 09:02:00 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"exceed max image\",\n        \"code\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/content/(oid)/image/extra/(number)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content",
+								"5c6a63155f5471084f696eb4",
+								"image",
+								"extra",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 09:18:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c6a63155f5471084f696eb4/images_1.m.png?versionId=0TIdwFhqZCea7J0JH_qXh9ybE2CrqUFe\"\n}"
+						},
+						{
+							"name": "400 invalid number",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 09:16:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"invalid number\"\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "/a/v2/content/(oid)",
 					"request": {
 						"method": "GET",

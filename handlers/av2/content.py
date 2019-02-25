@@ -395,3 +395,84 @@ class ContentImageMainHandler(MultipartFormdataHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class ContentImageExtraHandler(MultipartFormdataHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        images_count = len(content['images'])
+        if images_count >= 7:
+            raise HTTPError(400, self.set_error(1, 'exceed max image'))
+        image = self.request.files.get('image', None)
+        if not image:
+            raise HTTPError(400, self.set_error(1, 'invalid image'))
+        image_url = self.upload_s3(str(content['_id']), images_count ,self.request.files['image'], settings.settings())
+        set_doc = {
+            'images.%s.m' % images_count: image_url,
+            'updated_at': datetime.utcnow()
+        }
+        updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = image_url
+        self.write_json()
+
+    def upload_s3(self, content_oid, index, file, config):
+        img_extension = file[0]['filename'].split('.')[-1]
+        key = 'content/%s/images_%s.m.%s' % (content_oid, index, img_extension)
+        cres = S3Service().client.create_multipart_upload(
+            ACL='public-read',
+            ContentType='image/%s' % img_extension,
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        upres = S3Service().client.upload_part(
+            UploadId=cres['UploadId'],
+            PartNumber=1,
+            Body=file[0]['body'],
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        response = S3Service().client.complete_multipart_upload(
+            Bucket=config['aws']['res_bucket'],
+            Key=key,
+            UploadId=cres['UploadId'],
+            MultipartUpload={
+                'Parts': [
+                    {
+                        'ETag': upres['ETag'],
+                        'PartNumber': 1
+                    }
+                ]
+            }
+        )
+        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+
+    async def delete(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        number = kwargs.get('number', None)
+        if not number or int(number) not in (1, 2, 3, 4, 5, 6):
+            raise HTTPError(400, self.set_error(1, 'invalid number'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        deleted_image = content['images'].pop(int(number))
+        set_doc = {
+            'images': content['images'],
+            'updated_at': datetime.utcnow()
+        }
+        updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = deleted_image['m']
+        self.write_json()
+
+
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
