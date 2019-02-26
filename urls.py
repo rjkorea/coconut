@@ -86,7 +86,8 @@ url_patterns = [
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/main/?', av2.content.ContentImageMainHandler),
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/extra/?', av2.content.ContentImageExtraHandler),
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/extra/(?P<number>[^\/]+)/?', av2.content.ContentImageExtraHandler),
-    
+    (r'/a/v2/ticket/type/?', av2.ticket.TicketTypeHandler),
+
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
