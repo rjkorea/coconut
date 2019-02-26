@@ -48,16 +48,6 @@ class TicketTypeModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'day',
-                'type': int,
-                'default': (lambda: 1)
-            },
-            {
-                'key': 'expiry_date',
-                'type': datetime,
-                'default': None
-            },
-            {
                 'key': 'sales_date',
                 'type': dict,
                 'default': None
