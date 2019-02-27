@@ -106,7 +106,7 @@ class ContentPostHandler(MultipartFormdataHandler):
             sms=dict(
                 message='http://%s:%d/in/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             ),
-            images=[{'m': None} for i in range(len(self.request.files))]
+            images=[{'m': None, 'size': 0} for i in range(len(self.request.files))]
         )
         if self.json_decoded_body.get('site_url', None):
             doc['site_url'] = self.json_decoded_body.get('site_url')
@@ -181,6 +181,7 @@ class ContentPostHandler(MultipartFormdataHandler):
                 }
             )
             doc['images.%s.m'%k[-1]] = 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+            doc['images.%s.size'%k[-1]] = len(v[0]['body'])
         return doc
 
     async def options(self, *args, **kwargs):
