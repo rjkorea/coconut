@@ -106,29 +106,7 @@ class ContentPostHandler(MultipartFormdataHandler):
             sms=dict(
                 message='http://%s:%d/in/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             ),
-            images=[
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                }
-            ]
+            images=[{'m': None} for i in range(len(self.request.files))]
         )
         if self.json_decoded_body.get('site_url', None):
             doc['site_url'] = self.json_decoded_body.get('site_url')
