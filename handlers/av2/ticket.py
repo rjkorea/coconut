@@ -8,7 +8,7 @@ from tornado.web import HTTPError
 from common.decorators import admin_auth_async, parse_argument
 
 from handlers.base import JsonHandler
-from models.ticket import TicketTypeModel
+from models.ticket import TicketTypeModel, TicketModel
 from models.content import ContentModel
 
 
@@ -75,6 +75,35 @@ class TicketTypeHandler(JsonHandler):
             if ticket_type['fpfg']['spread'] <= ticket_type['fpfg']['limit']:
                 raise HTTPError(400, self.set_error(1, 'invalid fpfg (spread more than limit)'))
         return ticket_type
+
+    @admin_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg')])
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        query = {
+            '$and': [
+                {'enabled': True},
+                {'ticket_type_oid': ticket_type['_id']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name}
+                    ]
+                }
+            ]
+        }
+        sales_count = await TicketModel.count(query)
+        ticket_type['sales'] = {
+            'count': sales_count,
+            'limit': ticket_type['fpfg']['limit']
+        }
+        self.response['data'] = ticket_type
+        self.write_json()
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
