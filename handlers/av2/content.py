@@ -248,10 +248,6 @@ class ContentHandler(JsonHandler):
             is_private = False
         name = self.json_decoded_body.get('name', None)
         tags = self.json_decoded_body.get('tags', None)
-        if tags:
-            tags=eval(tags)
-        else:
-            tags=None
         place_name = self.json_decoded_body.get('place_name', None)
         place_url = self.json_decoded_body.get('place_url', None)
         place_x = self.json_decoded_body.get('place_x', None)
