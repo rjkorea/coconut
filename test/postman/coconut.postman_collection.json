@@ -14946,6 +14946,126 @@
 							"body": "{\n    \"data\": {\n        \"sales_date\": {\n            \"start\": 1551496800,\n            \"end\": 1551532200\n        },\n        \"fpfg\": {\n            \"limit\": 1000,\n            \"spread\": null\n        },\n        \"sales\": {\n            \"limit\": 1000,\n            \"count\": 0\n        },\n        \"price\": 20000,\n        \"name\": \"SUNDAY PGA INVITATION\",\n        \"_id\": \"5c74fffa5f54710a7876cbf3\",\n        \"desc\": {\n            \"value\": \"레드불 스폰서 초대권 입니다\",\n            \"enabled\": true\n        }\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "/a/v2/ticket/types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/types?start=0&size=10&content_oid=5c6a63155f5471084f696eb4",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"types"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c6a63155f5471084f696eb4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/types?start=0&size=10&content_oid=5c6a63155f5471084f696eb4",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"types"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "content_oid",
+											"value": "5c6a63155f5471084f696eb4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 07:45:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1175"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"7753c82e8fa9b3830948970104f1eaa8b780dd02\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 3,\n    \"data\": [\n        {\n            \"color\": \"ultra-bora\",\n            \"sales_date\": {\n                \"start\": 1551496800,\n                \"end\": 1551532200\n            },\n            \"price\": 20000,\n            \"desc\": {\n                \"value\": \"레드불 스폰서 초대권 입니다\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 1000\n            },\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"_id\": \"5c74fffa5f54710a7876cbf3\"\n        },\n        {\n            \"color\": \"tkit-coral\",\n            \"sales_date\": {\n                \"start\": 1551496800,\n                \"end\": 1551532200\n            },\n            \"price\": 20000,\n            \"desc\": {\n                \"value\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 1000\n            },\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"_id\": \"5c74fffa5f54710a7876cbf2\"\n        },\n        {\n            \"color\": \"tkit-mint\",\n            \"sales_date\": {\n                \"start\": 1547496000,\n                \"end\": 1550102400\n            },\n            \"price\": 0,\n            \"desc\": {\n                \"value\": \"스폰서, 스텝, 아티스트 전용\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 100\n            },\n            \"name\": \"초대권 S\",\n            \"_id\": \"5c74fffa5f54710a7876cbf1\"\n        }\n    ]\n}"
+						}
+					]
 				}
 			],
 			"description": "api version 2 for host user"

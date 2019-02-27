@@ -81,7 +81,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid id'))
-        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg')])
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')])
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         query = {
@@ -103,6 +103,47 @@ class TicketTypeHandler(JsonHandler):
             'limit': ticket_type['fpfg']['limit']
         }
         self.response['data'] = ticket_type
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketTypeListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        content_oid = parsed_args['content_oid']
+        if not content_oid or len(content_oid) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid content_oid'))
+        query = {
+            'content_oid': ObjectId(content_oid)
+        }
+        count = await TicketTypeModel.count(query)
+        ticket_types = await TicketTypeModel.find(query, fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
+        for tt in ticket_types:
+            query = {
+                '$and': [
+                    {'enabled': True},
+                    {'ticket_type_oid': tt['_id']},
+                    {
+                        '$or': [
+                            {'status': TicketModel.Status.register.name},
+                            {'status': TicketModel.Status.pay.name},
+                            {'status': TicketModel.Status.use.name}
+                        ]
+                    }
+                ]
+            }
+            sales_count = await TicketModel.count(query)
+            tt['sales'] = {
+                'count': sales_count,
+                'limit': tt['fpfg']['limit']
+            }
+        self.response['data'] = ticket_types
+        self.response['count'] = count
         self.write_json()
 
     async def options(self, *args, **kwargs):
