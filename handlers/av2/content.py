@@ -327,9 +327,10 @@ class ContentImageMainHandler(MultipartFormdataHandler):
         image = self.request.files.get('image', None)
         if not image:
             raise HTTPError(400, self.set_error(1, 'invalid image'))
-        image_url = self.upload_s3(str(content['_id']), self.request.files['image'], settings.settings())
+        image_url, size = self.upload_s3(str(content['_id']), self.request.files['image'], settings.settings())
         set_doc = {
             'images.0.m': image_url,
+            'images.0.size': size,
             'updated_at': datetime.utcnow()
         }
         updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
@@ -365,7 +366,7 @@ class ContentImageMainHandler(MultipartFormdataHandler):
                 ]
             }
         )
-        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']), len(file[0]['body'])
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
@@ -387,9 +388,10 @@ class ContentImageExtraHandler(MultipartFormdataHandler):
         image = self.request.files.get('image', None)
         if not image:
             raise HTTPError(400, self.set_error(1, 'invalid image'))
-        image_url = self.upload_s3(str(content['_id']), images_count ,self.request.files['image'], settings.settings())
+        image_url, size = self.upload_s3(str(content['_id']), images_count ,self.request.files['image'], settings.settings())
         set_doc = {
             'images.%s.m' % images_count: image_url,
+            'images.%s.size' % images_count: size,
             'updated_at': datetime.utcnow()
         }
         updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
@@ -425,7 +427,7 @@ class ContentImageExtraHandler(MultipartFormdataHandler):
                 ]
             }
         )
-        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']), len(file[0]['body'])
 
     async def delete(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
