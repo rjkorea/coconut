@@ -266,7 +266,7 @@ class ContentHandler(JsonHandler):
         video_url = self.json_decoded_body.get('video_url', None)
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
-        comments_private = self.json_decoded_body.get('comments_private', False):
+        comments_private = self.json_decoded_body.get('comments_private', False)
         if comments_private == 'true':
             comments_private = True
         elif comments_private == 'false':
