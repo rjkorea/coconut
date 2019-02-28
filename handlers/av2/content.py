@@ -221,7 +221,7 @@ class ContentListHandler(JsonHandler):
                     '$lt': now
                 }
         count = await ContentModel.count(query=q)
-        result = await ContentModel.find(query=q, sort=[('when.start', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        result = await ContentModel.find(query=q, sort=[('created_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
