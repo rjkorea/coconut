@@ -13790,7 +13790,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"ねこまんま\",\n    \"is_private\": \"false\",\n    \"when_start\": \"2019-06-03T04:00:00\",\n    \"when_end\": \"2019-06-09T14:00:00\",\n    \"tags\": \"[\\\"공연\\\",\\\"페스티벌\\\", \\\"기타\\\"]\",\n    \"place_name\": \"잠실종합운동장\",\n    \"place_url\": \"http://place.map.daum.net/8530688\",\n    \"place_x\": \"127.07302567658165\",\n    \"place_y\": \"37.51458927326663\",\n    \"site_url\": \"https://tkit.me\",\n    \"video_url\": \"https://www.youtube.com/watch?v=ckPaFQUkpKg\",\n    \"notice\": \"행사 시작 일시는 2019.06.22 11:00 부터 입장합니다. 미리 등록하고 ...\",\n    \"desc\": \"매해 2만명의 관객을 동원하며 성공적인 여름 페스티벌로 자리매김한 워터 댄스 뮤직 페스티벌 ‘워터밤 2018(WATERBOMB 2018)’이 오는 7월 21일(토) 서울, 7월 28일(토) 부산 개최 일정을 발표했다. ‘워터밤’은 신개념 워터 버라이어티 뮤직 페스티벌로, 여름 시즌 공연 문화의 새로운 패러다임을 제시하면서 아티스트 공연 중심의 기존 뮤직 페스티벌과 달리 관객 참여가 가장 중시되는 새로운 컨텐츠를 제공하고 있다. 관객은 마음에 드는 팀을 선택하여 물총을 들고 직접 워터파이팅에 참여하고, 쏟아지는 물줄기와 에너지 넘치는 아티스트들의 공연이 함께 어우러져 그 어디에서도 볼 수 없는 특별한 무대 퍼포먼스가 펼쳐진다.\",\n    \"host_name\": \"티알\",\n    \"host_email\": \"t@t.com\",\n    \"host_tel\": \"0212345678\",\n    \"comments_private\": \"false\"\n}"
+							"raw": "{\n    \"name\": \"ねこまんま\",\n    \"is_private\": false,\n    \"when_start\": \"2019-06-03T04:00:00\",\n    \"when_end\": \"2019-06-09T14:00:00\",\n    \"tags\": [\n    \t\"공연\",\n    \t\"페스티벌\",\n    \t\"기타\"\n\t],\n    \"place_name\": \"잠실종합운동장\",\n    \"place_url\": \"http://place.map.daum.net/8530688\",\n    \"place_x\": \"127.07302567658165\",\n    \"place_y\": \"37.51458927326663\",\n    \"site_url\": \"https://tkit.me\",\n    \"video_url\": \"https://www.youtube.com/watch?v=ckPaFQUkpKg\",\n    \"notice\": \"행사 시작 일시는 2019.06.22 11:00 부터 입장합니다. 미리 등록하고 ...\",\n    \"desc\": \"매해 2만명의 관객을 동원하며 성공적인 여름 페스티벌로 자리매김한 워터 댄스 뮤직 페스티벌 ‘워터밤 2018(WATERBOMB 2018)’이 오는 7월 21일(토) 서울, 7월 28일(토) 부산 개최 일정을 발표했다. ‘워터밤’은 신개념 워터 버라이어티 뮤직 페스티벌로, 여름 시즌 공연 문화의 새로운 패러다임을 제시하면서 아티스트 공연 중심의 기존 뮤직 페스티벌과 달리 관객 참여가 가장 중시되는 새로운 컨텐츠를 제공하고 있다. 관객은 마음에 드는 팀을 선택하여 물총을 들고 직접 워터파이팅에 참여하고, 쏟아지는 물줄기와 에너지 넘치는 아티스트들의 공연이 함께 어우러져 그 어디에서도 볼 수 없는 특별한 무대 퍼포먼스가 펼쳐진다.\",\n    \"host_name\": \"티알\",\n    \"host_email\": \"t@t.com\",\n    \"host_tel\": \"0212345678\",\n    \"comments_private\": false\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4",
@@ -13866,6 +13866,434 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": {\n        \"nModified\": 1,\n        \"n\": 1,\n        \"updatedExisting\": true,\n        \"ok\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/content/(oid)/image/main",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/main",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content",
+								"5c6a63155f5471084f696eb4",
+								"image",
+								"main"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/main",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"main"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 07:41:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c6a63155f5471084f696eb4/images_0.m.jpeg?versionId=G1IMhtIYeEsjLryqg1qCmnxdeY0D7ji1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/content/(oid)/image/extra",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content",
+								"5c6a63155f5471084f696eb4",
+								"image",
+								"extra"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 08:33:05 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c6a63155f5471084f696eb4/images_1.m.png?versionId=0TIdwFhqZCea7J0JH_qXh9ybE2CrqUFe\"\n}"
+						},
+						{
+							"name": "400 exceed max image",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 09:02:00 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"exceed max image\",\n        \"code\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/content/(oid)/image/extra/(number)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"content",
+								"5c6a63155f5471084f696eb4",
+								"image",
+								"extra",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 09:18:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c6a63155f5471084f696eb4/images_1.m.png?versionId=0TIdwFhqZCea7J0JH_qXh9ybE2CrqUFe\"\n}"
+						},
+						{
+							"name": "400 invalid number",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"content",
+										"5c6a63155f5471084f696eb4",
+										"image",
+										"extra",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Feb 2019 09:16:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"invalid number\"\n    }\n}"
 						}
 					]
 				},
@@ -14158,6 +14586,484 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": [\n        {\n            \"updated_at\": 1544738173,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543457182,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/e8Sph2L 기본티켓링크\"\n            },\n            \"_id\": \"5bffc82e5f547109247f758d\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5bffc82e5f547109247f758d/poster.m.jpg?versionId=KWkp7HscefsqZ5ipyWUJjldb_y2P2MbV\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"룸쓰, 쪼이, 깨빈과 함께 떠나는 티킷 식구들의 핫도그를 향한 기나긴 여정 To be continue\",\n            \"place\": \"명랑학도구 짝퉁 핫 플레이스\",\n            \"tags\": [\n                \"exhibition\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544740247,\n                \"start\": 1544738447\n            },\n            \"name\": \"호또 명랑핫도그\",\n            \"short_id\": \"e8Sph2L\",\n            \"notice\": {\n                \"enabled\": true,\n                \"message\": \"따라올테면 따라와봐\"\n            }\n        },\n        {\n            \"updated_at\": 1543456165,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456165,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/shcp7w4 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4355f54710924c2d194\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"shcp7w4\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456165,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456165,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/x1rrJr4 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4355f54710924c2d195\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"x1rrJr4\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456166,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456166,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/BkFJsDO 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4365f54710924c2d196\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"BkFJsDO\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456166,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456166,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/lOAXXfu 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4365f54710924c2d197\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"lOAXXfu\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456166,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456166,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/UiQixgJ 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4365f54710924c2d198\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"UiQixgJ\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456166,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456166,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/1ySw4oF 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4365f54710924c2d199\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"1ySw4oF\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/eLcp4hS 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d19a\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"eLcp4hS\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/wbTx4fg 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d19b\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"wbTx4fg\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/AWGxrOv 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d19c\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"AWGxrOv\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/C0o0jNb 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d19d\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"C0o0jNb\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/CC22Gbg 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d19e\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"CC22Gbg\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/jELESEM 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d19f\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"jELESEM\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456167,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456167,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/ir6Mv91 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4375f54710924c2d1a0\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"ir6Mv91\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456168,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456168,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/7IRDK8E 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4385f54710924c2d1a1\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"7IRDK8E\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456168,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456168,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/4riGB2S 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4385f54710924c2d1a2\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"4riGB2S\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456168,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456168,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/P1MnbMB 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4385f54710924c2d1a3\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"P1MnbMB\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456168,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456168,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/TanrpPu 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4385f54710924c2d1a4\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"TanrpPu\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456301,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456301,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/wGf4FUn 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4bd5f54710924c2d1a5\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 놀이\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"wGf4FUn\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        },\n        {\n            \"updated_at\": 1543456340,\n            \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n            \"created_at\": 1543456340,\n            \"sms\": {\n                \"message\": \"http://localhost:4300/l/S0ELQaw 기본티켓링크\"\n            },\n            \"_id\": \"5bffc4e45f54710924c2d1a6\",\n            \"enabled\": true,\n            \"image\": {\n                \"poster\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/poster.m.png\"\n                },\n                \"og\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/og.m.png\"\n                },\n                \"extra\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_0.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_1.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_2.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_3.m.png\"\n                    },\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/extra_4.m.png\"\n                    }\n                ],\n                \"logo\": {\n                    \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/default/logo.m.png\"\n                }\n            },\n            \"desc\": \"신나는 클럽 놀이 문화 가즈아\",\n            \"place\": \"크로마 인천 파라다이스 시티\",\n            \"tags\": [\n                \"show\",\n                \"club\"\n            ],\n            \"company_oid\": \"5922bc83c8bd9535771cf837\",\n            \"when\": {\n                \"end\": 1544173200,\n                \"start\": 1544151600\n            },\n            \"name\": \"티킷 라이언 런칭 기념 클럽 이벤트\",\n            \"short_id\": \"S0ELQaw\",\n            \"notice\": {\n                \"enabled\": false,\n                \"message\": \"코릴라 크로마\"\n            }\n        }\n    ],\n    \"count\": 32\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content_oid\": \"5c6a63155f5471084f696eb4\",\n    \"ticket_types\": [\n        {\n            \"name\": \"초대권 S\",\n            \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n            \"sales_date\": {\n                \"start\": \"2019-01-15T05:00:00\",\n                \"end\": \"2019-02-14T09:00:00\"\n            },\n            \"price\": 0,\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"color\": \"tkit-mint\"\n        },\n        {\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"desc\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"desc\": \"레드불 스폰서 초대권 입니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"color\": \"ultra-bora\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_oid\": \"5c6a63155f5471084f696eb4\",\n    \"ticket_types\": [\n        {\n            \"name\": \"초대권 S\",\n            \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n            \"sales_date\": {\n                \"start\": \"2019-01-15T05:00:00\",\n                \"end\": \"2019-02-14T09:00:00\"\n            },\n            \"price\": 0,\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"color\": \"tkit-mint\"\n        },\n        {\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"desc\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"desc\": \"레드불 스폰서 초대권 입니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"color\": \"ultra-bora\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "94"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Feb 2019 08:25:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        \"5c74f80d5f5471098d947df9\",\n        \"5c74f80d5f5471098d947dfa\",\n        \"5c74f80d5f5471098d947dfb\"\n    ]\n}"
+						},
+						{
+							"name": "400 invalid content_oid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_oid\": \"5c6a63155f5471084f696eb4\",\n    \"ticket_types\": [\n        {\n            \"name\": \"초대권 S\",\n            \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n            \"sales_date\": {\n                \"start\": \"2019-01-15T05:00:00\",\n                \"end\": \"2019-02-14T09:00:00\"\n            },\n            \"price\": 0,\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"color\": \"tkit-mint\"\n        },\n        {\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"desc\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"desc\": \"레드불 스폰서 초대권 입니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"color\": \"ultra-bora\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "94"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Feb 2019 08:25:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid content_oid\",\n        \"code\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/type/(oid)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"type",
+								"5c74fffa5f54710a7876cbf3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 not exist ticket type",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf4",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf4"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:07:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"not exist ticket type\",\n        \"code\": 2\n    }\n}"
+						},
+						{
+							"name": "400 invalid id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:06:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid id\",\n        \"code\": 1\n    }\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Etag",
+									"value": "\"faf6c0aeeb9da4a8dbfa2a743402d303764b0cb1\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "344"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:05:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"sales_date\": {\n            \"start\": 1551496800,\n            \"end\": 1551532200\n        },\n        \"fpfg\": {\n            \"limit\": 1000,\n            \"spread\": null\n        },\n        \"sales\": {\n            \"limit\": 1000,\n            \"count\": 0\n        },\n        \"price\": 20000,\n        \"name\": \"SUNDAY PGA INVITATION\",\n        \"_id\": \"5c74fffa5f54710a7876cbf3\",\n        \"desc\": {\n            \"value\": \"레드불 스폰서 초대권 입니다\",\n            \"enabled\": true\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/types?start=0&size=10&content_oid=5c6a63155f5471084f696eb4",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"types"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c6a63155f5471084f696eb4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/types?start=0&size=10&content_oid=5c6a63155f5471084f696eb4",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"types"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "content_oid",
+											"value": "5c6a63155f5471084f696eb4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 07:45:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1175"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"7753c82e8fa9b3830948970104f1eaa8b780dd02\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 3,\n    \"data\": [\n        {\n            \"color\": \"ultra-bora\",\n            \"sales_date\": {\n                \"start\": 1551496800,\n                \"end\": 1551532200\n            },\n            \"price\": 20000,\n            \"desc\": {\n                \"value\": \"레드불 스폰서 초대권 입니다\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 1000\n            },\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"_id\": \"5c74fffa5f54710a7876cbf3\"\n        },\n        {\n            \"color\": \"tkit-coral\",\n            \"sales_date\": {\n                \"start\": 1551496800,\n                \"end\": 1551532200\n            },\n            \"price\": 20000,\n            \"desc\": {\n                \"value\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 1000\n            },\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"_id\": \"5c74fffa5f54710a7876cbf2\"\n        },\n        {\n            \"color\": \"tkit-mint\",\n            \"sales_date\": {\n                \"start\": 1547496000,\n                \"end\": 1550102400\n            },\n            \"price\": 0,\n            \"desc\": {\n                \"value\": \"스폰서, 스텝, 아티스트 전용\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 100\n            },\n            \"name\": \"초대권 S\",\n            \"_id\": \"5c74fffa5f54710a7876cbf1\"\n        }\n    ]\n}"
 						}
 					]
 				}

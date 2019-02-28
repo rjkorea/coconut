@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from bson import ObjectId
+import requests
 
 from tornado.web import HTTPError
 
@@ -106,29 +107,7 @@ class ContentPostHandler(MultipartFormdataHandler):
             sms=dict(
                 message='http://%s:%d/in/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
             ),
-            images=[
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                },
-                {
-                    'm': None
-                }
-            ]
+            images=[{'m': None, 'size': 0} for i in range(len(self.request.files))]
         )
         if self.json_decoded_body.get('site_url', None):
             doc['site_url'] = self.json_decoded_body.get('site_url')
@@ -169,6 +148,15 @@ class ContentPostHandler(MultipartFormdataHandler):
         self.response['data'] = {
             'content_oid': content_oid
         }
+        requests.post(
+            'https://hooks.slack.com/services/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',
+            headers = {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            json = {
+                'text': '[%s] 행사가 생성되었습니다. %s, %s, %s~%s' % (config['application']['name'], name, place_name, when_start, when_end)
+            }
+        )
         self.write_json()
 
     def upload_s3(self, content_oid, files, config):
@@ -203,6 +191,7 @@ class ContentPostHandler(MultipartFormdataHandler):
                 }
             )
             doc['images.%s.m'%k[-1]] = 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+            doc['images.%s.size'%k[-1]] = len(v[0]['body'])
         return doc
 
     async def options(self, *args, **kwargs):
@@ -218,14 +207,9 @@ class ContentListHandler(JsonHandler):
         if 'status' in parsed_args and parsed_args['status'] not in ('open', 'closed'):
             raise HTTPError(400, self.set_error(1, 'invalid status (open, closed)'))
         if self.current_user['role'] == 'super' or self.current_user['role'] == 'admin':
-            q = dict(
-                enabled=True
-            )
+            q = dict()
         else:
-            q = dict(
-                admin_oid=self.current_user['_id'],
-                enabled=True
-            )
+            q = dict(company_oid=self.current_user['company_oid'])
         now = datetime.utcnow()
         if parsed_args['status']:
             if parsed_args['status'] == 'open':
@@ -237,7 +221,7 @@ class ContentListHandler(JsonHandler):
                     '$lt': now
                 }
         count = await ContentModel.count(query=q)
-        result = await ContentModel.find(query=q, sort=[('when.start', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        result = await ContentModel.find(query=q, sort=[('created_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -274,10 +258,6 @@ class ContentHandler(JsonHandler):
             is_private = False
         name = self.json_decoded_body.get('name', None)
         tags = self.json_decoded_body.get('tags', None)
-        if tags:
-            tags=eval(tags)
-        else:
-            tags=None
         place_name = self.json_decoded_body.get('place_name', None)
         place_url = self.json_decoded_body.get('place_url', None)
         place_x = self.json_decoded_body.get('place_x', None)
@@ -296,11 +276,11 @@ class ContentHandler(JsonHandler):
         video_url = self.json_decoded_body.get('video_url', None)
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
-        if self.json_decoded_body.get('comments_private', False):
-            if self.json_decoded_body.get('comments_private') == 'true':
-                comments_private = True
-            elif self.json_decoded_body.get('comments_private') == 'false':
-                comments_private = False
+        comments_private = self.json_decoded_body.get('comments_private', False)
+        if comments_private == 'true':
+            comments_private = True
+        elif comments_private == 'false':
+            comments_private = False
         host_name = self.json_decoded_body.get('host_name', None)
         host_email = self.json_decoded_body.get('host_email', None)
         host_tel = self.json_decoded_body.get('host_tel', None)
@@ -339,6 +319,146 @@ class ContentHandler(JsonHandler):
         updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
         self.response['data'] = updated
         self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentImageMainHandler(MultipartFormdataHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        image = self.request.files.get('image', None)
+        if not image:
+            raise HTTPError(400, self.set_error(1, 'invalid image'))
+        image_url, size = self.upload_s3(str(content['_id']), self.request.files['image'], settings.settings())
+        set_doc = {
+            'images.0.m': image_url,
+            'images.0.size': size,
+            'updated_at': datetime.utcnow()
+        }
+        updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = image_url
+        self.write_json()
+
+    def upload_s3(self, content_oid, file, config):
+        img_extension = file[0]['filename'].split('.')[-1]
+        key = 'content/%s/images_0.m.%s' % (content_oid, img_extension)
+        cres = S3Service().client.create_multipart_upload(
+            ACL='public-read',
+            ContentType='image/%s' % img_extension,
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        upres = S3Service().client.upload_part(
+            UploadId=cres['UploadId'],
+            PartNumber=1,
+            Body=file[0]['body'],
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        response = S3Service().client.complete_multipart_upload(
+            Bucket=config['aws']['res_bucket'],
+            Key=key,
+            UploadId=cres['UploadId'],
+            MultipartUpload={
+                'Parts': [
+                    {
+                        'ETag': upres['ETag'],
+                        'PartNumber': 1
+                    }
+                ]
+            }
+        )
+        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']), len(file[0]['body'])
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentImageExtraHandler(MultipartFormdataHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        images_count = len(content['images'])
+        if images_count >= 7:
+            raise HTTPError(400, self.set_error(1, 'exceed max image'))
+        image = self.request.files.get('image', None)
+        if not image:
+            raise HTTPError(400, self.set_error(1, 'invalid image'))
+        image_url, size = self.upload_s3(str(content['_id']), images_count ,self.request.files['image'], settings.settings())
+        set_doc = {
+            'images.%s.m' % images_count: image_url,
+            'images.%s.size' % images_count: size,
+            'updated_at': datetime.utcnow()
+        }
+        updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = image_url
+        self.write_json()
+
+    def upload_s3(self, content_oid, index, file, config):
+        img_extension = file[0]['filename'].split('.')[-1]
+        key = 'content/%s/images_%s.m.%s' % (content_oid, index, img_extension)
+        cres = S3Service().client.create_multipart_upload(
+            ACL='public-read',
+            ContentType='image/%s' % img_extension,
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        upres = S3Service().client.upload_part(
+            UploadId=cres['UploadId'],
+            PartNumber=1,
+            Body=file[0]['body'],
+            Bucket=config['aws']['res_bucket'],
+            Key=key
+        )
+        response = S3Service().client.complete_multipart_upload(
+            Bucket=config['aws']['res_bucket'],
+            Key=key,
+            UploadId=cres['UploadId'],
+            MultipartUpload={
+                'Parts': [
+                    {
+                        'ETag': upres['ETag'],
+                        'PartNumber': 1
+                    }
+                ]
+            }
+        )
+        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']), len(file[0]['body'])
+
+    async def delete(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        number = kwargs.get('number', None)
+        if not number or int(number) not in (1, 2, 3, 4, 5, 6):
+            raise HTTPError(400, self.set_error(1, 'invalid number'))
+        content = await ContentModel.find_one({'_id': ObjectId(_id)})
+        if not content:
+            raise HTTPError(400, self.set_error(1, 'not exist content'))
+        deleted_image = content['images'].pop(int(number))
+        set_doc = {
+            'images': content['images'],
+            'updated_at': datetime.utcnow()
+        }
+        updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = deleted_image['m']
+        self.write_json()
+
+
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
