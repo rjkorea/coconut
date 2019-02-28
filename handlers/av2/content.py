@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from bson import ObjectId
+import requests
 
 from tornado.web import HTTPError
 
@@ -147,6 +148,15 @@ class ContentPostHandler(MultipartFormdataHandler):
         self.response['data'] = {
             'content_oid': content_oid
         }
+        requests.post(
+            'https://hooks.slack.com/services/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',
+            headers = {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            json = {
+                'text': '[%s] 행사가 생성되었습니다. %s, %s, %s~%s' % (config['application']['name'], name, place_name, when_start, when_end)
+            }
+        )
         self.write_json()
 
     def upload_s3(self, content_oid, files, config):
