@@ -105,6 +105,56 @@ class TicketTypeHandler(JsonHandler):
         self.response['data'] = ticket_type
         self.write_json()
 
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')])
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        name = self.json_decoded_body.get('name', None)
+        desc = self.json_decoded_body.get('desc', None)
+        sales_date = self.json_decoded_body.get('sales_date', None)
+        try:
+            sales_date['start'] = datetime.strptime(sales_date['start'], '%Y-%m-%dT%H:%M:%S')
+            sales_date['end'] = datetime.strptime(sales_date['end'], '%Y-%m-%dT%H:%M:%S')
+        except ValueError:
+            raise HTTPError(400, self.set_error(1, 'invalid date(sales_date.start/sales_date.end) format(YYYY-mm-ddTHH:MM:SS)'))
+        set_doc ={
+            'name': name,
+            'desc': desc,
+            'sales_date': sales_date,
+            'updated_at': datetime.utcnow()
+        }
+        query = {
+            '$and': [
+                {'enabled': True},
+                {'ticket_type_oid': ticket_type['_id']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name}
+                    ]
+                }
+            ]
+        }
+        sales_count = await TicketModel.count(query)
+        fpfg = self.json_decoded_body.get('fpfg', None)
+        if 'limit' in fpfg and fpfg['limit'] <= sales_count:
+            raise HTTPError(400, set_error(3, 'can\'t set fpfg.limit (sold ticket count: %s)' % sales_count))
+        else:
+            set_doc['fpfg.limit'] = fpfg['limit']
+        spread_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
+        if 'spread' in fpfg and fpfg['spread'] <= spread_count:
+            raise HTTPError(400, set_error(3, 'can\'t set fpfg.spread (spread ticket count: %s)' % spread_count))
+        else:
+            set_doc['fpfg.spread'] = fpfg['spread']
+        updated = await TicketTypeModel.update({'_id': ticket_type['_id']}, {'$set': set_doc}, False, False)
+        self.response['data'] = updated
+        self.write_json()
+
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
