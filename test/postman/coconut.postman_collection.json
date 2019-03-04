@@ -14948,6 +14948,213 @@
 					]
 				},
 				{
+					"name": "/a/v2/ticket/type/(oid)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"초대권 S\",\n    \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n    \"sales_date\": {\n        \"start\": \"2019-01-15T05:00:00\",\n        \"end\": \"2019-02-14T09:00:00\"\n    },\n    \"fpfg\": {\n        \"limit\": 100\n    },\n    \"color\": \"tkit-mint\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"type",
+								"5c74fffa5f54710a7876cbf3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 not exist ticket type",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf4",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf4"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:07:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"not exist ticket type\",\n        \"code\": 2\n    }\n}"
+						},
+						{
+							"name": "400 invalid id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:06:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid id\",\n        \"code\": 1\n    }\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"초대권 S\",\n    \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n    \"sales_date\": {\n        \"start\": \"2019-01-15T05:00:00\",\n        \"end\": \"2019-02-14T09:00:00\"\n    },\n    \"fpfg\": {\n        \"limit\": 100,\n        \"spread\": 1000\n    }\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 04 Mar 2019 06:50:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"nModified\": 1,\n        \"ok\": 1,\n        \"updatedExisting\": true,\n        \"n\": 1\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "/a/v2/ticket/types",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true

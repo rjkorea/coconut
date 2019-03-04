@@ -12,6 +12,8 @@ from models.base import BaseModel
 class TicketTypeModel(BaseModel):
     MONGO_COLLECTION = 'ticket_type'
     TICKET_TYPE = ('general', 'network')
+    COLORS = ('tkit-mint', 'tkit-coral', 'hangang-blue', 'ultra-bora', 'mustard-norang')
+    MAX = 10
 
     def __init__(self, *args, **kwargs):
         super(TicketTypeModel, self).__init__(*args, **kwargs)
@@ -46,13 +48,13 @@ class TicketTypeModel(BaseModel):
                 'default': None
             },
             {
-                'key': 'day',
-                'type': int,
-                'default': (lambda: 1)
+                'key': 'sales_date',
+                'type': dict,
+                'default': None
             },
             {
-                'key': 'expiry_date',
-                'type': datetime,
+                'key': 'fpfg',
+                'type': dict,
                 'default': None
             },
             {
