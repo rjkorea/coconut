@@ -199,3 +199,24 @@ class TicketTypeListHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketTypeInfoHandler(JsonHandler):
+    @admin_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('fpfg')])
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        ticket_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
+        self.response['data'] = {
+            'spread': ticket_type['fpfg']['spread'],
+            'ticket_count': ticket_count
+        }
+        self.write_json()
+    
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
