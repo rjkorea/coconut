@@ -105,7 +105,7 @@ class ContentPostHandler(MultipartFormdataHandler):
             admin_oid=self.current_user['_id'],
             company_oid=self.current_user['company_oid'],
             sms=dict(
-                message='http://%s:%d/in/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
+                message='http://%s:%d/in/%s 티켓링크입니다' % (config['web']['host'], config['web']['port'], short_id)
             ),
             images=[{'m': None, 'size': 0} for i in range(len(self.request.files))]
         )
