@@ -30,6 +30,11 @@ _settings = dict(
         api_key='7968a1e2', 
         api_secret='a45366ce5d7a295c'
     ),
+    host=dict(
+        protocol='https',
+        host='host.tkit.me',
+        port=443
+    ),
     web=dict(
         name='citron',
         host='i.tkit.me',
@@ -49,6 +54,9 @@ _settings = dict(
         access_key='AKIAJRLZGNWWWHRYRG7Q',
         secret_key='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',
         res_bucket='res.tkit.me'
+    ),
+    slack=dict(
+        oauth_access_token='xoxp-24065128659-73904001223-457101199316-939af9f7bd0df067a789032615d2ad8f'
     )
 )
 
