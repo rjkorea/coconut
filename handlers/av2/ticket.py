@@ -307,3 +307,26 @@ class TicketOrderHandler(JsonHandler):
             'sms': is_sent_receiver
         }
         self.write_json()
+
+
+class TicketOrderListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('ticket_type_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        ticket_type_oid = parsed_args['ticket_type_oid']
+        if not ticket_type_oid or len(ticket_type_oid) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid ticket_type_oid'))
+        query = {
+            'ticket_type_oid': ObjectId(ticket_type_oid),
+            'enabled': True
+        }
+        count = await TicketOrderModel.count(query)
+        ticket_orders = await TicketOrderModel.find(query, fields=[('created_at'), ('qty'), ('receiver'), ('user_oid')], skip=parsed_args['start'], limit=parsed_args['size'])
+        self.response['data'] = ticket_orders
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
