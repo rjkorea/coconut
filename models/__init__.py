@@ -82,3 +82,15 @@ async def send_sms(data=dict()):
         return True
     else:
         return False
+
+async def create_user_v2(mobile, name):
+    user = await UserModel.find_one({'mobile.country_code': mobile['country_code'], 'mobile.number': mobile['number'], 'enabled': True})
+    if user:
+        return user['_id']
+    else:
+        user = UserModel(raw_data=dict(
+            name=name,
+            mobile=mobile
+        ))
+        id = await user.insert()
+        return id

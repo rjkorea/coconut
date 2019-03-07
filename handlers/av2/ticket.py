@@ -8,8 +8,13 @@ from tornado.web import HTTPError
 from common.decorators import admin_auth_async, parse_argument
 
 from handlers.base import JsonHandler
-from models.ticket import TicketTypeModel, TicketModel
+from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
+
+from models import create_user_v2, send_sms
+
+from services.slack import SlackService
+from services.config import ConfigService
 
 
 class TicketTypeHandler(JsonHandler):
@@ -123,7 +128,7 @@ class TicketTypeHandler(JsonHandler):
             raise HTTPError(400, self.set_error(1, 'invalid date(sales_date.start/sales_date.end) format(YYYY-mm-ddTHH:MM:SS)'))
         set_doc ={
             'name': name,
-            'desc': desc,
+            'desc.value': desc,
             'sales_date': sales_date,
             'updated_at': datetime.utcnow()
         }
@@ -216,7 +221,89 @@ class TicketTypeInfoHandler(JsonHandler):
             'ticket_count': ticket_count
         }
         self.write_json()
-    
+
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketOrderHandler(JsonHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        ticket_type_oid = self.json_decoded_body.get('ticket_type_oid', None)
+        if not ticket_type_oid or len(ticket_type_oid) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid ticket_type_oid'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(ticket_type_oid))
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        qty = self.json_decoded_body.get('qty', None)
+        if not qty:
+            raise HTTPError(400, self.set_error(1, 'invalid qty'))
+        ticket_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
+        if qty > (ticket_type['fpfg']['spread'] - ticket_count):
+            raise HTTPError(400, self.set_error(3, 'exceed available qty'))
+        name = self.json_decoded_body.get('name', None)
+        if not name or len(name) == 0:
+            raise HTTPError(400, self.set_error(1, 'invalid name'))
+        mobile = self.json_decoded_body.get('mobile', None)
+        if not mobile or not isinstance(mobile, dict):
+            raise HTTPError(400, self.set_error(1, 'invalid mobile(object)'))
+        sms = self.json_decoded_body.get('sms', None)
+        if not sms or len(sms) == 0:
+            raise HTTPError(400, self.set_error(1, 'invalid sms'))
+        user_oid = await create_user_v2(mobile, name)
+        doc = {
+            'type': 'network',
+            'content_oid': ticket_type['content_oid'],
+            'admin_oid': self.current_user['_id'],
+            'ticket_type_oid': ticket_type['_id'],
+            'receiver': {
+                'mobile': mobile,
+                'name': name
+            },
+            'qty': qty,
+            'user_oid': user_oid
+        }
+        ticket_order = TicketOrderModel(raw_data=doc)
+        ticket_order_oid = await ticket_order.insert()
+        for i in range(qty):
+            doc = {
+                'type': 'network',
+                'content_oid': ticket_type['content_oid'],
+                'ticket_type_oid': ticket_type['_id'],
+                'ticket_order_oid': ticket_order_oid,
+                'price': ticket_type['price'],
+                'status': 'send',
+                'receive_user_oid': user_oid
+            }
+            ticket = TicketModel(raw_data=doc)
+            await ticket.insert()
+        if mobile['number'].startswith('0'):
+            to_mobile_number = '%s%s' % (mobile['country_code'], mobile['number'][1:])
+        else:
+            to_mobile_number = '%s%s' % (mobile['country_code'], mobile['number'])
+        is_sent_receiver = await send_sms(
+            {
+                'type': 'unicode',
+                'from': 'tkit',
+                'to': to_mobile_number,
+                'text': sms
+            }
+        )
+        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name')])
+        slack_msg = [
+            {
+                'title': '[%s] 티켓전송' % (ConfigService().client['application']['name']),
+                'title_link': '%s://%s:%d/ticket/order;ticket_type_oid=%s' % (ConfigService().client['host']['protocol'], ConfigService().client['host']['host'], ConfigService().client['host']['port'], ticket_type_oid),
+                'fallback': '[%s] 티켓전송 / <%s> / %s / %d원 / %d장 / %s 전달' % (ConfigService().client['application']['name'], content['name'], ticket_type['name'], ticket_type['price'], qty, name),
+                'text': '<%s> / %s / %d원 / %d장 / %s 전달' % (content['name'], ticket_type['name'], ticket_type['price'], qty, name),
+                'mrkdwn_in': ['text']
+            }
+        ]
+        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        self.response['data'] = {
+            'ticket_order_oid': ticket_order_oid,
+            'ticket_count': i+1,
+            'sms': is_sent_receiver
+        }
         self.write_json()
