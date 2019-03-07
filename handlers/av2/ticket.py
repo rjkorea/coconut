@@ -52,6 +52,17 @@ class TicketTypeHandler(JsonHandler):
             )
             ttm = TicketTypeModel(raw_data=doc)
             res.append(await ttm.insert())
+        text = '\n'.join(['<%s> / %s / %d원 / %d장 (스프레드 %s장)' % (content['name'], tt['name'], tt['price'], tt['fpfg']['limit'], tt['fpfg']['spread']) for tt in ticket_types])
+        slack_msg = [
+            {
+                'title': '[%s] 티켓생성' % (ConfigService().client['application']['name']),
+                'title_link': '%s://%s:%d/ticket/type;content_oid=%s' % (ConfigService().client['host']['protocol'], ConfigService().client['host']['host'], ConfigService().client['host']['port'], content_oid),
+                'fallback': text,
+                'text': text,
+                'mrkdwn_in': ['text']
+            }
+        ]
+        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
         self.response['data'] = res
         self.write_json()
 
@@ -369,6 +380,8 @@ class TicketHistoryListHandler(JsonHandler):
         if not ticket_oid or len(ticket_oid) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid ticket_oid'))
         ticket = await TicketModel.get_id(ObjectId(ticket_oid), fields={'send_user_oid': True, 'receive_user_oid': True, 'history_send_user_oids': True})
+        if not ticket:
+            raise HTTPError(400, self.set_error(2, 'not exsit ticket'))
         history = list()
         if 'history_send_user_oids' in ticket:
             ticket['history_send_user_oids'].append(ticket['receive_user_oid'])
