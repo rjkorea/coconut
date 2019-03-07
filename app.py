@@ -12,6 +12,8 @@ from services.mongodb import MongodbService
 from services.sms import NexmoService
 from services.iamport import IamportService
 from services.s3 import S3Service
+from services.slack import SlackService
+from services.config import ConfigService
 
 
 class APIApplication(web.Application):
@@ -36,6 +38,8 @@ def main():
         NexmoService(config=config['nexmo'])
         IamportService(config=config['iamport'])
         S3Service(config=config['aws'])
+        SlackService(config=config['slack'])
+        ConfigService(config=config)
         ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
         logger.info('KeyboardInterrupt occured. Stopping instance')
