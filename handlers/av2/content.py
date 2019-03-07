@@ -12,6 +12,8 @@ from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.content import ContentModel
 
 from services.s3 import S3Service
+from services.config import ConfigService
+from services.slack import SlackService
 
 from common import hashers
 import settings
@@ -145,18 +147,19 @@ class ContentPostHandler(MultipartFormdataHandler):
             '$set': doc
         }
         await ContentModel.update(query, document, False, False)
+        slack_msg = [
+            {
+                'title': '[%s] 행사생성' % (ConfigService().client['application']['name']),
+                'title_link': '%s://%s:%d/contents;status=open' % (ConfigService().client['host']['protocol'], ConfigService().client['host']['host'], ConfigService().client['host']['port']),
+                'fallback': '[%s] 행사생성 / <%s> / %s / %s~%s' % (ConfigService().client['application']['name'], name, place_name, when_start, when_end),
+                'text': '<%s> / %s / %s~%s' % (name, place_name, when_start, when_end),
+                'mrkdwn_in': ['text']
+            }
+        ]
+        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
         self.response['data'] = {
             'content_oid': content_oid
         }
-        requests.post(
-            'https://hooks.slack.com/services/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',
-            headers = {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            json = {
-                'text': '[%s] 행사가 생성되었습니다. %s, %s, %s~%s' % (config['application']['name'], name, place_name, when_start, when_end)
-            }
-        )
         self.write_json()
 
     def upload_s3(self, content_oid, files, config):
