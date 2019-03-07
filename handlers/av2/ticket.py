@@ -10,6 +10,7 @@ from common.decorators import admin_auth_async, parse_argument
 from handlers.base import JsonHandler
 from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
+from models.user import UserModel
 
 from models import create_user_v2, send_sms
 
@@ -324,6 +325,33 @@ class TicketOrderListHandler(JsonHandler):
         count = await TicketOrderModel.count(query)
         ticket_orders = await TicketOrderModel.find(query, fields=[('created_at'), ('qty'), ('receiver'), ('user_oid')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = ticket_orders
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('ticket_order_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        ticket_order_oid = parsed_args['ticket_order_oid']
+        if not ticket_order_oid or len(ticket_order_oid) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid ticket_order_oid'))
+        query = {
+            'ticket_order_oid': ObjectId(ticket_order_oid),
+            'enabled': True
+        }
+        count = await TicketModel.count(query)
+        tickets = await TicketModel.find(query, fields={'updated_at': True, 'receive_user_oid': True}, skip=parsed_args['start'], limit=parsed_args['size'], sort=[('updated_at', -1)])
+        for t in tickets:
+            user = await UserModel.get_id(t['receive_user_oid'], fields={'_id': False, 'mobile': True, 'name': True, 'last_name': True})
+            t['receive_user'] = user
+            t.pop('receive_user_oid')
+        self.response['data'] = tickets
         self.response['count'] = count
         self.write_json()
 
