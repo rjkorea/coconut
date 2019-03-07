@@ -28,11 +28,13 @@ class TicketTypeHandler(JsonHandler):
         if not content:
             raise HTTPError(400, self.set_error(2, 'not exist content'))
         ticket_types_count = await TicketTypeModel.count({'content_oid': content['_id'], 'enabled': True})
-        if ticket_types_count > TicketTypeModel.MAX:
+        if ticket_types_count >= TicketTypeModel.MAX:
             raise HTTPError(400, self.set_error(3, 'exceed max ticket type count'))
         ticket_types = self.json_decoded_body.get('ticket_types', None)
         if not ticket_types:
             raise HTTPError(400, self.set_error(1, 'invalid ticket_types'))
+        if len(ticket_types) > TicketTypeModel.MAX - ticket_types_count:
+            raise HTTPError(400, self.set_error(3, 'exceed count to make ticket type'))
         res = list()
         for tt in ticket_types:
             ticket_type = self.validate_ticket_type(tt)
