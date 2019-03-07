@@ -198,6 +198,11 @@ class TicketModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'price',
+                'type': int,
+                'default': None
+            },
+            {
                 'key': 'days',
                 'type': dict,
                 'default': None
