@@ -358,3 +358,28 @@ class TicketListHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketHistoryListHandler(JsonHandler):
+    @admin_auth_async
+    @parse_argument([('ticket_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        ticket_oid = parsed_args['ticket_oid']
+        if not ticket_oid or len(ticket_oid) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid ticket_oid'))
+        ticket = await TicketModel.get_id(ObjectId(ticket_oid), fields={'send_user_oid': True, 'receive_user_oid': True, 'history_send_user_oids': True})
+        history = list()
+        if 'history_send_user_oids' in ticket:
+            ticket['history_send_user_oids'].append(ticket['receive_user_oid'])
+            for user_oid in ticket['history_send_user_oids']:
+                user = await UserModel.get_id(user_oid, fields={'mobile': True, 'name': True, 'last_name': True, '_id': False})
+                if user:
+                    history.append(user)
+        history.reverse()
+        self.response['data'] = history
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
