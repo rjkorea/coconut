@@ -331,6 +331,53 @@ def tkit_kr_users(mongo, dryrun):
         pprint(count)
 
 
+@click.group()
+def user_mobile():
+    pass
+
+@user_mobile.command()
+@click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('--dryrun', is_flag=True, help='dry run test')
+@click.confirmation_option(help='Are you sure your migration?')
+def user_mobiles(mongo, dryrun):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mongodb: %s' % (mongo), fg='green')
+    click.secho('dry run test %s' % dryrun, fg='red')
+    if mongo:
+        mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        cursor = mongo_client['test_database']['user_live'].find({})
+        while cursor.alive:
+            user = cursor.next()
+            if 'mobile_number' in user:
+                if user['mobile_number'].startswith('undefined'):
+                    set = {
+                        'mobile.country_code': '82',
+                        'mobile.number': '0%s' % user['mobile_number'][10:]
+                    }
+                elif user['mobile_number'].startswith('86') or user['mobile_number'].startswith('85') or user['mobile_number'].startswith('82') or user['mobile_number'].startswith('81') or user['mobile_number'].startswith('44') or user['mobile_number'].startswith('49') or user['mobile_number'].startswith('65') or user['mobile_number'].startswith('61') or user['mobile_number'].startswith('66'):
+                    set = {
+                        'mobile.country_code': user['mobile_number'][:2],
+                        'mobile.number': '0%s' % user['mobile_number'][2:]
+                    }
+                elif user['mobile_number'].startswith('10') or user['mobile_number'].startswith('11') or user['mobile_number'].startswith('12') or user['mobile_number'].startswith('13') or user['mobile_number'].startswith('14') or user['mobile_number'].startswith('15') or user['mobile_number'].startswith('16') or user['mobile_number'].startswith('17') or user['mobile_number'].startswith('18'):
+                    set = {
+                        'mobile.country_code': '82',
+                        'mobile.number': '0%s' % user['mobile_number']
+                    }
+                else:
+                    set = {
+                        'mobile.country_code': '82',
+                        'mobile.number': '01000000000'
+                    }
+                set_doc = {
+                    '$set': set,
+                    '$unset': {
+                        'mobile_number': 1
+                    }
+                }
+                mongo_client['coconut']['user'].update({'_id': user['_id']}, set_doc, False, False)
+
+
 if __name__ == '__main__':
-    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user])
+    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile])
     cli()
