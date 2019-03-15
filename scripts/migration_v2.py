@@ -378,6 +378,37 @@ def user_mobiles(mongo, dryrun):
                 mongo_client['coconut']['user'].update({'_id': user['_id']}, set_doc, False, False)
 
 
+@click.group()
+def ticket_order():
+    pass
+
+@ticket_order.command()
+@click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('--dryrun', is_flag=True, help='dry run test')
+@click.confirmation_option(help='Are you sure your migration?')
+def ticket_orders(mongo, dryrun):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mongodb: %s' % (mongo), fg='green')
+    click.secho('dry run test %s' % dryrun, fg='red')
+    if mongo:
+        mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        cursor = mongo_client['coconut']['ticket_order'].find({})
+        while cursor.alive:
+            ticket_order = cursor.next()
+            if 'receiver' in ticket_order and 'mobile_number' in ticket_order['receiver']:
+                set = {
+                    'receiver.mobile.country_code': ticket_order['receiver']['mobile_number'][:2],
+                    'receiver.mobile.number': '0%s' % ticket_order['receiver']['mobile_number'][2:]
+                }
+            set_doc = {
+                '$set': set,
+                '$unset': {
+                    'receiver.mobile_number': 1
+                }
+            }
+            mongo_client['coconut']['ticket_order'].update({'_id': ticket_order['_id']}, set_doc, False, False)
+
+
 if __name__ == '__main__':
-    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile])
+    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile, ticket_order])
     cli()
