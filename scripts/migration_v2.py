@@ -345,7 +345,7 @@ def user_mobiles(mongo, dryrun):
     click.secho('dry run test %s' % dryrun, fg='red')
     if mongo:
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
-        cursor = mongo_client['test_database']['user_live'].find({})
+        cursor = mongo_client['coconut']['user'].find({})
         while cursor.alive:
             user = cursor.next()
             if 'mobile_number' in user:
