@@ -409,6 +409,42 @@ def ticket_orders(mongo, dryrun):
             mongo_client['coconut']['ticket_order'].update({'_id': ticket_order['_id']}, set_doc, False, False)
 
 
+@click.group()
+def ticket():
+    pass
+
+@ticket.command()
+@click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('--dryrun', is_flag=True, help='dry run test')
+@click.confirmation_option(help='Are you sure your migration?')
+def tickets(mongo, dryrun):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mongodb: %s' % (mongo), fg='green')
+    click.secho('dry run test %s' % dryrun, fg='red')
+    if mongo:
+        mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        cursor = mongo_client['coconut']['ticket'].find({'days': {'$exists': 1}})
+        while cursor.alive:
+            ticket = cursor.next()
+            set_doc = {
+                '$unset': {
+                    'days': 1
+                }
+            }
+            if 'fee' in ticket['days'][0]:
+                if ticket['days'][0]['fee']['price'] == None:
+                    ticket['days'][0]['fee']['price'] = 0
+            if 'fee' in ticket['days'][0] and ticket['days'][0]['fee']['price'] > 0:
+                set_doc['$set'] = {
+                    'price': ticket['days'][0]['fee']['price']
+                }
+            if ('fee' in ticket['days'][0] and ticket['days'][0]['fee']['price'] == 0) or 'fee' not in ticket['days'][0]:
+                set_doc['$set'] = {
+                    'price': 0
+                }
+            mongo_client['coconut']['ticket'].update({'_id': ticket['_id']}, set_doc, False, False)
+
+
 if __name__ == '__main__':
-    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile, ticket_order])
+    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile, ticket_order, ticket])
     cli()
