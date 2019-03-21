@@ -19,10 +19,13 @@ import settings
 
 class RegisterHandler(JsonHandler):
     async def post(self, *args, **kwargs):
+        mobile_country_code = self.json_decoded_body.get('mobile_country_code', None)
+        if not mobile_country_code:
+            raise HTTPError(400, 'invalid mobile_country_code')
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number or len(mobile_number) < 9 :
             raise HTTPError(400, 'invalid mobile_number')
-        duplicated_user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
+        duplicated_user = await UserModel.find_one({'mobile.country_code': mobile_country_code, 'mobile.number': mobile_number, 'enabled': True})
         if duplicated_user and 'password' in duplicated_user:
             raise HTTPError(400, 'exist mobile number')
         email = self.json_decoded_body.get('email', None)
@@ -46,7 +49,10 @@ class RegisterHandler(JsonHandler):
 
         if duplicated_user and 'password' not in duplicated_user:
             doc = dict(
-                mobile_number=mobile_number,
+                mobile=dict(
+                    country_code=mobile_country_code,
+                    number=mobile_number
+                ),
                 email=email,
                 name=name,
                 last_name=last_name,
@@ -73,7 +79,10 @@ class RegisterHandler(JsonHandler):
             )
         else:
             user = UserModel(raw_data=dict(
-                mobile_number=mobile_number,
+                mobile=dict(
+                    country_code=mobile_country_code,
+                    number=mobile_number
+                ),
                 email=email,
                 name=name,
                 last_name=last_name,
@@ -129,15 +138,18 @@ class LoginHandler(JsonHandler):
         if not type:
             raise HTTPError(400, 'type param is required(mobile_number)')
         if type == 'mobile_number':
+            mobile_country_code = self.json_decoded_body.get('mobile_country_code', None)
+            if not mobile_country_code:
+                raise HTTPError(400, 'invalid mobile_country_code')
             mobile_number = self.json_decoded_body.get('mobile_number', None)
             if not mobile_number or len(mobile_number) < 9:
                 raise HTTPError(400, 'invalid mobile_number')
             password = self.json_decoded_body.get('password', None)
             if not password or len(password) < 4:
                 raise HTTPError(400, 'invalid password')
-            user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
+            user = await UserModel.find_one({'mobile.country_code': mobile_country_code, 'mobile.number': mobile_number, 'enabled': True})
             if not user:
-                raise HTTPError(400, 'no exist mobile_number')
+                raise HTTPError(400, 'no exist user')
             if not hashers.check_password(password, user['password']):
                 raise HTTPError(400, 'wrong password')
         else:
@@ -156,13 +168,14 @@ class LoginHandler(JsonHandler):
 
 
 class UserHandler(JsonHandler):
-    @parse_argument([('mobile_number', str, None)])
+    @parse_argument([('mobile_country_code', str, None), ('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if not parsed_args['mobile_number'] or len(parsed_args['mobile_number']) < 9:
-            raise HTTPError(400, 'invalid mobile_number')
+        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code']:
+            raise HTTPError(400, 'invalid mobile_number and mobile_country_code')
         q = {
-            'mobile_number': parsed_args['mobile_number'],
+            'mobile.country_code': parsed_args['mobile_country_code'],
+            'mobile.number': parsed_args['mobile_number'],
             'enabled': True
         }
         user = await UserModel.find_one(query=q)
@@ -183,13 +196,16 @@ class UserHandler(JsonHandler):
 
 class AutoLoginHandler(JsonHandler):
     async def put(self, *args, **kwargs):
+        mobile_country_code = self.json_decoded_body.get('mobile_country_code', None)
+        if not mobile_country_code:
+            raise HTTPError(400, 'invalid mobile_country_code')
         mobile_number = self.json_decoded_body.get('mobile_number', None)
         if not mobile_number:
             raise HTTPError(400, 'invalid mobile_number')
         content_oid = self.json_decoded_body.get('content_oid', None)
         if not content_oid:
             raise HTTPError(400, 'invalid content_oid')
-        user = await UserModel.find_one({'mobile_number': mobile_number, 'enabled': True})
+        user = await UserModel.find_one({'mobile.country_code': mobile_country_code, 'mobile.number': mobile_number, 'enabled': True})
         if not user:
             raise HTTPError(400, 'not exist user')
         session = UserSessionModel()
@@ -205,7 +221,7 @@ class AutoLoginHandler(JsonHandler):
             {
                 'type': 'unicode',
                 'from': 'tkit',
-                'to': mobile_number,
+                'to': '%s%s' % (mobile_country_code, mobile_number[1:]),
                 'text': 'http://%s:%s/autologin/%s' % (config['web']['host'], config['web']['port'], userautologin_oid)
             }
         )
