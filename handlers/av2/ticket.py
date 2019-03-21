@@ -254,7 +254,7 @@ class TicketOrderHandler(JsonHandler):
         if not qty:
             raise HTTPError(400, self.set_error(1, 'invalid qty'))
         ticket_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
-        if qty > (ticket_type['fpfg']['spread'] - ticket_count):
+        if ticket_type['fpfg']['spread'] and qty > (ticket_type['fpfg']['spread'] - ticket_count):
             raise HTTPError(400, self.set_error(3, 'exceed available qty'))
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
@@ -320,6 +320,10 @@ class TicketOrderHandler(JsonHandler):
             'ticket_count': i+1,
             'sms': is_sent_receiver
         }
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
         self.write_json()
 
 
