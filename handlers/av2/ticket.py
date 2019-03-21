@@ -100,7 +100,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid id'))
-        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')])
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid')])
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         query = {
