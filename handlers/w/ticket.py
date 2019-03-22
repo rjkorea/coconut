@@ -324,7 +324,7 @@ class TicketListHandler(JsonHandler):
         if parsed_args['status']:
             q['status'] = parsed_args['status']
         count = await TicketModel.count(query=q)
-        result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1), ('price', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
             res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
             res.pop('ticket_type_oid')
@@ -394,7 +394,7 @@ class TicketValidateListHandler(JsonHandler):
         q = {
             'content_oid': ObjectId(parsed_args['content_oid']),
             'enabled': True,
-            'expiry_date': {
+            'sales_date.end': {
                 '$gte': datetime.utcnow()
             }
         }
@@ -525,15 +525,15 @@ class TicketSendUserListHandler(JsonHandler):
                 return
         result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
         for res in result:
-            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
+            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile')])
             if receive_user and 'name' in receive_user:
                 res['name'] = receive_user['name']
-                res['mobile_number'] = receive_user['mobile_number']
+                res['mobile'] = receive_user['mobile']
             res.pop('receive_user_oid')
         send_user_dict = dict()
         for r in result:
-            if 'mobile_number' in r:
-                send_user_dict[r['mobile_number']] = {
+            if 'mobile' in r:
+                send_user_dict['%s%s' % (r['mobile']['country_code'], r['mobile']['number'][1:])] = {
                     '_id': r['_id'],
                     'name': r['name'],
                     'created_at': r['created_at']
@@ -854,7 +854,7 @@ class TicketTypeListMeHandler(JsonHandler):
         if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
             raise HTTPError(400, 'invalid content_oid')
         now = datetime.utcnow()
-        ticket_types = await TicketTypeModel.find({'content_oid': ObjectId(parsed_args['content_oid']), 'expiry_date': {'$gte': now}, 'enabled': True}, fields=[('_id')], skip=0, limit=100)
+        ticket_types = await TicketTypeModel.find({'content_oid': ObjectId(parsed_args['content_oid']), 'sales_date.end': {'$gte': now}, 'enabled': True}, fields=[('_id')], skip=0, limit=100)
         # aggregate ticket type
         pipeline = [
             {
@@ -882,7 +882,7 @@ class TicketTypeListMeHandler(JsonHandler):
             ticket_type = await TicketTypeModel.get_id(a['_id'])
             a['name'] = ticket_type['name']
             a['desc'] = ticket_type['desc']
-            a['expiry_date'] = ticket_type['expiry_date']
+            a['sales_date'] = ticket_type['sales_date']
             a['price'] = ticket_type['price']
             if 'color' in ticket_type:
                 a['color'] = ticket_type['color']
