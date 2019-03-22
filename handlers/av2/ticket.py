@@ -161,6 +161,8 @@ class TicketTypeHandler(JsonHandler):
         }
         sales_count = await TicketModel.count(query)
         fpfg = self.json_decoded_body.get('fpfg', None)
+        if fpfg['spread'] and fpfg['spread'] <= fpfg['limit']:
+            raise HTTPError(400, self.set_error(1, 'invalid fpfg (spread more than limit)'))
         if 'limit' in fpfg and fpfg['limit'] <= sales_count:
             raise HTTPError(400, set_error(3, 'can\'t set fpfg.limit (sold ticket count: %s)' % sales_count))
         else:
