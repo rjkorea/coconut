@@ -168,7 +168,7 @@ class TicketTypeHandler(JsonHandler):
         else:
             set_doc['fpfg.limit'] = fpfg['limit']
         spread_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
-        if 'spread' in fpfg and fpfg['spread'] <= spread_count:
+        if 'spread' in fpfg and isinstance(fpfg['spread'], int) and fpfg['spread'] <= spread_count:
             raise HTTPError(400, set_error(3, 'can\'t set fpfg.spread (spread ticket count: %s)' % spread_count))
         else:
             set_doc['fpfg.spread'] = fpfg['spread']
