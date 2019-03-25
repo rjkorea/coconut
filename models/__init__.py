@@ -67,7 +67,7 @@ async def create_broker(receiver):
         return id
 
 async def create_user(user):
-    res = await UserModel.find_one({'mobile_number': user['mobile_number'], 'enabled': True})
+    res = await UserModel.find_one({'mobile.country_code': user['mobile']['country_code'], 'mobile.number': user['mobile']['number'], 'enabled': True})
     if res:
         return res 
     else:
