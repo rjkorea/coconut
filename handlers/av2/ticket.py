@@ -92,7 +92,7 @@ class TicketTypeHandler(JsonHandler):
             raise HTTPError(400, self.set_error(1, 'invalid fpfg.limit'))
         if ticket_type['fpfg']['spread']:
             if ticket_type['fpfg']['spread'] <= 0:
-                raise HTTPError(400, self.set_error(1, 'invalid fpfg.spread)
+                raise HTTPError(400, self.set_error(1, 'invalid fpfg.spread'))
             if ticket_type['fpfg']['spread'] <= ticket_type['fpfg']['limit']:
                 raise HTTPError(400, self.set_error(1, 'invalid fpfg (spread more than limit)'))
         return ticket_type
