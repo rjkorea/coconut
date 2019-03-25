@@ -86,7 +86,15 @@ url_patterns = [
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/main/?', av2.content.ContentImageMainHandler),
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/extra/?', av2.content.ContentImageExtraHandler),
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/extra/(?P<number>[^\/]+)/?', av2.content.ContentImageExtraHandler),
-    
+    (r'/a/v2/ticket/type/?', av2.ticket.TicketTypeHandler),
+    (r'/a/v2/ticket/type/(?P<_id>[^\/]+)/?', av2.ticket.TicketTypeHandler),
+    (r'/a/v2/ticket/types/?', av2.ticket.TicketTypeListHandler),
+    (r'/a/v2/ticket/type/(?P<_id>[^\/]+)/info?', av2.ticket.TicketTypeInfoHandler),
+    (r'/a/v2/ticket/order/?', av2.ticket.TicketOrderHandler),
+    (r'/a/v2/ticket/orders/?', av2.ticket.TicketOrderListHandler),
+    (r'/a/v2/tickets/?', av2.ticket.TicketListHandler),
+    (r'/a/v2/ticket/history?', av2.ticket.TicketHistoryListHandler),
+
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
     (r'/a/invitation/(?P<_id>[^\/]+)/?', a.invitation.InvitationHandler),
@@ -120,9 +128,6 @@ url_patterns = [
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
     (r'/w/contents/?', w.content.ContentListHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
-    (r'/w/ticket/orders/?', w.ticket.TicketOrderListHandler),
-    (r'/w/ticket/order/(?P<_id>[^\/]+)/tickets/unused?', w.ticket.TicketUnusedListHandler),
-    (r'/w/ticket/order/(?P<_id>[^\/]+)/tickets/used?', w.ticket.TicketUsedListHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/register/?', w.ticket.TicketRegisterHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/register/cancel/?', w.ticket.TicketRegisterCancelHandler),
     (r'/w/tickets/register/?', w.ticket.TicketMultiRegisterHandler),

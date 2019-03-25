@@ -39,6 +39,11 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'mobile',
+                'type': dict,
+                'default': None
+            },
+            {
                 'key': 'password',
                 'type': str,
                 'default': None

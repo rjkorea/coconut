@@ -14948,6 +14948,213 @@
 					]
 				},
 				{
+					"name": "/a/v2/ticket/type/(oid)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"초대권 S\",\n    \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n    \"sales_date\": {\n        \"start\": \"2019-01-15T05:00:00\",\n        \"end\": \"2019-02-14T09:00:00\"\n    },\n    \"fpfg\": {\n        \"limit\": 100\n    },\n    \"color\": \"tkit-mint\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"type",
+								"5c74fffa5f54710a7876cbf3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 not exist ticket type",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf4",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf4"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:07:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"not exist ticket type\",\n        \"code\": 2\n    }\n}"
+						},
+						{
+							"name": "400 invalid id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 27 Feb 2019 05:06:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid id\",\n        \"code\": 1\n    }\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"초대권 S\",\n    \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n    \"sales_date\": {\n        \"start\": \"2019-01-15T05:00:00\",\n        \"end\": \"2019-02-14T09:00:00\"\n    },\n    \"fpfg\": {\n        \"limit\": 100,\n        \"spread\": 1000\n    }\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 04 Mar 2019 06:50:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"nModified\": 1,\n        \"ok\": 1,\n        \"updatedExisting\": true,\n        \"n\": 1\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "/a/v2/ticket/types",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -15064,6 +15271,600 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"count\": 3,\n    \"data\": [\n        {\n            \"color\": \"ultra-bora\",\n            \"sales_date\": {\n                \"start\": 1551496800,\n                \"end\": 1551532200\n            },\n            \"price\": 20000,\n            \"desc\": {\n                \"value\": \"레드불 스폰서 초대권 입니다\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 1000\n            },\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"_id\": \"5c74fffa5f54710a7876cbf3\"\n        },\n        {\n            \"color\": \"tkit-coral\",\n            \"sales_date\": {\n                \"start\": 1551496800,\n                \"end\": 1551532200\n            },\n            \"price\": 20000,\n            \"desc\": {\n                \"value\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 1000\n            },\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"_id\": \"5c74fffa5f54710a7876cbf2\"\n        },\n        {\n            \"color\": \"tkit-mint\",\n            \"sales_date\": {\n                \"start\": 1547496000,\n                \"end\": 1550102400\n            },\n            \"price\": 0,\n            \"desc\": {\n                \"value\": \"스폰서, 스텝, 아티스트 전용\",\n                \"enabled\": true\n            },\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"sales\": {\n                \"count\": 0,\n                \"limit\": 100\n            },\n            \"name\": \"초대권 S\",\n            \"_id\": \"5c74fffa5f54710a7876cbf1\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/type/(oid)/info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3/info",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"type",
+								"5c74fffa5f54710a7876cbf3",
+								"info"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5c74fffa5f54710a7876cbf3/info",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type",
+										"5c74fffa5f54710a7876cbf3",
+										"info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 05 Mar 2019 09:17:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "Etag",
+									"value": "\"63307d5739f8c055aa77eef1a37b36ff98cc5044\""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"ticket_count\": 0,\n        \"spread\": 1000\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticket_type_oid\": \"5c74fffa5f54710a7876cbf3\",\n    \"qty\": 50,\n    \"name\": \"박티킷\",\n    \"mobile\": {\n    \t\"country_code\": \"82\",\n    \t\"number\": \"01032697178\"\n    },\n    \"sms\": \"https://devi.tkit.me:80/in/mphjLTh THE FINAL COUNTDOWN 2019 티켓링크입니다\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/order",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ticket_type_oid\": \"5c74fffa5f54710a7876cbf3\",\n    \"qty\": 50,\n    \"name\": \"박티킷\",\n    \"mobile\": {\n    \t\"country_code\": \"82\",\n    \t\"number\": \"01032697178\"\n    },\n    \"sms\": \"https://devi.tkit.me:80/in/mphjLTh THE FINAL COUNTDOWN 2019 티켓링크입니다\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/order",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Mar 2019 08:20:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"sms\": true,\n        \"ticket_count\": 50,\n        \"ticket_order_oid\": \"5c7f82ca5f54714f23b5286c\"\n    }\n}"
+						},
+						{
+							"name": "400 exceed available qty",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ticket_type_oid\": \"5c74fffa5f54710a7876cbf3\",\n    \"qty\": 50,\n    \"name\": \"박티킷\",\n    \"mobile\": {\n    \t\"country_code\": \"82\",\n    \t\"number\": \"01032697178\"\n    },\n    \"sms\": \"https://devi.tkit.me:80/in/mphjLTh THE FINAL COUNTDOWN 2019 티켓링크입니다\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/order",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"order"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Mar 2019 08:11:09 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": 3,\n        \"message\": \"exceed available qty\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/orders?start=0&size=10&ticket_type_oid=5c74fffa5f54710a7876cbf3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "ticket_type_oid",
+									"value": "5c74fffa5f54710a7876cbf3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/orders?start=0&size=10&ticket_type_oid=5c74fffa5f54710a7876cbf3",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "ticket_type_oid",
+											"value": "5c74fffa5f54710a7876cbf3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Mar 2019 08:02:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "672"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"abb2ab06ec1da09667d34ac1acef176338b28346\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 3,\n    \"data\": [\n        {\n            \"created_at\": 1551913334,\n            \"qty\": 5,\n            \"user_oid\": \"5c7f99d25f54715204f17beb\",\n            \"receiver\": {\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"_id\": \"5c80d0065f54715c801a4b48\"\n        },\n        {\n            \"created_at\": 1551913285,\n            \"qty\": 10,\n            \"user_oid\": \"5c7f99d25f54715204f17beb\",\n            \"receiver\": {\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"_id\": \"5c80cfd55f54715c801a4b3d\"\n        },\n        {\n            \"created_at\": 1551908642,\n            \"qty\": 50,\n            \"user_oid\": \"5c7f99d25f54715204f17beb\",\n            \"receiver\": {\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"_id\": \"5c80bdb25f54715c80d5c5c9\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/tickets?start=0&size=10&ticket_order_oid=5c80bdb25f54715c80d5c5c9",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "ticket_order_oid",
+									"value": "5c80bdb25f54715c80d5c5c9"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/tickets?start=0&size=10&ticket_order_oid=5c80bdb25f54715c80d5c5c9",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"tickets"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "ticket_order_oid",
+											"value": "5c80bdb25f54715c80d5c5c9"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "1723"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"119a6c034a439f19dc38580a993574e8b7c18d10\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Mar 2019 08:36:02 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5fb\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5fa\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f9\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f8\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f7\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f6\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f5\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f4\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f3\"\n        },\n        {\n            \"receive_user\": {\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"name\": \"박티킷\"\n            },\n            \"updated_at\": 1551908642,\n            \"_id\": \"5c80bdb25f54715c80d5c5f2\"\n        }\n    ],\n    \"count\": 50\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/history",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/history?ticket_oid=5b16266fba590e015ee4f2a5",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"history"
+							],
+							"query": [
+								{
+									"key": "ticket_oid",
+									"value": "5b16266fba590e015ee4f2a5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/history?ticket_oid=5b16266fba590e015ee4f2a5",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"history"
+									],
+									"query": [
+										{
+											"key": "ticket_oid",
+											"value": "5b16266fba590e015ee4f2a5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Etag",
+									"value": "\"c7c1e0e807587687be1c85ec820b2a42757e41ca\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Mar 2019 09:53:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n        \t\"last_name\": \"이\",\n            \"name\": \"예진\",\n            \"mobile\": {\n            \t\"country_code\": \"82\",\n            \t\"number\": \"01092465406\"\n            }\n        },\n        {\n        \t\"last_name\": \"강\",\n            \"name\": \"준호\",\n            \"mobile\": {\n            \t\"country_code\": \"82\",\n            \t\"number\": \"01099734220\"\n            }\n        }\n    ]\n}"
 						}
 					]
 				}
