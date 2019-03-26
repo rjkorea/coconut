@@ -35,6 +35,23 @@ class TicketRegisterHandler(JsonHandler):
             raise HTTPError(400, 'canceled ticket can\'t register')
         if ticket['status'] == TicketModel.Status.pay.name:
             raise HTTPError(400, 'paid ticket can\'t register')
+        ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'])
+        query = {
+            '$and': [
+                {'enabled': True},
+                {'ticket_type_oid': ticket['ticket_type_oid']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name}
+                    ]
+                }
+            ]
+        }
+        sales_count = await TicketModel.count(query)
+        if sales_count >= ticket_type['fpfg']['limit']:
+            raise HTTPError(400, 'excceed register limit')
         q = {
             '$and': [
                 {'ticket_type_oid': ticket['ticket_type_oid']},
@@ -52,22 +69,6 @@ class TicketRegisterHandler(JsonHandler):
         exist_ticket = await TicketModel.find_one(q)
         if exist_ticket:
             ticket_type = await TicketTypeModel.get_id(exist_ticket['ticket_type_oid'])
-            query = {
-                '$and': [
-                    {'enabled': True},
-                    {'ticket_type_oid': ticket_type['_id']},
-                    {
-                        '$or': [
-                            {'status': TicketModel.Status.register.name},
-                            {'status': TicketModel.Status.pay.name},
-                            {'status': TicketModel.Status.use.name}
-                        ]
-                    }
-                ]
-            }
-            sales_count = await TicketModel.count(query)
-            if sales_count >= ticket_type['fpfg']['limit']:
-                raise HTTPError(400, 'excceed register limit')
             if 'duplicated_registration' not in ticket_type or not ticket_type['duplicated_registration']:
                 raise HTTPError(400, 'Already registered ticket type on this content')
         email = self.json_decoded_body.get('email', None)
