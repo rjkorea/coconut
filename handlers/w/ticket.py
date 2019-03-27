@@ -35,6 +35,23 @@ class TicketRegisterHandler(JsonHandler):
             raise HTTPError(400, 'canceled ticket can\'t register')
         if ticket['status'] == TicketModel.Status.pay.name:
             raise HTTPError(400, 'paid ticket can\'t register')
+        ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'])
+        query = {
+            '$and': [
+                {'enabled': True},
+                {'ticket_type_oid': ticket['ticket_type_oid']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name}
+                    ]
+                }
+            ]
+        }
+        sales_count = await TicketModel.count(query)
+        if sales_count >= ticket_type['fpfg']['limit']:
+            raise HTTPError(400, 'excceed register limit')
         q = {
             '$and': [
                 {'ticket_type_oid': ticket['ticket_type_oid']},
@@ -223,6 +240,24 @@ class TicketListHandler(JsonHandler):
         result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1), ('price', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
             res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            query = {
+                '$and': [
+                    {'enabled': True},
+                    {'ticket_type_oid': res['ticket_type']['_id']},
+                    {
+                        '$or': [
+                            {'status': TicketModel.Status.register.name},
+                            {'status': TicketModel.Status.pay.name},
+                            {'status': TicketModel.Status.use.name}
+                        ]
+                    }
+                ]
+            }
+            sales_count = await TicketModel.count(query)
+            res['ticket_type']['sales'] = {
+                'count': sales_count,
+                'limit': res['ticket_type']['fpfg']['limit']
+            }
             res.pop('ticket_type_oid')
             res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
             res.pop('ticket_order_oid')
@@ -775,6 +810,24 @@ class TicketTypeListMeHandler(JsonHandler):
             content = await ContentModel.get_id(ticket_type['content_oid'])
             a['content'] = {
                 'name': content['name']
+            }
+            query = {
+                '$and': [
+                    {'enabled': True},
+                    {'ticket_type_oid': ticket_type['_id']},
+                    {
+                        '$or': [
+                            {'status': TicketModel.Status.register.name},
+                            {'status': TicketModel.Status.pay.name},
+                            {'status': TicketModel.Status.use.name}
+                        ]
+                    }
+                ]
+            }
+            sales_count = await TicketModel.count(query)
+            a['sales'] = {
+                'count': sales_count,
+                'limit': ticket_type['fpfg']['limit']
             }
         self.response['data'] = aggs
         self.response['count'] = len(aggs)

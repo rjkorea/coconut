@@ -226,13 +226,10 @@ class DashboardContentHandler(JsonHandler):
                 }
             },
             {
-                '$unwind': {'path': '$days'}
-            },
-            {
                 '$group': {
                     '_id': '$content_oid',
                     'revenue': {
-                        '$sum': '$days.fee.price'
+                        '$sum': '$price'
                     },
                     'count': {
                         '$sum': 1
