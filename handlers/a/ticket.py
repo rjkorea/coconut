@@ -404,7 +404,7 @@ class TicketHandler(JsonHandler):
         if 'history_send_user_oids' in self.response['data']:
             self.response['data']['history_send_users'] = list()
             for user_oid in self.response['data']['history_send_user_oids']:
-                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile_number')])
+                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile')])
                 self.response['data']['history_send_users'].append(user)
             self.response['data'].pop('history_send_user_oids')
         self.write_json()
@@ -454,14 +454,10 @@ class TicketEnterUserHandler(JsonHandler):
         query = {
             '_id': ObjectId(_id)
         }
-        days = self.json_decoded_body['days']
-        for d in days:
-            if entered:
-                d.entered_at = datetime.utcnow()
         document = {
             '$set': {
-                'status': TicketModel.Status.use,
-                'days': days
+                'status': TicketModel.Status.use.name,
+                'updated_at': datetime.utcnow()
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
@@ -610,9 +606,9 @@ class TicketLogHandler(JsonHandler):
         ticket_log = await TicketLogModel.find_one({'_id': ObjectId(_id)})
         if not ticket_log:
             raise HTTPError(400, 'not exist ticket log')
-        ticket_log['send_user'] = await UserModel.get_id(ticket_log['send_user_oid'], fields=[('name'), ('mobile_number')])
+        ticket_log['send_user'] = await UserModel.get_id(ticket_log['send_user_oid'], fields=[('name'), ('mobile.number')])
         ticket_log.pop('send_user_oid')
-        ticket_log['receive_user'] = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('name'), ('mobile_number')])
+        ticket_log['receive_user'] = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('name'), ('mobile.number')])
         ticket_log.pop('receive_user_oid')
         ticket_log['content'] = await ContentModel.get_id(ticket_log['content_oid'], fields=[('name')])
         ticket_log.pop('content_oid')
@@ -620,7 +616,7 @@ class TicketLogHandler(JsonHandler):
         for oid in ticket_log['ticket_oids']:
             tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid'), ('receive_user_oid'), ('status')])
             ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields=[('name'), ('desc')])
-            receive_user = await UserModel.get_id(tm['receive_user_oid'], fields=[('name'), ('mobile_number')])
+            receive_user = await UserModel.get_id(tm['receive_user_oid'], fields=[('name'), ('mobile.number')])
             ticket = {
                 '_id': tm['_id'],
                 'ticket_type': ttm,
