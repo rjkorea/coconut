@@ -23,7 +23,7 @@ class UserListHandler(JsonHandler):
             q['$or'] = [
                 {'name': {'$regex': parsed_args['q']}},
                 {'email': {'$regex': parsed_args['q']}},
-                {'mobile_number': {'$regex': parsed_args['q']}},
+                {'mobile.number': {'$regex': parsed_args['q']}},
                 {'gender': {'$regex': parsed_args['q']}},
                 {'birthday': {'$regex': parsed_args['q']}},
                 {'role': {'$regex': parsed_args['q']}}

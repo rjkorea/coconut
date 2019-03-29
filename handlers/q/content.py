@@ -17,7 +17,7 @@ class ContentListMeHandler(JsonHandler):
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         count = await ContentModel.count(query={'company_oid': self.current_user['company_oid'], 'enabled': True})
-        result = await ContentModel.find(query={'company_oid': self.current_user['company_oid'], 'enabled': True}, fields=[('name'), ('when'), ('place'), ('image'), ('company_oid')], skip=parsed_args['start'], limit=parsed_args['size'])
+        result = await ContentModel.find(query={'company_oid': self.current_user['company_oid'], 'enabled': True}, fields=[('name'), ('when'), ('place'), ('images'), ('company_oid')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()

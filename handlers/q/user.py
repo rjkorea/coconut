@@ -17,7 +17,7 @@ class UserHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        user = await UserModel.find_one({'_id': ObjectId(_id)}, fields=[('name'), ('mobile_number')])
+        user = await UserModel.find_one({'_id': ObjectId(_id)}, fields=[('name'), ('mobile')])
         if not user:
             raise HTTPError(400, 'not exist _id')
         self.response['data'] = user
