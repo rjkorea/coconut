@@ -40,11 +40,11 @@ class TicketListUserHandler(JsonHandler):
             ]
         }
         count = await TicketModel.count(q)
-        tickets = await TicketModel.find(query=q, fields={'content_oid': True, 'ticket_type_oid': True, 'status': True, 'days': True}, skip=parsed_args['start'], limit=parsed_args['size'])
+        tickets = await TicketModel.find(query=q, fields={'content_oid': True, 'ticket_type_oid': True, 'status': True, 'price': True}, skip=parsed_args['start'], limit=parsed_args['size'])
         for t in tickets:
             tt = await TicketTypeModel.get_id(t['ticket_type_oid'], fields={'_id': False, 'name': True, 'desc': True})
             t['ticket_type'] = tt
-            c = await ContentModel.get_id(t['content_oid'], fields={'_id': False, 'name': True, 'image.logo.m': True})
+            c = await ContentModel.get_id(t['content_oid'], fields={'_id': False, 'name': True})
             t['content'] = c
         self.response['count'] = count
         self.response['data'] = tickets
@@ -64,24 +64,13 @@ class TicketEnterUserHandler(JsonHandler):
         ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
         if not ticket:
             raise HTTPError(400, 'not exist ticket')
-        fee_method = self.json_decoded_body.get('fee_method', None)
-        days = [{
-                'entered': True,
-                'day': 1,
-                'entered_at': datetime.utcnow()
-        }]
-        if 'fee' in ticket['days'][0]:
-            days[0]['fee'] = {
-                'price': ticket['days'][0]['fee']['price'],
-                'method': fee_method
-            }
         query = {
             '_id': ObjectId(_id)
         }
         document = {
             '$set': {
                 'status': TicketModel.Status.use.name,
-                'days': days
+                'updated_at': datetime.utcnow()
             }
         }
         self.response['data'] = await TicketModel.update(query, document)
