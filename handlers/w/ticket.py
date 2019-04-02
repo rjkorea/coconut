@@ -660,7 +660,7 @@ class TicketPaymentCompleteHandler(JsonHandler):
         if payment['status'] == 'paid':
             query = {
                 '_id': ObjectId(_id),
-                'status': TicketModel.Status.register.name
+                'status': TicketModel.Status.send.name
             }
             document = {
                 '$set': {
