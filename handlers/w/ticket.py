@@ -86,7 +86,10 @@ class TicketRegisterHandler(JsonHandler):
                 'updated_at': datetime.utcnow()
             }
         }
-        self.response['data'] = await TicketModel.update(query, document)
+        result = await TicketModel.update(query, document)
+        if result['nModified'] == 1:
+            await TicketTypeModel.update({'_id': ticket['ticket_type_oid']}, {'$inc': {'fpfg.now': 1}})
+        self.response['data'] = result
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -240,9 +243,8 @@ class TicketListHandler(JsonHandler):
         result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1), ('price', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
             res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
-            # TODO: update count to ticket_type['fpfg']['now']
             res['ticket_type']['sales'] = {
-                'count': 0,
+                'count': res['ticket_type']['fpfg']['now'],
                 'limit': res['ticket_type']['fpfg']['limit']
             }
             res.pop('ticket_type_oid')
@@ -732,7 +734,10 @@ class TicketRegisterCancelHandler(JsonHandler):
                 'updated_at': datetime.utcnow()
             }
         }
-        self.response['data'] = await TicketModel.update(query, document)
+        result = await TicketModel.update(query, document)
+        if result['nModified'] == 1:
+            await TicketTypeModel.update({'_id': ticket['ticket_type_oid']}, {'$inc': {'fpfg.now': -1}})
+        self.response['data'] = result
         self.write_json()
 
     async def options(self, *args, **kwargs):
