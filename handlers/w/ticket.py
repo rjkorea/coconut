@@ -589,6 +589,9 @@ class TicketPaymentCancelHandler(JsonHandler):
         reason = self.json_decoded_body.get('reason', None)
         if not reason:
             raise HTTPError(400, 'invalid reason')
+        ticket = await TicketModel.get_id(ObjectId(_id))
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
         try:
             response = IamportService().client.cancel(reason, merchant_uid=_id)
         except IamportService().client.ResponseError as e:
@@ -603,7 +606,9 @@ class TicketPaymentCancelHandler(JsonHandler):
                     'updated_at': datetime.utcnow()
                 }
             }
-            await TicketModel.update(query, document, False, False)
+            result = await TicketModel.update(query, document, False, False)
+            if result['nModified'] == 1:
+                await TicketTypeModel.update({'_id': ticket['ticket_type_oid']}, {'$inc': {'fpfg.now': -1}})
         data = dict(
             name=response['name'],
             buyer_name=response['buyer_name'],
@@ -629,6 +634,9 @@ class TicketPaymentCompleteHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid ticket_oid')
+        ticket = await TicketModel.get_id(ObjectId(_id))
+        if not ticket:
+            raise HTTPError(400, 'not exsit ticket')
         payment = IamportService().client.find(merchant_uid=_id)
         if payment == {}:
             raise HTTPError(400, 'not exist payment info')
@@ -643,7 +651,10 @@ class TicketPaymentCompleteHandler(JsonHandler):
                     'updated_at': datetime.utcnow()
                 }
             }
-            self.response['data'] = await TicketModel.update(query, document)
+            result = await TicketModel.update(query, document)
+            if result['nModified'] == 1:
+                await TicketTypeModel.update({'_id': ticket['ticket_type_oid']}, {'$inc': {'fpfg.now': 1}})
+            self.response['data'] = result
             self.write_json()
         else:
             raise HTTPError(400, 'status is not paid on iamport')
@@ -665,16 +676,25 @@ class TicketPaymentUpdateHandler(JsonHandler):
         if payment == {}:
             raise HTTPError(400, 'not exist payment info')
         if payment['status'] == 'paid':
-            query = {
-                '_id': ObjectId(merchant_uid)
-            }
-            document = {
-                '$set': {
-                    'status': TicketModel.Status.pay.name,
-                    'updated_at': datetime.utcnow()
+            ticket = await TicketModel.get_id(ObjectId(merchant_uid))
+            if not ticket:
+                raise HTTPError(400, 'not exist ticket')
+            if ticket['status'] == TicketModel.Status.send.name:
+                query = {
+                    '_id': ObjectId(merchant_uid)
                 }
-            }
-            self.response['data'] = await TicketModel.update(query, document)
+                document = {
+                    '$set': {
+                        'status': TicketModel.Status.pay.name,
+                        'updated_at': datetime.utcnow()
+                    }
+                }
+                result = await TicketModel.update(query, document)
+                if result['nModified'] == 1:
+                    await TicketTypeModel.update({'_id': ticket['ticket_type_oid']}, {'$inc': {'fpfg.now': 1}})
+                self.response['data'] = result
+            elif ticket['status'] == TicketModel.Status.pay.name:
+                self.response['data'] = {'message': 'Already updated pay of ticket status'}
             self.write_json()
         else:
             raise HTTPError(400, 'status is not paid on iamport')
