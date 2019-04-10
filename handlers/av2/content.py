@@ -302,9 +302,9 @@ class ContentHandler(JsonHandler):
                 end=when_end
             ),
             host=dict(
-                host_name=host_name,
-                host_email=host_email,
-                host_tel=host_tel
+                name=host_name,
+                email=host_email,
+                tel=host_tel
             ),
             site_url=site_url,
             video_url=video_url,
