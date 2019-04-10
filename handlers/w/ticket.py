@@ -468,9 +468,9 @@ class TicketLogsHandler(JsonHandler):
         count = await TicketLogModel.count(query=q)
         result = await TicketLogModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('mobile')])
+            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('last_name'), ('mobile')])
             res.pop('send_user_oid')
-            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile')])
+            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile')])
             res.pop('receive_user_oid')
             res['tickets'] = list()
             for oid in res['ticket_oids']:
