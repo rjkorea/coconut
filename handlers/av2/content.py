@@ -193,7 +193,7 @@ class ContentPostHandler(MultipartFormdataHandler):
                     ]
                 }
             )
-            doc['images.%s.m'%k[-1]] = 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId'])
+            doc['images.%s.m'%k[-1]] = 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId'])
             doc['images.%s.size'%k[-1]] = len(v[0]['body'])
         return doc
 
@@ -379,7 +379,7 @@ class ContentImageMainHandler(MultipartFormdataHandler):
                 ]
             }
         )
-        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']), len(file[0]['body'])
+        return 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId']), len(file[0]['body'])
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
@@ -440,7 +440,7 @@ class ContentImageExtraHandler(MultipartFormdataHandler):
                 ]
             }
         )
-        return 'https://s3.ap-northeast-2.amazonaws.com/%s/%s?versionId=%s' % (config['aws']['res_bucket'], key, response['VersionId']), len(file[0]['body'])
+        return 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId']), len(file[0]['body'])
 
     async def delete(self, *args, **kwargs):
         _id = kwargs.get('_id', None)
