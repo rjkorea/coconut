@@ -171,8 +171,10 @@ class UserHandler(JsonHandler):
     @parse_argument([('mobile_country_code', str, None), ('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code']:
+        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code'] or len(parsed_args['mobile_number']) < 10:
             raise HTTPError(400, 'invalid mobile_number and mobile_country_code')
+        if parsed_args['mobile_country_code'] == '82' and not parsed_args['mobile_number'].startswith('010'):
+            raise HTTPError(400, 'invalid Korea mobile number')
         q = {
             'mobile.country_code': parsed_args['mobile_country_code'],
             'mobile.number': parsed_args['mobile_number'],
