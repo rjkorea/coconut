@@ -88,8 +88,8 @@ class ContentPostHandler(MultipartFormdataHandler):
             place=dict(
                 name=place_name,
                 url=place_url,
-                x=place_x,
-                y=place_y
+                x=float(place_x),
+                y=float(place_y)
             ),
             when=dict(
                 start=when_start,
