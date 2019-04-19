@@ -28,9 +28,6 @@ class RegisterHandler(JsonHandler):
         duplicated_user = await UserModel.find_one({'mobile.country_code': mobile_country_code, 'mobile.number': mobile_number, 'enabled': True})
         if duplicated_user and 'password' in duplicated_user:
             raise HTTPError(400, 'exist mobile number')
-        email = self.json_decoded_body.get('email', None)
-        if not email or len(email) == 0:
-            raise HTTPError(400, 'invalid email')
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
@@ -53,7 +50,6 @@ class RegisterHandler(JsonHandler):
                     country_code=mobile_country_code,
                     number=mobile_number
                 ),
-                email=email,
                 name=name,
                 last_name=last_name,
                 birthday=birthday,
@@ -65,11 +61,6 @@ class RegisterHandler(JsonHandler):
                 password=hashers.make_password(password),
                 updated_at=datetime.utcnow()
             )
-            sns = self.json_decoded_body.get('sns', None)
-            if sns:
-                if 'type' not in sns or 'id' not in sns:
-                    raise HTTPError(400, 'invalid sns(type and id)')
-                doc['sns'] = sns
             await UserModel.update(
                 {'_id': duplicated_user['_id'], 'enabled': True},
                 {
@@ -83,18 +74,12 @@ class RegisterHandler(JsonHandler):
                     country_code=mobile_country_code,
                     number=mobile_number
                 ),
-                email=email,
                 name=name,
                 last_name=last_name,
                 birthday=birthday,
                 gender=gender,
                 terms={'privacy': True, 'policy': True}
             ))
-            sns = self.json_decoded_body.get('sns', None)
-            if sns:
-                if 'type' not in sns or 'id' not in sns:
-                    raise HTTPError(400, 'invalid sns(type and id)')
-                user.data['sns'] = sns
             user.set_password(password)
             await user.insert()
         self.response['data'] = 'OK'
