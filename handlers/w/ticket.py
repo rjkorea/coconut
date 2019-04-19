@@ -18,6 +18,67 @@ from models import create_user
 from services.iamport import IamportService
 
 
+class TicketMeRegisterValidateHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid _id')
+        ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
+        if not ticket:
+            raise HTTPError(400, 'not exist ticket')
+        if ticket['status'] == TicketModel.Status.register.name:
+            raise HTTPError(400, 'registered ticket can\'t register')
+        if ticket['status'] == TicketModel.Status.use.name:
+            raise HTTPError(400, 'used ticket can\'t register')
+        if ticket['status'] == TicketModel.Status.cancel.name:
+            raise HTTPError(400, 'canceled ticket can\'t register')
+        if ticket['status'] == TicketModel.Status.pay.name:
+            raise HTTPError(400, 'paid ticket can\'t register')
+        ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'])
+        query = {
+            '$and': [
+                {'enabled': True},
+                {'ticket_type_oid': ticket['ticket_type_oid']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name}
+                    ]
+                }
+            ]
+        }
+        sales_count = await TicketModel.count(query)
+        if sales_count >= ticket_type['fpfg']['limit']:
+            raise HTTPError(400, 'excceed register limit')
+        q = {
+            '$and': [
+                {'ticket_type_oid': ticket['ticket_type_oid']},
+                {'content_oid': ticket['content_oid']},
+                {'receive_user_oid': self.current_user['_id']},
+                {
+                    '$or': [
+                        {'status': TicketModel.Status.register.name},
+                        {'status': TicketModel.Status.pay.name},
+                        {'status': TicketModel.Status.use.name},
+                    ]
+                }
+            ]
+        }
+        exist_ticket = await TicketModel.find_one(q)
+        if exist_ticket:
+            ticket_type = await TicketTypeModel.get_id(exist_ticket['ticket_type_oid'])
+            if 'duplicated_registration' not in ticket_type or not ticket_type['duplicated_registration']:
+                raise HTTPError(400, 'Already registered ticket type on this content')
+        self.response['data'] = dict(validate=True)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class TicketRegisterHandler(JsonHandler):
     @user_auth_async
     async def put(self, *args, **kwargs):

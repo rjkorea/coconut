@@ -129,6 +129,7 @@ url_patterns = [
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
     (r'/w/contents/?', w.content.ContentListHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
+    (r'/w/ticket/(?P<_id>[^\/]+)/me/register/validate?', w.ticket.TicketMeRegisterValidateHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/register/?', w.ticket.TicketRegisterHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/register/cancel/?', w.ticket.TicketRegisterCancelHandler),
     (r'/w/tickets/register/?', w.ticket.TicketMultiRegisterHandler),
