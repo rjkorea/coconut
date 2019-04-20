@@ -500,7 +500,7 @@ class TicketSendUserListHandler(JsonHandler):
         send_user_dict = dict()
         for r in result:
             if 'mobile' in r:
-                send_user_dict['%s%s' % (r['mobile']['country_code'], r['mobile']['number'][1:])] = {
+                send_user_dict['%s%s' % (r['mobile']['country_code'], r['mobile']['number'])] = {
                     '_id': r['_id'],
                     'name': r['name'],
                     'created_at': r['created_at']
