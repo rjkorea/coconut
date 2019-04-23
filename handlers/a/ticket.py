@@ -572,9 +572,9 @@ class TicketLogListHandler(JsonHandler):
         count = await TicketLogModel.count(query=q)
         result = await TicketLogModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('mobile_number')])
+            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('last_name'), ('mobile_number')])
             res.pop('send_user_oid')
-            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile_number')])
+            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile_number')])
             res.pop('receive_user_oid')
             res['content'] = await ContentModel.get_id(res['content_oid'], fields=[('name')])
             res.pop('content_oid')
@@ -606,9 +606,9 @@ class TicketLogHandler(JsonHandler):
         ticket_log = await TicketLogModel.find_one({'_id': ObjectId(_id)})
         if not ticket_log:
             raise HTTPError(400, 'not exist ticket log')
-        ticket_log['send_user'] = await UserModel.get_id(ticket_log['send_user_oid'], fields=[('name'), ('mobile.number')])
+        ticket_log['send_user'] = await UserModel.get_id(ticket_log['send_user_oid'], fields=[('name'), ('last_name'), ('mobile.number')])
         ticket_log.pop('send_user_oid')
-        ticket_log['receive_user'] = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('name'), ('mobile.number')])
+        ticket_log['receive_user'] = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile.number')])
         ticket_log.pop('receive_user_oid')
         ticket_log['content'] = await ContentModel.get_id(ticket_log['content_oid'], fields=[('name')])
         ticket_log.pop('content_oid')
@@ -616,7 +616,7 @@ class TicketLogHandler(JsonHandler):
         for oid in ticket_log['ticket_oids']:
             tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid'), ('receive_user_oid'), ('status')])
             ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields=[('name'), ('desc')])
-            receive_user = await UserModel.get_id(tm['receive_user_oid'], fields=[('name'), ('mobile.number')])
+            receive_user = await UserModel.get_id(tm['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile.number')])
             ticket = {
                 '_id': tm['_id'],
                 'ticket_type': ttm,

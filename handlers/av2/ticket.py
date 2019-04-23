@@ -166,12 +166,12 @@ class TicketTypeHandler(JsonHandler):
         if fpfg['spread'] and fpfg['spread'] <= fpfg['limit']:
             raise HTTPError(400, self.set_error(1, 'invalid fpfg (spread more than limit)'))
         if 'limit' in fpfg and fpfg['limit'] <= sales_count:
-            raise HTTPError(400, set_error(3, 'can\'t set fpfg.limit (sold ticket count: %s)' % sales_count))
+            raise HTTPError(400, self.set_error(3, 'can\'t set fpfg.limit (sold ticket count: %s)' % sales_count))
         else:
             set_doc['fpfg.limit'] = fpfg['limit']
         spread_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
         if 'spread' in fpfg and isinstance(fpfg['spread'], int) and fpfg['spread'] <= spread_count:
-            raise HTTPError(400, set_error(3, 'can\'t set fpfg.spread (spread ticket count: %s)' % spread_count))
+            raise HTTPError(400, self.set_error(3, 'can\'t set fpfg.spread (spread ticket count: %s)' % spread_count))
         else:
             set_doc['fpfg.spread'] = fpfg['spread']
         updated = await TicketTypeModel.update({'_id': ticket_type['_id']}, {'$set': set_doc}, False, False)
@@ -255,8 +255,8 @@ class TicketOrderHandler(JsonHandler):
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         qty = self.json_decoded_body.get('qty', None)
-        if not qty:
-            raise HTTPError(400, self.set_error(1, 'invalid qty'))
+        if not qty or not isinstance(qty, int) or qty > 10000:
+            raise HTTPError(400, self.set_error(1, 'invalid qty (max: 10,000)'))
         ticket_count = await TicketModel.count({'ticket_type_oid': ticket_type['_id'], 'enabled': True})
         if ticket_type['fpfg']['spread'] and qty > (ticket_type['fpfg']['spread'] - ticket_count):
             raise HTTPError(400, self.set_error(3, 'exceed available qty'))

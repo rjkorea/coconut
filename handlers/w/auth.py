@@ -28,9 +28,6 @@ class RegisterHandler(JsonHandler):
         duplicated_user = await UserModel.find_one({'mobile.country_code': mobile_country_code, 'mobile.number': mobile_number, 'enabled': True})
         if duplicated_user and 'password' in duplicated_user:
             raise HTTPError(400, 'exist mobile number')
-        email = self.json_decoded_body.get('email', None)
-        if not email or len(email) == 0:
-            raise HTTPError(400, 'invalid email')
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, 'invalid name')
@@ -53,7 +50,6 @@ class RegisterHandler(JsonHandler):
                     country_code=mobile_country_code,
                     number=mobile_number
                 ),
-                email=email,
                 name=name,
                 last_name=last_name,
                 birthday=birthday,
@@ -65,11 +61,6 @@ class RegisterHandler(JsonHandler):
                 password=hashers.make_password(password),
                 updated_at=datetime.utcnow()
             )
-            sns = self.json_decoded_body.get('sns', None)
-            if sns:
-                if 'type' not in sns or 'id' not in sns:
-                    raise HTTPError(400, 'invalid sns(type and id)')
-                doc['sns'] = sns
             await UserModel.update(
                 {'_id': duplicated_user['_id'], 'enabled': True},
                 {
@@ -83,18 +74,12 @@ class RegisterHandler(JsonHandler):
                     country_code=mobile_country_code,
                     number=mobile_number
                 ),
-                email=email,
                 name=name,
                 last_name=last_name,
                 birthday=birthday,
                 gender=gender,
                 terms={'privacy': True, 'policy': True}
             ))
-            sns = self.json_decoded_body.get('sns', None)
-            if sns:
-                if 'type' not in sns or 'id' not in sns:
-                    raise HTTPError(400, 'invalid sns(type and id)')
-                user.data['sns'] = sns
             user.set_password(password)
             await user.insert()
         self.response['data'] = 'OK'
@@ -171,8 +156,10 @@ class UserHandler(JsonHandler):
     @parse_argument([('mobile_country_code', str, None), ('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code']:
+        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code'] or len(parsed_args['mobile_number']) < 10:
             raise HTTPError(400, 'invalid mobile_number and mobile_country_code')
+        if parsed_args['mobile_country_code'] == '82' and not parsed_args['mobile_number'].startswith('010'):
+            raise HTTPError(400, 'invalid Korea mobile number')
         q = {
             'mobile.country_code': parsed_args['mobile_country_code'],
             'mobile.number': parsed_args['mobile_number'],

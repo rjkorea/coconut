@@ -222,17 +222,20 @@ def list_tickets(csvfile, jsonfile, mongo, dryrun):
         pprint('deploy tickets')
         for i, line in enumerate(res):
             name = line['name'].strip()
-            mobile_number = '82%s' % line['mobile_number'].strip().replace(' ', '').replace('-', '')[1:]
-            if len(mobile_number) != 12:
+            mobile_number = line['mobile_number'].strip().replace(' ', '').replace('-', '')
+            if len(mobile_number) != 11:
                 except_users.append({'name': name, 'mobile_number': mobile_number})
                 continue
-            user = mongo_client['coconut']['user'].find_one({'name': name, 'mobile_number': mobile_number})
+            user = mongo_client['coconut']['user'].find_one({'mobile.country_code': '82', 'mobile.number': mobile_number})
             if user:
                 user_oid = user['_id']
             else:
                 user_oid = mongo_client['coconut']['user'].insert({
                     'name': name,
-                    'mobile_number': mobile_number,
+                    'mobile': {
+                        'country_code': '82',
+                        'number': mobile_number
+                    },
                     'terms': {
                         'policy': False,
                         'privacy': False
@@ -248,22 +251,19 @@ def list_tickets(csvfile, jsonfile, mongo, dryrun):
                 'admin_oid': ObjectId(ticket_order['admin_oid']),
                 'user_oid': user_oid,
                 'qty': ticket_order['qty'],
-                'expiry_date': datetime.strptime(ticket_order['expiry_date'], '%Y-%m-%dT%H:%M:%S'),
                 'enabled': True,
                 'created_at': now,
                 'updated_at': now,
                 'receiver': {
                     'name': name,
-                    'mobile_number': mobile_number,
-                    'sms': {
-                        'count': 1,
-                        'sent_at': now
+                    'mobile': {
+                        'country_code': '82',
+                        'number': mobile_number
                     }
                 }
             }
-            if 'fee' in ticket_order:
-                doc['fee'] = ticket_order['fee']
             ticket_order_oid = mongo_client['coconut']['ticket_order'].insert(doc)
+            ticket_type = mongo_client['coconut']['ticket_type'].find_one({'_id': ObjectId(ticket_order['ticket_type_oid'])})
             for t in range(ticket_order['qty']):
                 doc = {
                     'type': 'network',
@@ -272,16 +272,11 @@ def list_tickets(csvfile, jsonfile, mongo, dryrun):
                     'ticket_order_oid': ticket_order_oid,
                     'receive_user_oid': user_oid,
                     'status': 'send',
-                    'days': [{
-                        'entered': False,
-                        'day': 1
-                    }],
+                    'price': ticket_type['price'],
                     'enabled': True,
                     'created_at': now,
                     'updated_at': now
                 }
-                if 'fee' in ticket_order:
-                    doc['days'][0]['fee'] = ticket_order['fee']
                 ticket_oid = mongo_client['coconut']['ticket'].insert(doc)
             pprint({'index': i, 'name': name, 'mobile_number': mobile_number})
         pprint('except users')

@@ -53,7 +53,8 @@ _settings = dict(
     aws=dict(
         access_key='AKIAJRLZGNWWWHRYRG7Q',
         secret_key='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',
-        res_bucket='res.tkit.me'
+        res_bucket='res.tkit.me',
+        cloudfront='d3gdb0v1epkb6b.cloudfront.net'
     ),
     slack=dict(
         oauth_access_token='xoxp-24065128659-73904001223-457101199316-939af9f7bd0df067a789032615d2ad8f'

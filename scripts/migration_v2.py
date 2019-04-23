@@ -445,6 +445,51 @@ def tickets(mongo, dryrun):
             mongo_client['coconut']['ticket'].update({'_id': ticket['_id']}, set_doc, False, False)
 
 
+@click.group()
+def content_image():
+    pass
+
+@content_image.command()
+@click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('-s', '--src', help='source image url')
+@click.option('-d', '--dst', help='destination image url')
+@click.option('--dryrun', is_flag=True, help='dry run test')
+@click.confirmation_option(help='Are you sure your migration?')
+def content_images(mongo, src, dst, dryrun):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mongodb: %s' % (mongo), fg='green')
+    click.secho('source: %s' % (src), fg='green')
+    click.secho('destination: %s' % (dst), fg='green')
+    click.secho('dry run test %s' % dryrun, fg='red')
+    if mongo and src and dst:
+        mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        cursor = mongo_client['coconut']['content'].find({})
+        while cursor.alive:
+            content = cursor.next()
+            set_doc = dict()
+            unset_doc = dict()
+            for i, line in enumerate(content['images']):
+                if line['m']:
+                    if line['m'].find(src):
+                        set_doc['images.%s.m' % i] = line['m'].replace(src, dst)
+                    else:
+                        continue
+                else:
+                    unset_doc['images.%s' % i] = 1
+            if dryrun:
+                pprint(set_doc)
+                pprint(unset_doc)
+            else:
+                update = {
+                    '$set': set_doc
+                }
+                if unset_doc:
+                    update['$unset'] = unset_doc
+                mongo_client['coconut']['content'].update({'_id': content['_id']}, update, False, False)
+    else:
+        pprint('invalid parameters')
+
+
 if __name__ == '__main__':
-    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile, ticket_order, ticket])
+    cli = click.CommandCollection(name='migration_v2', sources=[content, ticket_type, viral_ticket_count, none_user, umf2018_user, tn_user, tkit_kr_user, user_mobile, ticket_order, ticket, content_image])
     cli()
