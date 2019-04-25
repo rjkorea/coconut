@@ -122,6 +122,8 @@ class ContentPostHandler(MultipartFormdataHandler):
             )
         if self.json_decoded_body.get('desc', None):
             doc['desc'] = self.json_decoded_body.get('desc')
+        if self.json_decoded_body.get('staff_auth_code', None):
+            doc['staff_auth_code'] = self.json_decoded_body.get('staff_auth_code')
         if comments_type:
             doc['comments']['type'] = comments_type
         if self.json_decoded_body.get('comments_private', False):
@@ -279,6 +281,7 @@ class ContentHandler(JsonHandler):
         video_url = self.json_decoded_body.get('video_url', None)
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
+        staff_auth_code = self.json_decoded_body.get('staff_auth_code', None)
         comments_private = self.json_decoded_body.get('comments_private', False)
         if comments_private == 'true':
             comments_private = True
@@ -312,6 +315,7 @@ class ContentHandler(JsonHandler):
                 enabled=True,
                 message=notice_message
             ),
+            staff_auth_code=staff_auth_code,
             comments=dict(
                 type=comments_type,
                 is_private=comments_private
