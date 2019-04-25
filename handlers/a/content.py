@@ -212,7 +212,7 @@ class ContentPostHandler(JsonHandler):
             'when': when,
             'tags': tags,
             'sms': {
-                'message': 'http://%s:%d/in/%s 기본티켓링크' % (config['web']['host'], config['web']['port'], short_id)
+                'message': 'http://%s:%d/in/%s 친구가 보낸 초대장이 도착했습니다. 확인해주세요.' % (config['web']['host'], config['web']['port'], short_id)
             },
             'image': {
                 'poster': {
