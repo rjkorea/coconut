@@ -61,30 +61,36 @@ def user_ticket():
 @click.option('-i', '--contentid', help='content id')
 @click.option('--dryrun', is_flag=True, help='dry run test')
 @click.confirmation_option(help='Are you sure you import to mongodb?')
-def user_tickets(csvfile, mongo, contentid, status, fee, dryrun):
+def user_tickets(csvfile, mongo, contentid, dryrun):
     click.secho('= params info =', fg='cyan')
     click.secho('csvfile: %s' % (csvfile), fg='green')
     click.secho('mongodb: %s' % (mongo), fg='green')
     now = datetime.utcnow()
-    if csvfile and mongo and contentid and status:
-        fieldnames = ['name', 'mobile_number']
+    if csvfile and mongo and contentid:
+        fieldnames = ['name', 'mobile_number', 'gender', 'birthday', 'status']
         writer = csv.writer(open(csvfile, 'w'))
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
-        ticket_orders = mongo_client['coconut']['ticket_order'].find({'content_oid': ObjectId(contentid), 'fee.price': {'$exists': True}}, [('_id')])
-        if fee:
-            cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status, 'ticket_order_oid': {'$in': [to['_id'] for to in ticket_orders]}})
-        else:
-            cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid), 'status': status})
-        users_map = dict()
+        cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid)})
         while cursor.alive:
             doc = cursor.next()
             user = mongo_client['coconut']['user'].find_one({'_id': doc['receive_user_oid']})
-            users_map[user['mobile_number']] = user['name']
-        if dryrun:
-            pprint(users_map)
-        else:
-            for user in users_map.items():
-                writer.writerow([user[0].replace('8210', '010'), user[1]])
+            if 'last_name' in user:
+                name = user['last_name'] + user['name']
+            else:
+                name = user['name']
+            if 'gender' in user:
+                gender = user['gender']
+            else:
+                gender = None
+            if 'birthday' in user:
+                birthday = user['birthday']
+            else:
+                birthday = None
+            line = [name, user['mobile']['number'], gender, birthday, doc['status']]
+            if dryrun:
+                pprint(line)
+            else:
+                writer.writerow(line)
     else:
         click.secho('check parameters <python export.py  --help>', fg='red')
 
@@ -170,6 +176,7 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
 
     else:
         click.secho('check parameters <python export.py  --help>', fg='red')
+
 
 cli = click.CommandCollection(sources=[group_ticket, user_ticket, report_ticket])
 
