@@ -304,20 +304,16 @@ class AnalyticsHandler(JsonHandler):
                 }
             },
             {
-                '$unwind': {'path': '$days'}
-            },
-            {
                 '$group': {
                     '_id': '$days.fee.method',
                     'revenue': {
-                        '$sum': '$days.fee.price'
+                        '$sum': '$price'
                     }
                 }
             }
         ]
         aggs = await TicketModel.aggregate(pipeline, 5)
-        for a in aggs:
-            self.response['data']['revenue'][a['_id']] = a['revenue']
+        self.response['data']['revenue'] = aggs[0]['revenue']
         q = {
             'content_oid': ObjectId(content_oid),
             'action': TicketLogModel.Status.send.name
