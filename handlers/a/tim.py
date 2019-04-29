@@ -164,10 +164,7 @@ class ReportHandler(JsonHandler):
         self.response['data'] = {
             'total_visit': 0,
             'total_forward': 0,
-            'revenue': {
-                'cash': 0,
-                'creditcard': 0
-            },
+            'revenue': 0,
             'commission': 0.07
         }
         q = {
@@ -191,13 +188,10 @@ class ReportHandler(JsonHandler):
                 }
             },
             {
-                '$unwind': {'path': '$days'}
-            },
-            {
                 '$group': {
-                    '_id': '$days.fee.method',
+                    '_id': '$content_oid',
                     'revenue': {
-                        '$sum': '$days.fee.price'
+                        '$sum': '$price'
                     }
                 }
             }
@@ -302,7 +296,7 @@ class AnalyticsHandler(JsonHandler):
             },
             {
                 '$group': {
-                    '_id': '$days.fee.method',
+                    '_id': '$content_oid',
                     'revenue': {
                         '$sum': '$price'
                     }
