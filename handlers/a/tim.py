@@ -197,7 +197,7 @@ class ReportHandler(JsonHandler):
             }
         ]
         aggs = await TicketModel.aggregate(pipeline, 5)
-        for a in aggs:
+        if aggs:
             self.response['data']['revenue'][a['_id']] = a['revenue']
         self.write_json()
 
