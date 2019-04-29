@@ -228,10 +228,7 @@ class AnalyticsHandler(JsonHandler):
                 'use': 0,
                 'cancel': 0
             },
-            'revenue': {
-                'cash': 0,
-                'creditcard': 0
-            },
+            'revenue': 0,
             'gender': {}
         }
         query = {
@@ -313,7 +310,8 @@ class AnalyticsHandler(JsonHandler):
             }
         ]
         aggs = await TicketModel.aggregate(pipeline, 5)
-        self.response['data']['revenue'] = aggs[0]['revenue']
+        if aggs:
+            self.response['data']['revenue'] = aggs[0]['revenue']
         q = {
             'content_oid': ObjectId(content_oid),
             'action': TicketLogModel.Status.send.name
