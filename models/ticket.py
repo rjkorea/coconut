@@ -13,7 +13,7 @@ class TicketTypeModel(BaseModel):
     MONGO_COLLECTION = 'ticket_type'
     TICKET_TYPE = ('general', 'network')
     COLORS = ('tkit-mint', 'tkit-coral', 'hangang-blue', 'ultra-bora', 'mustard-norang')
-    MAX = 10
+    MAX = 50
 
     def __init__(self, *args, **kwargs):
         super(TicketTypeModel, self).__init__(*args, **kwargs)
