@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
+from datetime import datetime
 
 from tornado.web import HTTPError
 
@@ -34,8 +35,15 @@ class ContentListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        count = await ContentModel.count(query={'enabled': True, 'is_private': False})
-        result = await ContentModel.find(query={'enabled': True, 'is_private': False}, fields=[('name'), ('when'), ('place'), ('images')], skip=parsed_args['start'], limit=parsed_args['size'])
+        q = {
+            'enabled': True,
+            'is_private': False,
+            'when.end': {
+                '$gte': datetime.utcnow()
+            }
+        }
+        count = await ContentModel.count(query=q)
+        result = await ContentModel.find(query=q, fields=[('name'), ('when'), ('place'), ('images')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
