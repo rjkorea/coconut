@@ -164,10 +164,7 @@ class ReportHandler(JsonHandler):
         self.response['data'] = {
             'total_visit': 0,
             'total_forward': 0,
-            'revenue': {
-                'cash': 0,
-                'creditcard': 0
-            },
+            'revenue': 0,
             'commission': 0.07
         }
         q = {
@@ -191,19 +188,16 @@ class ReportHandler(JsonHandler):
                 }
             },
             {
-                '$unwind': {'path': '$days'}
-            },
-            {
                 '$group': {
-                    '_id': '$days.fee.method',
+                    '_id': '$content_oid',
                     'revenue': {
-                        '$sum': '$days.fee.price'
+                        '$sum': '$price'
                     }
                 }
             }
         ]
         aggs = await TicketModel.aggregate(pipeline, 5)
-        for a in aggs:
+        if aggs:
             self.response['data']['revenue'][a['_id']] = a['revenue']
         self.write_json()
 
@@ -228,10 +222,7 @@ class AnalyticsHandler(JsonHandler):
                 'use': 0,
                 'cancel': 0
             },
-            'revenue': {
-                'cash': 0,
-                'creditcard': 0
-            },
+            'revenue': 0,
             'gender': {}
         }
         query = {
@@ -304,20 +295,17 @@ class AnalyticsHandler(JsonHandler):
                 }
             },
             {
-                '$unwind': {'path': '$days'}
-            },
-            {
                 '$group': {
-                    '_id': '$days.fee.method',
+                    '_id': '$content_oid',
                     'revenue': {
-                        '$sum': '$days.fee.price'
+                        '$sum': '$price'
                     }
                 }
             }
         ]
         aggs = await TicketModel.aggregate(pipeline, 5)
-        for a in aggs:
-            self.response['data']['revenue'][a['_id']] = a['revenue']
+        if aggs:
+            self.response['data']['revenue'] = aggs[0]['revenue']
         q = {
             'content_oid': ObjectId(content_oid),
             'action': TicketLogModel.Status.send.name

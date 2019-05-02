@@ -67,13 +67,14 @@ def user_tickets(csvfile, mongo, contentid, dryrun):
     click.secho('mongodb: %s' % (mongo), fg='green')
     now = datetime.utcnow()
     if csvfile and mongo and contentid:
-        fieldnames = ['name', 'mobile_number', 'gender', 'birthday', 'status']
+        fieldnames = ['ticket_name', 'price', 'name', 'mobile_number', 'gender', 'birthday', 'status']
         writer = csv.writer(open(csvfile, 'w'))
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         cursor = mongo_client['coconut']['ticket'].find({'content_oid': ObjectId(contentid)})
         while cursor.alive:
             doc = cursor.next()
             user = mongo_client['coconut']['user'].find_one({'_id': doc['receive_user_oid']})
+            ticket = mongo_client['coconut']['ticket_type'].find_one({'_id': doc['ticket_type_oid']})
             if 'last_name' in user:
                 name = user['last_name'] + user['name']
             else:
@@ -86,7 +87,7 @@ def user_tickets(csvfile, mongo, contentid, dryrun):
                 birthday = user['birthday']
             else:
                 birthday = None
-            line = [name, user['mobile']['number'], gender, birthday, doc['status']]
+            line = [ticket['name'], doc['price'], name, user['mobile']['number'], gender, birthday, doc['status']]
             if dryrun:
                 pprint(line)
             else:
