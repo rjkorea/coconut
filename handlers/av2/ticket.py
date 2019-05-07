@@ -331,6 +331,72 @@ class TicketOrderHandler(JsonHandler):
         self.write_json()
 
 
+class TicketOrderCsvHandler(JsonHandler):
+    @admin_auth_async
+    async def post(self, *args, **kwargs):
+        ticket_type_oid = self.json_decoded_body.get('ticket_type_oid', None)
+        if not ticket_type_oid or len(ticket_type_oid) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid ticket_type_oid'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(ticket_type_oid))
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        users = self.json_decoded_body.get('users', None)
+        if not users or not isinstance(users, list):
+            raise HTTPError(400, self.set_error(3, 'invalid users'))
+        now = datetime.utcnow()
+        for i, u in enumerate(users):
+            mobile = dict(
+                country_code='82',
+                number=u['mobile_number']
+            )
+            user_oid = await create_user_v2(mobile, u['name'])
+            ticket_order_doc = {
+                'type': 'network',
+                'content_oid': ticket_type['content_oid'],
+                'ticket_type_oid': ticket_type['_id'],
+                'admin_oid': self.current_user['_id'],
+                'user_oid': user_oid,
+                'qty': u['qty'],
+                'enabled': True,
+                'created_at': now,
+                'updated_at': now,
+                'receiver': {
+                    'name': u['name'],
+                    'mobile': {
+                        'country_code': '82',
+                        'number': u['mobile_number']
+                    }
+                }
+            }
+            ticket_order = TicketOrderModel(raw_data=ticket_order_doc)
+            ticket_order_oid = await ticket_order.insert()
+            for t in range(u['qty']):
+                ticket_doc = {
+                    'type': 'network',
+                    'content_oid': ticket_type['content_oid'],
+                    'ticket_type_oid': ticket_type['_id'],
+                    'ticket_order_oid': ticket_order_oid,
+                    'receive_user_oid': user_oid,
+                    'status': 'send',
+                    'price': ticket_type['price'],
+                    'enabled': True,
+                    'created_at': now,
+                    'updated_at': now
+                }
+                ticket = TicketModel(raw_data=ticket_doc)
+                ticket_oid = await ticket.insert()
+        self.response['data'] = {
+            'user_count': i+1,
+            'ticket_type_name': ticket_type['name'],
+            'ticket_type_oid': ticket_type_oid
+        }
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class TicketOrderListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('ticket_type_oid', str, None)])
