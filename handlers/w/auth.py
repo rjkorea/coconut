@@ -156,23 +156,21 @@ class UserHandler(JsonHandler):
     @parse_argument([('mobile_country_code', str, None), ('mobile_number', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
-        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code'] or len(parsed_args['mobile_number']) < 10:
-            raise HTTPError(400, 'invalid mobile_number and mobile_country_code')
+        if not parsed_args['mobile_number'] or not parsed_args['mobile_country_code'] or len(parsed_args['mobile_number']) < 8:
+            raise HTTPError(400, self.set_error(1, 'invalid mobile_number and mobile_country_code'))
         if parsed_args['mobile_country_code'] == '82' and not parsed_args['mobile_number'].startswith('010'):
-            raise HTTPError(400, 'invalid Korea mobile number')
+            raise HTTPError(400, self.set_error(2, 'invalid Korea mobile number'))
+        res = dict()
         q = {
             'mobile.country_code': parsed_args['mobile_country_code'],
             'mobile.number': parsed_args['mobile_number'],
             'enabled': True
         }
         user = await UserModel.find_one(query=q)
-        if not user:
-            raise HTTPError(400, 'no exist user')
-        res = dict()
-        if 'password' in user:
-            res['has_password'] = True
+        if not user or not user['terms']['policy']:
+            res['is_user'] = False
         else:
-            res['has_password'] = False
+            res['is_user'] = True
         self.response['data'] = res
         self.write_json()
 
