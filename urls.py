@@ -92,6 +92,7 @@ url_patterns = [
     (r'/a/v2/ticket/types/?', av2.ticket.TicketTypeListHandler),
     (r'/a/v2/ticket/type/(?P<_id>[^\/]+)/info?', av2.ticket.TicketTypeInfoHandler),
     (r'/a/v2/ticket/order/?', av2.ticket.TicketOrderHandler),
+    (r'/a/v2/ticket/order/csv?', av2.ticket.TicketOrderCsvHandler),
     (r'/a/v2/ticket/orders/?', av2.ticket.TicketOrderListHandler),
     (r'/a/v2/tickets/?', av2.ticket.TicketListHandler),
     (r'/a/v2/ticket/history?', av2.ticket.TicketHistoryListHandler),

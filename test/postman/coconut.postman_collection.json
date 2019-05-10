@@ -7139,7 +7139,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e&status=register",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=register",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -7160,7 +7160,7 @@
 								},
 								{
 									"key": "content_oid",
-									"value": "58cf91e55f5471137a8ffd9e"
+									"value": "5c91d2ae5f5471186d80a02f"
 								},
 								{
 									"key": "status",
@@ -7172,7 +7172,7 @@
 					},
 					"response": [
 						{
-							"name": "유저가 받은 티켓들의 리스트(status: send/register/use/cancel)",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -7186,7 +7186,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=register",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -7207,7 +7207,11 @@
 										},
 										{
 											"key": "content_oid",
-											"value": "5951cc82ba590e3cec7f6031"
+											"value": "5c91d2ae5f5471186d80a02f"
+										},
+										{
+											"key": "status",
+											"value": "register"
 										}
 									]
 								}
@@ -7217,38 +7221,28 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Content-Length",
-									"value": "8185",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 14 Jun 2017 08:31:55 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
 									"key": "Etag",
-									"value": "\"3bf4b125a68bfd36ba199f1a0f8001a00c4adf54\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"value": "\"ac1a2a4d02de07ad2c518bf4ac18dec111d2d8d0\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "4656"
 								},
 								{
 									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Mar 2019 07:12:12 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"count\": 4,\n    \"data\": [\n        {\n            \"receive_user\": {\n                \"name\": \"조건희\",\n                \"role\": [\n                    \"broker\"\n                ],\n                \"updated_at\": 1497388008,\n                \"access_code\": \"asdf\",\n                \"enabled\": true,\n                \"mobile_number\": \"821032697178\",\n                \"created_at\": 1497388008,\n                \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\",\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"status\": \"register\",\n            \"updated_at\": 1497388356,\n            \"created_at\": 1497388356,\n            \"days\": [\n                {\n                    \"entered\": false,\n                    \"day\": 1\n                }\n            ],\n            \"ticket_order\": {\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"updated_at\": 1497388356,\n                \"receiver\": {\n                    \"access_code\": \"asdf\",\n                    \"name\": \"조건희\",\n                    \"mobile_number\": \"821032697178\"\n                },\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"expiry_date\": 1497420724,\n                \"created_at\": 1497388356,\n                \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n                \"enabled\": true,\n                \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\",\n                \"_id\": \"5940d3d45f5471904f610e6a\",\n                \"qty\": 3\n            },\n            \"enabled\": true,\n            \"ticket_type\": {\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"updated_at\": 1496392957,\n                \"name\": \"현장 게스트\",\n                \"day\": 1,\n                \"created_at\": 1496392957,\n                \"price\": 99000,\n                \"enabled\": true,\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"desc\": \"행사 당일 현장에서 추가되는 게스트\"\n            },\n            \"content\": {\n                \"company_oid\": \"59267101c8bd954d005597c7\",\n                \"name\": \"Rainbow island 2017\",\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"place\": \"Jarasum, Gyeonggido\",\n                \"updated_at\": 1489965909,\n                \"image\": {\n                    \"poster\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"\n                    },\n                    \"logo\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"\n                    }\n                },\n                \"created_at\": 1489965909,\n                \"enabled\": true,\n                \"_id\": \"58cf91e55f5471137a8ffd9e\",\n                \"when\": {\n                    \"end\": 1497160800,\n                    \"start\": 1497020400\n                },\n                \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"\n            },\n            \"_id\": \"5940d3d45f5471904f610e6d\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"조건희\",\n                \"role\": [\n                    \"broker\"\n                ],\n                \"updated_at\": 1497388008,\n                \"access_code\": \"asdf\",\n                \"enabled\": true,\n                \"mobile_number\": \"821032697178\",\n                \"created_at\": 1497388008,\n                \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\",\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"status\": \"send\",\n            \"updated_at\": 1497388356,\n            \"created_at\": 1497388356,\n            \"days\": [\n                {\n                    \"entered\": false,\n                    \"day\": 1\n                }\n            ],\n            \"ticket_order\": {\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"updated_at\": 1497388356,\n                \"receiver\": {\n                    \"access_code\": \"asdf\",\n                    \"name\": \"조건희\",\n                    \"mobile_number\": \"821032697178\"\n                },\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"expiry_date\": 1497420724,\n                \"created_at\": 1497388356,\n                \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n                \"enabled\": true,\n                \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\",\n                \"_id\": \"5940d3d45f5471904f610e6a\",\n                \"qty\": 3\n            },\n            \"enabled\": true,\n            \"ticket_type\": {\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"updated_at\": 1496392957,\n                \"name\": \"현장 게스트\",\n                \"day\": 1,\n                \"created_at\": 1496392957,\n                \"price\": 99000,\n                \"enabled\": true,\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"desc\": \"행사 당일 현장에서 추가되는 게스트\"\n            },\n            \"content\": {\n                \"company_oid\": \"59267101c8bd954d005597c7\",\n                \"name\": \"Rainbow island 2017\",\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"place\": \"Jarasum, Gyeonggido\",\n                \"updated_at\": 1489965909,\n                \"image\": {\n                    \"poster\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"\n                    },\n                    \"logo\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"\n                    }\n                },\n                \"created_at\": 1489965909,\n                \"enabled\": true,\n                \"_id\": \"58cf91e55f5471137a8ffd9e\",\n                \"when\": {\n                    \"end\": 1497160800,\n                    \"start\": 1497020400\n                },\n                \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"\n            },\n            \"_id\": \"5940d3d45f5471904f610e6c\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"조건희\",\n                \"role\": [\n                    \"broker\"\n                ],\n                \"updated_at\": 1497388008,\n                \"access_code\": \"asdf\",\n                \"enabled\": true,\n                \"mobile_number\": \"821032697178\",\n                \"created_at\": 1497388008,\n                \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\",\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"status\": \"send\",\n            \"updated_at\": 1497388356,\n            \"created_at\": 1497388356,\n            \"days\": [\n                {\n                    \"entered\": false,\n                    \"day\": 1\n                }\n            ],\n            \"ticket_order\": {\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"updated_at\": 1497388356,\n                \"receiver\": {\n                    \"access_code\": \"asdf\",\n                    \"name\": \"조건희\",\n                    \"mobile_number\": \"821032697178\"\n                },\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"expiry_date\": 1497420724,\n                \"created_at\": 1497388356,\n                \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n                \"enabled\": true,\n                \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\",\n                \"_id\": \"5940d3d45f5471904f610e6a\",\n                \"qty\": 3\n            },\n            \"enabled\": true,\n            \"ticket_type\": {\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"updated_at\": 1496392957,\n                \"name\": \"현장 게스트\",\n                \"day\": 1,\n                \"created_at\": 1496392957,\n                \"price\": 99000,\n                \"enabled\": true,\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"desc\": \"행사 당일 현장에서 추가되는 게스트\"\n            },\n            \"content\": {\n                \"company_oid\": \"59267101c8bd954d005597c7\",\n                \"name\": \"Rainbow island 2017\",\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"place\": \"Jarasum, Gyeonggido\",\n                \"updated_at\": 1489965909,\n                \"image\": {\n                    \"poster\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"\n                    },\n                    \"logo\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"\n                    }\n                },\n                \"created_at\": 1489965909,\n                \"enabled\": true,\n                \"_id\": \"58cf91e55f5471137a8ffd9e\",\n                \"when\": {\n                    \"end\": 1497160800,\n                    \"start\": 1497020400\n                },\n                \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"\n            },\n            \"_id\": \"5940d3d45f5471904f610e6b\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"조건희\",\n                \"role\": [\n                    \"broker\"\n                ],\n                \"updated_at\": 1497388008,\n                \"access_code\": \"asdf\",\n                \"enabled\": true,\n                \"mobile_number\": \"821032697178\",\n                \"created_at\": 1497388008,\n                \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\",\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"status\": \"use\",\n            \"updated_at\": 1497391284,\n            \"created_at\": 1496874035,\n            \"days\": [\n                {\n                    \"entered_at\": 1497391284,\n                    \"fee\": {\n                        \"price\": 10000,\n                        \"method\": \"cash\"\n                    },\n                    \"entered\": true,\n                    \"day\": 1\n                }\n            ],\n            \"ticket_order\": {\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"updated_at\": 1496874035,\n                \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n                \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\",\n                \"created_at\": 1496874035,\n                \"qty\": 10,\n                \"fee\": {\n                    \"price\": 10000,\n                    \"method\": \"cash\"\n                },\n                \"receiver\": {\n                    \"access_code\": \"qwer\",\n                    \"name\": \"조건희\",\n                    \"mobile_number\": \"821032697178\"\n                },\n                \"expiry_date\": 1496906396,\n                \"enabled\": true,\n                \"_id\": \"5938fac35f547128283fe759\"\n            },\n            \"enabled\": true,\n            \"ticket_type\": {\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"updated_at\": 1496392957,\n                \"name\": \"현장 게스트\",\n                \"day\": 1,\n                \"created_at\": 1496392957,\n                \"price\": 99000,\n                \"enabled\": true,\n                \"content_oid\": \"58cf91e55f5471137a8ffd9e\",\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"desc\": \"행사 당일 현장에서 추가되는 게스트\"\n            },\n            \"content\": {\n                \"company_oid\": \"59267101c8bd954d005597c7\",\n                \"name\": \"Rainbow island 2017\",\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"place\": \"Jarasum, Gyeonggido\",\n                \"updated_at\": 1489965909,\n                \"image\": {\n                    \"poster\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"\n                    },\n                    \"logo\": {\n                        \"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"\n                    }\n                },\n                \"created_at\": 1489965909,\n                \"enabled\": true,\n                \"_id\": \"58cf91e55f5471137a8ffd9e\",\n                \"when\": {\n                    \"end\": 1497160800,\n                    \"start\": 1497020400\n                },\n                \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"\n            },\n            \"_id\": \"5938fac35f547128283fe761\"\n        }\n    ]\n}"
+							"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"ticket_type\": {\n                \"color\": \"tkit-mint\",\n                \"updated_at\": 1553382227,\n                \"sales_date\": {\n                    \"start\": 1552964400,\n                    \"end\": 1553828400\n                },\n                \"enabled\": true,\n                \"fpfg\": {\n                    \"limit\": 20,\n                    \"spread\": \"\"\n                },\n                \"type\": \"network\",\n                \"duplicated_registration\": false,\n                \"price\": 0,\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"_id\": \"5c930ac05f54711fc8b8e854\",\n                \"desc\": {\n                    \"value\": \"무료 티켓 설명\",\n                    \"enabled\": true\n                },\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"name\": \"무료 티켓 이름\",\n                \"sales\": {\n                    \"limit\": 20,\n                    \"count\": 1\n                },\n                \"created_at\": 1553108016\n            },\n            \"content\": {\n                \"host\": {\n                    \"email\": \"tkitzoa@rjkorea.com\",\n                    \"name\": \"RJ KOREA Entertainment\",\n                    \"tel\": \"028282889888\"\n                },\n                \"updated_at\": 1553028126,\n                \"sms\": {\n                    \"message\": \"http://localhost:4300/in/w9jKN9z 티켓링크입니다\"\n                },\n                \"video_url\": \"https://www.youtube.com/watch?v=ckPaFQUkpKg\",\n                \"place\": {\n                    \"x\": \"127.07302567658165\",\n                    \"y\": \"37.51458927326663\",\n                    \"url\": \"http://place.map.daum.net/8530688\",\n                    \"name\": \"잠실종합운동장\"\n                },\n                \"desc\": \"매해 2만명의 관객을 동원하며 성공적인 여름 페스티벌로 자리매김한 워터 댄스 뮤직 페스티벌 ‘워터밤 2018(WATERBOMB 2018)’이 오는 7월 21일(토) 서울, 7월 28일(토) 부산 개최 일정을 발표했다.\\n‘워터밤’은 신개념 워터 버라이어티 뮤직 페스티벌로, 여름 시즌 공연 문화의 새로운 패러다임을 제시하면서 아티스트 공연 중심의 기존 뮤직 페스티벌과 달리 관객 참여가 가장 중시되는 새로운 컨텐츠를 제공하고 있다.\\n관객은 마음에 드는 팀을 선택하여 물총을 들고 직접 워터파이팅에 참여하고, 쏟아지는 물줄기와 에너지 넘치는 아티스트들의 공연이 함께 어우러져 그 어디에서도 볼 수 없는 특별한 무대 퍼포먼스가 펼쳐진다.\",\n                \"notice\": {\n                    \"message\": \"행사 시작 일시는 2019.06.22 11:00 부터 입장합니다. 미리 등록하고 ...\",\n                    \"enabled\": true\n                },\n                \"company_oid\": \"5922bc83c8bd9535771cf837\",\n                \"is_private\": false,\n                \"short_id\": \"w9jKN9z\",\n                \"enabled\": true,\n                \"tags\": [\n                    \"공연\",\n                    \"페스티벌\"\n                ],\n                \"when\": {\n                    \"start\": 1559671200,\n                    \"end\": 1559797200\n                },\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"images\": [\n                    {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/content/5c91d2ae5f5471186d80a02f/images_0.m.jpg?versionId=YoOfrFRSl6eSgpYKBIJgIfKwBOW.de46\",\n                        \"size\": 796889\n                    }\n                ],\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"name\": \"Ultra Music Festival KOREA 2019\",\n                \"site_url\": \"https://tkit.me\",\n                \"created_at\": 1553028126,\n                \"comments\": {\n                    \"type\": \"guestbook\",\n                    \"is_private\": true\n                }\n            },\n            \"type\": \"network\",\n            \"status\": \"register\",\n            \"price\": 0,\n            \"updated_at\": 1553470786,\n            \"enabled\": true,\n            \"_id\": \"5c9331f45f54711fc8589b17\",\n            \"receive_user\": {\n                \"updated_at\": 1553207950,\n                \"terms\": {\n                    \"privacy\": true,\n                    \"policy\": true\n                },\n                \"birthday\": \"19800118\",\n                \"access_code\": \"asdf\",\n                \"image\": {\n                    \"profile\": {\n                        \"m\": \"https://s3.ap-northeast-2.amazonaws.com/devres.tkit.me/user/5931a3eabc2c44140e0dea91/profile.m.gif?versionId=Q0KfPW0llMguCHqqV87nMWdhtnqYfsTP\"\n                    }\n                },\n                \"password\": \"$p5k2$$cB04ZqzP3po3wAKHb8DpMOnBMyzKkKpp$nVwIsfuBlFvN6iTKWoZLtFD9AaTbgcXR\",\n                \"gender\": \"male\",\n                \"enabled\": true,\n                \"_id\": \"5931a3eabc2c44140e0dea91\",\n                \"mobile\": {\n                    \"country_code\": \"82\",\n                    \"number\": \"01032697178\"\n                },\n                \"email\": \"takearest118@gmail.com\",\n                \"role\": [\n                    \"broker\"\n                ],\n                \"name\": \"조건희\",\n                \"created_at\": 1497388008,\n                \"mobile_number\": \"01032697178\"\n            },\n            \"ticket_order\": {\n                \"enabled\": true,\n                \"updated_at\": 1553118052,\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"ticket_type_oid\": \"5c930ac05f54711fc8b8e854\",\n                \"_id\": \"5c9331f45f54711fc8589b12\",\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"receiver\": {\n                    \"mobile\": {\n                        \"number\": \"01032697178\",\n                        \"country_code\": \"82\"\n                    },\n                    \"name\": \"조건희\"\n                },\n                \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n                \"qty\": 20,\n                \"type\": \"network\",\n                \"created_at\": 1553118052\n            },\n            \"created_at\": 1553118052\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -8628,7 +8622,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile_number\": \"821030623239\"\n\t}\n}"
+							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile\": {\n\t\t\t\"country_code\": \"82\",\n\t\t\t\"number\": \"01030623239\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
@@ -9040,6 +9034,39 @@
 					]
 				},
 				{
+					"name": "/w/ticket/(oid)/me/register/validate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b7664ebba590e285e649556/me/register/validate",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5b7664ebba590e285e649556",
+								"me",
+								"register",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/w/tickets/me",
 					"request": {
 						"method": "GET",
@@ -9165,6 +9192,50 @@
 					]
 				},
 				{
+					"name": "/w/tickets/validate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/validate?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"tickets",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "58cf91e55f5471137a8ffd9e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/w/ticket/types/me",
 					"request": {
 						"method": "GET",
@@ -9179,7 +9250,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c009e465f547109247f758f",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c91d2ae5f5471186d80a02f",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -9194,13 +9265,76 @@
 							"query": [
 								{
 									"key": "content_oid",
-									"value": "5c009e465f547109247f758f"
+									"value": "5c91d2ae5f5471186d80a02f"
 								}
 							]
 						},
 						"description": "request params\n- content_oid\n- status (send, register, pay, use, cancel)"
 					},
 					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk=5938f49a5f5471259d521341"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c91d2ae5f5471186d80a02f",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"types",
+										"me"
+									],
+									"query": [
+										{
+											"key": "content_oid",
+											"value": "5c91d2ae5f5471186d80a02f"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Etag",
+									"value": "\"14ab0ca18e9cc185ec416c2c5c0614d3a49f030e\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "758"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Mar 2019 08:04:40 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"name\": \"유료티켓 이름\",\n            \"price\": 1000,\n            \"sales_date\": {\n                \"end\": 1553860800,\n                \"start\": 1552996800\n            },\n            \"desc\": {\n                \"enabled\": true,\n                \"value\": \"유료티켓 설명\"\n            },\n            \"ticket_count\": 39,\n            \"content\": {\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"_id\": \"5c9345755f54711fc8589b27\",\n            \"sales\": {\n                \"limit\": 20,\n                \"count\": 1\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"무료 티켓 이름\",\n            \"price\": 0,\n            \"sales_date\": {\n                \"end\": 1553828400,\n                \"start\": 1552964400\n            },\n            \"desc\": {\n                \"value\": \"무료 티켓 설명\",\n                \"enabled\": true\n            },\n            \"ticket_count\": 19,\n            \"content\": {\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"_id\": \"5c930ac05f54711fc8b8e854\",\n            \"sales\": {\n                \"limit\": 20,\n                \"count\": 1\n            },\n            \"color\": \"tkit-mint\"\n        }\n    ],\n    \"count\": 2\n}"
+						},
 						{
 							"name": "200 OK",
 							"originalRequest": {
@@ -14626,6 +14760,65 @@
 					},
 					"response": [
 						{
+							"name": "400 exceed max ticket type count",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_oid\": \"5c6a63155f5471084f696eb4\",\n    \"ticket_types\": [\n        {\n            \"name\": \"초대권 S\",\n            \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n            \"sales_date\": {\n                \"start\": \"2019-01-15T05:00:00\",\n                \"end\": \"2019-02-14T09:00:00\"\n            },\n            \"price\": 0,\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"color\": \"tkit-mint\"\n        },\n        {\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"desc\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"desc\": \"레드불 스폰서 초대권 입니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"color\": \"ultra-bora\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Mar 2019 11:22:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"exceed max ticket type count\",\n        \"code\": 3\n    }\n}"
+						},
+						{
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "POST",
@@ -14683,6 +14876,65 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": [\n        \"5c74f80d5f5471098d947df9\",\n        \"5c74f80d5f5471098d947dfa\",\n        \"5c74f80d5f5471098d947dfb\"\n    ]\n}"
+						},
+						{
+							"name": "400 exceed count to make ticket type",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_oid\": \"5c6a63155f5471084f696eb4\",\n    \"ticket_types\": [\n        {\n            \"name\": \"초대권 S\",\n            \"desc\": \"스폰서, 스텝, 아티스트 전용\",\n            \"sales_date\": {\n                \"start\": \"2019-01-15T05:00:00\",\n                \"end\": \"2019-02-14T09:00:00\"\n            },\n            \"price\": 0,\n            \"fpfg\": {\n                \"limit\": 100,\n                \"spread\": 1500\n            },\n            \"color\": \"tkit-mint\"\n        },\n        {\n            \"name\": \"FRIDAY PGA INVITATION\",\n            \"desc\": \"본 초대권은 대관시설 유지보수를 위한 환경부담금이 있습니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": 15000\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"SUNDAY PGA INVITATION\",\n            \"desc\": \"레드불 스폰서 초대권 입니다\",\n            \"sales_date\": {\n                \"start\": \"2019-03-02T12:20:00\",\n                \"end\": \"2019-03-02T22:10:00\"\n            },\n            \"price\": 20000,\n            \"fpfg\": {\n                \"limit\": 1000,\n                \"spread\": null\n            },\n            \"color\": \"ultra-bora\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"type"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 07 Mar 2019 11:58:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"exceed count to make ticket type\",\n        \"code\": 3\n    }\n}"
 						},
 						{
 							"name": "400 invalid content_oid",
@@ -15523,6 +15775,105 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"error\": {\n        \"code\": 3,\n        \"message\": \"exceed available qty\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/a/v2/ticket/order/csv",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticket_type_oid\": \"5c930ac05f54711fc8b8e854\",\n    \"users\": [\n    \t{\n\t    \t\"name\": \"조건희\",\n\t    \t\"mobile_number\": \"01032697178\",\n\t    \t\"qty\": 2\n\t\t},\n    \t{\n\t    \t\"name\": \"이은채\",\n\t    \t\"mobile_number\": \"01066790034\",\n\t    \t\"qty\": 2\n\t\t}\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/order/csv",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"order",
+								"csv"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200  OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "csk={{csk}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ticket_type_oid\": \"5c930ac05f54711fc8b8e854\",\n    \"users\": [\n    \t{\n\t    \t\"name\": \"조건희\",\n\t    \t\"mobile_number\": \"01032697178\",\n\t    \t\"qty\": 2\n\t\t},\n    \t{\n\t    \t\"name\": \"이은채\",\n\t    \t\"mobile_number\": \"01066790034\",\n\t    \t\"qty\": 2\n\t\t}\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/order/csv",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"a",
+										"v2",
+										"ticket",
+										"order",
+										"csv"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "136"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 May 2019 09:40:36 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"ticket_type_oid\": \"5c930ac05f54711fc8b8e854\",\n        \"user_count\": 2,\n        \"ticket_type_name\": \"무료 티켓 이름\"\n    }\n}"
 						}
 					]
 				},
