@@ -14,7 +14,7 @@ from models.sms_verification import SmsVerificationModel
 
 from services.sms import NexmoService
 
-from models import send_sms
+from models import send_sms, create_user_v2
 
 from common.decorators import parse_argument
 from common import hashers
@@ -210,6 +210,39 @@ class SmsSendHandler(JsonHandler):
         if res['messages'][0]['status'] != '0':
             raise HTTPError(400, self.set_error(3, '%s: %s' % (res['messages'][0]['status'], res['messages'][0]['error-text'])))
         self.response['data'] = res
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class SmsVerifyHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        mobile = self.json_decoded_body.get('mobile', None)
+        if not mobile or not isinstance(mobile, dict):
+            raise HTTPError(400, self.set_error(1, 'mobile(object) is required'))
+        code = self.json_decoded_body.get('code', None)
+        if not code or len(code) != 4:
+            raise HTTPError(400, self.set_error(2, 'invalid code(length is only 6 characters)'))
+        sms_doc = {
+            'mobile.country_code': mobile['country_code'],
+            'mobile.number': mobile['number'],
+            'code': code,
+            'enabled': True
+        }
+        sms_verify = await SmsVerificationModel.find_one(sms_doc)
+        if not sms_verify:
+            raise HTTPError(400, self.set_error(3, 'no exist valid verification'))
+        if datetime.utcnow() > sms_verify['expired_at']:
+            raise HTTPError(400, self.set_error(4, 'expired verification code'))
+        user_oid = await create_user_v2(mobile)
+        session = UserSessionModel()
+        session.data['user_oid'] = user_oid
+        session_oid = await session.insert()
+        self.response['data'] = {
+            'usk': str(session_oid)
+        }
         self.write_json()
 
     async def options(self, *args, **kwargs):
