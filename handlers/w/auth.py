@@ -224,7 +224,7 @@ class SmsVerifyHandler(JsonHandler):
             raise HTTPError(400, self.set_error(1, 'mobile(object) is required'))
         code = self.json_decoded_body.get('code', None)
         if not code or len(code) != 4:
-            raise HTTPError(400, self.set_error(2, 'invalid code(length is only 6 characters)'))
+            raise HTTPError(400, self.set_error(2, 'invalid code(length is only 4 characters)'))
         sms_doc = {
             'mobile.country_code': mobile['country_code'],
             'mobile.number': mobile['number'],

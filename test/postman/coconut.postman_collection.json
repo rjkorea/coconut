@@ -5207,7 +5207,7 @@
 									"key": "_xsrf"
 								}
 							],
-							"body": "{\"error\": {\"code\": 2, \"message\": \"invalid code(length is only 6 characters)\"}}"
+							"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid code(length is only 4 characters)\"\n    }\n}"
 						},
 						{
 							"name": "expired certification code",
@@ -5278,7 +5278,7 @@
 									"key": "_xsrf"
 								}
 							],
-							"body": "{\"error\": {\"code\": 4, \"message\": \"expired certification code\"}}"
+							"body": "{\n    \"error\": {\n        \"code\": 4,\n        \"message\": \"expired certification code\"\n    }\n}"
 						},
 						{
 							"name": "200 OK",
@@ -5402,7 +5402,7 @@
 									"key": "_xsrf"
 								}
 							],
-							"body": "{\"error\": {\"code\": 1, \"message\": \"mobile(object) is required\"}}"
+							"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"mobile(object) is required\"\n    }\n}"
 						},
 						{
 							"name": "no exist valid certification",
@@ -5473,7 +5473,7 @@
 									"key": "_xsrf"
 								}
 							],
-							"body": "{\"error\": {\"code\": 3, \"message\": \"no exist valid certification\"}}"
+							"body": "{\n    \"error\": {\n        \"code\": 3,\n        \"message\": \"no exist valid certification\"\n    }\n}"
 						}
 					]
 				},
