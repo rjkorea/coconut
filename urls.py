@@ -114,6 +114,7 @@ url_patterns = [
 
     # w
     (r'/w/auth/user/?', w.auth.UserHandler),
+    (r'/w/auth/sms/send?', w.auth.SmsSendHandler),
     (r'/w/auth/register/?', w.auth.RegisterHandler),
     (r'/w/auth/login/?', w.auth.LoginHandler),
     (r'/w/auth/duplicated/?', w.auth.DuplicatedHandler),

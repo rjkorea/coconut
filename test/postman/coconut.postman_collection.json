@@ -4521,7 +4521,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=821012345678",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -4534,15 +4534,20 @@
 							],
 							"query": [
 								{
+									"key": "mobile_country_code",
+									"value": "82"
+								},
+								{
 									"key": "mobile_number",
-									"value": "821012345678"
+									"value": "10123"
 								}
 							]
-						}
+						},
+						"description": "핸드폰번호로 유저정보 확인하기"
 					},
 					"response": [
 						{
-							"name": "200 OK 준회원",
+							"name": "200 OK: 비회원",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
@@ -4551,7 +4556,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=821012345678",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345677",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4564,8 +4569,12 @@
 									],
 									"query": [
 										{
+											"key": "mobile_country_code",
+											"value": "82"
+										},
+										{
 											"key": "mobile_number",
-											"value": "821012345678"
+											"value": "01012345677"
 										}
 									]
 								}
@@ -4579,27 +4588,27 @@
 									"value": "application/json"
 								},
 								{
-									"key": "Content-Length",
-									"value": "33"
-								},
-								{
-									"key": "Etag",
-									"value": "\"6d5b7106018c705e357d7e2063c532dea46144bf\""
-								},
-								{
 									"key": "Date",
-									"value": "Wed, 12 Dec 2018 09:22:47 GMT"
+									"value": "Fri, 10 May 2019 10:17:10 GMT"
 								},
 								{
 									"key": "Server",
 									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Etag",
+									"value": "\"ee3f4a47559108fd7be0fab4554f8a44924a5743\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"has_password\": false\n    }\n}"
+							"body": "{\n    \"data\": {\n        \"is_user\": false\n    }\n}"
 						},
 						{
-							"name": "400: no exist user 비회원",
+							"name": "invalid Korea mobile number",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
@@ -4608,7 +4617,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=8210326178",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=1012345678",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4621,8 +4630,12 @@
 									],
 									"query": [
 										{
+											"key": "mobile_country_code",
+											"value": "82"
+										},
+										{
 											"key": "mobile_number",
-											"value": "8210326178"
+											"value": "1012345678"
 										}
 									]
 								}
@@ -4632,27 +4645,27 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 12 Dec 2018 09:24:51 GMT"
-								},
-								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
 								{
+									"key": "Date",
+									"value": "Fri, 10 May 2019 10:17:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
 									"key": "Content-Length",
-									"value": "33"
+									"value": "64"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"400: no exist user\"\n}"
+							"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid Korea mobile number\"\n    }\n}"
 						},
 						{
-							"name": "200 OK 회원",
+							"name": "invalid mobile_number and mobile_country_code",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
@@ -4661,7 +4674,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_number=821032697178",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -4674,8 +4687,69 @@
 									],
 									"query": [
 										{
+											"key": "mobile_country_code",
+											"value": "82"
+										},
+										{
 											"key": "mobile_number",
-											"value": "821032697178"
+											"value": "10123"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 May 2019 10:18:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"invalid mobile_number and mobile_country_code\"\n    }\n}"
+						},
+						{
+							"name": "200 OK: 회원",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345678",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "mobile_country_code",
+											"value": "82"
+										},
+										{
+											"key": "mobile_number",
+											"value": "01012345678"
 										}
 									]
 								}
@@ -4685,28 +4759,348 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 12 Dec 2018 09:24:18 GMT"
-								},
-								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
 								{
-									"key": "Content-Length",
-									"value": "32"
+									"key": "Date",
+									"value": "Fri, 10 May 2019 10:16:34 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
 								},
 								{
 									"key": "Etag",
-									"value": "\"a8e20f5f876513c4b8218775ff1e4eaa254cd5b2\""
+									"value": "\"ad6e5498fe71d079b81bc3457044704afced9196\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"has_password\": true\n    }\n}"
+							"body": "{\n    \"data\": {\n        \"is_user\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/auth/sms/send",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"sms",
+								"send"
+							]
+						},
+						"description": "SMS로 인증코드 4자리 보내기"
+					},
+					"response": [
+						{
+							"name": "mobile(object) is required",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile\": {\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v2",
+										"auth",
+										"sms",
+										"send"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "63",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Mar 2018 08:25:04 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/5.0.1",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\n    \"error\": {\n        \"message\": \"mobile(object) is required\",\n        \"code\": 1\n    }\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v2",
+										"auth",
+										"sms",
+										"send"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "206",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Mar 2018 08:24:44 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/5.0.1",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"data\": {\"message-count\": \"1\", \"messages\": [{\"remaining-balance\": \"64.20000000\", \"message-id\": \"0E00000090234467\", \"to\": \"821032697178\", \"network\": \"45002\", \"message-price\": \"0.04000000\", \"status\": \"0\"}]}}"
+						},
+						{
+							"name": "invalid mobile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile\": {\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v2",
+										"auth",
+										"sms",
+										"send"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "58",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Apr 2018 07:38:04 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/5.0.1",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid mobile\"\n    }\n}"
+						},
+						{
+							"name": "6: Unroutable message - rejected",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v2",
+										"auth",
+										"sms",
+										"send"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "69",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Apr 2018 07:38:52 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/5.0.1",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"httpOnly": false,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+									"key": "_xsrf"
+								}
+							],
+							"body": "{\"error\": {\"code\": 3, \"message\": \"6: Unroutable message - rejected\"}}"
 						}
 					]
 				},
@@ -9334,69 +9728,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": [\n        {\n            \"name\": \"유료티켓 이름\",\n            \"price\": 1000,\n            \"sales_date\": {\n                \"end\": 1553860800,\n                \"start\": 1552996800\n            },\n            \"desc\": {\n                \"enabled\": true,\n                \"value\": \"유료티켓 설명\"\n            },\n            \"ticket_count\": 39,\n            \"content\": {\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"_id\": \"5c9345755f54711fc8589b27\",\n            \"sales\": {\n                \"limit\": 20,\n                \"count\": 1\n            },\n            \"color\": \"tkit-coral\"\n        },\n        {\n            \"name\": \"무료 티켓 이름\",\n            \"price\": 0,\n            \"sales_date\": {\n                \"end\": 1553828400,\n                \"start\": 1552964400\n            },\n            \"desc\": {\n                \"value\": \"무료 티켓 설명\",\n                \"enabled\": true\n            },\n            \"ticket_count\": 19,\n            \"content\": {\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"_id\": \"5c930ac05f54711fc8b8e854\",\n            \"sales\": {\n                \"limit\": 20,\n                \"count\": 1\n            },\n            \"color\": \"tkit-mint\"\n        }\n    ],\n    \"count\": 2\n}"
-						},
-						{
-							"name": "200 OK",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk=5938f49a5f5471259d521341"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c009e465f547109247f758f",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"ticket",
-										"types",
-										"me"
-									],
-									"query": [
-										{
-											"key": "content_oid",
-											"value": "5c009e465f547109247f758f"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
-									"key": "Etag",
-									"value": "\"7623c432bb9f141664e4be2e3397823caceb0c39\""
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1561"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 17 Jan 2019 09:47:08 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": [\n        {\n            \"_id\": \"5c3825a05f547120f37bb857\",\n            \"name\": \"중복 등록 허용 티켓\",\n            \"expiry_date\": 1551309088,\n            \"ticket_count\": 10,\n            \"desc\": {\n                \"value\": \"완전 허용\",\n                \"enabled\": true\n            },\n            \"content\": {\n                \"name\": \"뇌섹남 페스티벌\"\n            },\n            \"color\": {\n                \"value\": \"#8f6dab\",\n                \"name\": \"ultra-bora\"\n            },\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5c3826885f547120f37bb858\",\n            \"name\": \"중복 등록 미허용\",\n            \"expiry_date\": 1548879319,\n            \"ticket_count\": 10,\n            \"desc\": {\n                \"value\": \"등록을 완전 허용하지 않음\",\n                \"enabled\": false\n            },\n            \"content\": {\n                \"name\": \"뇌섹남 페스티벌\"\n            },\n            \"color\": {\n                \"value\": \"#62aab8\",\n                \"name\": \"tkit-mint\"\n            },\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5c3818835f547120f33adae3\",\n            \"name\": \"티켓 컬러\",\n            \"expiry_date\": 1548861254,\n            \"ticket_count\": 10,\n            \"desc\": {\n                \"value\": \"컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 컬러 테스트 합니다 \",\n                \"enabled\": true\n            },\n            \"content\": {\n                \"name\": \"뇌섹남 페스티벌\"\n            },\n            \"color\": {\n                \"value\": \"#f6d87f\",\n                \"name\": \"mustard-norang\"\n            },\n            \"price\": 10000\n        }\n    ],\n    \"count\": 3\n}"
 						}
 					]
 				},

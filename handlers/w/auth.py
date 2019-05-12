@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson import ObjectId
+
+import logging
 
 from tornado.web import HTTPError
 
 from handlers.base import JsonHandler
 from models.user import UserModel, UserAutologinModel
 from models.session import UserSessionModel
+from models.sms_verification import SmsVerificationModel
+
+from services.sms import NexmoService
 
 from models import send_sms
 
@@ -171,6 +176,39 @@ class UserHandler(JsonHandler):
             res['is_user'] = False
         else:
             res['is_user'] = True
+        self.response['data'] = res
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class SmsSendHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        mobile = self.json_decoded_body.get('mobile', None)
+        if not mobile or not isinstance(mobile, dict):
+            raise HTTPError(400, self.set_error(1, 'mobile(object) is required'))
+        if 'country_code' not in mobile or 'number' not in mobile:
+            raise HTTPError(400, self.set_error(2, 'invalid moblie'))
+        verify_code = hashers.generate_random_number(4)
+        doc = {
+            'mobile': mobile,
+            'code': verify_code,
+            'expired_at': datetime.utcnow() + timedelta(minutes=3)
+        }
+        sms_verify = SmsVerificationModel(raw_data=doc)
+        _id = await sms_verify.insert()
+        payload = {
+            'type': 'unicode',
+            'from': 'TKIT',
+            'to': '%s%s' % (mobile['country_code'], mobile['number'][1:]),
+            'text': '[티킷] 인증코드 %s' % verify_code
+        }
+        res = NexmoService().client.send_message(payload)
+        logging.info(res)
+        if res['messages'][0]['status'] != '0':
+            raise HTTPError(400, self.set_error(3, '%s: %s' % (res['messages'][0]['status'], res['messages'][0]['error-text'])))
         self.response['data'] = res
         self.write_json()
 
