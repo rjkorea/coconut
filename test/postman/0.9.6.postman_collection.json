@@ -1,0 +1,1276 @@
+{
+	"info": {
+		"_postman_id": "b435ef18-b7a1-43e9-9807-64f9154cb317",
+		"name": "0.9.6",
+		"description": "아이엔비엠 사용 컬렉션",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/w/auth/user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"auth",
+						"user"
+					],
+					"query": [
+						{
+							"key": "mobile_country_code",
+							"value": "82"
+						},
+						{
+							"key": "mobile_number",
+							"value": "10123"
+						}
+					]
+				},
+				"description": "핸드폰번호로 유저정보 확인하기"
+			},
+			"response": [
+				{
+					"name": "200 OK: 회원",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345678",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"user"
+							],
+							"query": [
+								{
+									"key": "mobile_country_code",
+									"value": "82"
+								},
+								{
+									"key": "mobile_number",
+									"value": "01012345678"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 May 2019 10:16:34 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Etag",
+							"value": "\"ad6e5498fe71d079b81bc3457044704afced9196\""
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"is_user\": true\n    }\n}"
+				},
+				{
+					"name": "200 OK: 비회원",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345677",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"user"
+							],
+							"query": [
+								{
+									"key": "mobile_country_code",
+									"value": "82"
+								},
+								{
+									"key": "mobile_number",
+									"value": "01012345677"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 May 2019 10:17:10 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Etag",
+							"value": "\"ee3f4a47559108fd7be0fab4554f8a44924a5743\""
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"is_user\": false\n    }\n}"
+				},
+				{
+					"name": "invalid Korea mobile number",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=1012345678",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"user"
+							],
+							"query": [
+								{
+									"key": "mobile_country_code",
+									"value": "82"
+								},
+								{
+									"key": "mobile_number",
+									"value": "1012345678"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 May 2019 10:17:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "64"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid Korea mobile number\"\n    }\n}"
+				},
+				{
+					"name": "invalid mobile_number and mobile_country_code",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"user"
+							],
+							"query": [
+								{
+									"key": "mobile_country_code",
+									"value": "82"
+								},
+								{
+									"key": "mobile_number",
+									"value": "10123"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 May 2019 10:18:21 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "82"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"invalid mobile_number and mobile_country_code\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/auth/sms/send",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/sms/send",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"auth",
+						"sms",
+						"send"
+					]
+				},
+				"description": "SMS로 인증코드 4자리 보내기"
+			},
+			"response": [
+				{
+					"name": "6: Unroutable message - rejected",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"send"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "69",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Apr 2018 07:38:52 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"code\": 3,\n        \"message\": \"6: Unroutable message - rejected\"\n    }\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"send"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "206",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 23 Mar 2018 08:24:44 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\"data\": {\"message-count\": \"1\", \"messages\": [{\"remaining-balance\": \"64.20000000\", \"message-id\": \"0E00000090234467\", \"to\": \"821032697178\", \"network\": \"45002\", \"message-price\": \"0.04000000\", \"status\": \"0\"}]}}"
+				},
+				{
+					"name": "invalid mobile",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"number\": \"01032697178\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"send"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "58",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Apr 2018 07:38:04 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|63411edb|03b55f04b6a6e9eb6be9e3c331116c0b|1522922517",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid mobile\"\n    }\n}"
+				},
+				{
+					"name": "mobile(object) is required",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"send"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "63",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 23 Mar 2018 08:25:04 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"message\": \"mobile(object) is required\",\n        \"code\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/auth/sms/verify",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"code\": \"8537\"\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/sms/verify",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"auth",
+						"sms",
+						"verify"
+					]
+				},
+				"description": "인증번호 4자리로 로그인하기"
+			},
+			"response": [
+				{
+					"name": "expired certification code",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"code\": \"122001\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/verify",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "63",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 23 Mar 2018 09:03:59 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"code\": 4,\n        \"message\": \"expired certification code\"\n    }\n}"
+				},
+				{
+					"name": "mobile(object) is required",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t},\n\t\"code\": \"466459\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/verify",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "63",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 23 Mar 2018 09:03:32 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"mobile(object) is required\"\n    }\n}"
+				},
+				{
+					"name": "invalid code(length is only 6 characters)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"code\": \"555\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/verify",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "78",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 23 Mar 2018 09:02:46 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid code(length is only 4 characters)\"\n    }\n}"
+				},
+				{
+					"name": "no exist valid certification",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"code\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/auth/sms/verify",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v2",
+								"auth",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "65",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 23 Mar 2018 09:04:29 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/5.0.1",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": false,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "2|621c57e4|5dee56e37f57de6954a3894330d28969|1521556662",
+							"key": "_xsrf"
+						}
+					],
+					"body": "{\n    \"error\": {\n        \"code\": 3,\n        \"message\": \"no exist valid certification\"\n    }\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobile\": {\n\t\t\"country_code\": \"82\",\n\t\t\"number\": \"01032697178\"\n\t},\n\t\"code\": \"8537\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/sms/verify",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"auth",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 May 2019 09:53:05 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"usk\": \"5cd7ed015f547159a68d8498\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/user/me",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"user",
+						"me"
+					]
+				},
+				"description": "본인정보 가져오기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk=5cd7ef5d5f547159a68d849a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Etag",
+							"value": "\"b49b6dfb8618bb31a1950b182c394c7e7c48aa23\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 May 2019 01:28:54 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "172"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"mobile\": {\n            \"country_code\": \"82\",\n            \"number\": \"01011117777\"\n        },\n        \"gender\": \"male\",\n        \"name\": \"조케빈\",\n        \"birthday\": \"2000\",\n        \"_id\": \"5cd7ef5d5f547159a68d8499\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/user/me",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"조케빈\",\n\t\"birthday\": \"1998\",\n\t\"gender\": \"male\"\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"user",
+						"me"
+					]
+				},
+				"description": "본인정보 등록 및 수정하기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk=5cd7ef5d5f547159a68d849a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조케빈\",\n\t\"birthday\": \"2000\",\n\t\"gender\": \"male\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 May 2019 01:28:37 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "68"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"n\": 1,\n        \"updatedExisting\": true,\n        \"nModified\": 1\n    }\n}"
+				},
+				{
+					"name": "invalid birthday (just year - 4 digit)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk=5cd7ef5d5f547159a68d849a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조케빈\",\n\t\"birthday\": \"200\",\n\t\"gender\": \"male\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 May 2019 01:29:40 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": 1,\n        \"message\": \"invalid birthday (just year - 4 digit)\"\n    }\n}"
+				},
+				{
+					"name": "invalid gender (male, female, not_specific)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk=5cd7ef5d5f547159a68d849a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"조케빈\",\n\t\"birthday\": \"1998\",\n\t\"gender\": \"man\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 May 2019 01:32:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"message\": \"invalid gender (male, female, not_specific)\",\n        \"code\": 2\n    }\n}"
+				}
+			]
+		}
+	]
+}
