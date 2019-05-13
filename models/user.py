@@ -10,6 +10,7 @@ from models.base import BaseModel
 class UserModel(BaseModel):
     MONGO_COLLECTION = 'user'
     ROLE = ('user', 'broker')
+    GENDER = ('male', 'female', 'not_specific')
 
     def __init__(self, *args, **kwargs):
         super(UserModel, self).__init__(*args, **kwargs)
