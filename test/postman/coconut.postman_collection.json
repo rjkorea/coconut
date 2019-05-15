@@ -4547,124 +4547,6 @@
 					},
 					"response": [
 						{
-							"name": "200 OK: 비회원",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345677",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"auth",
-										"user"
-									],
-									"query": [
-										{
-											"key": "mobile_country_code",
-											"value": "82"
-										},
-										{
-											"key": "mobile_number",
-											"value": "01012345677"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 10 May 2019 10:17:10 GMT"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
-									"key": "Etag",
-									"value": "\"ee3f4a47559108fd7be0fab4554f8a44924a5743\""
-								},
-								{
-									"key": "Content-Length",
-									"value": "28"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"is_user\": false\n    }\n}"
-						},
-						{
-							"name": "invalid Korea mobile number",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=1012345678",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"auth",
-										"user"
-									],
-									"query": [
-										{
-											"key": "mobile_country_code",
-											"value": "82"
-										},
-										{
-											"key": "mobile_number",
-											"value": "1012345678"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 10 May 2019 10:17:45 GMT"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
-									"key": "Content-Length",
-									"value": "64"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid Korea mobile number\"\n    }\n}"
-						},
-						{
 							"name": "invalid mobile_number and mobile_country_code",
 							"originalRequest": {
 								"method": "GET",
@@ -4781,6 +4663,124 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": {\n        \"is_user\": true\n    }\n}"
+						},
+						{
+							"name": "invalid Korea mobile number",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=1012345678",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "mobile_country_code",
+											"value": "82"
+										},
+										{
+											"key": "mobile_number",
+											"value": "1012345678"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 May 2019 10:17:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": 2,\n        \"message\": \"invalid Korea mobile number\"\n    }\n}"
+						},
+						{
+							"name": "200 OK: 비회원",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345677",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "mobile_country_code",
+											"value": "82"
+										},
+										{
+											"key": "mobile_number",
+											"value": "01012345677"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 May 2019 10:17:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Etag",
+									"value": "\"ee3f4a47559108fd7be0fab4554f8a44924a5743\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"is_user\": false\n    }\n}"
 						}
 					]
 				},
@@ -10152,260 +10152,6 @@
 					"response": []
 				},
 				{
-					"name": "/w/qnas",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "usk={{usk}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{hostname}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"w",
-								"qnas"
-							],
-							"query": [
-								{
-									"key": "start",
-									"value": "0"
-								},
-								{
-									"key": "size",
-									"value": "10"
-								},
-								{
-									"key": "content_oid",
-									"value": "594246755f5471c519ecfc8c"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Q/A 리스트",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"qnas"
-									],
-									"query": [
-										{
-											"key": "start",
-											"value": "0"
-										},
-										{
-											"key": "size",
-											"value": "10"
-										},
-										{
-											"key": "content_oid",
-											"value": "594246755f5471c519ecfc8c"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "5333",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 15 Jun 2017 07:47:48 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Etag",
-									"value": "\"f1fe8f91e83038a9998c8b9288d1726706065b51\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"count\": 12, \"data\": [{\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423ad8fd183a8f160312b4\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b65fd183a8f160312b5\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b93fd183a8f160312b6\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b96fd183a8f160312b7\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b97fd183a8f160312b8\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b99fd183a8f160312b9\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9afd183a8f160312ba\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9bfd183a8f160312bb\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9cfd183a8f160312bc\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9dfd183a8f160312bd\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}]}"
-						}
-					]
-				},
-				{
-					"name": "/w/qnas (filter=mytkit)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "usk={{usk}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c&filter=mytkit",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{hostname}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"w",
-								"qnas"
-							],
-							"query": [
-								{
-									"key": "start",
-									"value": "0"
-								},
-								{
-									"key": "size",
-									"value": "10"
-								},
-								{
-									"key": "content_oid",
-									"value": "594246755f5471c519ecfc8c"
-								},
-								{
-									"key": "filter",
-									"value": "mytkit"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Q/A 리스트",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "usk={{usk}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c&filter=mytkit",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{hostname}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"w",
-										"qnas"
-									],
-									"query": [
-										{
-											"key": "start",
-											"value": "0"
-										},
-										{
-											"key": "size",
-											"value": "10"
-										},
-										{
-											"key": "content_oid",
-											"value": "594246755f5471c519ecfc8c"
-										},
-										{
-											"key": "filter",
-											"value": "mytkit"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "5333",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 15 Jun 2017 07:47:48 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Etag",
-									"value": "\"f1fe8f91e83038a9998c8b9288d1726706065b51\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
-								}
-							],
-							"cookie": [],
-							"body": "{\"count\": 12, \"data\": [{\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423ad8fd183a8f160312b4\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b65fd183a8f160312b5\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b93fd183a8f160312b6\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b96fd183a8f160312b7\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b97fd183a8f160312b8\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b99fd183a8f160312b9\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9afd183a8f160312ba\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9bfd183a8f160312bb\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9cfd183a8f160312bc\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}, {\"enabled\": true, \"answer\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\", \"_id\": \"59423b9dfd183a8f160312bd\", \"company_oid\": \"59267101c8bd954d005597c7\", \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"question\": \"Jarasum, Gyeonggido\", \"updated_at\": 1497499033, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"created_at\": 1497482709}]}"
-						}
-					]
-				},
-				{
 					"name": "/w/user/me",
 					"request": {
 						"method": "GET",
@@ -10840,6 +10586,631 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/w/payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n    \"ticket_oids\": [\n            \"5c9345935f54711fc8589b3c\",\n            \"5c9345935f54711fc8589b9b\"\n    ],\n    \"currency\": \"USD\",\n    \"amount\": 10.00\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment"
+							]
+						},
+						"description": "결제 요청하기"
+					},
+					"response": [
+						{
+							"name": "no exist ticket",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n    \"ticket_oids\": [\n            \"5c9345935f54711fc8589b3c\",\n            \"5c9345935f54711fc8589b9b\"\n    ],\n    \"currency\": \"USD\",\n    \"amount\": 10.00\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 07:01:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": 4,\n        \"message\": \"no exist ticket\"\n    }\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n    \"ticket_oids\": [\n            \"5c9345935f54711fc8589b3c\",\n            \"5c9345935f54711fc8589b3a\"\n    ],\n    \"currency\": \"KRW\",\n    \"amount\": 1000\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 06:38:40 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"merchant_uid\": \"local_5cdbb3f05f5471832cb027cb\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payments"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c91d2ae5f5471186d80a02f"
+								},
+								{
+									"key": "status",
+									"value": ""
+								}
+							]
+						},
+						"description": "결제리스트 가져오기"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "content_oid",
+											"value": "5c91d2ae5f5471186d80a02f"
+										},
+										{
+											"key": "status",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Etag",
+									"value": "\"5a01cab64ac56fa2821a1214d35bc9e5085bed54\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "3994"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 09:46:36 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"currency\": \"USD\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3b\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb8af5f5471832cd89e5f\",\n            \"created_at\": 1557871135,\n            \"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n            \"updated_at\": 1557871135,\n            \"amount\": 10,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"currency\": \"USD\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3b\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb8295f5471832ccf2fb1\",\n            \"created_at\": 1557871001,\n            \"merchant_uid\": \"local_5cdbb8295f5471832ccf2fb1\",\n            \"updated_at\": 1557871001,\n            \"amount\": 10,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"currency\": \"USD\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb6515f5471832ccf2fb0\",\n            \"created_at\": 1557870529,\n            \"merchant_uid\": \"local_5cdbb6515f5471832ccf2fb0\",\n            \"updated_at\": 1557870529,\n            \"amount\": 10,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"currency\": \"KRW\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb64a5f5471832ccf2faf\",\n            \"created_at\": 1557870522,\n            \"merchant_uid\": \"local_5cdbb64a5f5471832ccf2faf\",\n            \"updated_at\": 1557870522,\n            \"amount\": 1000,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"updated_at\": 1557870262,\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb5465f5471832c71a4af\",\n            \"created_at\": 1557870262,\n            \"merchant_uid\": \"local_5cdbb5465f5471832c71a4af\",\n            \"currency\": \"KRW\",\n            \"amount\": 1000,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"updated_at\": 1557870259,\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb5435f5471832c71a4ae\",\n            \"created_at\": 1557870259,\n            \"merchant_uid\": \"local_5cdbb5435f5471832c71a4ae\",\n            \"currency\": \"KRW\",\n            \"amount\": 1000,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        }\n    ],\n    \"count\": 6\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/payment/success",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"success"
+							]
+						},
+						"description": "결제성공"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment",
+										"success"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 09:58:40 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n\t\"data\": {\n\t\t\"payment_oid\": \"5cdbb8af5f5471832cd89e5f\"\n\t}\n}"
+						},
+						{
+							"name": "invalid payment",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment",
+										"success"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 09:58:40 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid payment\",\n        \"code\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/w/payment/fail",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n\t\"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/fail",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"fail"
+							]
+						},
+						"description": "결제실패"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n\t\"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/fail",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment",
+										"fail"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 10:39:42 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"payment_oid\": \"5cdbb8af5f5471832cd89e5f\"\n    }\n}"
+						},
+						{
+							"name": "invalid payment",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment",
+										"success"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 09:58:40 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid payment\",\n        \"code\": 3\n    }\n}"
+						},
+						{
+							"name": "invalid error_msg",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/fail",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment",
+										"fail"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 15 May 2019 10:37:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"invalid error_msg\",\n        \"code\": 4\n    }\n}"
+						}
+					]
 				}
 			]
 		},

@@ -9,6 +9,7 @@ from models.base import BaseModel
 
 class PaymentModel(BaseModel):
     MONGO_COLLECTION = 'payment'
+    CURRENCY = ('KRW', 'USD')
 
     def __init__(self, *args, **kwargs):
         super(PaymentModel, self).__init__(*args, **kwargs)

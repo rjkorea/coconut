@@ -9,6 +9,7 @@ from tornado.log import logging
 _settings = dict(
     application=dict(
         name='coconut',
+        env='live',
         host='api.tkit.me',
         port=9100,
         debug=False,
