@@ -115,6 +115,8 @@ class ContentPostHandler(MultipartFormdataHandler):
             doc['site_url'] = self.json_decoded_body.get('site_url')
         if self.json_decoded_body.get('video_url', None):
             doc['video_url'] = self.json_decoded_body.get('video_url')
+        if self.json_decoded_body.get('purchase_url', None):
+            doc['purchase_url'] = self.json_decoded_body.get('purchase_url')
         if self.json_decoded_body.get('notice', None):
             doc['notice'] = dict(
                 message=self.json_decoded_body.get('notice'),
@@ -279,6 +281,7 @@ class ContentHandler(JsonHandler):
             raise HTTPError(400, self.set_error(1, 'invalid comments_type (preview, guestbook)'))
         site_url = self.json_decoded_body.get('site_url', None)
         video_url = self.json_decoded_body.get('video_url', None)
+        purchase_url = self.json_decoded_body.get('purchase_url', None)
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
         staff_auth_code = self.json_decoded_body.get('staff_auth_code', None)
@@ -311,6 +314,7 @@ class ContentHandler(JsonHandler):
             ),
             site_url=site_url,
             video_url=video_url,
+            purchase_url=purchase_url,
             notice=dict(
                 enabled=True,
                 message=notice_message
