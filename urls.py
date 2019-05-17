@@ -156,6 +156,7 @@ url_patterns = [
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register/?', w.ticket.TicketSerialNumberRegisterHandler),
     (r'/w/payment/?', w.payment.PaymentHandler),
     (r'/w/payments/?', w.payment.PaymentListHandler),
+    (r'/w/payment/(?P<_id>[^\/]+)/?', w.payment.PaymentHandler),
     (r'/w/payment/success/?', w.payment.PaymentSuccessHandler),
     (r'/w/payment/fail/?', w.payment.PaymentFailHandler),
 

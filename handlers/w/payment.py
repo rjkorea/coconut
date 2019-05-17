@@ -58,6 +58,29 @@ class PaymentHandler(JsonHandler):
         }
         self.write_json()
 
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid _id'))
+        q = {
+            '_id': ObjectId(_id),
+            'user_oid': self.current_user['_id'],
+            'enabled': True
+        }
+        payment = await PaymentModel.find_one(query=q)
+        if not payment:
+            raise HTTPError(400, self.set_error(2, 'no exist payment'))
+        payment['tickets'] = list()
+        for oid in payment['ticket_oids']:
+            tm = await TicketModel.get_id(oid, fields={'_id': True, 'ticket_type_oid': True})
+            ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields={'_id': False, 'name': True, 'desc': True, 'price': True})
+            ttm['_id'] = oid
+            payment['tickets'].append(ttm)
+        payment.pop('ticket_oids')
+        self.response['data'] = payment
+        self.write_json()
+
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
