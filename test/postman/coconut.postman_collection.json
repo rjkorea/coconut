@@ -10861,6 +10861,94 @@
 					]
 				},
 				{
+					"name": "/w/payments/<oid>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments/5cde3daa5f547191e9dcd0e8",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payments",
+								"5cde3daa5f547191e9dcd0e8"
+							]
+						},
+						"description": "결제정보 가져오기"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments/5cdbb8af5f5471832cd89e5f",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payments",
+										"5cdbb8af5f5471832cd89e5f"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"2a549ff4834ab23ecef15e074cba85587f13d7c2\""
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "922"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 May 2019 04:29:12 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"currency\": \"USD\",\n        \"status\": \"failed\",\n        \"tickets\": [\n            {\n                \"price\": 1000,\n                \"_id\": \"5c9345935f54711fc8589b3c\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"유료티켓 설명\"\n                },\n                \"name\": \"유료티켓 이름\"\n            },\n            {\n                \"price\": 1000,\n                \"_id\": \"5c9345935f54711fc8589b3b\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"유료티켓 설명\"\n                },\n                \"name\": \"유료티켓 이름\"\n            }\n        ],\n        \"amount\": 10,\n        \"_id\": \"5cdbb8af5f5471832cd89e5f\",\n        \"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\",\n        \"updated_at\": 1557884421,\n        \"enabled\": true,\n        \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n        \"created_at\": 1557871135,\n        \"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n        \"imp_uid\": \"imp_158558555093\",\n        \"user_oid\": \"5931a3eabc2c44140e0dea91\"\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "/w/payment/success",
 					"request": {
 						"method": "PUT",
@@ -11213,21 +11301,25 @@
 					]
 				},
 				{
-					"name": "/w/payment/<oid>",
+					"name": "/w/payment/cancel",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
 								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"payment_oid\": \"5cde3daa5f547191e9dcd0e8\"\n}"
 						},
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/5cdbb8af5f5471832cd89e5f",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/cancel",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -11236,28 +11328,32 @@
 							"path": [
 								"w",
 								"payment",
-								"5cdbb8af5f5471832cd89e5f"
+								"cancel"
 							]
 						},
-						"description": "결제정보 가져오기"
+						"description": "결제취소"
 					},
 					"response": [
 						{
 							"name": "200 OK",
 							"originalRequest": {
-								"method": "GET",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Authorization",
 										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "{\n\t\"payment_oid\": \"5cde85615f5471976296975a\"\n}"
 								},
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/5cdbb8af5f5471832cd89e5f",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/cancel",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -11266,37 +11362,89 @@
 									"path": [
 										"w",
 										"payment",
-										"5cdbb8af5f5471832cd89e5f"
+										"cancel"
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "Bad Request",
+							"code": 400,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Content-Type",
-									"value": "application/json"
+									"key": "Content-Length",
+									"value": "131"
 								},
 								{
-									"key": "Etag",
-									"value": "\"2a549ff4834ab23ecef15e074cba85587f13d7c2\""
+									"key": "Content-Type",
+									"value": "application/json"
 								},
 								{
 									"key": "Server",
 									"value": "TornadoServer/4.4.2"
 								},
 								{
-									"key": "Content-Length",
-									"value": "922"
-								},
-								{
 									"key": "Date",
-									"value": "Fri, 17 May 2019 04:29:12 GMT"
+									"value": "Fri, 17 May 2019 09:58:29 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"currency\": \"USD\",\n        \"status\": \"failed\",\n        \"tickets\": [\n            {\n                \"price\": 1000,\n                \"_id\": \"5c9345935f54711fc8589b3c\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"유료티켓 설명\"\n                },\n                \"name\": \"유료티켓 이름\"\n            },\n            {\n                \"price\": 1000,\n                \"_id\": \"5c9345935f54711fc8589b3b\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"유료티켓 설명\"\n                },\n                \"name\": \"유료티켓 이름\"\n            }\n        ],\n        \"amount\": 10,\n        \"_id\": \"5cdbb8af5f5471832cd89e5f\",\n        \"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\",\n        \"updated_at\": 1557884421,\n        \"enabled\": true,\n        \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n        \"created_at\": 1557871135,\n        \"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n        \"imp_uid\": \"imp_158558555093\",\n        \"user_oid\": \"5931a3eabc2c44140e0dea91\"\n    }\n}"
+							"body": "{\n\t\"data\": {\n\t\t\"payment_oid\": \"5cde85615f5471976296975a\"\n\t}\n}"
+						},
+						{
+							"name": "취소할 결제건이 존재하지 않습니다.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"payment_oid\": \"5cde85615f5471976296975a\"\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/cancel",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"payment",
+										"cancel"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "131"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 May 2019 09:58:29 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"message\": \"취소할 결제건이 존재하지 않습니다.\",\n        \"code\": 1\n    }\n}"
 						}
 					]
 				}

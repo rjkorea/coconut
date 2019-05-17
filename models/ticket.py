@@ -267,6 +267,11 @@ class TicketLogModel(BaseModel):
                 'type': list,
                 'default': None
             },
+            {
+                'key': 'ticket_oid',
+                'type': str,
+                'default': None
+            },
         ])
         return specification
 

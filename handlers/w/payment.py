@@ -9,7 +9,7 @@ from common.decorators import user_auth_async, parse_argument
 
 from handlers.base import JsonHandler
 from models.content import ContentModel
-from models.ticket import TicketTypeModel, TicketModel
+from models.ticket import TicketTypeModel, TicketModel, TicketLogModel
 from models.payment import PaymentModel
 
 from services.iamport import IamportService
@@ -186,6 +186,72 @@ class PaymentFailHandler(JsonHandler):
             'payment_oid': str(payment['_id'])
         }
         self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class PaymentCancelHandler(JsonHandler):
+    async def put(self, *args, **kwargs):
+        payment_oid = self.json_decoded_body.get('payment_oid', None)
+        if not payment_oid or len(payment_oid) != 24:
+            raise HTTPError(400, self.set_error(2, 'invalid payment_oid'))
+        payment = await PaymentModel.get_id(ObjectId(payment_oid))
+        if not payment:
+            raise HTTPError(400, self.set_error(3, 'no exist payment'))
+        if payment['status'] != 'paid':
+            raise HTTPError(400, self.set_error(4, 'status is not paid'))
+        reason = '결제자에 의한 취소'
+        try:
+            response = IamportService().client.cancel(reason, merchant_uid=payment['merchant_uid'])
+        except IamportService().client.ResponseError as e:
+            raise HTTPError(400, self.set_error(e.code, e.message))
+        now = datetime.utcnow()
+        if response['status'] == 'cancelled':
+            query = {
+                '_id': payment['_id'],
+                'status': 'paid'
+            }
+            set_doc = {
+                '$set': {
+                    'status': 'cancelled',
+                    'info': response,
+                    'updated_at': now
+                }
+            }
+            result = await PaymentModel.update(query, set_doc, False, False)
+            if result['nModified'] == 1:
+                for oid in payment['ticket_oids']:
+                    ticket = await TicketModel.get_id(oid)
+                    ticket_log_doc = {
+                        'action': 'payment_cancel',
+                        'content_oid': ticket['content_oid'],
+                        'ticket_oid': ticket['_id'],
+                        'ticket_type_oid': ticket['ticket_type_oid'],
+                        'user_oid': ticket['receive_user_oid']
+                    }
+                    ticket_log = TicketLogModel(raw_data=ticket_log_doc)
+                    await ticket_log.insert()
+                query = {
+                    '$in': payment['ticket_oids']
+                }
+                set_doc = {
+                    '$set': {
+                        'status': TicketModel.Status.send.name,
+                        'receive_user_oid': payment['user_oid'],
+                        'updated_at': now
+                    }
+                }
+                await TicketModel.update(query, set_doc, False, True)
+                self.response['data'] = {
+                    'payment_oid': str(payment['_id'])
+                }
+                self.write_json()
+            else:
+                HTTPError(400, self.set_error(5, 'invalid payment'))
+        else:
+            raise HTTPError(400, self.set_error(6, 'invalid status on Iamport'))
 
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
