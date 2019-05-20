@@ -9493,7 +9493,7 @@
 					},
 					"response": [
 						{
-							"name": "마이티킷 리스트(status: register/use/cancel)",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -9535,38 +9535,28 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Content-Length",
-									"value": "4161",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
 									"key": "Date",
-									"value": "Wed, 14 Jun 2017 08:36:00 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"value": "Mon, 20 May 2019 11:02:10 GMT"
 								},
 								{
 									"key": "Etag",
-									"value": "\"457a53c6c263a567a1d82b967b06e82cc2e74fda\"",
-									"name": "Etag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
+									"value": "\"c9348334a04ee4740435f94421c9ff3a746f3de8\""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
 								},
 								{
 									"key": "Server",
-									"value": "TornadoServer/4.4.2",
-									"name": "Server",
-									"description": "A name for the server"
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Length",
+									"value": "601"
 								}
 							],
 							"cookie": [],
-							"body": "{\"count\": 2, \"data\": [{\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"register\", \"updated_at\": 1497388356, \"created_at\": 1497388356, \"days\": [{\"entered\": false, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"updated_at\": 1497388356, \"receiver\": {\"access_code\": \"asdf\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"expiry_date\": 1497420724, \"created_at\": 1497388356, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"enabled\": true, \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"_id\": \"5940d3d45f5471904f610e6a\", \"qty\": 3}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5940d3d45f5471904f610e6d\"}, {\"receive_user\": {\"name\": \"\\uc870\\uac74\\ud76c\", \"role\": [\"broker\"], \"updated_at\": 1497388008, \"access_code\": \"asdf\", \"enabled\": true, \"mobile_number\": \"821032697178\", \"created_at\": 1497388008, \"password\": \"$p5k2$$pXpX99/OGL5rgPCuEhFmwei8DmFOAoOi$P64RfY6978uw4nYpt5OXq7LGYg4B9MaO\", \"_id\": \"5931a3eabc2c44140e0dea91\"}, \"status\": \"use\", \"updated_at\": 1497391284, \"created_at\": 1496874035, \"days\": [{\"entered_at\": 1497391284, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"entered\": true, \"day\": 1}], \"ticket_order\": {\"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496874035, \"user_oid\": \"5931a3eabc2c44140e0dea91\", \"ticket_type_oid\": \"5931a38dbc2c44140e0dea8d\", \"created_at\": 1496874035, \"qty\": 10, \"fee\": {\"price\": 10000, \"method\": \"cash\"}, \"receiver\": {\"access_code\": \"qwer\", \"name\": \"\\uc870\\uac74\\ud76c\", \"mobile_number\": \"821032697178\"}, \"expiry_date\": 1496906396, \"enabled\": true, \"_id\": \"5938fac35f547128283fe759\"}, \"enabled\": true, \"ticket_type\": {\"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"updated_at\": 1496392957, \"name\": \"\\ud604\\uc7a5 \\uac8c\\uc2a4\\ud2b8\", \"day\": 1, \"created_at\": 1496392957, \"price\": 99000, \"enabled\": true, \"content_oid\": \"58cf91e55f5471137a8ffd9e\", \"_id\": \"5931a38dbc2c44140e0dea8d\", \"desc\": \"\\ud589\\uc0ac \\ub2f9\\uc77c \\ud604\\uc7a5\\uc5d0\\uc11c \\ucd94\\uac00\\ub418\\ub294 \\uac8c\\uc2a4\\ud2b8\"}, \"content\": {\"company_oid\": \"59267101c8bd954d005597c7\", \"name\": \"Rainbow island 2017\", \"admin_oid\": \"58bfafa55f5471325c68c4f3\", \"place\": \"Jarasum, Gyeonggido\", \"updated_at\": 1489965909, \"image\": {\"poster\": {\"m\": \"http://host.tkit.me/assets/images/rain_poster.png\"}, \"logo\": {\"m\": \"http://host.tkit.me/assets/images/rain_logo.png\"}}, \"created_at\": 1489965909, \"enabled\": true, \"_id\": \"58cf91e55f5471137a8ffd9e\", \"when\": {\"end\": 1497160800, \"start\": 1497020400}, \"desc\": \"Rainbow Festival featuring camping and rock festivals! It is a special music festival where you can experience nature in Jarasum, camping and experiencing the performances of hot artists! Right now I'm going to book tickets and camping tickets ~~ !!\"}, \"_id\": \"5938fac35f547128283fe761\"}]}"
+							"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"content\": {\n                \"name\": \"Rainbow island 2017\",\n                \"_id\": \"58cf91e55f5471137a8ffd9e\"\n            },\n            \"price\": 0,\n            \"status\": \"register\",\n            \"type\": \"network\",\n            \"created_at\": 1497388356,\n            \"_id\": \"5940d3d45f5471904f610e6b\",\n            \"enabled\": true,\n            \"updated_at\": 1497388356,\n            \"ticket_type\": {\n                \"name\": \"현장 게스트\",\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"price\": 99000,\n                \"desc\": {\n                    \"value\": \"행사 당일 현장에서 추가되는 게스트\",\n                    \"enabled\": true\n                }\n            },\n            \"ticket_order_oid\": \"5940d3d45f5471904f610e6a\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\"\n        }\n    ]\n}"
 						}
 					]
 				},
