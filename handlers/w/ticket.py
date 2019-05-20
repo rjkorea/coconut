@@ -262,7 +262,7 @@ class TicketListMeHandler(JsonHandler):
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, sort=[('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'], fields={'_id': True, 'name': True, 'desc': True, 'price': True, 'sales_date': True})
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'], fields={'_id': True, 'name': True, 'desc': True, 'price': True, 'sales_date': True, 'color': True})
             res.pop('ticket_type_oid')
             res['content'] = await ContentModel.get_id(res['content_oid'], fields={'_id': True, 'name': True})
             res.pop('content_oid')

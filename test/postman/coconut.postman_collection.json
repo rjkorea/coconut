@@ -9489,7 +9489,8 @@
 									"value": "58cf91e55f5471137a8ffd9e"
 								}
 							]
-						}
+						},
+						"description": "마이티킷 사용가능 티켓"
 					},
 					"response": [
 						{
@@ -9535,28 +9536,28 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Date",
-									"value": "Mon, 20 May 2019 11:02:10 GMT"
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
 								},
 								{
 									"key": "Etag",
-									"value": "\"c9348334a04ee4740435f94421c9ff3a746f3de8\""
+									"value": "\"eae4d493d1ee3987721b847d2257058f9421d8a2\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 20 May 2019 11:09:50 GMT"
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
 								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
-								},
-								{
 									"key": "Content-Length",
-									"value": "601"
+									"value": "623"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"content\": {\n                \"name\": \"Rainbow island 2017\",\n                \"_id\": \"58cf91e55f5471137a8ffd9e\"\n            },\n            \"price\": 0,\n            \"status\": \"register\",\n            \"type\": \"network\",\n            \"created_at\": 1497388356,\n            \"_id\": \"5940d3d45f5471904f610e6b\",\n            \"enabled\": true,\n            \"updated_at\": 1497388356,\n            \"ticket_type\": {\n                \"name\": \"현장 게스트\",\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"price\": 99000,\n                \"desc\": {\n                    \"value\": \"행사 당일 현장에서 추가되는 게스트\",\n                    \"enabled\": true\n                }\n            },\n            \"ticket_order_oid\": \"5940d3d45f5471904f610e6a\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\"\n        }\n    ]\n}"
+							"body": "{\n    \"data\": [\n        {\n            \"content\": {\n                \"_id\": \"58cf91e55f5471137a8ffd9e\",\n                \"name\": \"Rainbow island 2017\"\n            },\n            \"price\": 0,\n            \"updated_at\": 1497388356,\n            \"ticket_order_oid\": \"5940d3d45f5471904f610e6a\",\n            \"enabled\": true,\n            \"type\": \"network\",\n            \"status\": \"register\",\n            \"_id\": \"5940d3d45f5471904f610e6b\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"ticket_type\": {\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"price\": 99000,\n                \"desc\": {\n                    \"value\": \"행사 당일 현장에서 추가되는 게스트\",\n                    \"enabled\": true\n                },\n                \"name\": \"현장 게스트\",\n                \"color\": \"tkit-mint\"\n            },\n            \"created_at\": 1497388356\n        }\n    ],\n    \"count\": 1\n}"
 						}
 					]
 				},
