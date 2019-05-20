@@ -160,6 +160,7 @@ url_patterns = [
     (r'/w/payment/success/?', w.payment.PaymentSuccessHandler),
     (r'/w/payment/fail/?', w.payment.PaymentFailHandler),
     (r'/w/payment/cancel/?', w.payment.PaymentCancelHandler),
+    (r'/w/exchange/rate/krwusd/?', w.util.ExchangeRateHandler),
 
     # /w/pc
     (r'/w/pc/contents/?', wpc.content.ContentListHandler),

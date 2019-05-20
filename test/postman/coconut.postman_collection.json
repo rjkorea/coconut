@@ -14,10 +14,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}",
 							"protocol": "{{protocol}}",
@@ -35,10 +31,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/test",
 							"protocol": "{{protocol}}",
@@ -118,10 +110,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/testws",
 							"protocol": "{{protocol}}",
@@ -147,10 +135,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://rest.nexmo.com/sms/json?api_key=7968a1e2&api_secret=a45366ce5d7a295c&to=821032697178&from=821032697178&type=unicode&text=티킷오더 발송 테스트 메세지 http://tkit.me/1432/invitation",
 							"protocol": "https",
@@ -671,10 +655,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/admin/58634dcc6a9fab09b441a747",
 							"protocol": "{{protocol}}",
@@ -735,10 +715,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/admins?start=0&size=20",
 							"protocol": "{{protocol}}",
@@ -807,10 +783,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/user/58bfafa55f5471325c68c4f3",
 							"protocol": "{{protocol}}",
@@ -906,10 +878,6 @@
 								"value": "csk=58ca31195f547161e34018bc"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/users?start=0&size=5&q=",
 							"protocol": "{{protocol}}",
@@ -991,8 +959,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -1032,8 +1000,8 @@
 									"formdata": [
 										{
 											"key": "image",
-											"type": "file",
-											"src": ""
+											"value": "",
+											"type": "file"
 										}
 									]
 								},
@@ -1106,8 +1074,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -1147,8 +1115,8 @@
 									"formdata": [
 										{
 											"key": "image",
-											"type": "file",
-											"src": ""
+											"value": "",
+											"type": "file"
 										}
 									]
 								},
@@ -1221,8 +1189,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -1263,8 +1231,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -1297,10 +1265,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/58cf77cd5f5471137a04dc29",
 							"protocol": "{{protocol}}",
@@ -1509,10 +1473,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/groups?start=0&size=10&q=KBS",
 							"protocol": "{{protocol}}",
@@ -1554,10 +1514,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/ticket/search?q=룸룸",
 							"protocol": "{{protocol}}",
@@ -1593,10 +1549,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/5ae98b0a5f547150c37b9736",
 							"protocol": "{{protocol}}",
@@ -1735,10 +1687,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/5ae98d215f547150c3f6ffad/tickets?start=0&size=10&q=010",
 							"protocol": "{{protocol}}",
@@ -1782,10 +1730,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/content/5a9577965f54716b62c32f68/group/5ae98d215f547150c3f6ffad/ticket/5ae98d215f547150c3f6ffae",
 							"protocol": "{{protocol}}",
@@ -2008,10 +1952,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/contents?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -2047,10 +1987,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard",
 							"protocol": "{{protocol}}",
@@ -2076,10 +2012,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -2106,10 +2038,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/stats/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -2136,10 +2064,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/analytics/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -2167,10 +2091,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/report/594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -2197,10 +2117,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/report/594246755f5471c519ecfc8c",
 									"protocol": "{{protocol}}",
@@ -2290,10 +2206,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/type/58d392345f547155bbcf8efe",
 							"protocol": "{{protocol}}",
@@ -2356,10 +2268,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/types?start=0&size=10&content_oid&admin_oid",
 							"protocol": "{{protocol}}",
@@ -2472,10 +2380,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order/5962e0855f54713980796f5b/serial_number_list?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -2514,10 +2418,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/order/58e33f305f54711359296bde",
 							"protocol": "{{protocol}}",
@@ -2580,10 +2480,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/orders?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -2725,10 +2621,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/58ec77f15f54711c0baf9c1d",
 							"protocol": "{{protocol}}",
@@ -2860,10 +2752,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets?start=0&size=10&ticket_order_oid=59e078ea5f54710eea1b0938",
 							"protocol": "{{protocol}}",
@@ -2903,10 +2791,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=20&content_oid=&q=",
 							"protocol": "{{protocol}}",
@@ -2951,10 +2835,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tickets/logs?start=0&size=20&content_oid=&q=",
 									"protocol": "{{protocol}}",
@@ -3048,10 +2928,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/log/5a48e955ba590e6df948a02d",
 							"protocol": "{{protocol}}",
@@ -3079,10 +2955,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/ticket/log/5a48e955ba590e6df948a02d",
 									"protocol": "{{protocol}}",
@@ -3192,10 +3064,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/companies?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -3231,10 +3099,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/company/591a6ab35f54713ed47976b2",
 							"protocol": "{{protocol}}",
@@ -3328,10 +3192,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/places?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -3367,10 +3227,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/place/5922938c5f547186cf8d596d",
 							"protocol": "{{protocol}}",
@@ -3431,10 +3287,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/places/stats",
 							"protocol": "{{protocol}}",
@@ -3496,10 +3348,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/dashboard/58cf91e55f5471137a8ffd9e",
 							"protocol": "{{protocol}}",
@@ -3526,10 +3374,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/matrix/ticket/order/5a0d2d4f33b66603b57a84e9?start=0&size=20&sort=use",
 							"protocol": "{{protocol}}",
@@ -3573,10 +3417,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/tim/matrix/ticket/type/5a0d2d4f33b66603b57a84e9?start=0&size=20&sort=use",
 							"protocol": "{{protocol}}",
@@ -3635,10 +3475,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -3674,10 +3510,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/countries?start=0&size=10",
 									"protocol": "{{protocol}}",
@@ -3762,10 +3594,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
 							"protocol": "{{protocol}}",
@@ -3804,10 +3632,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/qnas?start=0&size=10&content_oid=594246755f5471c519ecfc8c",
 									"protocol": "{{protocol}}",
@@ -3885,10 +3709,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/qna/59672be5ba590e656e4ce964",
 							"protocol": "{{protocol}}",
@@ -4023,10 +3843,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
 							"protocol": "{{protocol}}",
@@ -4058,10 +3874,6 @@
 								},
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/v2/user/me",
 									"protocol": "{{protocol}}",
@@ -4164,10 +3976,6 @@
 								"value": "mak=582d37225f54714def85effb; tak=kevin;"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/host",
 							"protocol": "{{protocol}}",
@@ -4193,10 +4001,6 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/contents",
 							"protocol": "{{protocol}}",
@@ -4222,10 +4026,6 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/contents",
 							"protocol": "{{protocol}}",
@@ -4251,10 +4051,6 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/dashboard/58ec69265f54711c0bd1368a",
 							"protocol": "{{protocol}}",
@@ -4329,10 +4125,6 @@
 								"value": "mak=582d37225f54714def85effb; tak=1234;"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/t/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -4403,10 +4195,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contents",
 							"protocol": "{{protocol}}",
@@ -4432,10 +4220,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/contents/5b024f902f30094d50e46ac8",
 							"protocol": "{{protocol}}",
@@ -4477,10 +4261,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/tw/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -4516,10 +4296,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
 							"protocol": "{{protocol}}",
@@ -4551,10 +4327,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
 									"protocol": "{{protocol}}",
@@ -4608,10 +4380,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345678",
 									"protocol": "{{protocol}}",
@@ -4669,10 +4437,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=1012345678",
 									"protocol": "{{protocol}}",
@@ -4726,10 +4490,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345677",
 									"protocol": "{{protocol}}",
@@ -6123,10 +5883,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?mobile_number=821032697178",
 							"protocol": "{{protocol}}",
@@ -6153,10 +5909,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?mobile_number=821032697178",
 									"protocol": "{{protocol}}",
@@ -6210,10 +5962,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?email=takearest118@gmail.com",
 									"protocol": "{{protocol}}",
@@ -6267,10 +6015,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?mobile_number=82103",
 									"protocol": "{{protocol}}",
@@ -6320,10 +6064,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated?email=kevin.cho@rjkorea.com",
 									"protocol": "{{protocol}}",
@@ -6373,10 +6113,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/duplicated",
 									"protocol": "{{protocol}}",
@@ -6578,10 +6314,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin/5a434a085f54711336570ecc",
 							"protocol": "{{protocol}}",
@@ -6612,10 +6344,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
@@ -6682,10 +6410,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
@@ -6746,10 +6470,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
@@ -6804,10 +6524,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
 							"protocol": "{{protocol}}",
@@ -6838,10 +6554,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
 									"protocol": "{{protocol}}",
@@ -6909,10 +6621,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user?name=조건희&mobile_number=821032697178",
 									"protocol": "{{protocol}}",
@@ -7344,10 +7052,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 							"protocol": "{{protocol}}",
@@ -7377,10 +7081,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
@@ -7441,10 +7141,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
@@ -7505,10 +7201,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/autologin/5a434a085f54711336570ecc",
 									"protocol": "{{protocol}}",
@@ -7568,10 +7260,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/content/atY3Nb7",
 							"protocol": "{{protocol}}",
@@ -7593,10 +7281,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/content/atY3Nb7",
 									"protocol": "{{protocol}}",
@@ -7657,10 +7341,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/contents?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -7691,10 +7371,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/contents?start=0&size=10",
 									"protocol": "{{protocol}}",
@@ -7779,10 +7455,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -7813,10 +7485,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/countries?start=0&size=10",
 									"protocol": "{{protocol}}",
@@ -7901,10 +7569,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=register",
 							"protocol": "{{protocol}}",
@@ -7948,10 +7612,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=register",
 									"protocol": "{{protocol}}",
@@ -8023,10 +7683,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174/detail",
 							"protocol": "{{protocol}}",
@@ -8053,10 +7709,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b1625f4ba590e015ee4f174/detail",
 									"protocol": "{{protocol}}",
@@ -8112,10 +7764,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/validate?start=0&size=0&content_oid=5c009e465f547109247f758f",
 							"protocol": "{{protocol}}",
@@ -8156,10 +7804,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/validate?start=0&size=0&content_oid=5c009e465f547109247f758f",
 									"protocol": "{{protocol}}",
@@ -8228,10 +7872,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
 							"protocol": "{{protocol}}",
@@ -8273,10 +7913,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send/users?q=",
 							"protocol": "{{protocol}}",
@@ -8310,10 +7946,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send/users?q=",
 									"protocol": "{{protocol}}",
@@ -8375,10 +8007,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_079527261731",
 							"protocol": "{{protocol}}",
@@ -8410,10 +8038,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_079527261731",
 									"protocol": "{{protocol}}",
@@ -8476,10 +8100,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/payment?imp_uid=imp_079527261731",
 									"protocol": "{{protocol}}",
@@ -8588,10 +8208,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
 							"protocol": "{{protocol}}",
@@ -8619,10 +8235,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
 									"protocol": "{{protocol}}",
@@ -8687,10 +8299,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/597bf030ba590e7985d0fb6d/payment/status",
 									"protocol": "{{protocol}}",
@@ -9810,10 +9418,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5b7664ebba590e285e649556/me/register/validate",
 							"protocol": "{{protocol}}",
@@ -9843,10 +9447,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/me?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
 							"protocol": "{{protocol}}",
@@ -9886,10 +9486,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/me?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
 									"protocol": "{{protocol}}",
@@ -9968,10 +9564,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/validate?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
 							"protocol": "{{protocol}}",
@@ -10012,10 +9604,6 @@
 								"value": "usk=5938f49a5f5471259d521341"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c91d2ae5f5471186d80a02f",
 							"protocol": "{{protocol}}",
@@ -10049,10 +9637,6 @@
 										"value": "usk=5938f49a5f5471259d521341"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/types/me?content_oid=5c91d2ae5f5471186d80a02f",
 									"protocol": "{{protocol}}",
@@ -10114,10 +9698,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/type/5b7664ebba590e285e649556/tickets?status=send&start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -10165,10 +9745,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
 							"protocol": "{{protocol}}",
@@ -10199,10 +9775,6 @@
 										"value": "usk=5cd7ef5d5f547159a68d849a"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
 									"protocol": "{{protocol}}",
@@ -10470,8 +10042,8 @@
 							"formdata": [
 								{
 									"key": "profile",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -10533,10 +10105,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/order/waterbomb-2017-kbs",
 							"protocol": "{{protocol}}",
@@ -10748,10 +10316,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=",
 							"protocol": "{{protocol}}",
@@ -10795,10 +10359,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=",
 									"protocol": "{{protocol}}",
@@ -10870,10 +10430,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments/5cde3daa5f547191e9dcd0e8",
 							"protocol": "{{protocol}}",
@@ -10900,10 +10456,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments/5cdbb8af5f5471832cd89e5f",
 									"protocol": "{{protocol}}",
@@ -11447,6 +10999,88 @@
 							"body": "{\n    \"error\": {\n        \"message\": \"취소할 결제건이 존재하지 않습니다.\",\n        \"code\": 1\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "/w/exchage/rate/krwusd",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/exchange/rate/krwusd",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"exchange",
+								"rate",
+								"krwusd"
+							]
+						},
+						"description": "환율 KRW USD"
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/exchange/rate/krwusd",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"exchange",
+										"rate",
+										"krwusd"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 17 May 2019 11:14:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								},
+								{
+									"key": "Etag",
+									"value": "\"4861e1a59ec7d552b1af4662115761b9353e1ae7\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"미국 (KRW/USD)\",\n        \"updated_at\": \"2019-05-17T11:06:43.000+0000\",\n        \"provider\": \"KEB하나은행\",\n        \"currency\": {\n            \"name\": \"달러\",\n            \"code\": \"USD\"\n        },\n        \"change_rate\": 0.0046218487,\n        \"base_price\": 1195.5\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -11458,10 +11092,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/contents?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -11494,10 +11124,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/content/5afa8f4bba590e4ce2618b54",
 							"protocol": "{{protocol}}",
@@ -11521,10 +11147,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/sns",
 							"protocol": "{{protocol}}",
@@ -11562,10 +11184,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/pc/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -11597,10 +11215,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/countries?start=0&size=20",
 									"protocol": "{{protocol}}",
@@ -11797,10 +11411,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/countries?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -11832,10 +11442,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/countries?start=0&size=20",
 									"protocol": "{{protocol}}",
@@ -12023,10 +11629,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user?name=조건희&mobile_number=821032697178",
 							"protocol": "{{protocol}}",
@@ -12058,10 +11660,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user?name=조건희&mobile_number=821032697178",
 									"protocol": "{{protocol}}",
@@ -12130,10 +11728,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"access_code\": \"asdf\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user?name=조건희&mobile_number=821032697178",
 									"protocol": "{{protocol}}",
@@ -12644,10 +12238,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
 							"protocol": "{{protocol}}",
@@ -12674,10 +12264,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
 									"protocol": "{{protocol}}",
@@ -12735,10 +12321,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
 									"protocol": "{{protocol}}",
@@ -12802,10 +12384,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"조건희\",\n\t\"mobile_number\": \"821032697178\",\n\t\"content_oid\": \"59e9bf995f54710f67bb237a\"\n}"
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/autologin/5b8e065d5f5471af55848f83",
 									"protocol": "{{protocol}}",
@@ -12865,10 +12443,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/me",
 							"protocol": "{{protocol}}",
@@ -12896,10 +12470,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/user/me",
 									"protocol": "{{protocol}}",
@@ -12976,10 +12546,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/contents/me",
 							"protocol": "{{protocol}}",
@@ -13002,10 +12568,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/contents?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -13038,10 +12600,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/content/5afa8f4bba590e4ce2618b54",
 							"protocol": "{{protocol}}",
@@ -13065,10 +12623,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/sns",
 							"protocol": "{{protocol}}",
@@ -13096,10 +12650,6 @@
 								"value": "usk={{usk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/content/5afa8f4bba590e4ce2618b54/ticket/orders?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -13139,10 +12689,6 @@
 										"value": "usk={{usk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/m/content/5afa8f4bba590e4ce2618b54/ticket/orders?start=0&size=10",
 									"protocol": "{{protocol}}",
@@ -13453,10 +12999,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/contents/me?start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -13493,10 +13035,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/user/5931a3eabc2c44140e0dea91",
 							"protocol": "{{protocol}}",
@@ -13523,10 +13061,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/q/content/5b7d1c17ba590e510352db36/tickets?user_oid=5931a3eabc2c44140e0dea91&start=0&size=10",
 							"protocol": "{{protocol}}",
@@ -13567,10 +13101,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/q/content/5b7d1c17ba590e510352db36/tickets?user_oid=5931a3eabc2c44140e0dea91&start=0&size=10",
 									"protocol": "{{protocol}}",
@@ -13698,10 +13228,6 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/d/user/5b4efba4ba590e4758269150",
 							"protocol": "{{protocol}}",
@@ -13723,10 +13249,6 @@
 							"originalRequest": {
 								"method": "DELETE",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/d/user/5b4efba4ba590e4758269150",
 									"protocol": "{{protocol}}",
@@ -14060,10 +13582,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/email/find/verification/647767",
 							"protocol": "{{protocol}}",
@@ -14095,10 +13613,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/email/find/verification/15825",
 									"protocol": "{{protocol}}",
@@ -14153,10 +13667,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/email/find/verification/647767",
 									"protocol": "{{protocol}}",
@@ -14215,10 +13725,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/email/find/verification/183577",
 									"protocol": "{{protocol}}",
@@ -14596,10 +14102,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/password/reset/verification/181965",
 							"protocol": "{{protocol}}",
@@ -14631,10 +14133,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/password/reset/verification/181965",
 									"protocol": "{{protocol}}",
@@ -14689,10 +14187,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/password/reset/verification/18196",
 									"protocol": "{{protocol}}",
@@ -14747,10 +14241,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/auth/password/reset/verification/181965",
 									"protocol": "{{protocol}}",
@@ -15040,45 +14530,45 @@
 								},
 								{
 									"key": "images_0",
+									"value": null,
 									"description": "대표 이미지",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "images_1",
+									"value": null,
 									"description": "추가 이미지 1",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "images_2",
+									"value": null,
 									"description": "추가 이미지 2",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "images_3",
+									"value": null,
 									"description": "추가 이미지 3",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "images_4",
+									"value": null,
 									"description": "추가 이미지 4",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "images_5",
+									"value": null,
 									"description": "추가 이미지 5",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "images_6",
+									"value": null,
 									"description": "추가 이미지 6",
-									"type": "file",
-									"src": ""
+									"type": "file"
 								},
 								{
 									"key": "place_name",
@@ -15496,8 +14986,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -15608,8 +15098,8 @@
 							"formdata": [
 								{
 									"key": "image",
-									"type": "file",
-									"src": ""
+									"value": null,
+									"type": "file"
 								}
 							]
 						},
@@ -15775,7 +15265,10 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
 							"protocol": "{{protocol}}",
@@ -15805,7 +15298,10 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
 									"protocol": "{{protocol}}",
@@ -15858,7 +15354,10 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4/image/extra/1",
 									"protocol": "{{protocol}}",
@@ -15913,10 +15412,6 @@
 								"value": "csk={{csk}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4",
 							"protocol": "{{protocol}}",
@@ -15943,10 +15438,6 @@
 										"value": "csk={{csk}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/content/5c6a63155f5471084f696eb4",
 									"protocol": "{{protocol}}",
@@ -16008,10 +15499,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/contents?status=open&start=0&size=20",
 							"protocol": "{{protocol}}",
@@ -16057,10 +15544,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/contents?status=open&start=0&size=20",
 									"protocol": "{{protocol}}",
@@ -16133,10 +15616,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/contents?status=closed&start=0&size=20",
 									"protocol": "{{protocol}}",
