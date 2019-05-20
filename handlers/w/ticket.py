@@ -9,7 +9,7 @@ from common import hashers
 from common.decorators import user_auth_async, parse_argument
 
 from handlers.base import JsonHandler
-from models.user import UserModel
+from models.user import UserModel, UserSendHistoryModel
 from models.content import ContentModel
 from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel, TicketLogModel
 
@@ -469,46 +469,24 @@ class TicketSerialNumberRegisterHandler(JsonHandler):
 
 class TicketSendUserListHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('q', str, None)])
+    @parse_argument([('q', str, None), ('start', int, 0), ('size', int, 20)])
     async def get(self, *args, **kwargs):
         q = {
-            '$and': [
-                {'send_user_oid': self.current_user['_id']}
-            ]
+            'user_oid': self.current_user['_id'],
+            'enabled': True
         }
         parsed_args = kwargs.get('parsed_args')
         if 'q' in parsed_args and parsed_args['q']:
-            user_q = {
-                'name': {'$regex': parsed_args['q']},
+            q['name'] = {
+                '$regex': parsed_args['q']
             }
-            users = await UserModel.find(query=user_q, limit=50)
-            if users:
-                q['$and'].append({'$or': []})
-                for user in users:
-                    q['$and'][1]['$or'].append({'receive_user_oid': user['_id']})
-            else:
-                self.response['data'] = list()
-                self.write_json()
-                return
-        result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
-        for res in result:
-            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile')])
-            if receive_user and 'name' in receive_user:
-                res['name'] = receive_user['name']
-                res['mobile'] = receive_user['mobile']
-            res.pop('receive_user_oid')
-        send_user_dict = dict()
-        for r in result:
-            if 'mobile' in r:
-                send_user_dict['%s%s' % (r['mobile']['country_code'], r['mobile']['number'])] = {
-                    '_id': r['_id'],
-                    'name': r['name'],
-                    'created_at': r['created_at']
-                }
-        send_user_list = list()
-        for k, v in send_user_dict.items():
-            send_user_list.append({'mobile_number': k, 'name': v['name'], 'created_at': v['created_at'], '_id': v['_id']})
-        self.response['data'] = send_user_list[:20]
+        count = await UserSendHistoryModel.count(query=q)
+        history = await UserSendHistoryModel.find(query=q, fields={'mobile': True, 'name': True, 'updated_at': True}, sort=[('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        for h in history:
+            h['mobile_number'] = "%s%s" % (h['mobile']['country_code'], h['mobile']['number'])
+            h.pop('mobile')
+        self.response['count'] = count
+        self.response['data'] = history
         self.write_json()
 
     async def options(self, *args, **kwargs):
