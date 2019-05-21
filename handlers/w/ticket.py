@@ -277,18 +277,19 @@ class TicketListMeHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None), ('status', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
             'receive_user_oid': self.current_user['_id'],
             'enabled': True,
-            'status': {'$ne': TicketModel.Status.pend.name}
+            '$or': [
+                {'status': TicketModel.Status.send.name},
+                {'status': TicketModel.Status.pay.name}
+            ]
         }
         if parsed_args['content_oid']:
             q['content_oid'] = ObjectId(parsed_args['content_oid'])
-        if parsed_args['status']:
-            q['status'] = parsed_args['status']
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1), ('price', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
