@@ -132,11 +132,6 @@ class TicketRegisterHandler(JsonHandler):
             ticket_type = await TicketTypeModel.get_id(exist_ticket['ticket_type_oid'])
             if 'duplicated_registration' not in ticket_type or not ticket_type['duplicated_registration']:
                 raise HTTPError(400, 'Already registered ticket type on this content')
-        email = self.json_decoded_body.get('email', None)
-        birthday = self.json_decoded_body.get('birthday', None)
-        gender = self.json_decoded_body.get('gender', None)
-        if email and birthday and gender:
-            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
         query = {
             '_id': ObjectId(_id)
         }
