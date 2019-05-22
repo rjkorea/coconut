@@ -108,6 +108,7 @@ class PaymentListHandler(JsonHandler):
                 ttm['_id'] = oid
                 res['tickets'].append(ttm)
             res.pop('ticket_oids')
+            res['is_pay_cancel'] = True
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -202,6 +203,7 @@ class PaymentCancelHandler(JsonHandler):
             raise HTTPError(400, self.set_error(3, 'no exist payment'))
         if payment['status'] != 'paid':
             raise HTTPError(400, self.set_error(4, 'status is not paid'))
+        # TODO: check is_pay_cancel
         reason = '결제자에 의한 취소'
         try:
             response = IamportService().client.cancel(reason, merchant_uid=payment['merchant_uid'])
