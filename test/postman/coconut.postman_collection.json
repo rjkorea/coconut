@@ -7865,7 +7865,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5951cc82ba590e3cec7f6031",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -7887,13 +7887,80 @@
 								},
 								{
 									"key": "content_oid",
-									"value": "5951cc82ba590e3cec7f6031"
+									"value": "5c91d2ae5f5471186d80a02f"
 								}
 							]
 						},
-						"description": "log for send tickets"
+						"description": "나의 전송내역 리스트"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"logs"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "content_oid",
+											"value": "5c91d2ae5f5471186d80a02f"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Etag",
+									"value": "\"976db1ced831900a306fdcae2b6be16b1c6b672e\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "6672"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 May 2019 10:32:12 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"01028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"594b96ffba590e3cec7f5f1a\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"clickUseSpread\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"URL 이동 테스트\",\n                    \"_id\": \"5c973ac65f547105fe798182\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"clickUseSpread\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"URL 이동 테스트\",\n                    \"_id\": \"5c973ac65f547105fe798182\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"clickUseSpread\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"URL 이동 테스트\",\n                    \"_id\": \"5c973ac65f547105fe798182\"\n                }\n            ],\n            \"created_at\": 1555984042,\n            \"_id\": \"5cbeed3a5f54710cd6734ed8\",\n            \"send_user_name\": \"케빈 조\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555984042,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"01028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"594b96ffba590e3cec7f5f1a\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"created_at\": 1555531839,\n            \"_id\": \"5cb806cf5f547102e61fd07d\",\n            \"send_user_name\": \"Kevin Cho\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555531839,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"1028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5cb7f85d5f547102e61fd07b\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"무료 티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"무료 티켓 이름\",\n                    \"_id\": \"5c930ac05f54711fc8b8e854\"\n                }\n            ],\n            \"created_at\": 1555528141,\n            \"_id\": \"5cb7f85d5f547102e61fd07c\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555528141,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"01028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"594b96ffba590e3cec7f5f1a\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"created_at\": 1555527968,\n            \"_id\": \"5cb7f7b05f547102e61fd07a\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555527968,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"유 지현\",\n                \"mobile\": {\n                    \"number\": \"01041080731\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5964c21fba590e508162d48e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5cad78ac5f547127b894fdfb\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1554840092,\n            \"created_at\": 1554840092\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9876245f547111bc323dda\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553463188,\n            \"created_at\": 1553463188\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9875fa5f547111bc323dd9\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553463146,\n            \"created_at\": 1553463146\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9875d25f547111bc323dd8\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553463106,\n            \"created_at\": 1553463106\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9871e05f547111bcc3ff42\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553462096,\n            \"created_at\": 1553462096\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858986\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5b518c54ba590e0b495c155f\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9871b75f547111bcc3ff41\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553462055,\n            \"created_at\": 1553462055\n        }\n    ],\n    \"count\": 11\n}"
+						}
+					]
 				},
 				{
 					"name": "/w/ticket/send/users",
@@ -8491,9 +8558,48 @@
 								"5940d2785f5471904fd44563",
 								"register"
 							]
-						}
+						},
+						"description": "단일티켓 등록하기"
 					},
 					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "usk={{usk}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{hostname}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"w",
+										"ticket",
+										"5940d2785f5471904fd44563",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"nModified\": 2,\n        \"updatedExisting\": true,\n        \"n\": 2\n    }\n}"
+						},
 						{
 							"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
 							"originalRequest": {
@@ -8892,7 +8998,8 @@
 								"tickets",
 								"register"
 							]
-						}
+						},
+						"description": "복수티켓 등록하기"
 					},
 					"response": [
 						{
@@ -9005,7 +9112,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile\": {\n\t\t\t\"country_code\": \"82\",\n\t\t\t\"number\": \"01030623239\"\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"send_user_name\": \"케빈\",\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile\": {\n\t\t\t\"country_code\": \"82\",\n\t\t\t\"number\": \"01030623239\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
@@ -9019,11 +9126,12 @@
 								"ticket",
 								"send"
 							]
-						}
+						},
+						"description": "티켓 보내기"
 					},
 					"response": [
 						{
-							"name": "3개 티켓을 자신에게 전송 (400 에러)",
+							"name": "400: cannot send to myself",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -9084,10 +9192,10 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\"message\": \"400: cannot send to myself\"}"
+							"body": "{\n    \"message\": \"400: cannot send to myself\"\n}"
 						},
 						{
-							"name": "3개 티켓 다른 사람에게 전송",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -9148,7 +9256,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\"data\": {\"ok\": 1, \"updatedExisting\": true, \"nModified\": 0, \"n\": 3}}"
+							"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"updatedExisting\": true,\n        \"nModified\": 0,\n        \"n\": 3\n    }\n}"
 						}
 					]
 				},
@@ -10316,7 +10424,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=",
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=paid",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{hostname}}"
@@ -10341,7 +10449,7 @@
 								},
 								{
 									"key": "status",
-									"value": ""
+									"value": "paid"
 								}
 							]
 						},
@@ -10359,7 +10467,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=",
+									"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=paid",
 									"protocol": "{{protocol}}",
 									"host": [
 										"{{hostname}}"
@@ -10384,7 +10492,7 @@
 										},
 										{
 											"key": "status",
-											"value": ""
+											"value": "paid"
 										}
 									]
 								}
@@ -10394,28 +10502,28 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Etag",
-									"value": "\"5a01cab64ac56fa2821a1214d35bc9e5085bed54\""
-								},
-								{
 									"key": "Content-Length",
-									"value": "3994"
+									"value": "706"
 								},
 								{
-									"key": "Server",
-									"value": "TornadoServer/4.4.2"
+									"key": "Date",
+									"value": "Wed, 22 May 2019 11:27:38 GMT"
 								},
 								{
 									"key": "Content-Type",
 									"value": "application/json"
 								},
 								{
-									"key": "Date",
-									"value": "Wed, 15 May 2019 09:46:36 GMT"
+									"key": "Etag",
+									"value": "\"2443c2ad0f5d381a2cd94f7d8b6575767ef6fc08\""
+								},
+								{
+									"key": "Server",
+									"value": "TornadoServer/4.4.2"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": [\n        {\n            \"currency\": \"USD\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3b\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb8af5f5471832cd89e5f\",\n            \"created_at\": 1557871135,\n            \"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n            \"updated_at\": 1557871135,\n            \"amount\": 10,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"currency\": \"USD\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3b\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb8295f5471832ccf2fb1\",\n            \"created_at\": 1557871001,\n            \"merchant_uid\": \"local_5cdbb8295f5471832ccf2fb1\",\n            \"updated_at\": 1557871001,\n            \"amount\": 10,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"currency\": \"USD\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb6515f5471832ccf2fb0\",\n            \"created_at\": 1557870529,\n            \"merchant_uid\": \"local_5cdbb6515f5471832ccf2fb0\",\n            \"updated_at\": 1557870529,\n            \"amount\": 10,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"currency\": \"KRW\",\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb64a5f5471832ccf2faf\",\n            \"created_at\": 1557870522,\n            \"merchant_uid\": \"local_5cdbb64a5f5471832ccf2faf\",\n            \"updated_at\": 1557870522,\n            \"amount\": 1000,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"updated_at\": 1557870262,\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb5465f5471832c71a4af\",\n            \"created_at\": 1557870262,\n            \"merchant_uid\": \"local_5cdbb5465f5471832c71a4af\",\n            \"currency\": \"KRW\",\n            \"amount\": 1000,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        },\n        {\n            \"updated_at\": 1557870259,\n            \"tickets\": [\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                },\n                {\n                    \"name\": \"유료티켓 이름\",\n                    \"price\": 1000,\n                    \"_id\": \"5c9345935f54711fc8589b3a\",\n                    \"desc\": {\n                        \"enabled\": true,\n                        \"value\": \"유료티켓 설명\"\n                    }\n                }\n            ],\n            \"status\": \"ready\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cdbb5435f5471832c71a4ae\",\n            \"created_at\": 1557870259,\n            \"merchant_uid\": \"local_5cdbb5435f5471832c71a4ae\",\n            \"currency\": \"KRW\",\n            \"amount\": 1000,\n            \"enabled\": true,\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\"\n        }\n    ],\n    \"count\": 6\n}"
+							"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"merchant_uid\": \"local_5cde85615f5471976296975a\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cde85615f5471976296975a\",\n            \"enabled\": true,\n            \"amount\": 10,\n            \"currency\": \"USD\",\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"price\": 1000,\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    }\n                },\n                {\n                    \"price\": 1000,\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345935f54711fc8589b3b\",\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    }\n                }\n            ],\n            \"updated_at\": 1558054609,\n            \"created_at\": 1558054609,\n            \"is_pay_cancel\": true,\n            \"status\": \"paid\"\n        }\n    ]\n}"
 						}
 					]
 				},

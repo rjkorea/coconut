@@ -191,6 +191,9 @@ class TicketSendHandler(JsonHandler):
             ticket = await TicketModel.find_one({'_id': ObjectId(t_oid)})
             if ticket and ticket['receive_user_oid'] != self.current_user['_id']:
                 raise HTTPError(400, 'is not your ticket')
+        send_user_name = self.json_decoded_body.get('send_user_name', None)
+        if not send_user_name or len(send_user_name) == 0:
+            raise HTTPError(400, 'invalid invalid send_user_name')
         receive_user = self.json_decoded_body.get('receive_user', None)
         if not receive_user or not isinstance(receive_user, dict):
             raise HTTPError(400, 'invalid receive_user')
@@ -216,6 +219,7 @@ class TicketSendHandler(JsonHandler):
         tm = await TicketModel.get_id(ObjectId(ticket_oids[0]))
         ticket_log = TicketLogModel(raw_data=dict(
             action=TicketLogModel.Status.send.name,
+            send_user_name=send_user_name,
             send_user_oid=self.current_user['_id'],
             receive_user_oid=receive_user['_id'],
             content_oid=tm['content_oid'],
@@ -480,7 +484,8 @@ class TicketLogsHandler(JsonHandler):
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
-            'send_user_oid': self.current_user['_id']
+            'send_user_oid': self.current_user['_id'],
+            'action': 'send'
         }
         if parsed_args['content_oid']:
             q['content_oid'] = ObjectId(parsed_args['content_oid'])
