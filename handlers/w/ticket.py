@@ -159,11 +159,6 @@ class TicketMultiRegisterHandler(JsonHandler):
         ticket_oids = self.json_decoded_body.get('ticket_oids', None)
         if not ticket_oids or len(ticket_oids) == 0:
             raise HTTPError(400, 'invalid ticket_oids')
-        email = self.json_decoded_body.get('email', None)
-        birthday = self.json_decoded_body.get('birthday', None)
-        gender = self.json_decoded_body.get('gender', None)
-        if email and birthday and gender:
-            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
         query = {
             '_id': {
                 '$in': []

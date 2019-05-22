@@ -8476,7 +8476,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
+							"raw": "{}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
@@ -8878,7 +8878,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"5be117172f30091b373dc9ab\",\n\t\t\"5be117172f30091b373dc9aa\"\n\t],\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
+							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"5be117172f30091b373dc9ab\",\n\t\t\"5be117172f30091b373dc9aa\"\n\t]\n}"
 						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/register",
