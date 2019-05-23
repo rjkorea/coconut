@@ -11,10 +11,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
 					"protocol": "{{protocol}}",
@@ -46,10 +42,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345678",
 							"protocol": "{{protocol}}",
@@ -107,10 +99,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=01012345677",
 							"protocol": "{{protocol}}",
@@ -168,10 +156,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=1012345678",
 							"protocol": "{{protocol}}",
@@ -225,10 +209,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/auth/user?mobile_country_code=82&mobile_number=10123",
 							"protocol": "{{protocol}}",
@@ -986,10 +966,6 @@
 						"value": "usk={{usk}}"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
 					"protocol": "{{protocol}}",
@@ -1020,10 +996,6 @@
 								"value": "usk=5cd7ef5d5f547159a68d849a"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/user/me",
 							"protocol": "{{protocol}}",
@@ -1269,6 +1241,1651 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"error\": {\n        \"message\": \"invalid gender (male, female, not_specific)\",\n        \"code\": 2\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n    \"ticket_oids\": [\n            \"5c9345935f54711fc8589b3c\",\n            \"5c9345935f54711fc8589b9b\"\n    ],\n    \"currency\": \"USD\",\n    \"amount\": 10.00\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"payment"
+					]
+				},
+				"description": "결제 요청하기"
+			},
+			"response": [
+				{
+					"name": "no exist ticket",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n    \"ticket_oids\": [\n            \"5c9345935f54711fc8589b3c\",\n            \"5c9345935f54711fc8589b9b\"\n    ],\n    \"currency\": \"USD\",\n    \"amount\": 10.00\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 07:01:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": 4,\n        \"message\": \"no exist ticket\"\n    }\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n    \"ticket_oids\": [\n            \"5c9345935f54711fc8589b3c\",\n            \"5c9345935f54711fc8589b3a\"\n    ],\n    \"currency\": \"KRW\",\n    \"amount\": 1000\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "60"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 06:38:40 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"merchant_uid\": \"local_5cdbb3f05f5471832cb027cb\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/payments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=paid",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "content_oid",
+							"value": "5c91d2ae5f5471186d80a02f"
+						},
+						{
+							"key": "status",
+							"value": "paid"
+						}
+					]
+				},
+				"description": "결제리스트 가져오기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f&status=paid",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payments"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c91d2ae5f5471186d80a02f"
+								},
+								{
+									"key": "status",
+									"value": "paid"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "706"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 22 May 2019 11:27:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Etag",
+							"value": "\"2443c2ad0f5d381a2cd94f7d8b6575767ef6fc08\""
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"merchant_uid\": \"local_5cde85615f5471976296975a\",\n            \"user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"_id\": \"5cde85615f5471976296975a\",\n            \"enabled\": true,\n            \"amount\": 10,\n            \"currency\": \"USD\",\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"price\": 1000,\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345935f54711fc8589b3c\",\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    }\n                },\n                {\n                    \"price\": 1000,\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345935f54711fc8589b3b\",\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    }\n                }\n            ],\n            \"updated_at\": 1558054609,\n            \"created_at\": 1558054609,\n            \"is_pay_cancel\": true,\n            \"status\": \"paid\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/payments/<oid>",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments/5cde3daa5f547191e9dcd0e8",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"payments",
+						"5cde3daa5f547191e9dcd0e8"
+					]
+				},
+				"description": "결제정보 가져오기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payments/5cdbb8af5f5471832cd89e5f",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payments",
+								"5cdbb8af5f5471832cd89e5f"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Etag",
+							"value": "\"2a549ff4834ab23ecef15e074cba85587f13d7c2\""
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "922"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 May 2019 04:29:12 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"currency\": \"USD\",\n        \"status\": \"failed\",\n        \"tickets\": [\n            {\n                \"price\": 1000,\n                \"_id\": \"5c9345935f54711fc8589b3c\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"유료티켓 설명\"\n                },\n                \"name\": \"유료티켓 이름\"\n            },\n            {\n                \"price\": 1000,\n                \"_id\": \"5c9345935f54711fc8589b3b\",\n                \"desc\": {\n                    \"enabled\": true,\n                    \"value\": \"유료티켓 설명\"\n                },\n                \"name\": \"유료티켓 이름\"\n            }\n        ],\n        \"amount\": 10,\n        \"_id\": \"5cdbb8af5f5471832cd89e5f\",\n        \"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\",\n        \"updated_at\": 1557884421,\n        \"enabled\": true,\n        \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n        \"created_at\": 1557871135,\n        \"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n        \"imp_uid\": \"imp_158558555093\",\n        \"user_oid\": \"5931a3eabc2c44140e0dea91\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/payment/success",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"payment",
+						"success"
+					]
+				},
+				"description": "결제성공"
+			},
+			"response": [
+				{
+					"name": "invalid payment",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"success"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 09:58:40 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"message\": \"invalid payment\",\n        \"code\": 3\n    }\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"success"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 09:58:40 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n\t\"data\": {\n\t\t\"payment_oid\": \"5cdbb8af5f5471832cd89e5f\"\n\t}\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/payment/fail",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n\t\"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\"\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/fail",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"payment",
+						"fail"
+					]
+				},
+				"description": "결제실패"
+			},
+			"response": [
+				{
+					"name": "invalid payment",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/success",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"success"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 09:58:40 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"message\": \"invalid payment\",\n        \"code\": 3\n    }\n}"
+				},
+				{
+					"name": "invalid error_msg",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/fail",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"fail"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 10:37:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"message\": \"invalid error_msg\",\n        \"code\": 4\n    }\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imp_uid\": \"imp_158558555093\",\n\t\"merchant_uid\": \"local_5cdbb8af5f5471832cd89e5f\",\n\t\"error_msg\": \"F0005:결제가 중단되었습니다(imp_186345912447).01 | 인증이 정상적으로 이루어지지 않았습니다.\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/fail",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"fail"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 May 2019 10:39:42 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"payment_oid\": \"5cdbb8af5f5471832cd89e5f\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/payment/cancel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"payment_oid\": \"5cde3daa5f547191e9dcd0e8\"\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/cancel",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"payment",
+						"cancel"
+					]
+				},
+				"description": "결제취소"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"payment_oid\": \"5cde85615f5471976296975a\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/cancel",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"cancel"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "131"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 May 2019 09:58:29 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n\t\"data\": {\n\t\t\"payment_oid\": \"5cde85615f5471976296975a\"\n\t}\n}"
+				},
+				{
+					"name": "취소할 결제건이 존재하지 않습니다.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"payment_oid\": \"5cde85615f5471976296975a\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/payment/cancel",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"payment",
+								"cancel"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "131"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 May 2019 09:58:29 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"message\": \"취소할 결제건이 존재하지 않습니다.\",\n        \"code\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/exchage/rate/krwusd",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/exchange/rate/krwusd",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"exchange",
+						"rate",
+						"krwusd"
+					]
+				},
+				"description": "환율 KRW USD"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/exchange/rate/krwusd",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"exchange",
+								"rate",
+								"krwusd"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 May 2019 11:14:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "237"
+						},
+						{
+							"key": "Etag",
+							"value": "\"4861e1a59ec7d552b1af4662115761b9353e1ae7\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"name\": \"미국 (KRW/USD)\",\n        \"updated_at\": \"2019-05-17T11:06:43.000+0000\",\n        \"provider\": \"KEB하나은행\",\n        \"currency\": {\n            \"name\": \"달러\",\n            \"code\": \"USD\"\n        },\n        \"change_rate\": 0.0046218487,\n        \"base_price\": 1195.5\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/tickets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"tickets"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "content_oid",
+							"value": "5c91d2ae5f5471186d80a02f"
+						}
+					]
+				},
+				"description": "대기중 티켓 리스트"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c91d2ae5f5471186d80a02f"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Etag",
+							"value": "\"8d3f0eafcc0672841b66ea8b05d2d3341b5752e4\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 21 May 2019 05:45:19 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Length",
+							"value": "8901"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"count\": 73,\n    \"data\": [\n        {\n            \"_id\": \"5cd152945f547114685edc05\",\n            \"created_at\": 1557189636,\n            \"updated_at\": 1557189636,\n            \"ticket_order_oid\": \"5cd152945f547114685edc04\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c930ac05f54711fc8b8e854\",\n                \"name\": \"무료 티켓 이름\",\n                \"created_at\": 1553108016,\n                \"updated_at\": 1555537660,\n                \"fpfg\": {\n                    \"limit\": 2,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"sales_date\": {\n                    \"end\": 1556431200,\n                    \"start\": 1552802400\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 2\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"무료 티켓 설명\",\n                    \"enabled\": true\n                },\n                \"color\": \"tkit-mint\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": true\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cd152945f547114685edc06\",\n            \"created_at\": 1557189636,\n            \"updated_at\": 1557189636,\n            \"ticket_order_oid\": \"5cd152945f547114685edc04\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c930ac05f54711fc8b8e854\",\n                \"name\": \"무료 티켓 이름\",\n                \"created_at\": 1553108016,\n                \"updated_at\": 1555537660,\n                \"fpfg\": {\n                    \"limit\": 2,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"sales_date\": {\n                    \"end\": 1556431200,\n                    \"start\": 1552802400\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 2\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"무료 티켓 설명\",\n                    \"enabled\": true\n                },\n                \"color\": \"tkit-mint\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": true\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cd120195f547113130b0215\",\n            \"created_at\": 1557176712,\n            \"updated_at\": 1557176712,\n            \"status\": \"send\",\n            \"ticket_order_oid\": \"5cd120195f547113130b0214\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c930ac05f54711fc8b8e854\",\n                \"name\": \"무료 티켓 이름\",\n                \"created_at\": 1553108016,\n                \"updated_at\": 1555537660,\n                \"fpfg\": {\n                    \"limit\": 2,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"sales_date\": {\n                    \"end\": 1556431200,\n                    \"start\": 1552802400\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 2\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"무료 티켓 설명\",\n                    \"enabled\": true\n                },\n                \"color\": \"tkit-mint\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": true\n            },\n            \"enabled\": true,\n            \"price\": 0,\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\"\n        },\n        {\n            \"_id\": \"5cd120195f547113130b0216\",\n            \"created_at\": 1557176712,\n            \"updated_at\": 1557176712,\n            \"status\": \"send\",\n            \"ticket_order_oid\": \"5cd120195f547113130b0214\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c930ac05f54711fc8b8e854\",\n                \"name\": \"무료 티켓 이름\",\n                \"created_at\": 1553108016,\n                \"updated_at\": 1555537660,\n                \"fpfg\": {\n                    \"limit\": 2,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"sales_date\": {\n                    \"end\": 1556431200,\n                    \"start\": 1552802400\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 2\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"무료 티켓 설명\",\n                    \"enabled\": true\n                },\n                \"color\": \"tkit-mint\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": true\n            },\n            \"enabled\": true,\n            \"price\": 0,\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\"\n        },\n        {\n            \"_id\": \"5cb84d265f5471072bfcdf0e\",\n            \"created_at\": 1555549846,\n            \"updated_at\": 1555549846,\n            \"ticket_order_oid\": \"5cb84d265f5471072bfcdf08\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c973ac65f547105fe798182\",\n                \"name\": \"URL 이동 테스트\",\n                \"fpfg\": {\n                    \"limit\": 10,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"updated_at\": 1555020722,\n                \"created_at\": 1553382454,\n                \"sales_date\": {\n                    \"end\": 1556571600,\n                    \"start\": 1553374800\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 10\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"clickUseSpread\",\n                    \"enabled\": true\n                },\n                \"color\": \"hangang-blue\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": false\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cb84d265f5471072bfcdf0d\",\n            \"created_at\": 1555549846,\n            \"updated_at\": 1555549846,\n            \"ticket_order_oid\": \"5cb84d265f5471072bfcdf08\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c973ac65f547105fe798182\",\n                \"name\": \"URL 이동 테스트\",\n                \"fpfg\": {\n                    \"limit\": 10,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"updated_at\": 1555020722,\n                \"created_at\": 1553382454,\n                \"sales_date\": {\n                    \"end\": 1556571600,\n                    \"start\": 1553374800\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 10\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"clickUseSpread\",\n                    \"enabled\": true\n                },\n                \"color\": \"hangang-blue\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": false\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cb84d265f5471072bfcdf0c\",\n            \"created_at\": 1555549846,\n            \"updated_at\": 1555549846,\n            \"ticket_order_oid\": \"5cb84d265f5471072bfcdf08\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c973ac65f547105fe798182\",\n                \"name\": \"URL 이동 테스트\",\n                \"fpfg\": {\n                    \"limit\": 10,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"updated_at\": 1555020722,\n                \"created_at\": 1553382454,\n                \"sales_date\": {\n                    \"end\": 1556571600,\n                    \"start\": 1553374800\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 10\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"clickUseSpread\",\n                    \"enabled\": true\n                },\n                \"color\": \"hangang-blue\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": false\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cb84d265f5471072bfcdf0b\",\n            \"created_at\": 1555549846,\n            \"updated_at\": 1555549846,\n            \"ticket_order_oid\": \"5cb84d265f5471072bfcdf08\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c973ac65f547105fe798182\",\n                \"name\": \"URL 이동 테스트\",\n                \"fpfg\": {\n                    \"limit\": 10,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"updated_at\": 1555020722,\n                \"created_at\": 1553382454,\n                \"sales_date\": {\n                    \"end\": 1556571600,\n                    \"start\": 1553374800\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 10\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"clickUseSpread\",\n                    \"enabled\": true\n                },\n                \"color\": \"hangang-blue\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": false\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cb84d265f5471072bfcdf0a\",\n            \"created_at\": 1555549846,\n            \"updated_at\": 1555549846,\n            \"ticket_order_oid\": \"5cb84d265f5471072bfcdf08\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c973ac65f547105fe798182\",\n                \"name\": \"URL 이동 테스트\",\n                \"fpfg\": {\n                    \"limit\": 10,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"updated_at\": 1555020722,\n                \"created_at\": 1553382454,\n                \"sales_date\": {\n                    \"end\": 1556571600,\n                    \"start\": 1553374800\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 10\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"clickUseSpread\",\n                    \"enabled\": true\n                },\n                \"color\": \"hangang-blue\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": false\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        },\n        {\n            \"_id\": \"5cb84d265f5471072bfcdf09\",\n            \"created_at\": 1555549846,\n            \"updated_at\": 1555549846,\n            \"ticket_order_oid\": \"5cb84d265f5471072bfcdf08\",\n            \"content\": {\n                \"_id\": \"5c91d2ae5f5471186d80a02f\",\n                \"name\": \"Ultra Music Festival KOREA 2019\"\n            },\n            \"type\": \"network\",\n            \"ticket_type\": {\n                \"_id\": \"5c973ac65f547105fe798182\",\n                \"name\": \"URL 이동 테스트\",\n                \"fpfg\": {\n                    \"limit\": 10,\n                    \"now\": 1,\n                    \"spread\": \"\"\n                },\n                \"updated_at\": 1555020722,\n                \"created_at\": 1553382454,\n                \"sales_date\": {\n                    \"end\": 1556571600,\n                    \"start\": 1553374800\n                },\n                \"sales\": {\n                    \"count\": 1,\n                    \"limit\": 10\n                },\n                \"type\": \"network\",\n                \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n                \"desc\": {\n                    \"value\": \"clickUseSpread\",\n                    \"enabled\": true\n                },\n                \"color\": \"hangang-blue\",\n                \"enabled\": true,\n                \"price\": 0,\n                \"admin_oid\": \"58bfafa55f5471325c68c4f3\",\n                \"duplicated_registration\": false\n            },\n            \"enabled\": true,\n            \"status\": \"send\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"price\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/tickets/me",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/me?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"tickets",
+						"me"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "content_oid",
+							"value": "58cf91e55f5471137a8ffd9e"
+						}
+					]
+				},
+				"description": "마이티킷 사용가능 티켓"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/me?start=0&size=10&content_oid=58cf91e55f5471137a8ffd9e",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"tickets",
+								"me"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "58cf91e55f5471137a8ffd9e"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Etag",
+							"value": "\"eae4d493d1ee3987721b847d2257058f9421d8a2\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 May 2019 11:09:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "623"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"content\": {\n                \"_id\": \"58cf91e55f5471137a8ffd9e\",\n                \"name\": \"Rainbow island 2017\"\n            },\n            \"price\": 0,\n            \"updated_at\": 1497388356,\n            \"ticket_order_oid\": \"5940d3d45f5471904f610e6a\",\n            \"enabled\": true,\n            \"type\": \"network\",\n            \"status\": \"register\",\n            \"_id\": \"5940d3d45f5471904f610e6b\",\n            \"receive_user_oid\": \"5931a3eabc2c44140e0dea91\",\n            \"ticket_type\": {\n                \"_id\": \"5931a38dbc2c44140e0dea8d\",\n                \"price\": 99000,\n                \"desc\": {\n                    \"value\": \"행사 당일 현장에서 추가되는 게스트\",\n                    \"enabled\": true\n                },\n                \"name\": \"현장 게스트\",\n                \"color\": \"tkit-mint\"\n            },\n            \"created_at\": 1497388356\n        }\n    ],\n    \"count\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/ticket/<oid>/register",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"ticket",
+						"5940d2785f5471904fd44563",
+						"register"
+					]
+				},
+				"description": "단일티켓 등록하기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5940d2785f5471904fd44563",
+								"register"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"nModified\": 2,\n        \"updatedExisting\": true,\n        \"n\": 2\n    }\n}"
+				},
+				{
+					"name": "한 컨텐츠에 다른 티켓이 등록되어 있는데 다른 티켓으로 등록하려고 하는 경우 (예외)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"20170615\",\n\t\"gender\": \"male\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/5940d2785f5471904fd44563/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"5940d2785f5471904fd44563",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "61",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 21 Jun 2017 05:32:30 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"body": "{\"message\": \"400: Already registered ticket on this content\"}"
+				}
+			]
+		},
+		{
+			"name": "/w/tickets/register",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ticket_oids\": [\n\t\t\"5be117172f30091b373dc9ab\",\n\t\t\"5be117172f30091b373dc9aa\"\n\t]\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/register",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"tickets",
+						"register"
+					]
+				},
+				"description": "복수티켓 등록하기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ticket_oids\":[\n\t\t\"5b78f78eba590e27ecb53077\",\n\t\t\"5b78f78eba590e27ecb53078\"\n\t],\n\t\"email\": \"takearest118@gmail.com\",\n\t\"birthday\": \"19800118\",\n\t\"gender\": \"male\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/tickets/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"tickets",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 07 Nov 2018 06:08:54 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "68"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"nModified\": 2,\n        \"updatedExisting\": true,\n        \"n\": 2\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/ticket/send",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"send_user_name\": \"케빈\",\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile\": {\n\t\t\t\"country_code\": \"82\",\n\t\t\t\"number\": \"01030623239\"\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"ticket",
+						"send"
+					]
+				},
+				"description": "티켓 보내기"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile_number\": \"821030623239\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"send"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "68",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 07:08:59 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"ok\": 1,\n        \"updatedExisting\": true,\n        \"nModified\": 0,\n        \"n\": 3\n    }\n}"
+				},
+				{
+					"name": "400: cannot send to myself",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ticket_oids\": [\n\t\t\"59dde16d5f54710940ec1963\",\n\t\t\"59dde16d5f54710940ec1962\"\n\t],\n\t\"receive_user\": {\n\t\t\"name\": \"이민경\",\n\t\t\"mobile_number\": \"821030623239\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/send",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"send"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "41",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jun 2017 07:10:55 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"400: cannot send to myself\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/w/ticket/logs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "usk={{usk}}"
+					}
+				],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"w",
+						"ticket",
+						"logs"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "content_oid",
+							"value": "5c91d2ae5f5471186d80a02f"
+						}
+					]
+				},
+				"description": "나의 전송내역 리스트"
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "usk={{usk}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/w/ticket/logs?start=0&size=10&content_oid=5c91d2ae5f5471186d80a02f",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"w",
+								"ticket",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "content_oid",
+									"value": "5c91d2ae5f5471186d80a02f"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "TornadoServer/4.4.2"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Etag",
+							"value": "\"976db1ced831900a306fdcae2b6be16b1c6b672e\""
+						},
+						{
+							"key": "Content-Length",
+							"value": "6672"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 22 May 2019 10:32:12 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"01028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"594b96ffba590e3cec7f5f1a\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"clickUseSpread\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"URL 이동 테스트\",\n                    \"_id\": \"5c973ac65f547105fe798182\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"clickUseSpread\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"URL 이동 테스트\",\n                    \"_id\": \"5c973ac65f547105fe798182\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"clickUseSpread\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"URL 이동 테스트\",\n                    \"_id\": \"5c973ac65f547105fe798182\"\n                }\n            ],\n            \"created_at\": 1555984042,\n            \"_id\": \"5cbeed3a5f54710cd6734ed8\",\n            \"send_user_name\": \"케빈 조\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555984042,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"01028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"594b96ffba590e3cec7f5f1a\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"created_at\": 1555531839,\n            \"_id\": \"5cb806cf5f547102e61fd07d\",\n            \"send_user_name\": \"Kevin Cho\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555531839,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"1028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5cb7f85d5f547102e61fd07b\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"무료 티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"무료 티켓 이름\",\n                    \"_id\": \"5c930ac05f54711fc8b8e854\"\n                }\n            ],\n            \"created_at\": 1555528141,\n            \"_id\": \"5cb7f85d5f547102e61fd07c\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555528141,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"정효섭\",\n                \"mobile\": {\n                    \"number\": \"01028741666\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"594b96ffba590e3cec7f5f1a\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                },\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"created_at\": 1555527968,\n            \"_id\": \"5cb7f7b05f547102e61fd07a\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1555527968,\n            \"action\": \"send\"\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"유 지현\",\n                \"mobile\": {\n                    \"number\": \"01041080731\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5964c21fba590e508162d48e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5cad78ac5f547127b894fdfb\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1554840092,\n            \"created_at\": 1554840092\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9876245f547111bc323dda\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553463188,\n            \"created_at\": 1553463188\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9875fa5f547111bc323dd9\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553463146,\n            \"created_at\": 1553463146\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9875d25f547111bc323dd8\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553463106,\n            \"created_at\": 1553463106\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858906\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5a379064ba590e0f55bc0c7e\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9871e05f547111bcc3ff42\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553462096,\n            \"created_at\": 1553462096\n        },\n        {\n            \"receive_user\": {\n                \"name\": \"한아름\",\n                \"mobile\": {\n                    \"number\": \"01087858986\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5b518c54ba590e0b495c155f\"\n            },\n            \"content_oid\": \"5c91d2ae5f5471186d80a02f\",\n            \"tickets\": [\n                {\n                    \"desc\": {\n                        \"value\": \"유료티켓 설명\",\n                        \"enabled\": true\n                    },\n                    \"name\": \"유료티켓 이름\",\n                    \"_id\": \"5c9345755f54711fc8589b27\"\n                }\n            ],\n            \"action\": \"send\",\n            \"_id\": \"5c9871b75f547111bcc3ff41\",\n            \"send_user\": {\n                \"name\": \"조건희\",\n                \"mobile\": {\n                    \"number\": \"01032697178\",\n                    \"country_code\": \"82\"\n                },\n                \"_id\": \"5931a3eabc2c44140e0dea91\"\n            },\n            \"updated_at\": 1553462055,\n            \"created_at\": 1553462055\n        }\n    ],\n    \"count\": 11\n}"
 				}
 			]
 		}
