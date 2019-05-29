@@ -18,6 +18,11 @@ class CountryModel(BaseModel):
         specification = super(CountryModel, self).specification
         specification.extend([
             {
+                'key': 'seq',
+                'type': int,
+                'default': None
+            },
+            {
                 'key': 'name',
                 'type': str,
                 'default': None
