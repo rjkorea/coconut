@@ -14,3 +14,4 @@ iamport-rest-client==0.6.0
 boto3==1.4.7
 pyjwt==1.4.2
 slacker==0.12.0
+mysql-connector-python==8.0.16
