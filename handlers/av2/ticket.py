@@ -196,25 +196,6 @@ class TicketTypeListHandler(JsonHandler):
         }
         count = await TicketTypeModel.count(query)
         ticket_types = await TicketTypeModel.find(query, fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
-        for tt in ticket_types:
-            query = {
-                '$and': [
-                    {'enabled': True},
-                    {'ticket_type_oid': tt['_id']},
-                    {
-                        '$or': [
-                            {'status': TicketModel.Status.register.name},
-                            {'status': TicketModel.Status.pay.name},
-                            {'status': TicketModel.Status.use.name}
-                        ]
-                    }
-                ]
-            }
-            sales_count = await TicketModel.count(query)
-            tt['sales'] = {
-                'count': sales_count,
-                'limit': tt['fpfg']['limit']
-            }
         self.response['data'] = ticket_types
         self.response['count'] = count
         self.write_json()
