@@ -114,6 +114,8 @@ url_patterns = [
 
     # w
     (r'/w/auth/user/?', w.auth.UserHandler),
+    (r'/w/auth/sms/send?', w.auth.SmsSendHandler),
+    (r'/w/auth/sms/verify?', w.auth.SmsVerifyHandler),
     (r'/w/auth/register/?', w.auth.RegisterHandler),
     (r'/w/auth/login/?', w.auth.LoginHandler),
     (r'/w/auth/duplicated/?', w.auth.DuplicatedHandler),
@@ -152,6 +154,13 @@ url_patterns = [
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register/?', w.ticket.TicketSerialNumberRegisterHandler),
+    (r'/w/payment/?', w.payment.PaymentHandler),
+    (r'/w/payments/?', w.payment.PaymentListHandler),
+    (r'/w/payments/(?P<_id>[^\/]+)/?', w.payment.PaymentHandler),
+    (r'/w/payment/success/?', w.payment.PaymentSuccessHandler),
+    (r'/w/payment/fail/?', w.payment.PaymentFailHandler),
+    (r'/w/payment/cancel/?', w.payment.PaymentCancelHandler),
+    (r'/w/exchange/rate/krwusd/?', w.util.ExchangeRateHandler),
 
     # /w/pc
     (r'/w/pc/contents/?', wpc.content.ContentListHandler),

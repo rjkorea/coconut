@@ -9,7 +9,7 @@ from common import hashers
 from common.decorators import user_auth_async, parse_argument
 
 from handlers.base import JsonHandler
-from models.user import UserModel
+from models.user import UserModel, UserSendHistoryModel
 from models.content import ContentModel
 from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel, TicketLogModel
 
@@ -132,11 +132,6 @@ class TicketRegisterHandler(JsonHandler):
             ticket_type = await TicketTypeModel.get_id(exist_ticket['ticket_type_oid'])
             if 'duplicated_registration' not in ticket_type or not ticket_type['duplicated_registration']:
                 raise HTTPError(400, 'Already registered ticket type on this content')
-        email = self.json_decoded_body.get('email', None)
-        birthday = self.json_decoded_body.get('birthday', None)
-        gender = self.json_decoded_body.get('gender', None)
-        if email and birthday and gender:
-            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
         query = {
             '_id': ObjectId(_id)
         }
@@ -164,11 +159,6 @@ class TicketMultiRegisterHandler(JsonHandler):
         ticket_oids = self.json_decoded_body.get('ticket_oids', None)
         if not ticket_oids or len(ticket_oids) == 0:
             raise HTTPError(400, 'invalid ticket_oids')
-        email = self.json_decoded_body.get('email', None)
-        birthday = self.json_decoded_body.get('birthday', None)
-        gender = self.json_decoded_body.get('gender', None)
-        if email and birthday and gender:
-            user = await UserModel.update({'_id': self.current_user['_id']}, {'$set': {'email': email, 'birthday': birthday, 'gender': gender}})
         query = {
             '_id': {
                 '$in': []
@@ -201,6 +191,9 @@ class TicketSendHandler(JsonHandler):
             ticket = await TicketModel.find_one({'_id': ObjectId(t_oid)})
             if ticket and ticket['receive_user_oid'] != self.current_user['_id']:
                 raise HTTPError(400, 'is not your ticket')
+        send_user_name = self.json_decoded_body.get('send_user_name', None)
+        if not send_user_name or len(send_user_name) == 0:
+            raise HTTPError(400, 'invalid invalid send_user_name')
         receive_user = self.json_decoded_body.get('receive_user', None)
         if not receive_user or not isinstance(receive_user, dict):
             raise HTTPError(400, 'invalid receive_user')
@@ -226,6 +219,7 @@ class TicketSendHandler(JsonHandler):
         tm = await TicketModel.get_id(ObjectId(ticket_oids[0]))
         ticket_log = TicketLogModel(raw_data=dict(
             action=TicketLogModel.Status.send.name,
+            send_user_name=send_user_name,
             send_user_oid=self.current_user['_id'],
             receive_user_oid=receive_user['_id'],
             content_oid=tm['content_oid'],
@@ -252,10 +246,7 @@ class TicketListMeHandler(JsonHandler):
                 },
                 {
                     '$or': [
-                        {'status': TicketModel.Status.register.name},
-                        {'status': TicketModel.Status.pay.name},
-                        {'status': TicketModel.Status.use.name},
-                        {'status': TicketModel.Status.cancel.name}
+                        {'status': TicketModel.Status.register.name}
                     ]
                 }
             ]
@@ -265,18 +256,10 @@ class TicketListMeHandler(JsonHandler):
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, sort=[('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'], fields={'_id': True, 'name': True, 'desc': True, 'price': True, 'sales_date': True, 'color': True})
             res.pop('ticket_type_oid')
-            res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
-            res.pop('ticket_order_oid')
-            res['content'] = await ContentModel.get_id(res['content_oid'])
+            res['content'] = await ContentModel.get_id(res['content_oid'], fields={'_id': True, 'name': True})
             res.pop('content_oid')
-            if 'send_user_oid'in res:
-                res['send_user'] = await UserModel.get_id(res['send_user_oid'])
-                res.pop('send_user_oid')
-            if 'receive_user_oid'in res:
-                res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
-                res.pop('receive_user_oid')
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
@@ -288,18 +271,19 @@ class TicketListMeHandler(JsonHandler):
 
 class TicketListHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None), ('status', str, None)])
+    @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
             'receive_user_oid': self.current_user['_id'],
             'enabled': True,
-            'status': {'$ne': TicketModel.Status.pend.name}
+            '$or': [
+                {'status': TicketModel.Status.send.name},
+                {'status': TicketModel.Status.pay.name}
+            ]
         }
         if parsed_args['content_oid']:
             q['content_oid'] = ObjectId(parsed_args['content_oid'])
-        if parsed_args['status']:
-            q['status'] = parsed_args['status']
         count = await TicketModel.count(query=q)
         result = await TicketModel.find(query=q, sort=[('status', 1), ('created_at', -1), ('price', 1)], skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
@@ -469,46 +453,24 @@ class TicketSerialNumberRegisterHandler(JsonHandler):
 
 class TicketSendUserListHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('q', str, None)])
+    @parse_argument([('q', str, None), ('start', int, 0), ('size', int, 20)])
     async def get(self, *args, **kwargs):
         q = {
-            '$and': [
-                {'send_user_oid': self.current_user['_id']}
-            ]
+            'user_oid': self.current_user['_id'],
+            'enabled': True
         }
         parsed_args = kwargs.get('parsed_args')
         if 'q' in parsed_args and parsed_args['q']:
-            user_q = {
-                'name': {'$regex': parsed_args['q']},
+            q['name'] = {
+                '$regex': parsed_args['q']
             }
-            users = await UserModel.find(query=user_q, limit=50)
-            if users:
-                q['$and'].append({'$or': []})
-                for user in users:
-                    q['$and'][1]['$or'].append({'receive_user_oid': user['_id']})
-            else:
-                self.response['data'] = list()
-                self.write_json()
-                return
-        result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
-        for res in result:
-            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile')])
-            if receive_user and 'name' in receive_user:
-                res['name'] = receive_user['name']
-                res['mobile'] = receive_user['mobile']
-            res.pop('receive_user_oid')
-        send_user_dict = dict()
-        for r in result:
-            if 'mobile' in r:
-                send_user_dict['%s%s' % (r['mobile']['country_code'], r['mobile']['number'])] = {
-                    '_id': r['_id'],
-                    'name': r['name'],
-                    'created_at': r['created_at']
-                }
-        send_user_list = list()
-        for k, v in send_user_dict.items():
-            send_user_list.append({'mobile_number': k, 'name': v['name'], 'created_at': v['created_at'], '_id': v['_id']})
-        self.response['data'] = send_user_list[:20]
+        count = await UserSendHistoryModel.count(query=q)
+        history = await UserSendHistoryModel.find(query=q, fields={'mobile': True, 'name': True, 'updated_at': True}, sort=[('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        for h in history:
+            h['mobile_number'] = "%s%s" % (h['mobile']['country_code'], h['mobile']['number'])
+            h.pop('mobile')
+        self.response['count'] = count
+        self.response['data'] = history
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -522,7 +484,8 @@ class TicketLogsHandler(JsonHandler):
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
-            'send_user_oid': self.current_user['_id']
+            'send_user_oid': self.current_user['_id'],
+            'action': 'send'
         }
         if parsed_args['content_oid']:
             q['content_oid'] = ObjectId(parsed_args['content_oid'])

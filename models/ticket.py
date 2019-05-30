@@ -253,6 +253,11 @@ class TicketLogModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'send_user_name',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'send_user_oid',
                 'type': ObjectId,
                 'default': None
@@ -265,6 +270,11 @@ class TicketLogModel(BaseModel):
             {
                 'key': 'ticket_oids',
                 'type': list,
+                'default': None
+            },
+            {
+                'key': 'ticket_oid',
+                'type': str,
                 'default': None
             },
         ])

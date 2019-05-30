@@ -10,6 +10,7 @@ from models.base import BaseModel
 class UserModel(BaseModel):
     MONGO_COLLECTION = 'user'
     ROLE = ('user', 'broker')
+    GENDER = ('male', 'female', 'not_specific')
 
     def __init__(self, *args, **kwargs):
         super(UserModel, self).__init__(*args, **kwargs)
@@ -117,6 +118,40 @@ class UserAutologinModel(BaseModel):
                 'key': 'content_oid',
                 'type': ObjectId,
                 'default': None
+            },
+        ])
+        return specification
+
+
+class UserSendHistoryModel(BaseModel):
+    MONGO_COLLECTION = 'user_send_history'
+
+    def __init__(self, *args, **kwargs):
+        super(UserSendHistoryModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(UserSendHistoryModel, self).specification
+        specification.extend([
+            {
+                'key': 'user_oid',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'name',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'mobile',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'enabled',
+                'type': bool,
+                'default': (lambda: True)
             },
         ])
         return specification

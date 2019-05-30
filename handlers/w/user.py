@@ -129,9 +129,9 @@ class UserAuthPasswordHandler(JsonHandler):
 class UserMeHandler(JsonHandler):
     @user_auth_async
     async def get(self, *args, **kwargs):
-        user = await UserModel.find_one({'_id': self.current_user['_id']})
+        user = await UserModel.find_one({'_id': self.current_user['_id']}, fields=[('name'), ('mobile'), ('birthday'), ('gender')])
         if not user:
-            raise HTTPError(400, 'not exist user')
+            raise HTTPError(400, self.set_error(1, 'not exist user'))
         self.response['data'] = user
         self.write_json()
 
@@ -144,15 +144,13 @@ class UserMeHandler(JsonHandler):
         if name:
             set_doc['name'] = name
         birthday = self.json_decoded_body.get('birthday', None)
+        if len(birthday) != 4:
+            raise HTTPError(400, self.set_error(1, 'invalid birthday (just year - 4 digit)'))
         if birthday:
             set_doc['birthday'] = birthday
-        mobile_number = self.json_decoded_body.get('mobile_number', None)
-        if mobile_number:
-            set_doc['mobile_number'] = mobile_number
-        email = self.json_decoded_body.get('email', None)
-        if email:
-            set_doc['email'] = email
         gender = self.json_decoded_body.get('gender', None)
+        if gender not in UserModel.GENDER:
+            raise HTTPError(400, self.set_error(2, 'invalid gender (male, female, not_specific)'))
         if gender:
             set_doc['gender'] = gender
         query = {
