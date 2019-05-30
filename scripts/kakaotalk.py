@@ -84,7 +84,81 @@ def tmp003csv(csvfile):
         click.secho('check parameters <python kakaotalk.py tmp003csv --help>', fg='red')
 
 
-cli = click.CommandCollection(sources=[tmp3, tmp3csv])
+@click.group()
+def tmp7():
+    pass
+
+@tmp7.command()
+@click.option('-m', '--mobile', default=None, help='mobile number only South Korea')
+@click.option('-r', '--receive', default=None, help='receive user name')
+@click.option('-s', '--send', default=None, help='send user name')
+@click.option('-c', '--content', default=None, help='content name')
+@click.option('-q', '--qty', default=None, help='quantity of ticket')
+@click.option('-d', '--date', default=None, help='date of content')
+@click.option('-p', '--place', default=None, help='place of content')
+@click.option('-i', '--shortid', default=None, help='short id of content')
+@click.confirmation_option(help='Are you sure to send message by kakaotalk?')
+def tmp007(mobile, receive, send, content, qty, date, place, shortid):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mobile: %s' % (mobile), fg='green')
+    if mobile and receive and send and content and qty and date and place and shortid:
+        TMPL_007 = '[TKIT 티켓]\n%s님 안녕하세요.\n%s님에게 요청하신 TKIT 티켓이 도착하였습니다.\n\n■ 공연제목 : %s\n■ 매수 : %s장\n■ 공연날짜 : %s\n■ 공연장소 : %s\n■ 밴딩수령장소 : %s\n\n수령하신 티켓은 TKIT에서 확인 가능합니다.\n로그인후 등록을 해주세요'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'x-waple-authorization': KEY
+        }
+        payload = {
+            'callback': '15999642',
+            'phone': mobile,
+            'template_code': '007',
+            'msg': TMPL_007 % (receive, send, content, qty, date, place, place),
+            'btn_types': '웹링크',
+            'btn_txts': 'TKIT확인하기',
+            'btn_urls1': 'http://i.tkit.me/in/%s' % shortid
+        }
+        res = requests.post(APISTORE_KAKAO_URL, data=payload, headers=headers)
+        pprint(res)
+        pprint(res.json())
+    else:
+        click.secho('check parameters <python kakaotalk.py tmp007 --help>', fg='red')
+
+
+@click.group()
+def tmp7csv():
+    pass
+
+@tmp7csv.command()
+@click.option('-c', '--csvfile', default=None, help='csv file')
+@click.confirmation_option(help='Are you sure to send message by kakaotalk?')
+def tmp007csv(csvfile):
+    click.secho('= params info =', fg='cyan')
+    click.secho('csv filename: %s' % (csvfile), fg='green')
+    if csvfile:
+        TMPL_007 = '[TKIT 티켓]\n%s님 안녕하세요.\n%s님에게 요청하신 TKIT 티켓이 도착하였습니다.\n\n■ 공연제목 : %s\n■ 매수 : %s장\n■ 공연날짜 : %s\n■ 공연장소 : %s\n■ 밴딩수령장소 : %s\n\n수령하신 티켓은 TKIT에서 확인 가능합니다.\n로그인후 등록을 해주세요'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'x-waple-authorization': KEY
+        }
+        users = csv.DictReader(open(csvfile, 'r'))
+        for u in users:
+            payload = {
+                'callback': '15999642',
+                'phone': u['MOBILE_NUMBER'],
+                'template_code': '007',
+                'msg': TMPL_007 % (u['RECEIVE_NAME'], u['SEND_NAME'], u['CONTENT'], u['QTY'], u['DATE'], u['PLACE'], u['BANDING_PLACE']),
+                'btn_types': '웹링크',
+                'btn_txts': 'TKIT확인하기',
+                'btn_urls1': 'http://i.tkit.me/in/%s' % u['SHORT_OID']
+            }
+            res = requests.post(APISTORE_KAKAO_URL, data=payload, headers=headers)
+            pprint(res)
+            pprint(res.json())
+    else:
+        click.secho('check parameters <python kakaotalk.py tmp007csv --help>', fg='red')
+
+
+
+cli = click.CommandCollection(sources=[tmp3, tmp3csv, tmp7, tmp7csv])
 
 
 if __name__ == '__main__':
