@@ -66,6 +66,7 @@ url_patterns = [
     (r'/a/ticket/log/(?P<_id>[^\/]+)/?', a.ticket.TicketLogHandler),
     (r'/a/tickets/entrance/?', a.ticket.TicketEntranceListHandler),
     (r'/a/ticket/(?P<_id>[^\/]+)/enter/?', a.ticket.TicketEnterUserHandler),
+    (r'/a/rfid/umfkorea/sync?', a.rfid.RfidUmfKoreaSyncHandler),
     (r'/a/places/?', a.place.PlaceListHandler),
     (r'/a/place/(?P<_id>[^\/]+)/?', a.place.PlaceHandler),
     (r'/a/place/?', a.place.PlaceHandler),

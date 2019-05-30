@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import ObjectId
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from tornado.web import HTTPError
 
@@ -16,6 +16,7 @@ from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel, Ticket
 from models import create_user
 
 from services.iamport import IamportService
+from services.kakaotalk import KakaotalkService
 
 
 class TicketMeRegisterValidateHandler(JsonHandler):
@@ -232,6 +233,17 @@ class TicketSendHandler(JsonHandler):
             ticket_oids=toids
         ))
         await ticket_log.insert()
+        content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('short_id')])
+        KakaotalkService().tmp007(
+            receive_user['mobile']['number'],
+            receive_user['name'],
+            self.current_user['name'],
+            content['name'],
+            str(len(ticket_oids)),
+            '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d')),
+            content['place']['name'],
+            content['short_id']
+        )
         self.write_json()
 
     async def options(self, *args, **kwargs):

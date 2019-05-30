@@ -196,25 +196,6 @@ class TicketTypeListHandler(JsonHandler):
         }
         count = await TicketTypeModel.count(query)
         ticket_types = await TicketTypeModel.find(query, fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
-        for tt in ticket_types:
-            query = {
-                '$and': [
-                    {'enabled': True},
-                    {'ticket_type_oid': tt['_id']},
-                    {
-                        '$or': [
-                            {'status': TicketModel.Status.register.name},
-                            {'status': TicketModel.Status.pay.name},
-                            {'status': TicketModel.Status.use.name}
-                        ]
-                    }
-                ]
-            }
-            sales_count = await TicketModel.count(query)
-            tt['sales'] = {
-                'count': sales_count,
-                'limit': tt['fpfg']['limit']
-            }
         self.response['data'] = ticket_types
         self.response['count'] = count
         self.write_json()
@@ -263,9 +244,11 @@ class TicketOrderHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, self.set_error(1, 'invalid name'))
+        name = name.strip()
         mobile = self.json_decoded_body.get('mobile', None)
         if not mobile or not isinstance(mobile, dict):
             raise HTTPError(400, self.set_error(1, 'invalid mobile(object)'))
+        mobile['number'] = mobile['number'].strip()
         sms = self.json_decoded_body.get('sms', None)
         if not sms or len(sms) == 0:
             raise HTTPError(400, self.set_error(1, 'invalid sms'))
@@ -277,7 +260,7 @@ class TicketOrderHandler(JsonHandler):
             'ticket_type_oid': ticket_type['_id'],
             'receiver': {
                 'mobile': mobile,
-                'name': name
+                'name': name.strip()
             },
             'qty': qty,
             'user_oid': user_oid

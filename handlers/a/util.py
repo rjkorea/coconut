@@ -14,15 +14,16 @@ class CountryListHandler(JsonHandler):
         parsed_args = kwargs.get('parsed_args')
         if parsed_args['q']:
             q = {
+                'enabled': True,
                 '$or': [
                     {'name': {'$regex': parsed_args['q']}},
                     {'code': {'$regex': parsed_args['q']}}
                 ]
             }
         else:
-            q = {}
+            q = {'enabled': True}
         count = await CountryModel.count(query=q)
-        result = await CountryModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'], sort=[('name', 1)])
+        result = await CountryModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'], sort=[('seq', 1)])
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
