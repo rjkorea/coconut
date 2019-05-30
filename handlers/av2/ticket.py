@@ -244,9 +244,11 @@ class TicketOrderHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         if not name or len(name) == 0:
             raise HTTPError(400, self.set_error(1, 'invalid name'))
+        name = name.strip()
         mobile = self.json_decoded_body.get('mobile', None)
         if not mobile or not isinstance(mobile, dict):
             raise HTTPError(400, self.set_error(1, 'invalid mobile(object)'))
+        mobile['number'] = mobile['number'].strip()
         sms = self.json_decoded_body.get('sms', None)
         if not sms or len(sms) == 0:
             raise HTTPError(400, self.set_error(1, 'invalid sms'))
@@ -258,7 +260,7 @@ class TicketOrderHandler(JsonHandler):
             'ticket_type_oid': ticket_type['_id'],
             'receiver': {
                 'mobile': mobile,
-                'name': name
+                'name': name.strip()
             },
             'qty': qty,
             'user_oid': user_oid
