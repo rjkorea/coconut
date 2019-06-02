@@ -288,12 +288,14 @@ def add_users_index(cursor):
 def gen_user(cursor):
     user = dict(
         _id=str(cursor['_id']),
-        mobile_number=cursor['mobile_number'],
         enabled=cursor['enabled'],
         created_at=cursor['created_at'].strftime('%Y-%m-%dT%H:%M:%S+0000'),
     )
     if 'birthday' in cursor and cursor['birthday'].strip():
         if len(cursor['birthday'].strip()) == 8:
+            user['birthday'] = str(cursor['birthday'])
+            user['age'] = 2018-int(user['birthday'][:4])
+        if len(cursor['birthday'].strip()) == 4:
             user['birthday'] = str(cursor['birthday'])
             user['age'] = 2018-int(user['birthday'][:4])
         elif len(cursor['birthday'].strip()) == 6:

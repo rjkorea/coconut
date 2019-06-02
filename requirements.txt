@@ -1,5 +1,5 @@
 click==6.6
-elasticsearch==5.0.1
+elasticsearch==6.0.0
 greenlet==0.4.10
 motor==1.2.1
 pbkdf2==1.3
