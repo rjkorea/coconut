@@ -199,6 +199,11 @@ class TicketSendHandler(JsonHandler):
         if not ticket_oids or not isinstance(ticket_oids, list):
             raise HTTPError(400, 'invalid ticket_oids')
         for t_oid in ticket_oids:
+            ticket = await TicketModel.get_id(ObjectId(t_oid) ,fields=[('ticket_type_oid')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send')])
+            if 'disabled_send' in ticket_type and ticket_type['disabled_send']:
+                raise HTTPError(400, 'Cannot send ticket')
+        for t_oid in ticket_oids:
             ticket = await TicketModel.find_one({'_id': ObjectId(t_oid)})
             if ticket and ticket['receive_user_oid'] != self.current_user['_id']:
                 raise HTTPError(400, 'is not your ticket')

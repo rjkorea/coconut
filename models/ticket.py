@@ -73,6 +73,11 @@ class TicketTypeModel(BaseModel):
                 'default': (lambda: False)
             },
             {
+                'key': 'disabled_send',
+                'type': bool,
+                'default': (lambda: False)
+            },
+            {
                 'key': 'enabled',
                 'type': bool,
                 'default': (lambda: True)
