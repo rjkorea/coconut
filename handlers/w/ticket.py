@@ -210,6 +210,8 @@ class TicketSendHandler(JsonHandler):
         receive_user = self.json_decoded_body.get('receive_user', None)
         if not receive_user or not isinstance(receive_user, dict):
             raise HTTPError(400, 'invalid receive_user')
+        if receive_user['mobile']['country_code'] == '82' and not receive_user['mobile']['number'].startswith('010'):
+            raise HTTPError(400, 'invalid Korea mobile number')
         receive_user = await create_user(receive_user)
         if self.current_user['_id'] == receive_user['_id']:
             raise HTTPError(400, 'cannot send to myself')
