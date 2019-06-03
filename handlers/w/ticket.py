@@ -936,3 +936,28 @@ class TicketTypeTicketListMeHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class TicketMeCheckPopupHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('content_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        q = {
+            'content_oid': ObjectId(parsed_args['content_oid']),
+            'enabled': True,
+            'status': TicketModel.Status.send.name,
+            'receive_user_oid': self.current_user['_id']
+        }
+        count = await TicketModel.count(query=q)
+        if count > 0:
+            self.response['data'] = { 'enabled': False }
+        else:
+            self.response['data'] = { 'enabled': True }
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
