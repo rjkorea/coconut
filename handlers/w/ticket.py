@@ -954,7 +954,12 @@ class TicketMeCheckPopupHandler(JsonHandler):
             'content_oid': ObjectId(parsed_args['content_oid']),
             'enabled': True,
             'status': TicketModel.Status.send.name,
-            'receive_user_oid': self.current_user['_id']
+            'receive_user_oid': self.current_user['_id'],
+            '$or': [
+                { 'status': TicketModel.Status.register.name },
+                { 'status': TicketModel.Status.pay.name },
+                { 'status': TicketModel.Status.use.name }
+            ]
         }
         count = await TicketModel.count(query=q)
         if count > 0:
