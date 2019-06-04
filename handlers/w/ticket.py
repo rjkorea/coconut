@@ -199,12 +199,19 @@ class TicketSendHandler(JsonHandler):
         if not ticket_oids or not isinstance(ticket_oids, list):
             raise HTTPError(400, 'invalid ticket_oids')
         for t_oid in ticket_oids:
+            ticket = await TicketModel.get_id(ObjectId(t_oid) ,fields=[('ticket_type_oid')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send')])
+            if 'disabled_send' in ticket_type and ticket_type['disabled_send']:
+                raise HTTPError(400, 'Cannot send ticket')
+        for t_oid in ticket_oids:
             ticket = await TicketModel.find_one({'_id': ObjectId(t_oid)})
             if ticket and ticket['receive_user_oid'] != self.current_user['_id']:
                 raise HTTPError(400, 'is not your ticket')
         receive_user = self.json_decoded_body.get('receive_user', None)
         if not receive_user or not isinstance(receive_user, dict):
             raise HTTPError(400, 'invalid receive_user')
+        if receive_user['mobile']['country_code'] == '82' and not receive_user['mobile']['number'].startswith('010'):
+            raise HTTPError(400, 'invalid Korea mobile number')
         receive_user = await create_user(receive_user)
         if self.current_user['_id'] == receive_user['_id']:
             raise HTTPError(400, 'cannot send to myself')
@@ -240,7 +247,7 @@ class TicketSendHandler(JsonHandler):
             self.current_user['name'],
             content['name'],
             str(len(ticket_oids)),
-            '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d')),
+            '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
             content['place']['name'],
             content['short_id']
         )
@@ -931,6 +938,35 @@ class TicketTypeTicketListMeHandler(JsonHandler):
         result = await TicketModel.find(query=q, fields=[('_id')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketMeCheckPopupHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('content_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        if not parsed_args['content_oid'] or len(parsed_args['content_oid']) != 24:
+            raise HTTPError(400, 'invalid content_oid')
+        q = {
+            'content_oid': ObjectId(parsed_args['content_oid']),
+            'enabled': True,
+            'receive_user_oid': self.current_user['_id'],
+            '$or': [
+                { 'status': TicketModel.Status.register.name },
+                { 'status': TicketModel.Status.pay.name },
+                { 'status': TicketModel.Status.use.name }
+            ]
+        }
+        count = await TicketModel.count(query=q)
+        if count > 0:
+            self.response['data'] = { 'enabled': False }
+        else:
+            self.response['data'] = { 'enabled': True }
         self.write_json()
 
     async def options(self, *args, **kwargs):
