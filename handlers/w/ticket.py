@@ -955,7 +955,6 @@ class TicketMeCheckPopupHandler(JsonHandler):
         q = {
             'content_oid': ObjectId(parsed_args['content_oid']),
             'enabled': True,
-            'status': TicketModel.Status.send.name,
             'receive_user_oid': self.current_user['_id'],
             '$or': [
                 { 'status': TicketModel.Status.register.name },
