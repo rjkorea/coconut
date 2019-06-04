@@ -955,18 +955,27 @@ class TicketMeCheckPopupHandler(JsonHandler):
         q = {
             'content_oid': ObjectId(parsed_args['content_oid']),
             'enabled': True,
-            'receive_user_oid': self.current_user['_id'],
-            '$or': [
-                { 'status': TicketModel.Status.register.name },
-                { 'status': TicketModel.Status.pay.name },
-                { 'status': TicketModel.Status.use.name }
-            ]
+            'receive_user_oid': self.current_user['_id']
         }
         count = await TicketModel.count(query=q)
-        if count > 0:
+        if count == 0:
             self.response['data'] = { 'enabled': False }
         else:
-            self.response['data'] = { 'enabled': True }
+            q = {
+                'content_oid': ObjectId(parsed_args['content_oid']),
+                'enabled': True,
+                'receive_user_oid': self.current_user['_id'],
+                '$or': [
+                    { 'status': TicketModel.Status.register.name },
+                    { 'status': TicketModel.Status.pay.name },
+                    { 'status': TicketModel.Status.use.name }
+                ]
+            }
+            count = await TicketModel.count(query=q)
+            if count > 0:
+                self.response['data'] = { 'enabled': False }
+            else:
+                self.response['data'] = { 'enabled': True }
         self.write_json()
 
     async def options(self, *args, **kwargs):
