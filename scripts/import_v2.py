@@ -8,6 +8,7 @@ import json
 import click
 from pprint import pprint
 from pymongo import MongoClient
+from slacker import Slacker
 
 
 @click.group()
@@ -35,6 +36,7 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
             return -1
         count = 0
         except_users = list()
+        slack = Slacker('xoxp-24065128659-73904001223-569430935267-9b2f294c10839df3b30241f2641f6a8c')
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         users = csv.DictReader(open(csvfile, 'r'))
         for u in users:
@@ -74,6 +76,18 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
                     'updated_at': now
                 }
                 ticket_type_oid = mongo_client['coconut']['ticket_type'].insert(ticket_type_doc)
+                if dryrun:
+                    text = '<%s> / %s / %d원 / %d장 (스프레드 %s장)' % ('대용량엑셀파일 티켓 리스트 업로드 테스트', u['ticket_type_name'], 0, 1000, None)
+                    slack_msg = [
+                        {
+                            'title': '[%s] 티켓생성' % '테스트',
+                            'title_link': '%s://%s/ticket/type;content_oid=%s' % ('https', 'devhost.tkit.me', contentid),
+                            'fallback': text,
+                            'text': text,
+                            'mrkdwn_in': ['text']
+                        }
+                    ]
+                    slack.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
 
             user = mongo_client['coconut']['user'].find_one({'mobile.country_code': '82', 'mobile.number': u['mobile_number'].strip(), 'enabled': True})
             if user:
@@ -120,6 +134,18 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
                 }
             }
             ticket_order_oid = mongo_client['coconut']['ticket_order'].insert(ticket_order_doc)
+            if dryrun:
+                slack_msg = [
+                    {
+                        'title': '[%s] 티켓전송' % '테스트',
+                        'title_link': '%s://%s/ticket/order;ticket_type_oid=%s' % ('https', 'devhost.tkit.me', ticket_type_oid),
+                        'fallback': '[%s] 티켓전송 / <%s> / %s / %d원 / %d장 / %s 전달' % ('테스트', '대용량엑셀파일 티켓 리스트 업로드 테스트', u['ticket_type_name'], 0, int(u['qty']), u['name']),
+                        'text': '<%s> / %s / %d원 / %d장 / %s 전달' % ('대용량엑셀파일 티켓 리스트 업로드 테스트', u['ticket_type_name'], 0, int(u['qty']), u['name']),
+                        'mrkdwn_in': ['text']
+                    }
+                ]
+                slack.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+
             for t in range(int(u['qty'])):
                 ticket_doc = {
                     'type': 'network',
