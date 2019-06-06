@@ -39,10 +39,15 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
         users = csv.DictReader(open(csvfile, 'r'))
         for u in users:
             if u['mobile_number'].startswith('010'):
-                pass
+                mobile = {
+                    'country_code': '82',
+                    'number': u['mobile_number']
+                }
             else:
-                except_users.append(u)
-                continue
+                mobile = {
+                    'country_code': 'xx',
+                    'number': u['mobile_number']
+                }
             ticket_type = mongo_client['coconut']['ticket_type'].find_one({'content_oid': ObjectId(contentid), 'name': u['ticket_type_name'], 'desc.value': u['ticket_type_desc']})
             if ticket_type:
                 ticket_type_oid = ticket_type['_id']
@@ -87,10 +92,7 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
                     gender = 'female'
                 user_oid = mongo_client['coconut']['user'].insert({
                     'name': u['name'].strip(),
-                    'mobile': {
-                        'country_code': '82',
-                        'number': u['mobile_number'].strip()
-                    },
+                    'mobile': mobile,
                     'birthday': u['birthday'],
                     'gender': gender,
                     'terms': {
@@ -113,10 +115,7 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
                 'updated_at': now,
                 'receiver': {
                     'name': u['name'],
-                    'mobile': {
-                        'country_code': '82',
-                        'number': u['mobile_number']
-                    }
+                    'mobile': mobile
                 }
             }
             ticket_order_oid = mongo_client['coconut']['ticket_order'].insert(ticket_order_doc)
