@@ -80,7 +80,7 @@ def list_tickets(csvfile, adminid, contentid, end, mongo, dryrun):
                 }
                 ticket_type_oid = mongo_client['coconut']['ticket_type'].insert(ticket_type_doc)
 
-            user = mongo_client['coconut']['user'].find_one({'mobile.country_code': '82', 'mobile.number': u['mobile_number'].strip(), 'enabled': True})
+            user = mongo_client['coconut']['user'].find_one({'mobile.country_code': mobile['country_code'], 'mobile.number': mobile['number'].strip(), 'enabled': True})
             if user:
                 user_oid = user['_id']
             else:
