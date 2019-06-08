@@ -3,7 +3,7 @@
 import logging
 
 from bson import ObjectId
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import mysql.connector
 from mysql.connector import Error
@@ -13,6 +13,7 @@ from tornado.web import HTTPError
 from common.decorators import admin_auth_async
 
 from models.ticket import TicketModel
+from models.user import UserModel
 
 from handlers.base import JsonHandler
 
@@ -30,6 +31,9 @@ class RfidUmfKoreaSyncHandler(JsonHandler):
         user = self.json_decoded_body.get('user', None)
         if not user or not isinstance(user, dict):
             raise HTTPError(400, self.set_error(1, 'invalid user'))
+        if 'birthday' not in user or 'gender' not in user or 'mobile' not in user or 'name' not in user or '_id' not in user:
+            raise HTTPError(400, self.set_error(1, 'invalid user'))
+        await UserModel.update({'_id': ObjectId(user['_id'])}, {'$set': {'birthday': user['birthday'], 'gender': user['gender']}}, False, False)
         ticket = self.json_decoded_body.get('ticket', None)
         if not ticket or not isinstance(ticket, dict):
             raise HTTPError(400, self.set_error(1, 'invalid ticket'))
@@ -54,7 +58,7 @@ class RfidUmfKoreaSyncHandler(JsonHandler):
                         updated_at=record[4]
                     )
                     if band['status'] == '0':
-                        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                        now = (datetime.now()+timedelta(hours=9)).strftime('%Y-%m-%d %H:%M:%S')
                         bands_update_query = '''UPDATE bands set status = %s, updated_at = %s WHERE id = %s'''
                         update_params = ('1', now, band['id'])
                         cursor.execute(bands_update_query, update_params)
