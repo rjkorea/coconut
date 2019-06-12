@@ -393,29 +393,7 @@ class TicketValidateListHandler(JsonHandler):
                 '$in': [ObjectId(tt['_id']) for tt in ticket_types]
             }
         }
-        count = await TicketModel.count(query=q)
-        result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
-        for res in result:
-            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
-            res.pop('ticket_type_oid')
-            res['ticket_order'] = await TicketOrderModel.get_id(res['ticket_order_oid'])
-            res.pop('ticket_order_oid')
-            res['content'] = await ContentModel.get_id(res['content_oid'])
-            res.pop('content_oid')
-            if 'send_user_oid'in res:
-                res['send_user'] = await UserModel.get_id(res['send_user_oid'])
-                res.pop('send_user_oid')
-            if 'receive_user_oid'in res:
-                res['receive_user'] = await UserModel.get_id(res['receive_user_oid'])
-                res.pop('receive_user_oid')
-            if 'history_send_user_oids' in res:
-                res['history_send_users'] = list()
-                for user_oid in res['history_send_user_oids']:
-                    user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile')])
-                    res['history_send_users'].append(user)
-                res.pop('history_send_user_oids')
-        self.response['data'] = result
-        self.response['count'] = count
+        self.response['count'] = await TicketModel.count(query=q)
         self.write_json()
 
     async def options(self, *args, **kwargs):
