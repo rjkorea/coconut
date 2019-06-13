@@ -338,6 +338,7 @@ class TicketOrderCsvHandler(JsonHandler):
         users = self.json_decoded_body.get('users', None)
         if not users or not isinstance(users, list):
             raise HTTPError(400, self.set_error(3, 'invalid users'))
+        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('short_id')])
         now = datetime.utcnow()
         for i, u in enumerate(users):
             mobile = dict(
@@ -365,6 +366,16 @@ class TicketOrderCsvHandler(JsonHandler):
             }
             ticket_order = TicketOrderModel(raw_data=ticket_order_doc)
             ticket_order_oid = await ticket_order.insert()
+            KakaotalkService().tmp007(
+                u['mobile_number'],
+                u['name'],
+                self.current_user['name'],
+                content['name'],
+                u['qty'],
+                '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                content['place']['name'],
+                content['short_id']
+            )
             for t in range(u['qty']):
                 ticket_doc = {
                     'type': 'network',
