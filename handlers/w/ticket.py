@@ -240,17 +240,18 @@ class TicketSendHandler(JsonHandler):
             ticket_oids=toids
         ))
         await ticket_log.insert()
-        content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('short_id')])
-        KakaotalkService().tmp007(
-            receive_user['mobile']['number'],
-            receive_user['name'],
-            self.current_user['name'],
-            content['name'],
-            str(len(ticket_oids)),
-            '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
-            content['place']['name'],
-            content['short_id']
-        )
+        if receive_user['mobile']['country_code'] == '82':
+            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('short_id')])
+            KakaotalkService().tmp007(
+                receive_user['mobile']['number'],
+                receive_user['name'],
+                self.current_user['name'],
+                content['name'],
+                str(len(ticket_oids)),
+                '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                content['place']['name'],
+                content['short_id']
+            )
         self.write_json()
 
     async def options(self, *args, **kwargs):
