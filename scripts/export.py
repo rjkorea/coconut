@@ -117,17 +117,17 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
         writer.writeheader()
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         if contentid:
-           q = {
-                '$and': [
-                    {'content_oid': ObjectId(contentid)},
-                    {
-                        '$or': [
-                            {'status': 'use'},
-                            {'status': 'pay'}
-                        ]
-                    }
-                ]
-            }
+            q = {
+                 '$and': [
+                     {'content_oid': ObjectId(contentid)},
+                     {
+                         '$or': [
+                             {'status': 'use'},
+                             {'status': 'pay'}
+                         ]
+                     }
+                 ]
+             }
         else:
             q = {}
         tickets = list()
@@ -199,16 +199,19 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
         writer.writeheader()
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         if contentid:
-           q = {
-                '$and': [
-                    {'content_oid': ObjectId(contentid)},
-                    {
-                        '$or': [
-                            {'status': 'use'}
-                        ]
-                    }
-                ]
-            }
+            q = {
+                 '$and': [
+                     {'content_oid': ObjectId(contentid)},
+                     {
+                         '$or': [
+                             {'status': 'send'},
+                             {'status': 'register'},
+                             {'status': 'use'},
+                             {'status': 'cancel'}
+                         ]
+                     }
+                 ]
+             }
         else:
             q = {}
         tickets = list()
@@ -227,10 +230,20 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
             pprint(len(tickets))
         else:
             for ticket in tickets:
+                if not ticket['receive_user']:
+                    continue
                 if 'last_name' in ticket['receive_user']:
                     name = '%s%s' % (ticket['receive_user']['last_name'], ticket['receive_user']['name'])
                 else:
                     name = ticket['receive_user']['name']
+                if 'birthday' in ticket['receive_user']:
+                    birthday = ticket['receive_user']['birthday'][:4]
+                else:
+                    birthday = None
+                if 'gender' in ticket['receive_user']:
+                    gender = ticket['receive_user']['gender']
+                else:
+                    birthday = None
                 if 'history_send_user_oids' in ticket:
                     path = list()
                     for u in ticket['history_send_user_oids']:
@@ -251,8 +264,8 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
                     user_name=name,
                     user_mobile_country_code=ticket['receive_user']['mobile']['country_code'],
                     user_mobile_number=ticket['receive_user']['mobile']['number'],
-                    birthday=ticket['receive_user']['birthday'][:4],
-                    gender=ticket['receive_user']['gender']
+                    birthday=birthday,
+                    gender=gender
                 )
                 writer.writerow(row)
             pprint(len(tickets))
