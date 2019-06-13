@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson import ObjectId
 
 from tornado.web import HTTPError
@@ -16,6 +16,7 @@ from models import create_user_v2, send_sms
 
 from services.slack import SlackService
 from services.config import ConfigService
+from services.kakaotalk import KakaotalkService
 
 
 class TicketTypeHandler(JsonHandler):
@@ -291,7 +292,7 @@ class TicketOrderHandler(JsonHandler):
                 'text': sms
             }
         )
-        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name')])
+        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('short_id')])
         slack_msg = [
             {
                 'title': '[%s] 티켓전송' % (ConfigService().client['application']['name']),
@@ -302,6 +303,17 @@ class TicketOrderHandler(JsonHandler):
             }
         ]
         SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        if mobile['country_code'] == '82':
+            KakaotalkService().tmp007(
+                mobile['number'],
+                name,
+                self.current_user['name'],
+                content['name'],
+                qty,
+                '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                content['place']['name'],
+                content['short_id']
+            )
         self.response['data'] = {
             'ticket_order_oid': ticket_order_oid,
             'ticket_count': i+1,
