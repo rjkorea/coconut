@@ -117,17 +117,17 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
         writer.writeheader()
         mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
         if contentid:
-           q = {
-                '$and': [
-                    {'content_oid': ObjectId(contentid)},
-                    {
-                        '$or': [
-                            {'status': 'use'},
-                            {'status': 'pay'}
-                        ]
-                    }
-                ]
-            }
+            q = {
+                 '$and': [
+                     {'content_oid': ObjectId(contentid)},
+                     {
+                         '$or': [
+                             {'status': 'use'},
+                             {'status': 'pay'}
+                         ]
+                     }
+                 ]
+             }
         else:
             q = {}
         tickets = list()
@@ -179,7 +179,102 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
         click.secho('check parameters <python export.py  --help>', fg='red')
 
 
-cli = click.CommandCollection(sources=[group_ticket, user_ticket, report_ticket])
+@click.group()
+def use_ticket():
+    pass
+
+@use_ticket.command()
+@click.option('-c', '--csvfile', help='csv filename')
+@click.option('-m', '--mongo', default='localhost:27017', help='host of mongodb')
+@click.option('-i', '--contentid', help='content id')
+@click.option('--dryrun', is_flag=True, help='dry run test')
+@click.confirmation_option(help='Are you sure you export to csv file?')
+def use_tickets(csvfile, mongo, contentid, dryrun):
+    click.secho('= params info =', fg='cyan')
+    click.secho('csvfile: %s' % (csvfile), fg='green')
+    click.secho('mongodb: %s' % (mongo), fg='green')
+    if csvfile and mongo:
+        fieldnames = ['content_name', 'ticket_type_name', 'ticket_type_desc', 'status', 'path', 'user_name', 'user_mobile_country_code', 'user_mobile_number', 'birthday', 'gender']
+        writer = csv.DictWriter(open(csvfile, 'w'), fieldnames=fieldnames)
+        writer.writeheader()
+        mongo_client = MongoClient(host=mongo.split(':')[0], port=int(mongo.split(':')[1]))
+        if contentid:
+            q = {
+                 '$and': [
+                     {'content_oid': ObjectId(contentid)},
+                     {
+                         '$or': [
+                             {'status': 'send'},
+                             {'status': 'register'},
+                             {'status': 'use'},
+                             {'status': 'cancel'}
+                         ]
+                     }
+                 ]
+             }
+        else:
+            q = {}
+        tickets = list()
+        cursor = mongo_client['coconut_umf2019']['ticket'].find(q)
+        while cursor.alive:
+            doc = cursor.next()
+            content = mongo_client['coconut_umf2019']['content'].find_one({'_id': doc['content_oid']}, {'_id': 0, 'name': 1})
+            doc['content'] = content
+            ticket_type = mongo_client['coconut_umf2019']['ticket_type'].find_one({'_id': doc['ticket_type_oid']}, {'_id': 0, 'name': 1, 'desc.value': 1})
+            doc['ticket_type'] = ticket_type
+            receive_user = mongo_client['coconut_umf2019']['user'].find_one({'_id': doc['receive_user_oid']}, {'_id': 0, 'name': 1, 'last_name': 1, 'mobile': 1, 'birthday': 1, 'gender': 1})
+            doc['receive_user'] = receive_user
+            tickets.append(doc)
+        if dryrun:
+            pprint(tickets)
+            pprint(len(tickets))
+        else:
+            for ticket in tickets:
+                if not ticket['receive_user']:
+                    continue
+                if 'last_name' in ticket['receive_user']:
+                    name = '%s%s' % (ticket['receive_user']['last_name'], ticket['receive_user']['name'])
+                else:
+                    name = ticket['receive_user']['name']
+                if 'birthday' in ticket['receive_user']:
+                    birthday = ticket['receive_user']['birthday'][:4]
+                else:
+                    birthday = None
+                if 'gender' in ticket['receive_user']:
+                    gender = ticket['receive_user']['gender']
+                else:
+                    birthday = None
+                if 'history_send_user_oids' in ticket:
+                    path = list()
+                    for u in ticket['history_send_user_oids']:
+                        path_user = mongo_client['coconut_umf2019']['user'].find_one({'_id': u}, {'_id': 0, 'name': 1, 'last_name': 1, 'mobile': 1})
+                        if 'last_name' in path_user:
+                            path_name = '%s%s' % (path_user['last_name'], path_user['name'])
+                        else:
+                            path_name = path_user['name']
+                        path.append((path_name, path_user['mobile']['country_code'], path_user['mobile']['number']))
+                else:
+                    path = None
+                row = dict(
+                    content_name=ticket['content']['name'],
+                    ticket_type_name=ticket['ticket_type']['name'],
+                    ticket_type_desc=ticket['ticket_type']['desc']['value'],
+                    status=ticket['status'],
+                    path=str(path),
+                    user_name=name,
+                    user_mobile_country_code=ticket['receive_user']['mobile']['country_code'],
+                    user_mobile_number=ticket['receive_user']['mobile']['number'],
+                    birthday=birthday,
+                    gender=gender
+                )
+                writer.writerow(row)
+            pprint(len(tickets))
+
+    else:
+        click.secho('check parameters <python export.py  --help>', fg='red')
+
+
+cli = click.CommandCollection(sources=[group_ticket, user_ticket, report_ticket, use_ticket])
 
 
 if __name__ == '__main__':

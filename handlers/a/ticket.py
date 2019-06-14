@@ -546,15 +546,19 @@ class TicketLogListHandler(JsonHandler):
         q = {}
         parsed_args = kwargs.get('parsed_args')
         if 'content_oid' in parsed_args and parsed_args['content_oid']:
-            q = {'$and': [{
-                'content_oid': ObjectId(parsed_args['content_oid'])
-            }]}
+            q = {
+                '$and': [
+                    {'content_oid': ObjectId(parsed_args['content_oid'])}
+                ]
+            }
         if 'q' in parsed_args and parsed_args['q']:
-            user_q = {'$or': [
-                {'name': {'$regex': parsed_args['q']}},
-                {'mobile_number': {'$regex': parsed_args['q']}}
-            ]}
-            users = await UserModel.find(query=user_q)
+            user_q = {
+                '$or': [
+                    {'name': {'$regex': parsed_args['q']}},
+                    {'mobile.number': {'$regex': parsed_args['q']}}
+                ]
+            }
+            users = await UserModel.find(query=user_q, skip=0, limit=100)
             if users:
                 user_q = {
                     '$or': [
@@ -572,9 +576,9 @@ class TicketLogListHandler(JsonHandler):
         count = await TicketLogModel.count(query=q)
         result = await TicketLogModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
         for res in result:
-            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('last_name'), ('mobile_number')])
+            res['send_user'] = await UserModel.get_id(res['send_user_oid'], fields=[('name'), ('last_name'), ('mobile.number')])
             res.pop('send_user_oid')
-            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile_number')])
+            res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile.number')])
             res.pop('receive_user_oid')
             res['content'] = await ContentModel.get_id(res['content_oid'], fields=[('name')])
             res.pop('content_oid')
