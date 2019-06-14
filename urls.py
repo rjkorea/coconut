@@ -130,6 +130,7 @@ url_patterns = [
     (r'/w/autologin/(?P<_id>[^\/]+)/?', w.user.AutoLoginHandler),
     (r'/w/content/(?P<_id>[^\/]+)/?', w.content.ContentHandler),
     (r'/w/contents/?', w.content.ContentListHandler),
+    (r'/w/contents/me/?', w.content.ContentListMeHandler),
     (r'/w/countries/?', w.util.CountryListHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/me/register/validate?', w.ticket.TicketMeRegisterValidateHandler),
     (r'/w/ticket/(?P<_id>[^\/]+)/register/?', w.ticket.TicketRegisterHandler),
