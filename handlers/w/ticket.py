@@ -833,7 +833,6 @@ class TicketTypeListMeHandler(JsonHandler):
             raise HTTPError(400, 'invalid content_oid')
         now = datetime.utcnow()
         ticket_types = await TicketTypeModel.find({'content_oid': ObjectId(parsed_args['content_oid']), 'sales_date.end': {'$gte': now}, 'enabled': True}, fields=[('_id')], skip=0, limit=100)
-        # aggregate ticket type
         pipeline = [
             {
                 '$match': {
@@ -855,37 +854,19 @@ class TicketTypeListMeHandler(JsonHandler):
                 }
             }
         ]
-        aggs = await TicketModel.aggregate(pipeline, 50)
+        aggs = await TicketModel.aggregate(pipeline, 100)
         for a in aggs:
-            ticket_type = await TicketTypeModel.get_id(a['_id'])
+            ticket_type = await TicketTypeModel.get_id(a['_id'], fields=[('name'), ('desc'), ('sales_date'), ('price'), ('color'), ('fpfg'), ('content_oid')])
             a['name'] = ticket_type['name']
             a['desc'] = ticket_type['desc']
             a['sales_date'] = ticket_type['sales_date']
             a['price'] = ticket_type['price']
-            if 'color' in ticket_type:
-                a['color'] = ticket_type['color']
-            content = await ContentModel.get_id(ticket_type['content_oid'])
+            a['color'] = ticket_type['color']
+            content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name')])
             a['content'] = {
                 'name': content['name']
             }
-            query = {
-                '$and': [
-                    {'enabled': True},
-                    {'ticket_type_oid': ticket_type['_id']},
-                    {
-                        '$or': [
-                            {'status': TicketModel.Status.register.name},
-                            {'status': TicketModel.Status.pay.name},
-                            {'status': TicketModel.Status.use.name}
-                        ]
-                    }
-                ]
-            }
-            sales_count = await TicketModel.count(query)
-            a['sales'] = {
-                'count': sales_count,
-                'limit': ticket_type['fpfg']['limit']
-            }
+            a['fpfg'] = ticket_type['fpfg']
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
@@ -924,7 +905,7 @@ class TicketTypeTicketListMeHandler(JsonHandler):
         self.write_json()
 
 
-class TicketMeCheckPopupHandler(JsonHandler):
+class TicketMeCheckRegisterHandler(JsonHandler):
     @user_auth_async
     @parse_argument([('content_oid', str, None)])
     async def get(self, *args, **kwargs):
@@ -934,27 +915,18 @@ class TicketMeCheckPopupHandler(JsonHandler):
         q = {
             'content_oid': ObjectId(parsed_args['content_oid']),
             'enabled': True,
-            'receive_user_oid': self.current_user['_id']
+            'receive_user_oid': self.current_user['_id'],
+            '$or': [
+                { 'status': TicketModel.Status.register.name },
+                { 'status': TicketModel.Status.pay.name },
+                { 'status': TicketModel.Status.use.name }
+            ]
         }
         count = await TicketModel.count(query=q)
-        if count == 0:
-            self.response['data'] = { 'enabled': False }
+        if count > 0:
+            self.response['data'] = { 'enabled': True }
         else:
-            q = {
-                'content_oid': ObjectId(parsed_args['content_oid']),
-                'enabled': True,
-                'receive_user_oid': self.current_user['_id'],
-                '$or': [
-                    { 'status': TicketModel.Status.register.name },
-                    { 'status': TicketModel.Status.pay.name },
-                    { 'status': TicketModel.Status.use.name }
-                ]
-            }
-            count = await TicketModel.count(query=q)
-            if count > 0:
-                self.response['data'] = { 'enabled': False }
-            else:
-                self.response['data'] = { 'enabled': True }
+            self.response['data'] = { 'enabled': False }
         self.write_json()
 
     async def options(self, *args, **kwargs):
