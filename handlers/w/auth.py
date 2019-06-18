@@ -29,17 +29,14 @@ class RegisterHandler(JsonHandler):
         if duplicated_user and 'password' in duplicated_user:
             raise HTTPError(400, 'exist mobile number')
         name = self.json_decoded_body.get('name', None)
-        if not name or len(name) == 0:
+        if not name or len(name.strip()) == 0:
             raise HTTPError(400, 'invalid name')
-        last_name = self.json_decoded_body.get('last_name', None)
-        if not last_name or len(last_name) == 0:
-            raise HTTPError(400, 'invalid last_name')
         birthday = self.json_decoded_body.get('birthday', None)
-        if not birthday or len(birthday) != 8 :
-            raise HTTPError(400, 'invalid birthday(YYYYMMDD)')
+        if not birthday or len(birthday) != 4 :
+            raise HTTPError(400, 'invalid birthday(YYYY)')
         gender = self.json_decoded_body.get('gender', None)
-        if not gender or (gender != 'male' and gender != 'female' and gender != 'not_specific'):
-            raise HTTPError(400, 'invalid gender(male, female, not_specific)')
+        if not gender or gender not in UserModel.GENDER:
+            raise HTTPError(400, 'invalid gender(male, female, others)')
         password = self.json_decoded_body.get('password', None)
         if not password or len(password) == 0 or not hashers.validate_user_password_v2(password):
             raise HTTPError(400, 'invalid password')
@@ -50,8 +47,7 @@ class RegisterHandler(JsonHandler):
                     country_code=mobile_country_code,
                     number=mobile_number
                 ),
-                name=name,
-                last_name=last_name,
+                name=name.strip(),
                 birthday=birthday,
                 gender=gender,
                 terms={
@@ -74,8 +70,7 @@ class RegisterHandler(JsonHandler):
                     country_code=mobile_country_code,
                     number=mobile_number
                 ),
-                name=name,
-                last_name=last_name,
+                name=name.strip(),
                 birthday=birthday,
                 gender=gender,
                 terms={'privacy': True, 'policy': True}
