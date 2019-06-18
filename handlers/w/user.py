@@ -129,7 +129,7 @@ class UserAuthPasswordHandler(JsonHandler):
 class UserMeHandler(JsonHandler):
     @user_auth_async
     async def get(self, *args, **kwargs):
-        user = await UserModel.find_one({'_id': self.current_user['_id']})
+        user = await UserModel.find_one({'_id': self.current_user['_id']}, fields=[('name'), ('mobile'), ('birthday'), ('gender'), ('image')])
         if not user:
             raise HTTPError(400, 'not exist user')
         self.response['data'] = user
