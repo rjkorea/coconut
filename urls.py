@@ -137,6 +137,7 @@ url_patterns = [
     (r'/w/ticket/(?P<_id>[^\/]+)/register/cancel/?', w.ticket.TicketRegisterCancelHandler),
     (r'/w/tickets/register/?', w.ticket.TicketMultiRegisterHandler),
     (r'/w/ticket/send/?', w.ticket.TicketSendHandler),
+    (r'/w/ticket/types/send/?', w.ticket.TicketTypesSendHandler),
     (r'/w/ticket/send/users?', w.ticket.TicketSendUserListHandler),
     (r'/w/tickets/me/?', w.ticket.TicketListMeHandler),
     (r'/w/tickets/?', w.ticket.TicketListHandler),
