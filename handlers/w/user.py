@@ -155,7 +155,9 @@ class UserMeHandler(JsonHandler):
         document = {
             '$set': set_doc
         }
-        self.response['data'] = await UserModel.update(query, document, False, False)
+        await UserModel.update(query, document, False, False)
+        user = await UserModel.find_one({'_id': self.current_user['_id']}, fields=[('name'), ('mobile'), ('birthday'), ('gender'), ('image')])
+        self.response['data'] = user
         self.write_json()
 
     async def options(self, *args, **kwargs):
