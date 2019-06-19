@@ -14,6 +14,8 @@ from models import send_sms
 from common.decorators import parse_argument
 from common import hashers
 
+from services.lms import LmsService
+
 import settings
 
 
@@ -199,16 +201,8 @@ class AutoLoginHandler(JsonHandler):
         userautologin.data['content_oid'] = ObjectId(content_oid)
         userautologin_oid = await userautologin.insert()
         config = settings.settings()
-        is_sent_receiver = await send_sms(
-            {
-                'type': 'unicode',
-                'from': 'tkit',
-                'to': '%s%s' % (mobile_country_code, mobile_number[1:]),
-                'text': 'http://%s:%s/autologin/%s' % (config['web']['host'], config['web']['port'], userautologin_oid)
-            }
-        )
+        LmsService().send(mobile_number, '티킷(TKIT)', 'http://%s:%s/autologin/%s' % (config['web']['host'], config['web']['port'], userautologin_oid))
         self.response['message'] = 'check your sms'
-        self.response['is_sent_receiver'] = is_sent_receiver
         self.write_json()
 
 

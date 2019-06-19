@@ -12,11 +12,12 @@ from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
 from models.user import UserModel
 
-from models import create_user_v2, send_sms
+from models import create_user_v2
 
 from services.slack import SlackService
 from services.config import ConfigService
 from services.kakaotalk import KakaotalkService
+from services.lms import LmsService
 
 
 class TicketTypeHandler(JsonHandler):
@@ -314,14 +315,7 @@ class TicketOrderHandler(JsonHandler):
             to_mobile_number = '%s%s' % (mobile['country_code'], mobile['number'][1:])
         else:
             to_mobile_number = '%s%s' % (mobile['country_code'], mobile['number'])
-        is_sent_receiver = await send_sms(
-            {
-                'type': 'unicode',
-                'from': 'tkit',
-                'to': to_mobile_number,
-                'text': sms
-            }
-        )
+        LmsService().send(mobile['number'], '티킷(TKIT)', sms)
         content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('short_id')])
         slack_msg = [
             {
@@ -346,8 +340,7 @@ class TicketOrderHandler(JsonHandler):
             )
         self.response['data'] = {
             'ticket_order_oid': ticket_order_oid,
-            'ticket_count': i+1,
-            'sms': is_sent_receiver
+            'ticket_count': i+1
         }
         self.write_json()
 
