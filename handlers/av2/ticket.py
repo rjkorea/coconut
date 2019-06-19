@@ -184,6 +184,36 @@ class TicketTypeHandler(JsonHandler):
         self.write_json()
 
 
+class TicketTypeDuplicateHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id))
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        doc = dict(
+            type=ticket_type['type'],
+            name=ticket_type['name'],
+            desc=ticket_type['desc'],
+            color=ticket_type['color'],
+            admin_oid=self.current_user['_id'],
+            content_oid=ticket_type['content_oid'],
+            price=ticket_type['price'],
+            fpfg=ticket_type['fpfg'],
+            sales_date=ticket_type['sales_date']
+        )
+        ticket_type_model = TicketTypeModel(raw_data=doc)
+        _id = await ticket_type_model.insert()
+        self.response['data'] = _id
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
 class TicketTypeListHandler(JsonHandler):
     @admin_auth_async
     @parse_argument([('start', int, 0), ('size', int, 10), ('content_oid', str, None)])

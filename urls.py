@@ -90,6 +90,7 @@ url_patterns = [
     (r'/a/v2/content/(?P<_id>[^\/]+)/image/extra/(?P<number>[^\/]+)/?', av2.content.ContentImageExtraHandler),
     (r'/a/v2/ticket/type/?', av2.ticket.TicketTypeHandler),
     (r'/a/v2/ticket/type/(?P<_id>[^\/]+)/?', av2.ticket.TicketTypeHandler),
+    (r'/a/v2/ticket/type/(?P<_id>[^\/]+)/duplicate/?', av2.ticket.TicketTypeDuplicateHandler),
     (r'/a/v2/ticket/types/?', av2.ticket.TicketTypeListHandler),
     (r'/a/v2/ticket/type/(?P<_id>[^\/]+)/info?', av2.ticket.TicketTypeInfoHandler),
     (r'/a/v2/ticket/order/?', av2.ticket.TicketOrderHandler),
