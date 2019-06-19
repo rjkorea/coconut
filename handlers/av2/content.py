@@ -282,6 +282,7 @@ class ContentHandler(JsonHandler):
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
         staff_auth_code = self.json_decoded_body.get('staff_auth_code', None)
+        band_place = self.json_decoded_body.get('band_place', None)
         comments_private = self.json_decoded_body.get('comments_private', False)
         if comments_private == 'true':
             comments_private = True
@@ -316,6 +317,7 @@ class ContentHandler(JsonHandler):
                 message=notice_message
             ),
             staff_auth_code=staff_auth_code,
+            band_place=band_place,
             comments=dict(
                 type=comments_type,
                 is_private=comments_private
