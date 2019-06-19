@@ -203,7 +203,9 @@ class TicketTypeDuplicateHandler(JsonHandler):
             content_oid=ticket_type['content_oid'],
             price=ticket_type['price'],
             fpfg=ticket_type['fpfg'],
-            sales_date=ticket_type['sales_date']
+            sales_date=ticket_type['sales_date'],
+            duplicated_registration=ticket_type['duplicated_registration'],
+            disabled_send=ticket_type['disabled_send']
         )
         ticket_type_model = TicketTypeModel(raw_data=doc)
         _id = await ticket_type_model.insert()
