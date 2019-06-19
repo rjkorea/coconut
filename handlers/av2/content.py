@@ -281,6 +281,7 @@ class ContentHandler(JsonHandler):
         video_url = self.json_decoded_body.get('video_url', None)
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
+        sms = self.json_decoded_body.get('sms', None)
         staff_auth_code = self.json_decoded_body.get('staff_auth_code', None)
         band_place = self.json_decoded_body.get('band_place', None)
         comments_private = self.json_decoded_body.get('comments_private', False)
@@ -323,6 +324,9 @@ class ContentHandler(JsonHandler):
                 is_private=comments_private
             ),
             desc=desc,
+            sms=dict(
+                message=sms
+            ),
             updated_at=datetime.utcnow()
         )
         updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
