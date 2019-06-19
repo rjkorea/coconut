@@ -203,6 +203,7 @@ class AutoLoginHandler(JsonHandler):
         config = settings.settings()
         LmsService().send(mobile_number, '티킷(TKIT)', 'http://%s:%s/autologin/%s' % (config['web']['host'], config['web']['port'], userautologin_oid))
         self.response['message'] = 'check your sms'
+        self.response['is_sent_receiver'] = True
         self.write_json()
 
 
