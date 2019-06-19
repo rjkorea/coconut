@@ -241,17 +241,30 @@ class TicketSendHandler(JsonHandler):
         ))
         await ticket_log.insert()
         if receive_user['mobile']['country_code'] == '82':
-            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('short_id')])
-            KakaotalkService().tmp007(
-                receive_user['mobile']['number'],
-                receive_user['name'],
-                self.current_user['name'],
-                content['name'],
-                str(len(ticket_oids)),
-                '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
-                content['place']['name'],
-                content['short_id']
-            )
+            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['place']['name'],
+                    content['short_id']
+                )
+            else:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['band_place'],
+                    content['short_id']
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -317,17 +330,31 @@ class TicketTypesSendHandler(JsonHandler):
         ))
         await ticket_log.insert()
         if receive_user['mobile']['country_code'] == '82':
-            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('short_id')])
-            KakaotalkService().tmp007(
-                receive_user['mobile']['number'],
-                receive_user['name'],
-                self.current_user['name'],
-                content['name'],
-                str(len(ticket_oids)),
-                '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
-                content['place']['name'],
-                content['short_id']
-            )
+            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['place']['name'],
+                    content['short_id']
+                )
+            else:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['band_place'],
+                    content['short_id']
+                )
         self.write_json()
 
     async def options(self, *args, **kwargs):
