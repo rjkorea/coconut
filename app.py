@@ -15,6 +15,7 @@ from services.s3 import S3Service
 from services.slack import SlackService
 from services.mysql import MySQLService
 from services.kakaotalk import KakaotalkService
+from services.lms import LmsService
 from services.config import ConfigService
 
 
@@ -43,6 +44,7 @@ def main():
         S3Service(config=config['aws'])
         SlackService(config=config['slack'])
         KakaotalkService()
+        LmsService()
         ConfigService(config=config)
         ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
