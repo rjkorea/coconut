@@ -95,6 +95,11 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'band_place',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'is_private',
                 'type': bool,
                 'default': (lambda: False)
