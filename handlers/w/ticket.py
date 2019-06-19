@@ -265,6 +265,7 @@ class TicketSendHandler(JsonHandler):
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']
+                )
         self.write_json()
 
     async def options(self, *args, **kwargs):
