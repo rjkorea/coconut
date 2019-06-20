@@ -104,7 +104,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid id'))
-        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid')])
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid'), ('duplicated_registration'), ('disabled_send')])
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         query = {
@@ -139,6 +139,8 @@ class TicketTypeHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         desc = self.json_decoded_body.get('desc', None)
         sales_date = self.json_decoded_body.get('sales_date', None)
+        duplicated_registration = self.json_decoded_body.get('duplicated_registration', False)
+        disabled_send = self.json_decoded_body.get('disabled_send', False)
         try:
             sales_date['start'] = datetime.strptime(sales_date['start'], '%Y-%m-%dT%H:%M:%S')
             sales_date['end'] = datetime.strptime(sales_date['end'], '%Y-%m-%dT%H:%M:%S')
@@ -148,6 +150,8 @@ class TicketTypeHandler(JsonHandler):
             'name': name,
             'desc.value': desc,
             'sales_date': sales_date,
+            'duplicated_registration': duplicated_registration,
+            'disabled_send': disabled_send,
             'updated_at': datetime.utcnow()
         }
         query = {
