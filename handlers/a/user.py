@@ -25,11 +25,13 @@ class UserListHandler(JsonHandler):
                 {'email': {'$regex': parsed_args['q']}},
                 {'mobile.number': {'$regex': parsed_args['q']}},
                 {'gender': {'$regex': parsed_args['q']}},
-                {'birthday': {'$regex': parsed_args['q']}},
-                {'role': {'$regex': parsed_args['q']}}
+                {'birthday': {'$regex': parsed_args['q']}}
             ]
-        count = await UserModel.count(query=q)
-        result = await UserModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+            count = await UserModel.count(query=q)
+            result = await UserModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        else:
+            count = 0
+            result = list()
         self.response['data'] = result
         self.response['count'] = count
         self.write_json()
