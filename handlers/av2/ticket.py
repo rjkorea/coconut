@@ -196,7 +196,7 @@ class TicketTypeDuplicateHandler(JsonHandler):
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         doc = dict(
             type=ticket_type['type'],
-            name=ticket_type['name'],
+            name='%s의 사본' % ticket_type['name'],
             desc=ticket_type['desc'],
             color=ticket_type['color'],
             admin_oid=self.current_user['_id'],
