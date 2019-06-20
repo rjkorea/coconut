@@ -89,6 +89,16 @@ class UserModel(BaseModel):
                 'type': dict,
                 'default': (lambda: {'privacy': False, 'policy': False})
             },
+            {
+                'key': 'memo',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'area',
+                'type': str,
+                'default': None
+            },
         ])
         return specification
 
