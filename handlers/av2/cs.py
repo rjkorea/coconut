@@ -10,6 +10,7 @@ from common.decorators import admin_auth_async, parse_argument
 from handlers.base import JsonHandler
 from models.content import ContentModel
 from models.ticket import TicketModel, TicketTypeModel
+from models.user import UserModel
 
 
 class TicketListHandler(JsonHandler):
@@ -48,6 +49,10 @@ class TicketListHandler(JsonHandler):
             ticket_type = await TicketTypeModel.get_id(t['ticket_type_oid'], fields=[('name'), ('desc')])
             t['ticket_type'] = ticket_type
             t.pop('ticket_type_oid')
+            if 'history_send_user_oids' in t:
+                user = await UserModel.get_id(t['receive_user_oid'], fields=[('last_name'), ('name'), ('mobile')])
+                t['receive_user'] = user
+                t.pop('receive_user_oid')
         self.response['count'] = count
         self.response['data'] = tickets
         self.write_json()
