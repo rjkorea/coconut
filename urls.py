@@ -98,6 +98,7 @@ url_patterns = [
     (r'/a/v2/ticket/orders/?', av2.ticket.TicketOrderListHandler),
     (r'/a/v2/tickets/?', av2.ticket.TicketListHandler),
     (r'/a/v2/ticket/history?', av2.ticket.TicketHistoryListHandler),
+    (r'/a/v2/cs/tickets?', av2.cs.TicketListHandler),
 
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
