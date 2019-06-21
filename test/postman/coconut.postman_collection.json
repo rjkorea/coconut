@@ -16705,6 +16705,45 @@
 					]
 				},
 				{
+					"name": "/a/v2/ticket/type/(oid)/duplicate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/ticket/type/5cb058005f5471031c87623f/duplicate",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"ticket",
+								"type",
+								"5cb058005f5471031c87623f",
+								"duplicate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/a/v2/ticket/types",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -17516,6 +17555,54 @@
 							"body": "{\n    \"data\": [\n        {\n        \t\"last_name\": \"이\",\n            \"name\": \"예진\",\n            \"mobile\": {\n            \t\"country_code\": \"82\",\n            \t\"number\": \"01092465406\"\n            }\n        },\n        {\n        \t\"last_name\": \"강\",\n            \"name\": \"준호\",\n            \"mobile\": {\n            \t\"country_code\": \"82\",\n            \t\"number\": \"01099734220\"\n            }\n        }\n    ]\n}"
 						}
 					]
+				},
+				{
+					"name": "/a/v2/cs/tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "csk={{csk}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/a/v2/cs/tickets?start=0&size=10&user_oid=5931a3eabc2c44140e0dea91",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"a",
+								"v2",
+								"cs",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "user_oid",
+									"value": "5931a3eabc2c44140e0dea91"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "api version 2 for host user"
