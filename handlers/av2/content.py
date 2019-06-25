@@ -12,6 +12,7 @@ from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.content import ContentModel
 
 from services.s3 import S3Service
+from services.cloudfront import CloudfrontService
 from services.config import ConfigService
 from services.slack import SlackService
 
@@ -389,6 +390,16 @@ class ContentImageMainHandler(MultipartFormdataHandler):
                 ]
             }
         )
+        CloudfrontService().client.create_invalidation(
+            DistributionId=config['aws']['cloudfront_distribution_id'],
+            InvalidationBatch={
+                'Paths': {
+                    'Quantity': 1,
+                    'Items': ['/{}'.format(key)]
+                },
+                'CallerReference': 'references-{}'.format(datetime.now())
+            }
+        )
         return 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId']), len(file[0]['body'])
 
     async def options(self, *args, **kwargs):
@@ -448,6 +459,16 @@ class ContentImageExtraHandler(MultipartFormdataHandler):
                         'PartNumber': 1
                     }
                 ]
+            }
+        )
+        CloudfrontService().client.create_invalidation(
+            DistributionId=config['aws']['cloudfront_distribution_id'],
+            InvalidationBatch={
+                'Paths': {
+                    'Quantity': 1,
+                    'Items': ['/{}'.format(key)]
+                },
+                'CallerReference': 'references-{}'.format(datetime.now())
             }
         )
         return 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId']), len(file[0]['body'])
