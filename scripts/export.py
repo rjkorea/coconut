@@ -215,14 +215,14 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
         else:
             q = {}
         tickets = list()
-        cursor = mongo_client['coconut_umf2019']['ticket'].find(q)
+        cursor = mongo_client['coconut']['ticket'].find(q)
         while cursor.alive:
             doc = cursor.next()
-            content = mongo_client['coconut_umf2019']['content'].find_one({'_id': doc['content_oid']}, {'_id': 0, 'name': 1})
+            content = mongo_client['coconut']['content'].find_one({'_id': doc['content_oid']}, {'_id': 0, 'name': 1})
             doc['content'] = content
-            ticket_type = mongo_client['coconut_umf2019']['ticket_type'].find_one({'_id': doc['ticket_type_oid']}, {'_id': 0, 'name': 1, 'desc.value': 1})
+            ticket_type = mongo_client['coconut']['ticket_type'].find_one({'_id': doc['ticket_type_oid']}, {'_id': 0, 'name': 1, 'desc.value': 1})
             doc['ticket_type'] = ticket_type
-            receive_user = mongo_client['coconut_umf2019']['user'].find_one({'_id': doc['receive_user_oid']}, {'_id': 0, 'name': 1, 'last_name': 1, 'mobile': 1, 'birthday': 1, 'gender': 1})
+            receive_user = mongo_client['coconut']['user'].find_one({'_id': doc['receive_user_oid']}, {'_id': 0, 'name': 1, 'last_name': 1, 'mobile': 1, 'birthday': 1, 'gender': 1})
             doc['receive_user'] = receive_user
             tickets.append(doc)
         if dryrun:
@@ -247,7 +247,7 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
                 if 'history_send_user_oids' in ticket:
                     path = list()
                     for u in ticket['history_send_user_oids']:
-                        path_user = mongo_client['coconut_umf2019']['user'].find_one({'_id': u}, {'_id': 0, 'name': 1, 'last_name': 1, 'mobile': 1})
+                        path_user = mongo_client['coconut']['user'].find_one({'_id': u}, {'_id': 0, 'name': 1, 'last_name': 1, 'mobile': 1})
                         if 'last_name' in path_user:
                             path_name = '%s%s' % (path_user['last_name'], path_user['name'])
                         else:
