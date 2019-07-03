@@ -138,7 +138,7 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
             doc['content'] = content
             ticket_type = mongo_client['coconut']['ticket_type'].find_one({'_id': doc['ticket_type_oid']}, {'_id': 0, 'name': 1, 'desc.value': 1})
             doc['ticket_type'] = ticket_type
-            receive_user = mongo_client['coconut']['user'].find_one({'_id': doc['receive_user_oid']}, {'_id': 0, 'name': 1, 'mobile_number': 1})
+            receive_user = mongo_client['coconut']['user'].find_one({'_id': doc['receive_user_oid']}, {'_id': 0, 'name': 1, 'mobile': 1})
             doc['receive_user'] = receive_user
             tickets.append(doc)
         if dryrun:
@@ -151,7 +151,7 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
                     content_name=ticket['content']['name'],
                     ticket_type_name=ticket['ticket_type']['name'],
                     ticket_type_desc=ticket['ticket_type']['desc']['value'],
-                    price=0,
+                    price=ticket['price'],
                     pay_type='',
                     pay_method='',
                     pg_provider='',
@@ -159,11 +159,8 @@ def report_tickets(csvfile, mongo, contentid, dryrun):
                     paid_at='',
                     status=ticket['status'],
                     user_name=ticket['receive_user']['name'],
-                    user_mobile_number=ticket['receive_user']['mobile_number']
+                    user_mobile_number=ticket['receive_user']['mobile']['number']
                 )
-                if 'fee' in ticket['days'][0]:
-                    row['price'] = ticket['days'][0]['fee']['price']
-                    row['pay_method'] = ticket['days'][0]['fee']['method']
                 pay_online = iamport_client.find(merchant_uid=str(ticket['_id']))
                 if pay_online and pay_online['status'] == 'paid':
                     row['pay_type'] = 'online'
