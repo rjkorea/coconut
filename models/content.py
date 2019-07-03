@@ -90,6 +90,11 @@ class ContentModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'purchase_url',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'staff_auth_code',
                 'type': str,
                 'default': None
