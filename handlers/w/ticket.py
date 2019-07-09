@@ -594,9 +594,12 @@ class TicketSendUserListHandler(JsonHandler):
                 return
         result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
         for res in result:
-            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile')])
+            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('last_name'), ('name'), ('mobile')])
             if receive_user and 'name' in receive_user:
-                res['name'] = receive_user['name']
+                if 'last_name' in receive_user:
+                    res['name'] = receive_user['last_name'] + receive_user['name']
+                else:
+                    res['name'] = receive_user['name']
                 res['mobile'] = receive_user['mobile']
             res.pop('receive_user_oid')
         send_user_dict = dict()
