@@ -52,7 +52,9 @@ class TicketTypeHandler(JsonHandler):
                 sales_date=ticket_type['sales_date'],
                 price=ticket_type['price'],
                 color=ticket_type['color'],
-                fpfg=ticket_type['fpfg']
+                fpfg=ticket_type['fpfg'],
+                duplicated_registration=ticket_type['duplicated_registration'],
+                disabled_send=ticket_type['disabled_send']
             )
             ttm = TicketTypeModel(raw_data=doc)
             res.append(await ttm.insert())
