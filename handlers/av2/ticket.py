@@ -12,11 +12,12 @@ from models.ticket import TicketTypeModel, TicketOrderModel, TicketModel
 from models.content import ContentModel
 from models.user import UserModel
 
-from models import create_user_v2, send_sms
+from models import create_user_v2
 
 from services.slack import SlackService
 from services.config import ConfigService
 from services.kakaotalk import KakaotalkService
+from services.lms import LmsService
 
 
 class TicketTypeHandler(JsonHandler):
@@ -51,7 +52,9 @@ class TicketTypeHandler(JsonHandler):
                 sales_date=ticket_type['sales_date'],
                 price=ticket_type['price'],
                 color=ticket_type['color'],
-                fpfg=ticket_type['fpfg']
+                fpfg=ticket_type['fpfg'],
+                duplicated_registration=ticket_type['duplicated_registration'],
+                disabled_send=ticket_type['disabled_send']
             )
             ttm = TicketTypeModel(raw_data=doc)
             res.append(await ttm.insert())
@@ -103,7 +106,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid id'))
-        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid')])
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid'), ('duplicated_registration'), ('disabled_send')])
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         query = {
@@ -138,6 +141,8 @@ class TicketTypeHandler(JsonHandler):
         name = self.json_decoded_body.get('name', None)
         desc = self.json_decoded_body.get('desc', None)
         sales_date = self.json_decoded_body.get('sales_date', None)
+        duplicated_registration = self.json_decoded_body.get('duplicated_registration', False)
+        disabled_send = self.json_decoded_body.get('disabled_send', False)
         try:
             sales_date['start'] = datetime.strptime(sales_date['start'], '%Y-%m-%dT%H:%M:%S')
             sales_date['end'] = datetime.strptime(sales_date['end'], '%Y-%m-%dT%H:%M:%S')
@@ -147,6 +152,8 @@ class TicketTypeHandler(JsonHandler):
             'name': name,
             'desc.value': desc,
             'sales_date': sales_date,
+            'duplicated_registration': duplicated_registration,
+            'disabled_send': disabled_send,
             'updated_at': datetime.utcnow()
         }
         query = {
@@ -177,6 +184,38 @@ class TicketTypeHandler(JsonHandler):
             set_doc['fpfg.spread'] = fpfg['spread']
         updated = await TicketTypeModel.update({'_id': ticket_type['_id']}, {'$set': set_doc}, False, False)
         self.response['data'] = updated
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketTypeDuplicateHandler(JsonHandler):
+    @admin_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, self.set_error(1, 'invalid id'))
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id))
+        if not ticket_type:
+            raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
+        doc = dict(
+            type=ticket_type['type'],
+            name='%s의 사본' % ticket_type['name'],
+            desc=ticket_type['desc'],
+            color=ticket_type['color'],
+            admin_oid=self.current_user['_id'],
+            content_oid=ticket_type['content_oid'],
+            price=ticket_type['price'],
+            fpfg=ticket_type['fpfg'],
+            sales_date=ticket_type['sales_date'],
+            duplicated_registration=ticket_type['duplicated_registration'],
+            disabled_send=ticket_type['disabled_send']
+        )
+        ticket_type_model = TicketTypeModel(raw_data=doc)
+        _id = await ticket_type_model.insert()
+        self.response['data'] = _id
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -284,15 +323,8 @@ class TicketOrderHandler(JsonHandler):
             to_mobile_number = '%s%s' % (mobile['country_code'], mobile['number'][1:])
         else:
             to_mobile_number = '%s%s' % (mobile['country_code'], mobile['number'])
-        is_sent_receiver = await send_sms(
-            {
-                'type': 'unicode',
-                'from': 'tkit',
-                'to': to_mobile_number,
-                'text': sms
-            }
-        )
-        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('short_id')])
+        LmsService().send(mobile['number'], '티킷(TKIT)', sms)
+        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
         slack_msg = [
             {
                 'title': '[%s] 티켓전송' % (ConfigService().client['application']['name']),
@@ -304,20 +336,33 @@ class TicketOrderHandler(JsonHandler):
         ]
         SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
         if mobile['country_code'] == '82':
-            KakaotalkService().tmp007(
-                mobile['number'],
-                name,
-                self.current_user['name'],
-                content['name'],
-                qty,
-                '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
-                content['place']['name'],
-                content['short_id']
-            )
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp007(
+                    mobile['number'],
+                    name,
+                    self.current_user['name'],
+                    content['name'],
+                    qty,
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['place']['name'],
+                    content['short_id']
+                )
+            else:
+                KakaotalkService().tmp007(
+                    mobile['number'],
+                    name,
+                    self.current_user['name'],
+                    content['name'],
+                    qty,
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['band_place'],
+                    content['short_id']
+                )
         self.response['data'] = {
             'ticket_order_oid': ticket_order_oid,
-            'ticket_count': i+1,
-            'sms': is_sent_receiver
+            'ticket_count': i+1
         }
         self.write_json()
 
@@ -338,7 +383,7 @@ class TicketOrderCsvHandler(JsonHandler):
         users = self.json_decoded_body.get('users', None)
         if not users or not isinstance(users, list):
             raise HTTPError(400, self.set_error(3, 'invalid users'))
-        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('short_id')])
+        content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
         now = datetime.utcnow()
         for i, u in enumerate(users):
             mobile = dict(
@@ -366,16 +411,30 @@ class TicketOrderCsvHandler(JsonHandler):
             }
             ticket_order = TicketOrderModel(raw_data=ticket_order_doc)
             ticket_order_oid = await ticket_order.insert()
-            KakaotalkService().tmp007(
-                u['mobile_number'],
-                u['name'],
-                self.current_user['name'],
-                content['name'],
-                u['qty'],
-                '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
-                content['place']['name'],
-                content['short_id']
-            )
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp007(
+                    u['mobile_number'],
+                    u['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    u['qty'],
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['place']['name'],
+                    content['short_id']
+                )
+            else:
+                KakaotalkService().tmp007(
+                    u['mobile_number'],
+                    u['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    u['qty'],
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['band_place'],
+                    content['short_id']
+                )
             for t in range(u['qty']):
                 ticket_doc = {
                     'type': 'network',

@@ -129,7 +129,7 @@ class UserAuthPasswordHandler(JsonHandler):
 class UserMeHandler(JsonHandler):
     @user_auth_async
     async def get(self, *args, **kwargs):
-        user = await UserModel.find_one({'_id': self.current_user['_id']})
+        user = await UserModel.find_one({'_id': self.current_user['_id']}, fields=[('name'), ('mobile'), ('birthday'), ('gender'), ('image')])
         if not user:
             raise HTTPError(400, 'not exist user')
         self.response['data'] = user
@@ -141,19 +141,13 @@ class UserMeHandler(JsonHandler):
             'updated_at': datetime.utcnow()
         }
         name = self.json_decoded_body.get('name', None)
-        if name:
-            set_doc['name'] = name
+        if name.strip() and len(name.strip()) > 0:
+            set_doc['name'] = name.strip()
         birthday = self.json_decoded_body.get('birthday', None)
-        if birthday:
-            set_doc['birthday'] = birthday
-        mobile_number = self.json_decoded_body.get('mobile_number', None)
-        if mobile_number:
-            set_doc['mobile_number'] = mobile_number
-        email = self.json_decoded_body.get('email', None)
-        if email:
-            set_doc['email'] = email
+        if birthday.strip() and len(birthday.strip()) == 4:
+            set_doc['birthday'] = birthday.strip()
         gender = self.json_decoded_body.get('gender', None)
-        if gender:
+        if gender and (gender in UserModel.GENDER):
             set_doc['gender'] = gender
         query = {
             '_id': self.current_user['_id']
@@ -161,7 +155,9 @@ class UserMeHandler(JsonHandler):
         document = {
             '$set': set_doc
         }
-        self.response['data'] = await UserModel.update(query, document)
+        await UserModel.update(query, document, False, False)
+        user = await UserModel.find_one({'_id': self.current_user['_id']}, fields=[('name'), ('mobile'), ('birthday'), ('gender'), ('image')])
+        self.response['data'] = user
         self.write_json()
 
     async def options(self, *args, **kwargs):

@@ -12,9 +12,11 @@ from services.mongodb import MongodbService
 from services.sms import NexmoService
 from services.iamport import IamportService
 from services.s3 import S3Service
+from services.cloudfront import CloudfrontService
 from services.slack import SlackService
-from services.mysql import MySQLService
+# from services.mysql import MySQLService
 from services.kakaotalk import KakaotalkService
+from services.lms import LmsService
 from services.config import ConfigService
 
 
@@ -37,12 +39,14 @@ def main():
         server.start(1)
         logger.info('api start up on Tornado listen %d' % config['application']['port'])
         MongodbService(config=config['mongodb'])
-        MySQLService(config=config['mysql'])
+        # MySQLService(config=config['mysql'])
         NexmoService(config=config['nexmo'])
         IamportService(config=config['iamport'])
         S3Service(config=config['aws'])
+        CloudfrontService(config=config['aws'])
         SlackService(config=config['slack'])
         KakaotalkService()
+        LmsService()
         ConfigService(config=config)
         ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:

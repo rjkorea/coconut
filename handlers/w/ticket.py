@@ -241,17 +241,121 @@ class TicketSendHandler(JsonHandler):
         ))
         await ticket_log.insert()
         if receive_user['mobile']['country_code'] == '82':
-            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('short_id')])
-            KakaotalkService().tmp007(
-                receive_user['mobile']['number'],
-                receive_user['name'],
-                self.current_user['name'],
-                content['name'],
-                str(len(ticket_oids)),
-                '%s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a')),
-                content['place']['name'],
-                content['short_id']
-            )
+            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['place']['name'],
+                    content['short_id']
+                )
+            else:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['band_place'],
+                    content['short_id']
+                )
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketTypesSendHandler(JsonHandler):
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        ticket_types = self.json_decoded_body.get('ticket_types', None)
+        if not ticket_types or not isinstance(ticket_types, list):
+            raise HTTPError(400, 'invalid ticket_types')
+        ticket_oids = list()
+        for tt in ticket_types:
+            if tt[1] > 100:
+                raise HTTPError(400, 'Maxium qty is 100 on system')
+            tickets = await TicketModel.find({'ticket_type_oid': ObjectId(tt[0]), 'receive_user_oid': self.current_user['_id'], 'status': TicketModel.Status.send.name}, fields=[('_id')], skip=0, limit=tt[1])
+            if tt[1] > len(tickets):
+                raise HTTPError(400, 'unavailable qty: %d' % tt[1])
+            for t in tickets:
+                ticket_oids.append(str(t['_id']))
+        for t_oid in ticket_oids:
+            ticket = await TicketModel.get_id(ObjectId(t_oid) ,fields=[('ticket_type_oid')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send')])
+            if 'disabled_send' in ticket_type and ticket_type['disabled_send']:
+                raise HTTPError(400, 'Cannot send ticket')
+        for t_oid in ticket_oids:
+            ticket = await TicketModel.find_one({'_id': ObjectId(t_oid)})
+            if ticket and ticket['receive_user_oid'] != self.current_user['_id']:
+                raise HTTPError(400, 'is not your ticket')
+        receive_user = self.json_decoded_body.get('receive_user', None)
+        if not receive_user or not isinstance(receive_user, dict):
+            raise HTTPError(400, 'invalid receive_user')
+        if receive_user['mobile']['country_code'] == '82' and not receive_user['mobile']['number'].startswith('010'):
+            raise HTTPError(400, 'invalid Korea mobile number')
+        receive_user = await create_user(receive_user)
+        if self.current_user['_id'] == receive_user['_id']:
+            raise HTTPError(400, 'cannot send to myself')
+        query = {'$or': []}
+        for t_oid in ticket_oids:
+            query['$or'].append({'_id': ObjectId(t_oid)})
+        document = {
+            '$set': {
+                'status': TicketModel.Status.send.name,
+                'send_user_oid': self.current_user['_id'],
+                'receive_user_oid': receive_user['_id'],
+                'updated_at': datetime.utcnow()
+            },
+            '$addToSet': {
+                'history_send_user_oids': self.current_user['_id']
+            }
+        }
+        self.response['data'] = await TicketModel.update(query, document, False, True)
+        toids = [ObjectId(oid) for oid in ticket_oids]
+        tm = await TicketModel.get_id(ObjectId(ticket_oids[0]))
+        ticket_log = TicketLogModel(raw_data=dict(
+            action=TicketLogModel.Status.send.name,
+            send_user_oid=self.current_user['_id'],
+            receive_user_oid=receive_user['_id'],
+            content_oid=tm['content_oid'],
+            ticket_oids=toids
+        ))
+        await ticket_log.insert()
+        if receive_user['mobile']['country_code'] == '82':
+            content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['place']['name'],
+                    content['short_id']
+                )
+            else:
+                KakaotalkService().tmp007(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    str(len(ticket_oids)),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    content['place']['name'],
+                    content['band_place'],
+                    content['short_id']
+                )
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -490,9 +594,12 @@ class TicketSendUserListHandler(JsonHandler):
                 return
         result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
         for res in result:
-            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile')])
+            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('last_name'), ('name'), ('mobile')])
             if receive_user and 'name' in receive_user:
-                res['name'] = receive_user['name']
+                if 'last_name' in receive_user:
+                    res['name'] = receive_user['last_name'] + receive_user['name']
+                else:
+                    res['name'] = receive_user['name']
                 res['mobile'] = receive_user['mobile']
             res.pop('receive_user_oid')
         send_user_dict = dict()
@@ -833,7 +940,6 @@ class TicketTypeListMeHandler(JsonHandler):
             raise HTTPError(400, 'invalid content_oid')
         now = datetime.utcnow()
         ticket_types = await TicketTypeModel.find({'content_oid': ObjectId(parsed_args['content_oid']), 'sales_date.end': {'$gte': now}, 'enabled': True}, fields=[('_id')], skip=0, limit=100)
-        # aggregate ticket type
         pipeline = [
             {
                 '$match': {
@@ -855,37 +961,19 @@ class TicketTypeListMeHandler(JsonHandler):
                 }
             }
         ]
-        aggs = await TicketModel.aggregate(pipeline, 50)
+        aggs = await TicketModel.aggregate(pipeline, 100)
         for a in aggs:
-            ticket_type = await TicketTypeModel.get_id(a['_id'])
+            ticket_type = await TicketTypeModel.get_id(a['_id'], fields=[('name'), ('desc'), ('sales_date'), ('price'), ('color'), ('fpfg'), ('content_oid')])
             a['name'] = ticket_type['name']
             a['desc'] = ticket_type['desc']
             a['sales_date'] = ticket_type['sales_date']
             a['price'] = ticket_type['price']
-            if 'color' in ticket_type:
-                a['color'] = ticket_type['color']
-            content = await ContentModel.get_id(ticket_type['content_oid'])
+            a['color'] = ticket_type['color']
+            content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name')])
             a['content'] = {
                 'name': content['name']
             }
-            query = {
-                '$and': [
-                    {'enabled': True},
-                    {'ticket_type_oid': ticket_type['_id']},
-                    {
-                        '$or': [
-                            {'status': TicketModel.Status.register.name},
-                            {'status': TicketModel.Status.pay.name},
-                            {'status': TicketModel.Status.use.name}
-                        ]
-                    }
-                ]
-            }
-            sales_count = await TicketModel.count(query)
-            a['sales'] = {
-                'count': sales_count,
-                'limit': ticket_type['fpfg']['limit']
-            }
+            a['fpfg'] = ticket_type['fpfg']
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
@@ -924,7 +1012,7 @@ class TicketTypeTicketListMeHandler(JsonHandler):
         self.write_json()
 
 
-class TicketMeCheckPopupHandler(JsonHandler):
+class TicketMeCheckRegisterHandler(JsonHandler):
     @user_auth_async
     @parse_argument([('content_oid', str, None)])
     async def get(self, *args, **kwargs):
@@ -934,27 +1022,18 @@ class TicketMeCheckPopupHandler(JsonHandler):
         q = {
             'content_oid': ObjectId(parsed_args['content_oid']),
             'enabled': True,
-            'receive_user_oid': self.current_user['_id']
+            'receive_user_oid': self.current_user['_id'],
+            '$or': [
+                { 'status': TicketModel.Status.register.name },
+                { 'status': TicketModel.Status.pay.name },
+                { 'status': TicketModel.Status.use.name }
+            ]
         }
         count = await TicketModel.count(query=q)
-        if count == 0:
-            self.response['data'] = { 'enabled': False }
+        if count > 0:
+            self.response['data'] = { 'enabled': True }
         else:
-            q = {
-                'content_oid': ObjectId(parsed_args['content_oid']),
-                'enabled': True,
-                'receive_user_oid': self.current_user['_id'],
-                '$or': [
-                    { 'status': TicketModel.Status.register.name },
-                    { 'status': TicketModel.Status.pay.name },
-                    { 'status': TicketModel.Status.use.name }
-                ]
-            }
-            count = await TicketModel.count(query=q)
-            if count > 0:
-                self.response['data'] = { 'enabled': False }
-            else:
-                self.response['data'] = { 'enabled': True }
+            self.response['data'] = { 'enabled': False }
         self.write_json()
 
     async def options(self, *args, **kwargs):

@@ -34,7 +34,7 @@ class KakaotalkService(Singleton):
         logging.info(res.json())
 
     @classmethod
-    def tmp007(cls, mobile, receive, send, content, qty, date, place, shortid):
+    def tmp007(cls, mobile, receive, send, content, qty, date, place, band_place, shortid):
         TMPL_007 = '[TKIT 티켓]\n%s님 안녕하세요.\n%s님에게 요청하신 TKIT 티켓이 도착하였습니다.\n\n■ 공연제목 : %s\n■ 매수 : %s장\n■ 공연날짜 : %s\n■ 공연장소 : %s\n■ 밴딩수령장소 : %s\n\n수령하신 티켓은 TKIT에서 확인 가능합니다.\n로그인후 등록을 해주세요'
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,7 +44,7 @@ class KakaotalkService(Singleton):
             'callback': '15999642',
             'phone': mobile,
             'template_code': '007',
-            'msg': TMPL_007 % (receive, send, content, qty, date, place, place),
+            'msg': TMPL_007 % (receive, send, content, qty, date, place, band_place),
             'btn_types': '웹링크',
             'btn_txts': 'TKIT확인하기',
             'btn_urls1': 'http://i.tkit.me/in/%s' % shortid

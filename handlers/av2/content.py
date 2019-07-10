@@ -12,6 +12,7 @@ from handlers.base import JsonHandler, MultipartFormdataHandler
 from models.content import ContentModel
 
 from services.s3 import S3Service
+from services.cloudfront import CloudfrontService
 from services.config import ConfigService
 from services.slack import SlackService
 
@@ -122,6 +123,8 @@ class ContentPostHandler(MultipartFormdataHandler):
             )
         if self.json_decoded_body.get('desc', None):
             doc['desc'] = self.json_decoded_body.get('desc')
+        if self.json_decoded_body.get('purchase_url', None):
+            doc['purchase_url'] = self.json_decoded_body.get('purchase_url')
         if self.json_decoded_body.get('staff_auth_code', None):
             doc['staff_auth_code'] = self.json_decoded_body.get('staff_auth_code')
         if comments_type:
@@ -278,10 +281,13 @@ class ContentHandler(JsonHandler):
         if comments_type not in ('preview', 'guestbook'):
             raise HTTPError(400, self.set_error(1, 'invalid comments_type (preview, guestbook)'))
         site_url = self.json_decoded_body.get('site_url', None)
+        purchase_url = self.json_decoded_body.get('purchase_url', None)
         video_url = self.json_decoded_body.get('video_url', None)
         notice_message = self.json_decoded_body.get('notice', None)
         desc = self.json_decoded_body.get('desc', None)
+        sms = self.json_decoded_body.get('sms', None)
         staff_auth_code = self.json_decoded_body.get('staff_auth_code', None)
+        band_place = self.json_decoded_body.get('band_place', None)
         comments_private = self.json_decoded_body.get('comments_private', False)
         if comments_private == 'true':
             comments_private = True
@@ -310,17 +316,22 @@ class ContentHandler(JsonHandler):
                 tel=host_tel
             ),
             site_url=site_url,
+            purchase_url=purchase_url,
             video_url=video_url,
             notice=dict(
                 enabled=True,
                 message=notice_message
             ),
             staff_auth_code=staff_auth_code,
+            band_place=band_place,
             comments=dict(
                 type=comments_type,
                 is_private=comments_private
             ),
             desc=desc,
+            sms=dict(
+                message=sms
+            ),
             updated_at=datetime.utcnow()
         )
         updated = await ContentModel.update({'_id': content['_id']}, {'$set': set_doc}, False, False)
@@ -383,6 +394,16 @@ class ContentImageMainHandler(MultipartFormdataHandler):
                 ]
             }
         )
+        CloudfrontService().client.create_invalidation(
+            DistributionId=config['aws']['cloudfront_distribution_id'],
+            InvalidationBatch={
+                'Paths': {
+                    'Quantity': 1,
+                    'Items': ['/{}'.format(key)]
+                },
+                'CallerReference': 'references-{}'.format(datetime.now())
+            }
+        )
         return 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId']), len(file[0]['body'])
 
     async def options(self, *args, **kwargs):
@@ -442,6 +463,16 @@ class ContentImageExtraHandler(MultipartFormdataHandler):
                         'PartNumber': 1
                     }
                 ]
+            }
+        )
+        CloudfrontService().client.create_invalidation(
+            DistributionId=config['aws']['cloudfront_distribution_id'],
+            InvalidationBatch={
+                'Paths': {
+                    'Quantity': 1,
+                    'Items': ['/{}'.format(key)]
+                },
+                'CallerReference': 'references-{}'.format(datetime.now())
             }
         )
         return 'https://%s/%s?versionId=%s' % (config['aws']['cloudfront'], key, response['VersionId']), len(file[0]['body'])

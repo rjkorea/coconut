@@ -7,9 +7,12 @@ from tornado.web import HTTPError
 
 from handlers.base import JsonHandler
 from models.content import ContentModel
+from models.ticket import TicketModel
 
 from common import hashers
 from common.decorators import parse_argument
+
+from common.decorators import user_auth_async
 
 
 class ContentHandler(JsonHandler):
@@ -46,6 +49,56 @@ class ContentListHandler(JsonHandler):
         result = await ContentModel.find(query=q, fields=[('name'), ('when'), ('place'), ('images')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class ContentListMeHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        pipeline = [
+            {
+                '$match': {
+                    'receive_user_oid': self.current_user['_id']
+                }
+            },
+            {
+                '$lookup': {
+                    "from" : "content",
+                    "localField" : "content_oid",
+                    "foreignField" : "_id",
+                    "as" : "content"
+                }
+            },
+            {
+                '$group': {
+                    '_id': {
+                        'content_oid': '$content_oid',
+                        'content_name': '$content.name',
+                        'content_when': '$content.when',
+                        'ticket_count': {
+                            '$sum': 1
+                        }
+                    }
+                }
+            }
+        ]
+        aggs = await TicketModel.aggregate(pipeline, 100)
+        contents = list()
+        for a in aggs:
+            if a['_id']['content_when'][0]['end'] > datetime.utcnow():
+                c = dict(
+                    _id=a['_id']['content_oid'],
+                    name=a['_id']['content_name'][0],
+                    ticket_count=a['_id']['ticket_count'],
+                    when_end=a['_id']['content_when'][0]['end']
+                )
+                contents.append(c)
+        self.response['data'] = contents
+        self.response['count'] = len(contents)
         self.write_json()
 
     async def options(self, *args, **kwargs):

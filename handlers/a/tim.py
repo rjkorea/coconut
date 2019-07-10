@@ -72,9 +72,9 @@ class MatrixTicketOrderHandler(JsonHandler):
         ]
         ticket_orders_stats = await TicketModel.aggregate(pipeline, parsed_args['size'])
         for tos in ticket_orders_stats:
-            tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile_number'), ('ticket_type_oid'), ('content_oid')])
+            tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile'), ('ticket_type_oid'), ('content_oid')])
             tos.pop('_id')
-            tos['ticket_type'] = await TicketTypeModel.get_id(tos['ticket_order']['ticket_type_oid'], fields=[('name'), ('desc')])
+            tos['ticket_type'] = await TicketTypeModel.get_id(tos['ticket_order']['ticket_type_oid'], fields=[('name'), ('desc'), ('price')])
             tos['content'] = await ContentModel.get_id(tos['ticket_order']['content_oid'], fields=[('name')])
         self.response['data'] = ticket_orders_stats
         self.write_json()

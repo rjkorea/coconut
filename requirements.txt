@@ -8,10 +8,10 @@ pymongo==3.6
 pytest==3.0.3
 pytz==2016.10
 tornado==4.4.2
-urllib3==1.19.1
+urllib3==1.24.3
 nexmo==1.4.0
 iamport-rest-client==0.6.0
-boto3==1.4.7
+boto3==1.9.174
 pyjwt==1.4.2
 slacker==0.12.0
 mysql-connector-python==8.0.16

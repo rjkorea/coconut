@@ -10,6 +10,7 @@ from models.base import BaseModel
 class UserModel(BaseModel):
     MONGO_COLLECTION = 'user'
     ROLE = ('user', 'broker')
+    GENDER = ('male', 'female', 'others')
 
     def __init__(self, *args, **kwargs):
         super(UserModel, self).__init__(*args, **kwargs)
@@ -87,6 +88,16 @@ class UserModel(BaseModel):
                 'key': 'terms',
                 'type': dict,
                 'default': (lambda: {'privacy': False, 'policy': False})
+            },
+            {
+                'key': 'memo',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'area',
+                'type': str,
+                'default': None
             },
         ])
         return specification
