@@ -150,19 +150,29 @@ class TicketOrderListHandler(JsonHandler):
             q['ticket_type_oid'] = ObjectId(parsed_args['ticket_type_oid'])
         if 'q' in parsed_args and parsed_args['q']:
             q['$or'] = [
-                {'name': {'$regex': parsed_args['q']}},
-                {'desc': {'$regex': parsed_args['q']}}
+                {'receiver.name': {'$regex': parsed_args['q']}},
+                {'receiver.mobile.number': {'$regex': parsed_args['q']}}
             ]
         count = await TicketOrderModel.count(query=q)
-        result = await TicketOrderModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
-        for res in result:
-            res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
-            res['admin'] = await AdminModel.get_id(res['admin_oid'])
-            res['content'] = await ContentModel.get_id(res['content_oid'])
-            res.pop('ticket_type_oid')
-            res.pop('admin_oid')
-            res.pop('content_oid')
-        self.response['data'] = result
+        orders = await TicketOrderModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'])
+        for o in orders:
+            # res['ticket_type'] = await TicketTypeModel.get_id(res['ticket_type_oid'])
+            # res['admin'] = await AdminModel.get_id(res['admin_oid'])
+            # res['content'] = await ContentModel.get_id(res['content_oid'])
+            q = {
+                'ticket_order_oid': o['_id'],
+                '$or': [
+                    {'status': TicketModel.Status.register.name},
+                    {'status': TicketModel.Status.pay.name},
+                    {'status': TicketModel.Status.use.name},
+                    {'status': TicketModel.Status.cancel.name}
+                ]
+            }
+            o['active_ticket_count'] = await TicketModel.count(q)
+            # res.pop('ticket_type_oid')
+            # res.pop('admin_oid')
+            # res.pop('content_oid')
+        self.response['data'] = orders
         self.response['count'] = count
         self.write_json()
 
