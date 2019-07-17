@@ -383,6 +383,7 @@ class TicketOrderCsvHandler(JsonHandler):
         users = self.json_decoded_body.get('users', None)
         if not users or not isinstance(users, list):
             raise HTTPError(400, self.set_error(3, 'invalid users'))
+        send_kakaotalk = self.json_decoded_body.get('send_kakaotalk', False)
         content = await ContentModel.get_id(ticket_type['content_oid'], fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
         now = datetime.utcnow()
         for i, u in enumerate(users):
@@ -411,30 +412,31 @@ class TicketOrderCsvHandler(JsonHandler):
             }
             ticket_order = TicketOrderModel(raw_data=ticket_order_doc)
             ticket_order_oid = await ticket_order.insert()
-            if 'band_place' not in content or not content['band_place']:
-                KakaotalkService().tmp007(
-                    u['mobile_number'],
-                    u['name'],
-                    self.current_user['name'],
-                    content['name'],
-                    u['qty'],
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['place']['name'],
-                    content['short_id']
-                )
-            else:
-                KakaotalkService().tmp007(
-                    u['mobile_number'],
-                    u['name'],
-                    self.current_user['name'],
-                    content['name'],
-                    u['qty'],
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['band_place'],
-                    content['short_id']
-                )
+            if send_kakaotalk:
+                if 'band_place' not in content or not content['band_place']:
+                    KakaotalkService().tmp007(
+                        u['mobile_number'],
+                        u['name'],
+                        self.current_user['name'],
+                        content['name'],
+                        u['qty'],
+                        '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
+                        content['place']['name'],
+                        content['place']['name'],
+                        content['short_id']
+                    )
+                else:
+                    KakaotalkService().tmp007(
+                        u['mobile_number'],
+                        u['name'],
+                        self.current_user['name'],
+                        content['name'],
+                        u['qty'],
+                        '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
+                        content['place']['name'],
+                        content['band_place'],
+                        content['short_id']
+                    )
             for t in range(u['qty']):
                 ticket_doc = {
                     'type': 'network',
