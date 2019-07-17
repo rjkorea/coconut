@@ -466,7 +466,7 @@ class TicketHandler(JsonHandler):
         if 'history_send_user_oids' in ticket:
             ticket['history_send_users'] = list()
             for user_oid in ticket['history_send_user_oids']:
-                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile')])
+                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile'), ('last_name')])
                 ticket['history_send_users'].append(user)
             ticket.pop('history_send_user_oids')
         self.response['data'] = ticket
