@@ -249,7 +249,7 @@ class TicketSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['place']['name'],
                     content['short_id']
@@ -261,7 +261,7 @@ class TicketSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']
@@ -339,7 +339,7 @@ class TicketTypesSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['place']['name'],
                     content['short_id']
@@ -351,7 +351,7 @@ class TicketTypesSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']

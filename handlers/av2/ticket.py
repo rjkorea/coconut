@@ -343,7 +343,7 @@ class TicketOrderHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     qty,
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['place']['name'],
                     content['short_id']
@@ -355,7 +355,7 @@ class TicketOrderHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     qty,
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']
@@ -418,7 +418,7 @@ class TicketOrderCsvHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     u['qty'],
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['place']['name'],
                     content['short_id']
@@ -430,7 +430,7 @@ class TicketOrderCsvHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     u['qty'],
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']
