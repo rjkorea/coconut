@@ -240,6 +240,16 @@ class TicketSendHandler(JsonHandler):
             ticket_oids=toids
         ))
         await ticket_log.insert()
+        user_send_history = await UserSendHistoryModel.find_one({'user_oid': self.current_user['_id'], 'mobile.country_code': receive_user['mobile']['country_code'], 'mobile.number': receive_user['mobile']['number']})
+        if user_send_history:
+            await UserSendHistoryModel.update({'_id': user_send_history['_id']}, {'$set': {'updated_at': datetime.utcnow()}}, False, False)
+        else:
+            user_send_history = UserSendHistoryModel(raw_data=dict(
+                user_oid=self.current_user['_id'],
+                name=receive_user['name'],
+                mobile=receive_user['mobile']
+            ))
+            await user_send_history.insert()
         if receive_user['mobile']['country_code'] == '82':
             content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
             if 'band_place' not in content or not content['band_place']:
@@ -330,6 +340,17 @@ class TicketTypesSendHandler(JsonHandler):
             ticket_oids=toids
         ))
         await ticket_log.insert()
+        user_send_history = await UserSendHistoryModel.find_one({'user_oid': self.current_user['_id'], 'mobile.country_code': receive_user['mobile']['country_code'], 'mobile.number': receive_user['mobile']['number']})
+        if user_send_history:
+            await UserSendHistoryModel.update({'_id': user_send_history['_id']}, {'$set': {'updated_at': datetime.utcnow()}}, False, False)
+        else:
+            user_send_history = UserSendHistoryModel(raw_data=dict(
+                user_oid=self.current_user['_id'],
+                name=receive_user['name'],
+                mobile=receive_user['mobile']
+            ))
+            await user_send_history.insert()
+
         if receive_user['mobile']['country_code'] == '82':
             content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
             if 'band_place' not in content or not content['band_place']:
