@@ -291,8 +291,8 @@ class TicketTypesSendHandler(JsonHandler):
             raise HTTPError(400, 'invalid ticket_types')
         ticket_oids = list()
         for tt in ticket_types:
-            if tt[1] > 100:
-                raise HTTPError(400, 'Maxium qty is 100 on system')
+            if tt[1] > 200:
+                raise HTTPError(400, 'Maxium qty is 200 on system')
             tickets = await TicketModel.find({'ticket_type_oid': ObjectId(tt[0]), 'receive_user_oid': self.current_user['_id'], 'status': TicketModel.Status.send.name}, fields=[('_id')], skip=0, limit=tt[1])
             if tt[1] > len(tickets):
                 raise HTTPError(400, 'unavailable qty: %d' % tt[1])
