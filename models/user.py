@@ -131,3 +131,37 @@ class UserAutologinModel(BaseModel):
             },
         ])
         return specification
+
+
+class UserSendHistoryModel(BaseModel):
+    MONGO_COLLECTION = 'user_send_history'
+
+    def __init__(self, *args, **kwargs):
+        super(UserSendHistoryModel, self).__init__(*args, **kwargs)
+
+    @property
+    def specification(self):
+        specification = super(UserSendHistoryModel, self).specification
+        specification.extend([
+            {
+                'key': 'user_oid',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'name',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'mobile',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'enabled',
+                'type': bool,
+                'default': (lambda: True)
+            },
+        ])
+        return specification

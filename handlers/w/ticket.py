@@ -9,7 +9,7 @@ from common import hashers
 from common.decorators import user_auth_async, parse_argument
 
 from handlers.base import JsonHandler
-from models.user import UserModel
+from models.user import UserModel, UserSendHistoryModel
 from models.content import ContentModel
 from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel, TicketLogModel
 
@@ -240,6 +240,16 @@ class TicketSendHandler(JsonHandler):
             ticket_oids=toids
         ))
         await ticket_log.insert()
+        user_send_history = await UserSendHistoryModel.find_one({'user_oid': self.current_user['_id'], 'mobile.country_code': receive_user['mobile']['country_code'], 'mobile.number': receive_user['mobile']['number']})
+        if user_send_history:
+            await UserSendHistoryModel.update({'_id': user_send_history['_id']}, {'$set': {'updated_at': datetime.utcnow()}}, False, False)
+        else:
+            user_send_history = UserSendHistoryModel(raw_data=dict(
+                user_oid=self.current_user['_id'],
+                name=receive_user['name'],
+                mobile=receive_user['mobile']
+            ))
+            await user_send_history.insert()
         if receive_user['mobile']['country_code'] == '82':
             content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
             if 'band_place' not in content or not content['band_place']:
@@ -249,7 +259,7 @@ class TicketSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['place']['name'],
                     content['short_id']
@@ -261,7 +271,7 @@ class TicketSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']
@@ -281,8 +291,8 @@ class TicketTypesSendHandler(JsonHandler):
             raise HTTPError(400, 'invalid ticket_types')
         ticket_oids = list()
         for tt in ticket_types:
-            if tt[1] > 100:
-                raise HTTPError(400, 'Maxium qty is 100 on system')
+            if tt[1] > 200:
+                raise HTTPError(400, 'Maxium qty is 200 on system')
             tickets = await TicketModel.find({'ticket_type_oid': ObjectId(tt[0]), 'receive_user_oid': self.current_user['_id'], 'status': TicketModel.Status.send.name}, fields=[('_id')], skip=0, limit=tt[1])
             if tt[1] > len(tickets):
                 raise HTTPError(400, 'unavailable qty: %d' % tt[1])
@@ -330,6 +340,17 @@ class TicketTypesSendHandler(JsonHandler):
             ticket_oids=toids
         ))
         await ticket_log.insert()
+        user_send_history = await UserSendHistoryModel.find_one({'user_oid': self.current_user['_id'], 'mobile.country_code': receive_user['mobile']['country_code'], 'mobile.number': receive_user['mobile']['number']})
+        if user_send_history:
+            await UserSendHistoryModel.update({'_id': user_send_history['_id']}, {'$set': {'updated_at': datetime.utcnow()}}, False, False)
+        else:
+            user_send_history = UserSendHistoryModel(raw_data=dict(
+                user_oid=self.current_user['_id'],
+                name=receive_user['name'],
+                mobile=receive_user['mobile']
+            ))
+            await user_send_history.insert()
+
         if receive_user['mobile']['country_code'] == '82':
             content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
             if 'band_place' not in content or not content['band_place']:
@@ -339,7 +360,7 @@ class TicketTypesSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['place']['name'],
                     content['short_id']
@@ -351,7 +372,7 @@ class TicketTypesSendHandler(JsonHandler):
                     self.current_user['name'],
                     content['name'],
                     str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a')),
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
                     content['place']['name'],
                     content['band_place'],
                     content['short_id']
@@ -466,7 +487,7 @@ class TicketHandler(JsonHandler):
         if 'history_send_user_oids' in ticket:
             ticket['history_send_users'] = list()
             for user_oid in ticket['history_send_user_oids']:
-                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile')])
+                user = await UserModel.get_id(user_oid, fields=[('name'), ('mobile'), ('last_name')])
                 ticket['history_send_users'].append(user)
             ticket.pop('history_send_user_oids')
         self.response['data'] = ticket
@@ -571,49 +592,21 @@ class TicketSerialNumberRegisterHandler(JsonHandler):
 
 class TicketSendUserListHandler(JsonHandler):
     @user_auth_async
-    @parse_argument([('q', str, None)])
+    @parse_argument([('q', str, None), ('start', int, 0), ('size', int, 20)])
     async def get(self, *args, **kwargs):
         q = {
-            '$and': [
-                {'send_user_oid': self.current_user['_id']}
-            ]
+            'user_oid': self.current_user['_id'],
+            'enabled': True
         }
         parsed_args = kwargs.get('parsed_args')
         if 'q' in parsed_args and parsed_args['q']:
-            user_q = {
-                'name': {'$regex': parsed_args['q']},
+            q['name'] = {
+                '$regex': parsed_args['q']
             }
-            users = await UserModel.find(query=user_q, limit=50)
-            if users:
-                q['$and'].append({'$or': []})
-                for user in users:
-                    q['$and'][1]['$or'].append({'receive_user_oid': user['_id']})
-            else:
-                self.response['data'] = list()
-                self.write_json()
-                return
-        result = await TicketLogModel.find(query=q, sort=[('created_at', -1)], fields=[('receive_user_oid'), ('created_at')], skip=0, limit=100)
-        for res in result:
-            receive_user = await UserModel.get_id(res['receive_user_oid'], fields=[('last_name'), ('name'), ('mobile')])
-            if receive_user and 'name' in receive_user:
-                if 'last_name' in receive_user:
-                    res['name'] = receive_user['last_name'] + receive_user['name']
-                else:
-                    res['name'] = receive_user['name']
-                res['mobile'] = receive_user['mobile']
-            res.pop('receive_user_oid')
-        send_user_dict = dict()
-        for r in result:
-            if 'mobile' in r:
-                send_user_dict['%s%s' % (r['mobile']['country_code'], r['mobile']['number'])] = {
-                    '_id': r['_id'],
-                    'name': r['name'],
-                    'created_at': r['created_at']
-                }
-        send_user_list = list()
-        for k, v in send_user_dict.items():
-            send_user_list.append({'mobile_number': k, 'name': v['name'], 'created_at': v['created_at'], '_id': v['_id']})
-        self.response['data'] = send_user_list[:20]
+        count = await UserSendHistoryModel.count(query=q)
+        history = await UserSendHistoryModel.find(query=q, fields={'mobile': True, 'name': True, 'updated_at': True}, sort=[('updated_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
+        self.response['count'] = count
+        self.response['data'] = history
         self.write_json()
 
     async def options(self, *args, **kwargs):
