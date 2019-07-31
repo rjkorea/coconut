@@ -28,3 +28,4 @@ class LmsService(Singleton):
         res = requests.post(cls.APISTORE_LMS_URL, data=payload, headers=headers)
         logging.info(res)
         logging.info(res.json())
+        return res.json()

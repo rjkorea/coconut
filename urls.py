@@ -99,6 +99,10 @@ url_patterns = [
     (r'/a/v2/tickets/?', av2.ticket.TicketListHandler),
     (r'/a/v2/ticket/history?', av2.ticket.TicketHistoryListHandler),
     (r'/a/v2/cs/tickets?', av2.cs.TicketListHandler),
+    (r'/a/v2/targets/?', av2.target.TargetListHandler),
+    (r'/a/v2/target/count?', av2.target.TargetHandler),
+    (r'/a/v2/target/send?', av2.target.TargetSendHandler),
+
 
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
