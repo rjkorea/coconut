@@ -7,6 +7,8 @@ from tornado.web import HTTPError
 from handlers.base import JsonHandler
 from models.country import CountryModel
 
+import requests
+
 
 class CountryListHandler(JsonHandler):
     @parse_argument([('start', int, 0), ('size', int, 10), ('q', str, None)])
@@ -26,4 +28,22 @@ class CountryListHandler(JsonHandler):
         result = await CountryModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'], sort=[('seq', 1)])
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+
+class ExchangeRateHandler(JsonHandler):
+    async def get(self, *args, **kwargs):
+        url = 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD'
+        res = requests.get(url)
+        krwusd = res.json()[0]
+        self.response['data'] = {
+            'updated_at': krwusd['modifiedAt'],
+            'currency': {
+                'name': krwusd['currencyName'],
+                'code': krwusd['currencyCode']
+            },
+            'provider': krwusd['provider'],
+            'base_price': krwusd['basePrice'],
+            'name': krwusd['name']
+        }
         self.write_json()

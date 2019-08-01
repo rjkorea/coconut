@@ -162,7 +162,8 @@ url_patterns = [
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register/?', w.ticket.TicketSerialNumberRegisterHandler),
-
+    (r'/w/exchange/rate/krwusd/?', w.util.ExchangeRateHandler),
+    
     # /w/pc
     (r'/w/pc/contents/?', wpc.content.ContentListHandler),
     (r'/w/pc/content/(?P<_id>[^\/]+)/?', wpc.content.ContentHandler),
