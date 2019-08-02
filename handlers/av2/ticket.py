@@ -53,8 +53,9 @@ class TicketTypeHandler(JsonHandler):
                 price=ticket_type['price'],
                 color=ticket_type['color'],
                 fpfg=ticket_type['fpfg'],
-                duplicated_registration=ticket_type['duplicated_registration'],
-                disabled_send=ticket_type['disabled_send']
+                duplicated_registration=False,
+                disabled_send=False,
+                show_price=True
             )
             ttm = TicketTypeModel(raw_data=doc)
             res.append(await ttm.insert())
@@ -106,7 +107,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid id'))
-        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid'), ('duplicated_registration'), ('disabled_send')])
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid'), ('duplicated_registration'), ('disabled_send'), ('show_price')])
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         query = {
@@ -143,6 +144,8 @@ class TicketTypeHandler(JsonHandler):
         sales_date = self.json_decoded_body.get('sales_date', None)
         duplicated_registration = self.json_decoded_body.get('duplicated_registration', False)
         disabled_send = self.json_decoded_body.get('disabled_send', False)
+        show_price = self.json_decoded_body.get('show_price', True)
+        enabled_desc = self.json_decoded_body.get('enabled_desc', True)
         try:
             sales_date['start'] = datetime.strptime(sales_date['start'], '%Y-%m-%dT%H:%M:%S')
             sales_date['end'] = datetime.strptime(sales_date['end'], '%Y-%m-%dT%H:%M:%S')
@@ -154,6 +157,8 @@ class TicketTypeHandler(JsonHandler):
             'sales_date': sales_date,
             'duplicated_registration': duplicated_registration,
             'disabled_send': disabled_send,
+            'show_price': show_price,
+            'desc.enabled': enabled_desc,
             'updated_at': datetime.utcnow()
         }
         query = {
