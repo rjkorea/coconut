@@ -956,7 +956,7 @@ class TicketTypeListMeHandler(JsonHandler):
         ]
         aggs = await TicketModel.aggregate(pipeline, 100)
         for a in aggs:
-            ticket_type = await TicketTypeModel.get_id(a['_id'], fields=[('name'), ('desc'), ('sales_date'), ('price'), ('color'), ('fpfg'), ('content_oid')])
+            ticket_type = await TicketTypeModel.get_id(a['_id'], fields=[('name'), ('desc'), ('sales_date'), ('price'), ('color'), ('fpfg'), ('content_oid'), ('show_price')])
             a['name'] = ticket_type['name']
             a['desc'] = ticket_type['desc']
             a['sales_date'] = ticket_type['sales_date']
@@ -967,6 +967,7 @@ class TicketTypeListMeHandler(JsonHandler):
                 'name': content['name']
             }
             a['fpfg'] = ticket_type['fpfg']
+            a['show_price'] = ticket_type['show_price']
         self.response['data'] = aggs
         self.response['count'] = len(aggs)
         self.write_json()
