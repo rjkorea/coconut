@@ -99,6 +99,10 @@ url_patterns = [
     (r'/a/v2/tickets/?', av2.ticket.TicketListHandler),
     (r'/a/v2/ticket/history?', av2.ticket.TicketHistoryListHandler),
     (r'/a/v2/cs/tickets?', av2.cs.TicketListHandler),
+    (r'/a/v2/targets/?', av2.target.TargetListHandler),
+    (r'/a/v2/target/count?', av2.target.TargetHandler),
+    (r'/a/v2/target/send?', av2.target.TargetSendHandler),
+
 
     # legacy api for admin
     (r'/a/invitation/?', a.invitation.InvitationPostHandler),
@@ -158,7 +162,8 @@ url_patterns = [
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register/?', w.ticket.TicketSerialNumberRegisterHandler),
-
+    (r'/w/exchange/rate/krwusd/?', w.util.ExchangeRateHandler),
+    
     # /w/pc
     (r'/w/pc/contents/?', wpc.content.ContentListHandler),
     (r'/w/pc/content/(?P<_id>[^\/]+)/?', wpc.content.ContentHandler),

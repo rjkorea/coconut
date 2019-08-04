@@ -63,6 +63,11 @@ class TicketTypeModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'show_price',
+                'type': bool,
+                'default': (lambda: True)
+            },
+            {
                 'key': 'color',
                 'type': dict,
                 'default': (lambda: {'name': 'tkit-mint', 'value': '#62aab8'})
