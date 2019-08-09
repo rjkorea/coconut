@@ -89,6 +89,8 @@ class TicketRegisterHandler(JsonHandler):
         ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
         if not ticket:
             raise HTTPError(400, 'not exist ticket')
+        if ticket['receive_user_oid'] != self.current_user['_id']:
+            raise HTTPError(400, 'this is not your ticket')
         if ticket['status'] == TicketModel.Status.register.name:
             raise HTTPError(400, 'registered ticket can\'t register')
         if ticket['status'] == TicketModel.Status.use.name:
