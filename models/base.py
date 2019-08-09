@@ -24,7 +24,7 @@ class BaseModel(object):
             {
                 'key': 'created_at',
                 'type': datetime,
-                'default':datetime.utcnow
+                'default': datetime.utcnow
             },
             {
                 'key': 'updated_at',
