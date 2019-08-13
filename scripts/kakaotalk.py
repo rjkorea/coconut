@@ -231,8 +231,43 @@ def tmp005csv(csvfile):
         click.secho('check parameters <python kakaotalk.py tmp007csv --help>', fg='red')
 
 
+@click.group()
+def tmp17():
+    pass
 
-cli = click.CommandCollection(sources=[tmp3, tmp3csv, tmp7, tmp7csv, tmp5, tmp5csv])
+@tmp17.command()
+@click.option('-m', '--mobile', default=None, help='mobile number only South Korea')
+@click.option('-r', '--receive', default=None, help='receive user name')
+@click.option('-s', '--send', default=None, help='send user name')
+@click.option('-c', '--content', default=None, help='content name')
+@click.option('-d', '--date', default=None, help='date of content')
+@click.option('-p', '--place', default=None, help='place of content')
+@click.option('-t', '--ticket', default=None, help='name of ticket')
+@click.confirmation_option(help='Are you sure to send message by kakaotalk?')
+def tmp017(mobile, receive, send, content, date, place, ticket):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mobile: %s' % (mobile), fg='green')
+    if mobile and receive and send and content and date and place and ticket:
+        TMPL_017 = '[세상의 모든 즐거움 - 티킷]\n%s님 안녕하세요.\n%s님으로 부터 받은 TKIT이 취소되었습니다!\n\n\n■ 행사이름 : %s\n■ 행사일시 : %s\n■ 행사장소 : %s\n■ 티켓타입 : %s\n\n'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'x-waple-authorization': KEY
+        }
+        payload = {
+            'callback': '15999642',
+            'phone': mobile,
+            'template_code': '017',
+            'msg': TMPL_017 % (receive, send, content, date, place, ticket)
+        }
+        res = requests.post(APISTORE_KAKAO_URL, data=payload, headers=headers)
+        pprint(res)
+        pprint(res.json())
+    else:
+        click.secho('check parameters <python kakaotalk.py tmp005 --help>', fg='red')
+
+
+
+cli = click.CommandCollection(sources=[tmp3, tmp3csv, tmp7, tmp7csv, tmp5, tmp5csv, tmp17])
 
 
 if __name__ == '__main__':
