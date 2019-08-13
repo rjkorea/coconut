@@ -692,9 +692,31 @@ class TicketLogReturnHandler(JsonHandler):
             ticket_oids=ticket_log['ticket_oids']
         ))
         await return_ticket_log.insert()
-
-        # TODO 카카오 알림톡 회수 템플릿
-
+        receive_user = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('mobile'), ('name')])
+        if receive_user['mobile']['country_code'] == '82':
+            content = await ContentModel.find_one({'_id': ticket_log['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
+            ticket = await TicketModel.get_id(ticket_log['ticket_oids'][0], fields=[('ticket_type_oid')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('name')])
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp017(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
+                    content['place']['name'],
+                    ticket_type['name']
+                )
+            else:
+                KakaotalkService().tmp017(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
+                    content['band_place'],
+                    ticket_type['name']
+                )
         self.response['data'] = 'OK'
         self.write_json()
 
