@@ -203,6 +203,7 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
                          '$or': [
                              {'status': 'send'},
                              {'status': 'register'},
+                             {'status': 'pay'},
                              {'status': 'use'},
                              {'status': 'cancel'}
                          ]

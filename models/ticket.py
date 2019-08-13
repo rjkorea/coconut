@@ -238,7 +238,7 @@ class TicketModel(BaseModel):
 
 class TicketLogModel(BaseModel):
     MONGO_COLLECTION = 'ticket_log'
-    Status = Enum('Status', 'pend send register pay use cancel')
+    Status = Enum('Status', 'pend send register pay use cancel return')
 
     def __init__(self, *args, **kwargs):
         super(TicketLogModel, self).__init__(*args, **kwargs)
@@ -277,6 +277,16 @@ class TicketLogModel(BaseModel):
                 'type': list,
                 'default': None
             },
+            {
+                'key': 'status',
+                'type': str,
+                'default': None
+            },
+            {
+                'key': 'returned_at',
+                'type': datetime,
+                'default': None
+            }
         ])
         return specification
 

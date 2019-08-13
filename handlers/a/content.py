@@ -61,7 +61,7 @@ class ContentListHandler(JsonHandler):
             search_q = {'$or': [
                 {'name': {'$regex': parsed_args['q']}},
                 {'desc': {'$regex': parsed_args['q']}},
-                {'place': {'$regex': parsed_args['q']}},
+                {'place.name': {'$regex': parsed_args['q']}},
                 {'genre': {'$regex': parsed_args['q']}},
                 {'lineup': {'$regex': parsed_args['q']}}
             ]}

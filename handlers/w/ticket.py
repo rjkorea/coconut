@@ -89,6 +89,8 @@ class TicketRegisterHandler(JsonHandler):
         ticket = await TicketModel.find_one({'_id': ObjectId(_id)})
         if not ticket:
             raise HTTPError(400, 'not exist ticket')
+        if ticket['receive_user_oid'] != self.current_user['_id']:
+            raise HTTPError(400, 'this is not your ticket')
         if ticket['status'] == TicketModel.Status.register.name:
             raise HTTPError(400, 'registered ticket can\'t register')
         if ticket['status'] == TicketModel.Status.use.name:
@@ -620,7 +622,8 @@ class TicketLogsHandler(JsonHandler):
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         q = {
-            'send_user_oid': self.current_user['_id']
+            'send_user_oid': self.current_user['_id'],
+            'action': TicketLogModel.Status.send.name
         }
         if parsed_args['content_oid']:
             q['content_oid'] = ObjectId(parsed_args['content_oid'])
@@ -632,13 +635,89 @@ class TicketLogsHandler(JsonHandler):
             res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('last_name'), ('mobile')])
             res.pop('receive_user_oid')
             res['tickets'] = list()
+            returnable_ticket_count = 0
             for oid in res['ticket_oids']:
-                tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid')])
+                tm = await TicketModel.get_id(oid, fields=[('ticket_type_oid'), ('receive_user_oid'), ('status')])
+                if tm['receive_user_oid'] == res['receive_user']['_id'] and tm['status'] == TicketModel.Status.send.name:
+                    returnable_ticket_count = returnable_ticket_count + 1
                 ttm = await TicketTypeModel.get_id(tm['ticket_type_oid'], fields=[('name'), ('desc')])
                 res['tickets'].append(ttm)
             res.pop('ticket_oids')
+            res['returnable_ticket_count'] = returnable_ticket_count
         self.response['data'] = result
         self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class TicketLogReturnHandler(JsonHandler):
+    @user_auth_async
+    async def put(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        if not _id or len(_id) != 24:
+            raise HTTPError(400, 'invalid ticket_log_oid')
+        ticket_log = await TicketLogModel.get_id(ObjectId(_id))
+        if not ticket_log:
+            raise HTTPError(400, 'not exist ticket_log')
+        if ticket_log['send_user_oid'] != self.current_user['_id']:
+            raise HTTPError(400, 'this is not yours ticket log')
+        for toid in ticket_log['ticket_oids']:
+            tm = await TicketModel.get_id(toid, fields=[('receive_user_oid'), ('status')])
+            if tm['receive_user_oid'] != ticket_log['receive_user_oid'] or tm['status'] != TicketModel.Status.send.name:
+                raise HTTPError(400, 'already used ticket')
+        q = {'$or': []}
+        for t_oid in ticket_log['ticket_oids']:
+            q['$or'].append({'_id': ObjectId(t_oid)})
+        doc = {
+            '$set': {
+                'status': TicketModel.Status.send.name,
+                'send_user_oid': ticket_log['receive_user_oid'],
+                'receive_user_oid': ticket_log['send_user_oid'],
+                'updated_at': datetime.utcnow()
+            },
+            '$addToSet': {
+                'history_send_user_oids': ticket_log['receive_user_oid']
+            }
+        }
+        await TicketModel.update(q, doc, False, True)
+        await TicketLogModel.update({'_id': ticket_log['_id']}, {'$set': {'status': 'return', 'returned_at': datetime.utcnow()}}, False, False)
+        return_ticket_log = TicketLogModel(raw_data=dict(
+            action='return',
+            send_user_oid=ticket_log['receive_user_oid'],
+            receive_user_oid=ticket_log['send_user_oid'],
+            content_oid=ticket_log['content_oid'],
+            ticket_oids=ticket_log['ticket_oids']
+        ))
+        await return_ticket_log.insert()
+        receive_user = await UserModel.get_id(ticket_log['receive_user_oid'], fields=[('mobile'), ('name')])
+        if receive_user['mobile']['country_code'] == '82':
+            content = await ContentModel.find_one({'_id': ticket_log['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
+            ticket = await TicketModel.get_id(ticket_log['ticket_oids'][0], fields=[('ticket_type_oid')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('name')])
+            if 'band_place' not in content or not content['band_place']:
+                KakaotalkService().tmp017(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
+                    content['place']['name'],
+                    ticket_type['name']
+                )
+            else:
+                KakaotalkService().tmp017(
+                    receive_user['mobile']['number'],
+                    receive_user['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
+                    content['band_place'],
+                    ticket_type['name']
+                )
+        self.response['data'] = 'OK'
         self.write_json()
 
     async def options(self, *args, **kwargs):
