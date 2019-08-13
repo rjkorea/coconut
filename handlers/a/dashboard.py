@@ -28,37 +28,15 @@ class DashboardHandler(JsonHandler):
             'total_user_count': total_user_count,
             'total_content_count': total_content_count,
             'total_ticket_count': total_ticket_count,
-            'ticket_count': {
-                'pend': 0,
-                'send': 0,
-                'register': 0,
-                'pay': 0,
-                'use': 0,
-                'cancel': 0
-            },
             'gender_count': {
                 'male': 0,
                 'female': 0
             },
             'monthly_new_users': [],
             'monthly_ticket_viral': [],
-            'monthly_active_users': []
+            'monthly_active_users': [],
+            'last_7days_new_users': []
         }
-        # aggregate tickets
-        pipeline = [
-            {
-                '$group': {
-                    '_id': '$status',
-                    'cnt': {
-                        '$sum': 1
-                    }
-                }
-            }
-        ]
-        res = await TicketModel.aggregate(pipeline, 10)
-        for r in res:
-            self.response['data']['ticket_count'][r['_id']] = r['cnt']
-
         # aggregate genders
         pipeline = [
             {
@@ -73,7 +51,7 @@ class DashboardHandler(JsonHandler):
         res = await UserModel.aggregate(pipeline, 10)
         for r in res:
             self.response['data']['gender_count'][r['_id']] = r['count']
-        
+
         # aggregate monthly new users
         pipeline = [
             {
@@ -98,6 +76,31 @@ class DashboardHandler(JsonHandler):
         res = await UserModel.aggregate(pipeline, 12)
         for m in res:
             self.response['data']['monthly_new_users'].insert(0, m)
+
+        # aggregate last 7days new users
+        pipeline = [
+            {
+                '$group': {
+                    '_id': {
+                        '$dateToString': {
+                            'format': '%Y-%m-%d',
+                            'date': '$created_at'
+                        }
+                    },
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            },
+            {
+                '$sort': {
+                    '_id': -1
+                }
+            }
+        ]
+        res = await UserModel.aggregate(pipeline, 7)
+        for m in res:
+            self.response['data']['last_7days_new_users'].insert(0, m)
 
         # aggregate monthly ticket viral
         pipeline = [
@@ -209,7 +212,7 @@ class DashboardContentHandler(JsonHandler):
         res = await TicketModel.aggregate(pipeline, 10)
         for r in res:
             self.response['data']['ticket_count'][r['_id']] = r['cnt']
-        
+
         # count revenue
         pipeline = [
             {
