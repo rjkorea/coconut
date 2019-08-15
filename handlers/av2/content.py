@@ -161,7 +161,7 @@ class ContentPostHandler(MultipartFormdataHandler):
                 'mrkdwn_in': ['text']
             }
         ]
-        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
         self.response['data'] = {
             'content_oid': content_oid
         }

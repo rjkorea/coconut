@@ -69,7 +69,7 @@ class TicketTypeHandler(JsonHandler):
                 'mrkdwn_in': ['text']
             }
         ]
-        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
         self.response['data'] = res
         self.write_json()
 
@@ -339,7 +339,7 @@ class TicketOrderHandler(JsonHandler):
                 'mrkdwn_in': ['text']
             }
         ]
-        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
         if mobile['country_code'] == '82':
             if 'band_place' not in content or not content['band_place']:
                 KakaotalkService().tmp007(
