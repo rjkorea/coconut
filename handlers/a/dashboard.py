@@ -7,7 +7,7 @@ from tornado.web import HTTPError
 from common.decorators import admin_auth_async
 
 from handlers.base import JsonHandler
-from models.company import CompanyModel
+from models.admin import AdminModel
 from models.user import UserModel
 from models.content import ContentModel
 from models.ticket import TicketModel, TicketTypeModel, TicketOrderModel, TicketLogModel
@@ -19,15 +19,15 @@ from services.mongodb import MongodbService
 class DashboardHandler(JsonHandler):
     @admin_auth_async
     async def get(self, *args, **kwargs):
-        total_company_count = await CompanyModel.count({'enabled': True})
+        total_host_count = await AdminModel.count({'enabled': True})
         total_user_count = await UserModel.count({})
         total_content_count = await ContentModel.count({'enabled': True})
-        total_ticket_count = await TicketModel.count({'enabled': True})
+        total_ticket_use_count = await TicketModel.count({'status': TicketModel.Status.use.name, 'enabled': True})
         self.response['data'] = {
-            'total_company_count': total_company_count,
+            'total_host_count': total_host_count,
             'total_user_count': total_user_count,
             'total_content_count': total_content_count,
-            'total_ticket_count': total_ticket_count,
+            'total_ticket_use_count': total_ticket_use_count,
             'gender_count': {
                 'male': 0,
                 'female': 0
@@ -35,7 +35,8 @@ class DashboardHandler(JsonHandler):
             'monthly_new_users': [],
             'monthly_ticket_viral': [],
             'monthly_active_users': [],
-            'last_7days_new_users': []
+            'last_7days_new_users': [],
+            'ticket_use_rank': []
         }
         # aggregate genders
         pipeline = [
@@ -161,6 +162,41 @@ class DashboardHandler(JsonHandler):
         res = await TicketModel.aggregate(pipeline, 12)
         for m in res:
             self.response['data']['monthly_active_users'].insert(0, m)
+
+        # aggregate content rank
+        pipeline = [
+            {
+                '$match': {
+                    'enabled': True,
+                    'status': 'use'
+                },
+            },
+            {
+                '$group': {
+                    '_id': '$content_oid',
+                    'use_count': {
+                        '$sum': 1
+                    }
+                }
+            },
+            {
+                '$sort': {
+                    'use_count': -1
+                }
+            },
+            {
+                '$limit': 10
+            }
+        ]
+        res = await TicketModel.aggregate(pipeline, 10)
+        for m in res:
+            content = await ContentModel.get_id(m['_id'], fields=[('name')])
+            self.response['data']['ticket_use_rank'].append(
+                dict(
+                    content=content['name'],
+                    use_count=m['use_count']
+                )
+            )
 
         self.write_json()
 
