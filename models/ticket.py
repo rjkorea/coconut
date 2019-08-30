@@ -132,6 +132,11 @@ class TicketOrderModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'commission',
+                'type': int,
+                'default': None
+            },
+            {
                 'key': 'receiver',
                 'type': dict,
                 'default': None
