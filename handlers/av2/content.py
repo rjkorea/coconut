@@ -209,7 +209,7 @@ class ContentPostHandler(MultipartFormdataHandler):
 
 class ContentListHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('status', str, None), ('start', int, 0), ('size', int, 10)])
+    @parse_argument([('status', str, None), ('q', str, None), ('start', int, 0), ('size', int, 10), ('tags', str, None)])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         if 'status' in parsed_args and parsed_args['status'] not in ('open', 'closed'):
@@ -228,6 +228,10 @@ class ContentListHandler(JsonHandler):
                 q['when.end'] = {
                     '$lt': now
                 }
+        if parsed_args['q']:
+            q['name'] = { '$regex': parsed_args['q'] }
+        if parsed_args['tags']:
+            q['$or'] = [{'tags': t} for t in parsed_args['tags'].split(',')]
         count = await ContentModel.count(query=q)
         result = await ContentModel.find(query=q, sort=[('created_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = result
