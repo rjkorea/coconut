@@ -397,7 +397,7 @@ class TicketOrderCsvHandler(JsonHandler):
         for i, u in enumerate(users):
             mobile = dict(
                 country_code='82',
-                number=u['mobile_number']
+                number=u['mobile_number'].replace('\u200b', '')
             )
             user_oid = await create_user_v2(mobile, u['name'])
             ticket_order_doc = {
@@ -413,8 +413,8 @@ class TicketOrderCsvHandler(JsonHandler):
                 'receiver': {
                     'name': u['name'],
                     'mobile': {
-                        'country_code': '82',
-                        'number': u['mobile_number']
+                        'country_code': mobile['country_code'],
+                        'number': mobile['number']
                     }
                 }
             }
@@ -423,7 +423,7 @@ class TicketOrderCsvHandler(JsonHandler):
             if send_kakaotalk:
                 if 'band_place' not in content or not content['band_place']:
                     KakaotalkService().tmp007(
-                        u['mobile_number'],
+                        mobile['number'],
                         u['name'],
                         self.current_user['name'],
                         content['name'],
@@ -435,7 +435,7 @@ class TicketOrderCsvHandler(JsonHandler):
                     )
                 else:
                     KakaotalkService().tmp007(
-                        u['mobile_number'],
+                        mobile['number'],
                         u['name'],
                         self.current_user['name'],
                         content['name'],
