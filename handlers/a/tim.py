@@ -13,12 +13,15 @@ from models.content import ContentModel
 
 class MatrixTicketOrderHandler(JsonHandler):
     @admin_auth_async
-    @parse_argument([('start', int, 0), ('size', int, 10), ('sort', str, 'register_count')])
+    @parse_argument([('ticket_type_oids', str, None), ('start', int, 0), ('size', int, 10), ('sort', str, 'register_count')])
     async def get(self, *args, **kwargs):
         parsed_args = kwargs.get('parsed_args')
         content_oid = kwargs.get('_id', None)
         if not content_oid or len(content_oid) != 24:
             raise HTTPError(400, 'invalid content_oid')
+        ticket_type_oids = parsed_args['ticket_type_oids']
+        if ticket_type_oids:
+            ticket_type_oids = [{'ticket_type_oid': ObjectId(t)} for t in ticket_type_oids.split(',')]
         pipeline = [
             {
                 '$match': {'content_oid': ObjectId(content_oid)}
@@ -70,6 +73,8 @@ class MatrixTicketOrderHandler(JsonHandler):
                 '$limit': parsed_args['size']
             }
         ]
+        if ticket_type_oids:
+            pipeline[0]['$match']['$or'] = ticket_type_oids
         ticket_orders_stats = await TicketModel.aggregate(pipeline, parsed_args['size'])
         for tos in ticket_orders_stats:
             tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile'), ('ticket_type_oid'), ('content_oid')])
@@ -77,6 +82,12 @@ class MatrixTicketOrderHandler(JsonHandler):
             tos['ticket_type'] = await TicketTypeModel.get_id(tos['ticket_order']['ticket_type_oid'], fields=[('name'), ('desc'), ('price')])
             tos['content'] = await ContentModel.get_id(tos['ticket_order']['content_oid'], fields=[('name')])
         self.response['data'] = ticket_orders_stats
+        query = {
+            'content_oid': ObjectId(content_oid)
+        }
+        if ticket_type_oids:
+            query['$or'] =  ticket_type_oids
+        self.response['count'] = await TicketOrderModel.count(query)
         self.write_json()
 
     async def options(self, *args, **kwargs):
