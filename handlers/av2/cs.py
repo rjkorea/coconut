@@ -45,7 +45,7 @@ class TicketListHandler(JsonHandler):
         for t in tickets:
             t['content'] = await ContentModel.get_id(t['content_oid'], fields=[('name')])
             t.pop('content_oid')
-            t['ticket_type'] = await TicketTypeModel.get_id(t['ticket_type_oid'], fields=[('name'), ('desc')])
+            t['ticket_type'] = await TicketTypeModel.get_id(t['ticket_type_oid'], fields=[('name'), ('desc'), ('color')])
             t.pop('ticket_type_oid')
             t['receive_user'] = await UserModel.get_id(t['receive_user_oid'], fields=[('last_name'), ('name'), ('mobile')])
             t.pop('receive_user_oid')
