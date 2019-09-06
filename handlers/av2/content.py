@@ -231,6 +231,8 @@ class ContentListHandler(JsonHandler):
         if parsed_args['q']:
             q['name'] = { '$regex': parsed_args['q'] }
         if parsed_args['tags']:
+            if parsed_args['tags'] == '전체':
+                parsed_args['tags'] = '페스티벌,클럽,전시,공연,콘서트,쿠폰,세미나,초대장,청첩장,기타'
             q['$or'] = [{'tags': t} for t in parsed_args['tags'].split(',')]
         count = await ContentModel.count(query=q)
         result = await ContentModel.find(query=q, sort=[('created_at', -1)], skip=parsed_args['start'], limit=parsed_args['size'])
