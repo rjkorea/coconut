@@ -9,6 +9,7 @@ from common.decorators import admin_auth_async, parse_argument
 from handlers.base import JsonHandler
 from models.ticket import TicketModel, TicketOrderModel, TicketTypeModel, TicketLogModel
 from models.content import ContentModel
+from models.user import UserModel
 
 
 class MatrixTicketOrderHandler(JsonHandler):
@@ -77,8 +78,9 @@ class MatrixTicketOrderHandler(JsonHandler):
             pipeline[0]['$match']['$or'] = ticket_type_oids
         ticket_orders_stats = await TicketModel.aggregate(pipeline, parsed_args['size'])
         for tos in ticket_orders_stats:
-            tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('receiver.mobile'), ('ticket_type_oid'), ('content_oid')])
+            tos['ticket_order'] = await TicketOrderModel.get_id(tos['_id'], fields=[('receiver.name'), ('user_oid'), ('ticket_type_oid'), ('content_oid')])
             tos.pop('_id')
+            tos['user'] = await UserModel.get_id(tos['ticket_order']['user_oid'], fields=[('memo')])
             tos['ticket_type'] = await TicketTypeModel.get_id(tos['ticket_order']['ticket_type_oid'], fields=[('name'), ('desc'), ('price')])
             tos['content'] = await ContentModel.get_id(tos['ticket_order']['content_oid'], fields=[('name')])
         self.response['data'] = ticket_orders_stats
