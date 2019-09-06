@@ -41,7 +41,7 @@ class TicketTypeHandler(JsonHandler):
         for tt in ticket_types:
             ticket_type = self.validate_ticket_type(tt)
             doc = dict(
-                type='network',
+                type=ticket_type['type'],
                 content_oid=content['_id'],
                 admin_oid=self.current_user['_id'],
                 name=ticket_type['name'],
@@ -69,7 +69,7 @@ class TicketTypeHandler(JsonHandler):
                 'mrkdwn_in': ['text']
             }
         ]
-        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
         self.response['data'] = res
         self.write_json()
 
@@ -107,7 +107,7 @@ class TicketTypeHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, self.set_error(1, 'invalid id'))
-        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid'), ('duplicated_registration'), ('disabled_send'), ('show_price')])
+        ticket_type = await TicketTypeModel.get_id(ObjectId(_id), fields=[('type'), ('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color'), ('content_oid'), ('duplicated_registration'), ('disabled_send'), ('show_price')])
         if not ticket_type:
             raise HTTPError(400, self.set_error(2, 'not exist ticket type'))
         query = {
@@ -294,12 +294,13 @@ class TicketOrderHandler(JsonHandler):
         if not mobile or not isinstance(mobile, dict):
             raise HTTPError(400, self.set_error(1, 'invalid mobile(object)'))
         mobile['number'] = mobile['number'].strip()
+        commission = self.json_decoded_body.get('commission', -1)
         sms = self.json_decoded_body.get('sms', None)
         if not sms or len(sms) == 0:
             raise HTTPError(400, self.set_error(1, 'invalid sms'))
         user_oid = await create_user_v2(mobile, name)
         doc = {
-            'type': 'network',
+            'type': ticket_type['type'],
             'content_oid': ticket_type['content_oid'],
             'admin_oid': self.current_user['_id'],
             'ticket_type_oid': ticket_type['_id'],
@@ -310,11 +311,13 @@ class TicketOrderHandler(JsonHandler):
             'qty': qty,
             'user_oid': user_oid
         }
+        if commission >= 0:
+            doc['commission'] = commission
         ticket_order = TicketOrderModel(raw_data=doc)
         ticket_order_oid = await ticket_order.insert()
         for i in range(qty):
             doc = {
-                'type': 'network',
+                'type': ticket_type['type'],
                 'content_oid': ticket_type['content_oid'],
                 'ticket_type_oid': ticket_type['_id'],
                 'ticket_order_oid': ticket_order_oid,
@@ -339,7 +342,7 @@ class TicketOrderHandler(JsonHandler):
                 'mrkdwn_in': ['text']
             }
         ]
-        SlackService().client.chat.post_message(channel='#notice', text=None, attachments=slack_msg, as_user=False)
+        SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
         if mobile['country_code'] == '82':
             if 'band_place' not in content or not content['band_place']:
                 KakaotalkService().tmp007(
@@ -394,7 +397,7 @@ class TicketOrderCsvHandler(JsonHandler):
         for i, u in enumerate(users):
             mobile = dict(
                 country_code='82',
-                number=u['mobile_number']
+                number=u['mobile_number'].replace('\u200b', '')
             )
             user_oid = await create_user_v2(mobile, u['name'])
             ticket_order_doc = {
@@ -410,8 +413,8 @@ class TicketOrderCsvHandler(JsonHandler):
                 'receiver': {
                     'name': u['name'],
                     'mobile': {
-                        'country_code': '82',
-                        'number': u['mobile_number']
+                        'country_code': mobile['country_code'],
+                        'number': mobile['number']
                     }
                 }
             }
@@ -420,7 +423,7 @@ class TicketOrderCsvHandler(JsonHandler):
             if send_kakaotalk:
                 if 'band_place' not in content or not content['band_place']:
                     KakaotalkService().tmp007(
-                        u['mobile_number'],
+                        mobile['number'],
                         u['name'],
                         self.current_user['name'],
                         content['name'],
@@ -432,7 +435,7 @@ class TicketOrderCsvHandler(JsonHandler):
                     )
                 else:
                     KakaotalkService().tmp007(
-                        u['mobile_number'],
+                        mobile['number'],
                         u['name'],
                         self.current_user['name'],
                         content['name'],

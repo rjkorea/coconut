@@ -85,6 +85,16 @@ class UserModel(BaseModel):
                 'default': None
             },
             {
+                'key': 'bank',
+                'type': dict,
+                'default': None
+            },
+            {
+                'key': 'resident_registration_number',
+                'type': str,
+                'default': None
+            },
+            {
                 'key': 'terms',
                 'type': dict,
                 'default': (lambda: {'privacy': False, 'policy': False})

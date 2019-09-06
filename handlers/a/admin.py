@@ -186,9 +186,6 @@ class AdminPasswordHandler(JsonHandler):
         _id = kwargs.get('_id', None)
         if not _id or len(_id) != 24:
             raise HTTPError(400, 'invalid _id')
-        old_password = self.json_decoded_body.get('old_password', None)
-        if not old_password or len(old_password) == 0 or not hashers.validate_password(old_password):
-            raise HTTPError(400, 'invalid old_password')
         new_password_1 = self.json_decoded_body.get('new_password_1', None)
         if not new_password_1 or len(new_password_1) == 0 or not hashers.validate_password(new_password_1):
             raise HTTPError(400, 'invalid new_password_1')
@@ -200,8 +197,6 @@ class AdminPasswordHandler(JsonHandler):
         admin = await AdminModel.find_one({'_id': ObjectId(_id)})
         if not admin:
             raise HTTPError(400, 'not exist _id')
-        if not hashers.check_password(old_password, admin['password']):
-            raise HTTPError(400, 'not correct old password')
         query = {
             '_id': ObjectId(_id)
         }

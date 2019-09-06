@@ -241,7 +241,7 @@ def use_tickets(csvfile, mongo, contentid, dryrun):
                 if 'gender' in ticket['receive_user']:
                     gender = ticket['receive_user']['gender']
                 else:
-                    birthday = None
+                    gender = None
                 if 'history_send_user_oids' in ticket:
                     path = list()
                     for u in ticket['history_send_user_oids']:
