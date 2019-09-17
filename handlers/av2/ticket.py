@@ -240,7 +240,7 @@ class TicketTypeListHandler(JsonHandler):
             'content_oid': ObjectId(content_oid)
         }
         count = await TicketTypeModel.count(query)
-        ticket_types = await TicketTypeModel.find(query, fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
+        ticket_types = await TicketTypeModel.find(query, fields=[('type'), ('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = ticket_types
         self.response['count'] = count
         self.write_json()
