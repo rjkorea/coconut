@@ -165,6 +165,8 @@ url_patterns = [
     (r'/w/seller/me/contents/?', w.seller.SellerMeContentListHandler),
     (r'/w/seller/tickets/?', w.seller.SellerTicketListHandler),
     (r'/w/seller/coupons/?', w.seller.SellerCouponListHandler),
+    (r'/w/seller/used/tickets/?', w.seller.SellerUsedTicketListHandler),
+    (r'/w/seller/used/ticket/(?P<_id>[^\/]+)/histories/?', w.seller.SellerTicketHistoryListHandler),
     (r'/w/qnas/?', w.qna.QnaListHandler),
     (r'/w/ticket/order/(?P<slug>[^\/]+)/?', w.ticket.TicketOrderSlugHandler),
     (r'/w/ticket/sn/(?P<serial_number>[^\/]+)/register/?', w.ticket.TicketSerialNumberRegisterHandler),

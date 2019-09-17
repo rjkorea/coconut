@@ -172,3 +172,46 @@ class SellerMeContentListHandler(JsonHandler):
     async def options(self, *args, **kwargs):
         self.response['message'] = 'OK'
         self.write_json()
+
+
+class SellerUsedTicketListHandler(JsonHandler):
+    @user_auth_async
+    @parse_argument([('start', int, 0), ('size', int, 10), ('ticket_order_oid', str, None)])
+    async def get(self, *args, **kwargs):
+        parsed_args = kwargs.get('parsed_args')
+        q = {
+            'ticket_order_oid': ObjectId(parsed_args['ticket_order_oid']),
+            'status': TicketModel.Status.use.name
+        }
+        count = await TicketModel.count(query=q)
+        result = await TicketModel.find(query=q, skip=parsed_args['start'], limit=parsed_args['size'], fields=[('updated_at'), ('receive_user_oid')])
+        for res in result:
+            if 'receive_user_oid' in res:
+                res['receive_user'] = await UserModel.get_id(res['receive_user_oid'], fields=[('name'), ('mobile'), ('image')])
+                res.pop('receive_user_oid')
+        self.response['data'] = result
+        self.response['count'] = count
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
+
+
+class SellerTicketHistoryListHandler(JsonHandler):
+    @user_auth_async
+    async def get(self, *args, **kwargs):
+        _id = kwargs.get('_id', None)
+        ticket = await TicketModel.get_id(ObjectId(_id), fields=[('history_send_user_oids')])
+        histories = []
+        if 'history_send_user_oids' in ticket:
+            for send_user_oid in ticket['history_send_user_oids']:
+                send_user = await UserModel.get_id(send_user_oid, fields=[('name'), ('mobile')])
+                histories.append(send_user)
+        self.response['data'] = histories[::-1]
+        self.response['count'] = len(histories)
+        self.write_json()
+
+    async def options(self, *args, **kwargs):
+        self.response['message'] = 'OK'
+        self.write_json()
