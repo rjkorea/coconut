@@ -53,10 +53,13 @@ class TicketTypeHandler(JsonHandler):
                 price=ticket_type['price'],
                 color=ticket_type['color'],
                 fpfg=ticket_type['fpfg'],
-                duplicated_registration=False,
                 disabled_send=False,
                 show_price=True
             )
+            if doc['type'] == 'network':
+                doc['duplicated_registration'] = False
+            elif doc['type'] == 'coupon':
+                doc['duplicated_registration'] = True
             ttm = TicketTypeModel(raw_data=doc)
             res.append(await ttm.insert())
         text = '\n'.join(['<%s> / %s / %d원 / %d장 (스프레드 %s장)' % (content['name'], tt['name'], tt['price'], tt['fpfg']['limit'], tt['fpfg']['spread']) for tt in ticket_types])
@@ -240,7 +243,7 @@ class TicketTypeListHandler(JsonHandler):
             'content_oid': ObjectId(content_oid)
         }
         count = await TicketTypeModel.count(query)
-        ticket_types = await TicketTypeModel.find(query, fields=[('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
+        ticket_types = await TicketTypeModel.find(query, fields=[('type'), ('name'), ('desc'), ('sales_date'), ('price'), ('fpfg'), ('color')], skip=parsed_args['start'], limit=parsed_args['size'])
         self.response['data'] = ticket_types
         self.response['count'] = count
         self.write_json()
