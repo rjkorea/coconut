@@ -69,3 +69,23 @@ class KakaotalkService(Singleton):
         res = requests.post(cls.APISTORE_KAKAO_URL, data=payload, headers=headers)
         logging.info(res)
         logging.info(res.json())
+
+    @classmethod
+    def tmp032(cls, mobile, receive, send, content, ticket, qty, others,shortid):
+        TMPL_032 = '[TKIT 티킷]\n <%s>님 안녕하세요.\n <%s>님으로 부터\n TKIT이 도착했습니다 :)\n\n■ %s\n   - %s <%s장>\n     %s \n\n수령하신 TKIT을 확인 하시려면\n아래 버튼을 눌러 로그인 해주세요.'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'x-waple-authorization': cls.KEY
+        }
+        payload = {
+            'callback': '15999642',
+            'phone': mobile,
+            'template_code': '032',
+            'msg': TMPL_032 % (receive, send, content, ticket, qty, others),
+            'btn_types': '웹링크',
+            'btn_txts': 'TKIT 확인하기',
+            'btn_urls1': 'http://i.tkit.me/in/%s' % shortid
+        }
+        res = requests.post(cls.APISTORE_KAKAO_URL, data=payload, headers=headers)
+        logging.info(res)
+        logging.info(res.json())
