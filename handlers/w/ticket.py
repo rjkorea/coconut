@@ -200,9 +200,11 @@ class TicketSendHandler(JsonHandler):
         ticket_oids = self.json_decoded_body.get('ticket_oids', None)
         if not ticket_oids or not isinstance(ticket_oids, list):
             raise HTTPError(400, 'invalid ticket_oids')
+        ticket_types = list()
         for t_oid in ticket_oids:
             ticket = await TicketModel.get_id(ObjectId(t_oid) ,fields=[('ticket_type_oid')])
-            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send', 'name')])
+            ticket_types.append(ticket_type)
             if 'disabled_send' in ticket_type and ticket_type['disabled_send']:
                 raise HTTPError(400, 'Cannot send ticket')
         for t_oid in ticket_oids:
@@ -254,30 +256,27 @@ class TicketSendHandler(JsonHandler):
             await user_send_history.insert()
         if receive_user['mobile']['country_code'] == '82':
             content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
-            if 'band_place' not in content or not content['band_place']:
-                KakaotalkService().tmp007(
-                    receive_user['mobile']['number'],
-                    receive_user['name'],
-                    self.current_user['name'],
-                    content['name'],
-                    str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['place']['name'],
-                    content['short_id']
-                )
+            others = dict()
+            for t in ticket_types:
+                if t['name'] in others:
+                    others[t['name']] = others[t['name']] + 1
+                else:
+                    others[t['name']] = 1
+            main_ticket = others.popitem()
+            if others:
+                others = ', '.join(['%s <%d장>'%(k,v) for k,v in others.items()])
             else:
-                KakaotalkService().tmp007(
-                    receive_user['mobile']['number'],
-                    receive_user['name'],
-                    self.current_user['name'],
-                    content['name'],
-                    str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['band_place'],
-                    content['short_id']
-                )
+                others = ' '
+            KakaotalkService().tmp032(
+                receive_user['mobile']['number'],
+                receive_user['name'],
+                self.current_user['name'],
+                content['name'],
+                main_ticket[0],
+                main_ticket[1],
+                others,
+                content['short_id']
+            )
         self.write_json()
 
     async def options(self, *args, **kwargs):
@@ -300,9 +299,11 @@ class TicketTypesSendHandler(JsonHandler):
                 raise HTTPError(400, 'unavailable qty: %d' % tt[1])
             for t in tickets:
                 ticket_oids.append(str(t['_id']))
+        ticket_types = list()
         for t_oid in ticket_oids:
             ticket = await TicketModel.get_id(ObjectId(t_oid) ,fields=[('ticket_type_oid')])
-            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('disabled_send'), ('name')])
+            ticket_types.append(ticket_type)
             if 'disabled_send' in ticket_type and ticket_type['disabled_send']:
                 raise HTTPError(400, 'Cannot send ticket')
         for t_oid in ticket_oids:
@@ -355,30 +356,27 @@ class TicketTypesSendHandler(JsonHandler):
 
         if receive_user['mobile']['country_code'] == '82':
             content = await ContentModel.find_one({'_id': tm['content_oid']}, fields=[('name'), ('when'), ('place.name'), ('band_place'), ('short_id')])
-            if 'band_place' not in content or not content['band_place']:
-                KakaotalkService().tmp007(
-                    receive_user['mobile']['number'],
-                    receive_user['name'],
-                    self.current_user['name'],
-                    content['name'],
-                    str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['place']['name'],
-                    content['short_id']
-                )
+            others = dict()
+            for t in ticket_types:
+                if t['name'] in others:
+                    others[t['name']] = others[t['name']] + 1
+                else:
+                    others[t['name']] = 1
+            main_ticket = others.popitem()
+            if others:
+                others = ', '.join(['%s <%d장>'%(k,v) for k,v in others.items()])
             else:
-                KakaotalkService().tmp007(
-                    receive_user['mobile']['number'],
-                    receive_user['name'],
-                    self.current_user['name'],
-                    content['name'],
-                    str(len(ticket_oids)),
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['band_place'],
-                    content['short_id']
-                )
+                others = ' '
+            KakaotalkService().tmp032(
+                receive_user['mobile']['number'],
+                receive_user['name'],
+                self.current_user['name'],
+                content['name'],
+                main_ticket[0],
+                main_ticket[1],
+                others,
+                content['short_id']
+            )
         self.write_json()
 
     async def options(self, *args, **kwargs):
