@@ -347,30 +347,16 @@ class TicketOrderHandler(JsonHandler):
         ]
         SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
         if mobile['country_code'] == '82':
-            if 'band_place' not in content or not content['band_place']:
-                KakaotalkService().tmp007(
-                    mobile['number'],
-                    name,
-                    self.current_user['name'],
-                    content['name'],
-                    qty,
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['place']['name'],
-                    content['short_id']
-                )
-            else:
-                KakaotalkService().tmp007(
-                    mobile['number'],
-                    name,
-                    self.current_user['name'],
-                    content['name'],
-                    qty,
-                    '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                    content['place']['name'],
-                    content['band_place'],
-                    content['short_id']
-                )
+            KakaotalkService().tmp032(
+                mobile['number'],
+                name,
+                self.current_user['name'],
+                content['name'],
+                ticket_type['name'],
+                qty,
+                ' ',
+                content['short_id']
+            )
         self.response['data'] = {
             'ticket_order_oid': ticket_order_oid,
             'ticket_count': i+1
@@ -424,30 +410,16 @@ class TicketOrderCsvHandler(JsonHandler):
             ticket_order = TicketOrderModel(raw_data=ticket_order_doc)
             ticket_order_oid = await ticket_order.insert()
             if send_kakaotalk:
-                if 'band_place' not in content or not content['band_place']:
-                    KakaotalkService().tmp007(
-                        mobile['number'],
-                        u['name'],
-                        self.current_user['name'],
-                        content['name'],
-                        u['qty'],
-                        '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                        content['place']['name'],
-                        content['place']['name'],
-                        content['short_id']
-                    )
-                else:
-                    KakaotalkService().tmp007(
-                        mobile['number'],
-                        u['name'],
-                        self.current_user['name'],
-                        content['name'],
-                        u['qty'],
-                        '%s - %s' % (datetime.strftime(content['when']['start'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M'), datetime.strftime(content['when']['end'] + timedelta(hours=9), '%Y.%m.%d %a %H:%M')),
-                        content['place']['name'],
-                        content['band_place'],
-                        content['short_id']
-                    )
+                KakaotalkService().tmp032(
+                    mobile['number'],
+                    u['name'],
+                    self.current_user['name'],
+                    content['name'],
+                    ticket_type['name'],
+                    u['qty'],
+                    ' ',
+                    content['short_id']
+                )
             for t in range(u['qty']):
                 ticket_doc = {
                     'type': 'network',
