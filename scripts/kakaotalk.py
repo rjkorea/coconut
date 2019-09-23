@@ -228,7 +228,7 @@ def tmp005csv(csvfile):
             pprint(res)
             pprint(res.json())
     else:
-        click.secho('check parameters <python kakaotalk.py tmp007csv --help>', fg='red')
+        click.secho('check parameters <python kakaotalk.py tmp005csv --help>', fg='red')
 
 
 @click.group()
@@ -263,11 +263,49 @@ def tmp017(mobile, receive, send, content, date, place, ticket):
         pprint(res)
         pprint(res.json())
     else:
-        click.secho('check parameters <python kakaotalk.py tmp005 --help>', fg='red')
+        click.secho('check parameters <python kakaotalk.py tmp017 --help>', fg='red')
 
 
+@click.group()
+def tmp32():
+    pass
 
-cli = click.CommandCollection(sources=[tmp3, tmp3csv, tmp7, tmp7csv, tmp5, tmp5csv, tmp17])
+@tmp32.command()
+@click.option('-m', '--mobile', default=None, help='mobile number only South Korea')
+@click.option('-r', '--receive', default=None, help='receive user name')
+@click.option('-s', '--send', default=None, help='send user name')
+@click.option('-c', '--content', default=None, help='content name')
+@click.option('-t', '--ticket', default=None, help='ticket name')
+@click.option('-q', '--qty', default=None, help='quantity of ticket')
+@click.option('-o', '--others', default=None, help='others ticket')
+@click.option('-i', '--shortid', default=None, help='short id of content')
+@click.confirmation_option(help='Are you sure to send message by kakaotalk?')
+def tmp032(mobile, receive, send, content, ticket, qty, others, shortid):
+    click.secho('= params info =', fg='cyan')
+    click.secho('mobile: %s' % (mobile), fg='green')
+    if mobile and receive and send and content and ticket and qty and others and shortid:
+        TMPL_032 = '[TKIT 티킷]\n <%s>님 안녕하세요.\n <%s>님으로 부터\n TKIT이 도착했습니다 :)\n\n■ %s\n   - %s <%s장>\n     %s \n\n수령하신 TKIT을 확인 하시려면\n아래 버튼을 눌러 로그인 해주세요.'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'x-waple-authorization': KEY
+        }
+        payload = {
+            'callback': '15999642',
+            'phone': mobile,
+            'template_code': '032',
+            'msg': TMPL_032 % (receive, send, content, ticket, qty, others),
+            'btn_types': '웹링크',
+            'btn_txts': 'TKIT 확인하기',
+            'btn_urls1': 'http://i.tkit.me/in/%s' % shortid
+        }
+        res = requests.post(APISTORE_KAKAO_URL, data=payload, headers=headers)
+        pprint(res)
+        pprint(res.json())
+    else:
+        click.secho('check parameters <python kakaotalk.py tmp032 --help>', fg='red')
+
+
+cli = click.CommandCollection(sources=[tmp3, tmp3csv, tmp7, tmp7csv, tmp5, tmp5csv, tmp17, tmp32])
 
 
 if __name__ == '__main__':
