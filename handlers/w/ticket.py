@@ -1045,7 +1045,7 @@ class TicketTypeListMeHandler(JsonHandler):
             }
             a['fpfg'] = ticket_type['fpfg']
             a['show_price'] = ticket_type['show_price']
-        self.response['data'] = aggs
+        self.response['data'] = sorted(aggs, key=lambda k: k['sales_date']['end'], reverse=False)
         self.response['count'] = len(aggs)
         self.write_json()
 
