@@ -171,10 +171,10 @@ class UserHandler(JsonHandler):
         if not user:
             raise HTTPError(400, 'no exist user')
         res = dict()
-        if 'terms' in user and user['terms']['privacy'] and user['terms']['policy']:
-            res['terms'] = True
+        if 'password' in user:
+            res['has_password'] = True
         else:
-            res['terms'] = False
+            res['has_password'] = False
         self.response['data'] = res
         self.write_json()
 
