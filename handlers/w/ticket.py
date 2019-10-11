@@ -15,6 +15,8 @@ from models.ticket import TicketOrderModel, TicketTypeModel, TicketModel, Ticket
 
 from models import create_user
 
+from services.slack import SlackService
+from services.config import ConfigService
 from services.iamport import IamportService
 from services.kakaotalk import KakaotalkService
 
@@ -890,6 +892,20 @@ class TicketPaymentCompleteHandler(JsonHandler):
             result = await TicketModel.update(query, document)
             if result['nModified'] == 1:
                 await TicketTypeModel.update({'_id': ticket['ticket_type_oid']}, {'$inc': {'fpfg.now': 1}})
+            content = await ContentModel.get_id(ticket['content_oid'], fields=[('name')])
+            ticket_type = await TicketTypeModel.get_id(ticket['ticket_type_oid'], fields=[('name')])
+            user = await UserModel.get_id(ticket['receive_user_oid'], fields=[('name'), ('mobile')])
+            text = '<%s> / %s / %d원 / %s (%s)' % (content['name'], ticket_type['name'], ticket['price'], '%s*' % user['name'][:-1], '*** **** %s' % user['mobile']['number'][-4:])
+            slack_msg = [
+                {
+                    'title': '[%s] 결제완료' % (ConfigService().client['application']['name']),
+                    'title_link': '%s://%s:%d/cs/ticket/%s' % (ConfigService().client['host']['protocol'], ConfigService().client['host']['host'], ConfigService().client['host']['port'], _id),
+                    'fallback': text,
+                    'text': text,
+                    'mrkdwn_in': ['text']
+                }
+            ]
+            SlackService().client.chat.post_message(channel='#tkit_notice', text=None, attachments=slack_msg, as_user=False)
             self.response['data'] = result
             self.write_json()
         else:
